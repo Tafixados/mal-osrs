@@ -1,0 +1,41 @@
+/* OSRS fonts for Tafixados' MAL theme */
+
+@font-face {
+  font-family: "RS Chat 07";
+  src: url("https://cdn.jsdelivr.net/gh/Tafixados/mal-osrs@main/fonts/RUNESCAPE-CHAT-07.TTF") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS Large";
+  src: url("https://cdn.jsdelivr.net/gh/Tafixados/mal-osrs@main/fonts/RUNESCAPE_LARGE.TTF") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS NPC Chat";
+  src: url("https://cdn.jsdelivr.net/gh/Tafixados/mal-osrs@main/fonts/RUNESCAPE_NPC_CHAT.TTF") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS Small";
+  src: url("https://cdn.jsdelivr.net/gh/Tafixados/mal-osrs@main/fonts/RUNESCAPE_SMALL.TTF") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS UF";
+  src: url("https://cdn.jsdelivr.net/gh/Tafixados/mal-osrs@main/fonts/RUNESCAPE_UF.TTF") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
