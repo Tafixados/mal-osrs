@@ -276,4 +276,83 @@ body.ownlist .list-menu-float .icon-menu.setting::before {
   background-image: var(--rs-side-settings) !important;
 }
 
+/* =====================================================================
+   DYNAMIC CAP RESOLUTION
+   MAL exposes different sidebar controls depending on owner/visitor state.
+   CSS cannot ask "which element is visually last after display:none?" in a
+   completely generic way, but it CAN react to DOM presence with :has(), and
+   MAL also exposes data-owner on <body>. These rules therefore resolve the
+   lower cap from the controls that actually exist, with an explicit visitor
+   fallback for Logout.
+   ===================================================================== */
+
+/* If Settings is absent from the DOM, Logout becomes the lower cap. */
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  > form:has(.icon-menu.logout),
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  > .icon-menu.logout {
+  background-image: var(--rs-stone-bottom) !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  background-size: auto 100% !important;
+}
+
+/* On another user's list, MAL can retain owner-only controls in odd/hidden
+   states. data-owner="" is therefore the reliable signal: Logout is the
+   actual bottom action in the visitor layout. */
+body.ownlist[data-owner=""] .list-menu-float
+  > form:has(.icon-menu.logout),
+body.ownlist[data-owner=""] .list-menu-float
+  > .icon-menu.logout {
+  background-image: var(--rs-stone-bottom) !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  background-size: auto 100% !important;
+}
+
+/* Correct highlighted lower-cap art. These come AFTER the generic Logout
+   middle-stone rules so they win the cascade. */
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  > form:has(.icon-menu.logout):hover,
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  > .icon-menu.logout:hover,
+body.ownlist[data-owner=""] .list-menu-float
+  > form:has(.icon-menu.logout):hover,
+body.ownlist[data-owner=""] .list-menu-float
+  > .icon-menu.logout:hover {
+  background-image: var(--rs-stone-bottom-hot) !important;
+}
+
+/* Centre Logout's icon over the wider bottom cap instead of over a narrow
+   middle stone. */
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  .icon-menu.logout::before,
+body.ownlist[data-owner=""] .list-menu-float
+  .icon-menu.logout::before {
+  left: 8px !important;
+  right: auto !important;
+}
+
+/* Presence-based fallback chain for unusual MAL states. If Logout itself
+   isn't present, promote the last known available control. */
+body.ownlist .list-menu-float
+  :is(.icon-menu.export, .icon-menu.history, .icon-menu.statistics, .icon-menu.stats)
+  {
+  /* default remains middle; specific promotions below */
+}
+
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting)):not(:has(.icon-menu.logout))
+  > .icon-menu.export {
+  background-image: var(--rs-stone-bottom) !important;
+}
+
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting)):not(:has(.icon-menu.logout)):not(:has(.icon-menu.export))
+  > .icon-menu.history {
+  background-image: var(--rs-stone-bottom) !important;
+}
+
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting)):not(:has(.icon-menu.logout)):not(:has(.icon-menu.export)):not(:has(.icon-menu.history))
+  > :is(.icon-menu.statistics, .icon-menu.stats) {
+  background-image: var(--rs-stone-bottom) !important;
+}
 
