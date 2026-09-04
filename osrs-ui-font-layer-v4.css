@@ -1,0 +1,345 @@
+/* ================================================================
+   Tafixados MAL OSRS — external UI/font layer v4
+
+   Based on the exact working v4.6 layout.
+
+   Changes in this layer only:
+   - restore the two-line infobox layout
+   - make labels/values much larger and closer together
+   - enlarge Progress/Score icons
+   - enlarge status-tab text substantially
+   - normalize Released/Tags to the same value size
+   - keep the working dark corner-bite colors
+   - reserve extra top-right header room when somebody else views the list
+   ================================================================ */
+
+@font-face {
+  font-family: "RS Chat 07";
+  src: url("./fonts-fixed/RUNESCAPE-CHAT-07.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS Large";
+  src: url("./fonts-fixed/RUNESCAPE_LARGE.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS NPC Chat";
+  src: url("./fonts-fixed/RUNESCAPE_NPC_CHAT.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS Small";
+  src: url("./fonts-fixed/RUNESCAPE_SMALL.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS UF";
+  src: url("./fonts-fixed/RUNESCAPE_UF.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ================================================================
+   GENERAL TYPOGRAPHY
+   ================================================================ */
+
+html body.ownlist {
+  font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+}
+
+/* Top title */
+html body.ownlist .list-container .cover-block .image-container::before {
+  font-family: "RS Large", Georgia, serif !important;
+  font-weight: 400 !important;
+  font-size: clamp(48px, 4vw, 70px) !important;
+  line-height: 1 !important;
+}
+
+/* Top subtitle */
+html body.ownlist .list-container .cover-block .image-container::after {
+  font-family: "RS Small", Tahoma, Verdana, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 19px !important;
+  line-height: 1 !important;
+}
+
+/* ALL ANIME / COMPLETED / etc. */
+html body.ownlist .list-container .list-unit .list-status-title .text {
+  font-family: "RS Large", Georgia, serif !important;
+  font-weight: 400 !important;
+  font-size: 38px !important;
+  line-height: 1 !important;
+}
+
+/* Anime titles */
+html body.ownlist .list-container .list-table .list-table-data .data.title > .link {
+  font-family: "RS Large", Georgia, serif !important;
+  font-weight: 400 !important;
+  font-size: 32px !important;
+  line-height: 24px !important;
+  max-height: 48px !important;
+}
+
+/* Stats / Filters */
+html body.ownlist .list-container .list-unit .list-status-title .stats a {
+  font-family: "RS Small", Tahoma, Verdana, sans-serif !important;
+  font-size: 15px !important;
+}
+
+
+/* ================================================================
+   STATUS TABS — make the text actually readable
+   ================================================================ */
+
+html body.ownlist .list-container .status-menu-container .status-menu .status-button::after {
+  font-family: "RS Small", Tahoma, Verdana, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 20px !important;
+  line-height: 20px !important;
+}
+
+/* Slightly larger tab icon so the text/icon pairing feels balanced. */
+html body.ownlist .list-container .status-menu-container .status-menu .status-button::before {
+  width: 46px !important;
+  height: 46px !important;
+  margin: 0 auto 3px !important;
+}
+
+
+/* ================================================================
+   INFOBOXES — BACK TO LABEL ABOVE VALUE
+
+   42px total height:
+     3px top padding
+     13px label
+     1px label/value gap
+     ~17px value line
+     2px bottom padding
+
+   This keeps both lines comfortably inside the panel and closer together.
+   ================================================================ */
+
+html body.ownlist .list-container .list-table .list-table-data .data.progress,
+html body.ownlist .list-container .list-table .list-table-data .data.score,
+html body.ownlist .list-container .list-table .list-table-data .data.type,
+html body.ownlist .list-container .list-table .list-table-data .data.rated,
+html body.ownlist .list-container .list-table .list-table-data .data.season,
+html body.ownlist .list-container .list-table .list-table-data .data.tags {
+  display: block !important;
+
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+
+  padding: 3px 7px 2px !important;
+
+  font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 17px !important;
+  line-height: 17px !important;
+
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+/* Orange labels */
+html body.ownlist .list-container .list-table .list-table-data .data.progress::before,
+html body.ownlist .list-container .list-table .list-table-data .data.score::before,
+html body.ownlist .list-container .list-table .list-table-data .data.type::before,
+html body.ownlist .list-container .list-table .list-table-data .data.rated::before,
+html body.ownlist .list-container .list-table .list-table-data .data.season::before,
+html body.ownlist .list-container .list-table .list-table-data .data.tags::before {
+  display: block !important;
+
+  width: auto !important;
+  height: 13px !important;
+
+  margin: 0 0 1px !important;
+  padding: 0 !important;
+
+  font-family: "RS Small", Tahoma, Verdana, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 13px !important;
+
+  text-align: center !important;
+  vertical-align: top !important;
+}
+
+/* Progress + Score labels: preserve icons, but make them legible. */
+html body.ownlist .list-container .list-table .list-table-data .data.progress::before,
+html body.ownlist .list-container .list-table .list-table-data .data.score::before {
+  display: block !important;
+
+  height: 14px !important;
+  margin-bottom: 0 !important;
+
+  background-repeat: no-repeat !important;
+  background-size: 16px 16px !important;
+}
+
+/* Move the larger icons a little farther left of their respective labels. */
+html body.ownlist .list-container .list-table .list-table-data .data.progress::before {
+  background-position: calc(50% - 42px) center !important;
+}
+
+html body.ownlist .list-container .list-table .list-table-data .data.score::before {
+  background-position: calc(50% - 31px) center !important;
+}
+
+/* Normalize every value to the same readable size.
+   Parent font-size handles raw text fields; these cover child/link fields. */
+html body.ownlist .list-container .list-table .list-table-data .data.progress .link,
+html body.ownlist .list-container .list-table .list-table-data .data.progress > span,
+html body.ownlist .list-container .list-table .list-table-data .data.season a,
+html body.ownlist .list-container .list-table .list-table-data .data.tags a,
+html body.ownlist .list-container .list-table .list-table-data .data.tags > div {
+  display: inline !important;
+
+  font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 17px !important;
+  line-height: 17px !important;
+
+  vertical-align: baseline !important;
+  white-space: nowrap !important;
+}
+
+/* Score uses the same value font as every other box for visual consistency. */
+html body.ownlist .list-container .list-table .list-table-data .data.score .link,
+html body.ownlist .list-container .list-table .list-table-data .data.score .score-label {
+  display: inline !important;
+
+  font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 18px !important;
+  line-height: 17px !important;
+
+  vertical-align: baseline !important;
+}
+
+/* Keep MAL's small green episode-plus control from stretching the line. */
+html body.ownlist .list-container .list-table .list-table-data .data.progress .icon-add-episode {
+  display: inline !important;
+  font-size: 12px !important;
+  line-height: 12px !important;
+  vertical-align: baseline !important;
+}
+
+/* Never show the Tags "Edit" text in the compact panel. */
+html body.ownlist .list-container .list-table .list-table-data .data.tags .edit {
+  display: none !important;
+}
+
+
+/* ================================================================
+   NOTCHES — preserve the known-good v4.6 shape + dark center
+   ================================================================ */
+
+html body.ownlist .list-container .list-table .list-table-data .data.progress::after,
+html body.ownlist .list-container .list-table .list-table-data .data.score::after,
+html body.ownlist .list-container .list-table .list-table-data .data.type::after,
+html body.ownlist .list-container .list-table .list-table-data .data.rated::after,
+html body.ownlist .list-container .list-table .list-table-data .data.season::after,
+html body.ownlist .list-container .list-table .list-table-data .data.tags::after {
+  background:
+    radial-gradient(circle at 0 0,
+      #3e3529 0 4.5px,
+      #2d2a22 4.7px 5.6px,
+      #726451 5.8px 6.7px,
+      transparent 6.9px
+    ) top left / 14px 14px no-repeat,
+
+    radial-gradient(circle at 100% 0,
+      #3e3529 0 4.5px,
+      #2d2a22 4.7px 5.6px,
+      #726451 5.8px 6.7px,
+      transparent 6.9px
+    ) top right / 14px 14px no-repeat,
+
+    radial-gradient(circle at 0 100%,
+      #3e3529 0 4.5px,
+      #2d2a22 4.7px 5.6px,
+      #726451 5.8px 6.7px,
+      transparent 6.9px
+    ) bottom left / 14px 14px no-repeat,
+
+    radial-gradient(circle at 100% 100%,
+      #3e3529 0 4.5px,
+      #2d2a22 4.7px 5.6px,
+      #726451 5.8px 6.7px,
+      transparent 6.9px
+    ) bottom right / 14px 14px no-repeat !important;
+
+  opacity: 1 !important;
+}
+
+
+/* ================================================================
+   VISITOR HEADER / SHARED % INFO
+   Own-list pages use data-owner="1". Give non-owner viewers enough
+   vertical room for MAL's extra shared-anime / affinity line.
+   ================================================================ */
+
+html body.ownlist:not([data-owner="1"]) .header {
+  box-sizing: border-box !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  margin-bottom: 8px !important;
+  overflow: visible !important;
+  z-index: 90 !important;
+}
+
+html body.ownlist:not([data-owner="1"]) .header .header-menu {
+  position: relative !important;
+  z-index: 91 !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+
+  float: none !important;
+
+  width: 100% !important;
+  height: 40px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: visible !important;
+}
+
+html body.ownlist:not([data-owner="1"]) .header .header-menu .btn-menu,
+html body.ownlist:not([data-owner="1"]) .header .header-menu .header-info,
+html body.ownlist:not([data-owner="1"]) .header .header-menu .header-info a {
+  position: static !important;
+
+  height: auto !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  font-family: "RS Small", Tahoma, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 17px !important;
+
+  white-space: nowrap !important;
+  overflow: visible !important;
+}
