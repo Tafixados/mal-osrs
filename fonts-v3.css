@@ -1,0 +1,47 @@
+/* Fixed OSRS webfonts for Tafixados' MAL theme — v3
+   These WOFF2s have freshly rebuilt Unicode cmap tables because Chromium's
+   OTS sanitizer rejected the original conversion with:
+   "cmap: Range glyph reference too high".
+
+   Relative paths keep stylesheet + fonts on the same jsDelivr origin.
+*/
+
+@font-face {
+  font-family: "RS Chat 07";
+  src: url("./fonts-fixed/RUNESCAPE-CHAT-07.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS Large";
+  src: url("./fonts-fixed/RUNESCAPE_LARGE.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS NPC Chat";
+  src: url("./fonts-fixed/RUNESCAPE_NPC_CHAT.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS Small";
+  src: url("./fonts-fixed/RUNESCAPE_SMALL.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS UF";
+  src: url("./fonts-fixed/RUNESCAPE_UF.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
