@@ -1,0 +1,358 @@
+/* MODULE: 13-sidebar-final.css
+   Current OSRS stone sidebar stack, hover/selected stones, replacement icons, and Logout handling.
+   Extracted from source lines 2284-2558; import order matters. */
+
+/* =====================================================================
+   SIDEBAR — OUTER STACK
+   ===================================================================== */
+
+body.ownlist .list-menu-float {
+  position: fixed !important;
+  top: 88px !important;
+  left: 8px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+
+  width: 50px !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+
+  overflow: visible !important;
+  z-index: 150 !important;
+}
+
+/* Profile remains separate from the carved stone stack. */
+body.ownlist .list-menu-float > .icon-menu.profile {
+  position: relative !important;
+  box-sizing: border-box !important;
+
+  width: 42px !important;
+  height: 42px !important;
+
+  margin: 0 4px 3px 0 !important;
+
+  border: 2px solid #17130f !important;
+  outline: 1px solid #726451 !important;
+
+  background-position: center !important;
+  background-size: cover !important;
+
+  overflow: hidden !important;
+}
+
+
+/* =====================================================================
+   SIDEBAR — STONES
+   The clickable rows remain 50x48 for reliable MAL interaction, while
+   the stone image itself keeps its native aspect ratio and hugs the right.
+   ===================================================================== */
+
+body.ownlist .list-menu-float > .icon-menu:not(.profile),
+body.ownlist .list-menu-float > form {
+  position: relative !important;
+  box-sizing: border-box !important;
+
+  display: block !important;
+  flex: 0 0 48px !important;
+
+  width: 50px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background-color: transparent !important;
+  background-image: var(--rs-stone-mid) !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  background-size: auto 100% !important;
+
+  box-shadow: none !important;
+  overflow: visible !important;
+  transition: none !important;
+}
+
+/* Some MAL controls (notably Logout) are wrapped in a form.
+   The wrapper owns the stone. Its child must remain transparent or
+   Chrome paints two hover stones on top of each other. */
+body.ownlist .list-menu-float > form > .icon-menu,
+body.ownlist .list-menu-float > form > .icon-menu:hover,
+body.ownlist .list-menu-float > form:hover > .icon-menu {
+  position: relative !important;
+
+  width: 50px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Top cap = first real control after the profile. */
+body.ownlist .list-menu-float > .icon-menu.profile + .icon-menu:not(.profile),
+body.ownlist .list-menu-float > .icon-menu.profile + form {
+  background-image: var(--rs-stone-top) !important;
+}
+
+/* Bottom cap = final direct control, whatever MAL happens to show. */
+body.ownlist .list-menu-float > .icon-menu:not(.profile):last-child,
+body.ownlist .list-menu-float > form:last-child {
+  background-image: var(--rs-stone-bottom) !important;
+}
+
+
+/* =====================================================================
+   SIDEBAR — HIGHLIGHT / HOVER
+   ===================================================================== */
+
+body.ownlist .list-menu-float > .icon-menu:not(.profile):hover,
+body.ownlist .list-menu-float > form:hover {
+  width: 50px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+
+  background-color: transparent !important;
+  background-image: var(--rs-stone-mid-hot) !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  background-size: auto 100% !important;
+}
+
+body.ownlist .list-menu-float > .icon-menu.profile + .icon-menu:not(.profile):hover,
+body.ownlist .list-menu-float > .icon-menu.profile + form:hover {
+  background-image: var(--rs-stone-top-hot) !important;
+}
+
+body.ownlist .list-menu-float > .icon-menu:not(.profile):last-child:hover,
+body.ownlist .list-menu-float > form:last-child:hover {
+  background-image: var(--rs-stone-bottom-hot) !important;
+}
+
+/* Extra Logout protection against MAL's form/button hover cascade. */
+body.ownlist .list-menu-float > form:has(.icon-menu.logout) {
+  background-image: var(--rs-stone-mid) !important;
+}
+
+body.ownlist .list-menu-float > form:has(.icon-menu.logout):hover {
+  background-image: var(--rs-stone-mid-hot) !important;
+}
+
+body.ownlist .list-menu-float > form:has(.icon-menu.logout) > .icon-menu.logout,
+body.ownlist .list-menu-float > form:has(.icon-menu.logout):hover > .icon-menu.logout,
+body.ownlist .list-menu-float > form:has(.icon-menu.logout) > .icon-menu.logout:hover {
+  background: transparent !important;
+}
+
+/* Active Anime/Manga tab gets the red OSRS-selected treatment. */
+body.ownlist[data-work="anime"] .list-menu-float .icon-menu.anime-list {
+  background-image: var(--rs-stone-mid-hot) !important;
+}
+
+body.ownlist[data-work="manga"] .list-menu-float .icon-menu.manga-list {
+  background-image: var(--rs-stone-mid-hot) !important;
+}
+
+
+/* =====================================================================
+   SIDEBAR — ICONS
+   ===================================================================== */
+
+/* Middle stones are narrower than the 50px click row.
+   The ordinary icon is shifted 4px right compared with the old 8px rule,
+   so it visually centres over the right-aligned middle stone. */
+body.ownlist .list-menu-float .icon-menu:not(.profile)::before {
+  content: "" !important;
+
+  position: absolute !important;
+  left: auto !important;
+  right: 6px !important;
+  top: 7px !important;
+
+  display: block !important;
+
+  width: 32px !important;
+  height: 32px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+
+  pointer-events: none !important;
+  z-index: 3 !important;
+
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,.62));
+}
+
+/* The first/top and last/bottom stones are wider, so keep their icons
+   closer to the original 50px-row centre. */
+body.ownlist
+.list-menu-float > .icon-menu.profile + .icon-menu:not(.profile)::before,
+body.ownlist
+.list-menu-float > .icon-menu:not(.profile):last-child::before {
+  left: 8px !important;
+  right: auto !important;
+}
+
+/* Form-wrapped Logout is a middle stone: centre its child icon over the
+   narrower right-aligned stone too. */
+body.ownlist .list-menu-float > form .icon-menu.logout::before {
+  left: auto !important;
+  right: 6px !important;
+}
+
+/* Replace known MAL SVGs; unknown controls stay visible rather than blank. */
+body.ownlist .list-menu-float .icon-menu.quick-add > svg.icon,
+body.ownlist .list-menu-float .icon-menu.anime-list > svg.icon,
+body.ownlist .list-menu-float .icon-menu.manga-list > svg.icon,
+body.ownlist .list-menu-float .icon-menu.statistics > svg.icon,
+body.ownlist .list-menu-float .icon-menu.stats > svg.icon,
+body.ownlist .list-menu-float .icon-menu.history > svg.icon,
+body.ownlist .list-menu-float .icon-menu.export > svg.icon,
+body.ownlist .list-menu-float .icon-menu.logout > svg.icon,
+body.ownlist .list-menu-float .icon-menu.setting > svg.icon {
+  display: none !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.quick-add::before {
+  background-image: var(--rs-side-quick) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.anime-list::before {
+  background-image: var(--rs-side-anime) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.manga-list::before {
+  background-image: var(--rs-side-manga) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.statistics::before,
+body.ownlist .list-menu-float .icon-menu.stats::before {
+  background-image: var(--rs-side-statistics) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.history::before {
+  background-image: var(--rs-side-history) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.export::before {
+  background-image: var(--rs-side-export) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.logout::before {
+  background-image: var(--rs-side-logout) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.setting::before {
+  background-image: var(--rs-side-settings) !important;
+}
+
+/* =====================================================================
+   DYNAMIC CAP RESOLUTION
+   MAL exposes different sidebar controls depending on owner/visitor state.
+   CSS cannot ask "which element is visually last after display:none?" in a
+   completely generic way, but it CAN react to DOM presence with :has(), and
+   MAL also exposes data-owner on <body>. These rules therefore resolve the
+   lower cap from the controls that actually exist, with an explicit visitor
+   fallback for Logout.
+   ===================================================================== */
+
+/* If Settings is absent from the DOM, Logout becomes the lower cap. */
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  > form:has(.icon-menu.logout),
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  > .icon-menu.logout {
+  background-image: var(--rs-stone-bottom) !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  background-size: auto 100% !important;
+}
+
+/* On another user's list, MAL can retain owner-only controls in odd/hidden
+   states. data-owner="" is therefore the reliable signal: Logout is the
+   actual bottom action in the visitor layout. */
+body.ownlist[data-owner=""] .list-menu-float
+  > form:has(.icon-menu.logout),
+body.ownlist[data-owner=""] .list-menu-float
+  > .icon-menu.logout {
+  background-image: var(--rs-stone-bottom) !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  background-size: auto 100% !important;
+}
+
+/* Correct highlighted lower-cap art. These come AFTER the generic Logout
+   middle-stone rules so they win the cascade. */
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  > form:has(.icon-menu.logout):hover,
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  > .icon-menu.logout:hover,
+body.ownlist[data-owner=""] .list-menu-float
+  > form:has(.icon-menu.logout):hover,
+body.ownlist[data-owner=""] .list-menu-float
+  > .icon-menu.logout:hover {
+  background-image: var(--rs-stone-bottom-hot) !important;
+}
+
+/* Centre Logout's icon over the wider bottom cap instead of over a narrow
+   middle stone. */
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  .icon-menu.logout::before,
+body.ownlist[data-owner=""] .list-menu-float
+  .icon-menu.logout::before {
+  left: 8px !important;
+  right: auto !important;
+}
+
+/* Presence-based fallback chain for unusual MAL states. If Logout itself
+   isn't present, promote the last known available control. */
+body.ownlist .list-menu-float
+  :is(.icon-menu.export, .icon-menu.history, .icon-menu.statistics, .icon-menu.stats)
+  {
+  /* default remains middle; specific promotions below */
+}
+
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting)):not(:has(.icon-menu.logout))
+  > .icon-menu.export {
+  background-image: var(--rs-stone-bottom) !important;
+}
+
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting)):not(:has(.icon-menu.logout)):not(:has(.icon-menu.export))
+  > .icon-menu.history {
+  background-image: var(--rs-stone-bottom) !important;
+}
+
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting)):not(:has(.icon-menu.logout)):not(:has(.icon-menu.export)):not(:has(.icon-menu.history))
+  > :is(.icon-menu.statistics, .icon-menu.stats) {
+  background-image: var(--rs-stone-bottom) !important;
+}
+

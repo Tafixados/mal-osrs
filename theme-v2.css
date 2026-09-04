@@ -1,0 +1,21 @@
+/* Tafixados MAL OSRS — modular master stylesheet
+   Keep every @import above normal CSS rules.
+   Edit the individual files in /css; this file should rarely need changes. */
+
+@import url("./osrs-ui-font-layer-v4.css");
+@import url("./css/00-foundation.css");
+@import url("./css/01-banner.css");
+@import url("./css/02-tabs.css");
+@import url("./css/03-list-shell.css");
+@import url("./css/04-cards-base.css");
+@import url("./css/05-sidebar-base.css");
+@import url("./css/06-dialogs-footer-responsive.css");
+@import url("./css/07-cards-layout-v42.css");
+@import url("./css/08-card-details-v43.css");
+@import url("./css/09-ui-polish-v44.css");
+@import url("./css/10-card-polish-v45.css");
+@import url("./css/11-card-final-v46.css");
+@import url("./css/12-infobox-icons.css");
+@import url("./css/13-sidebar-final-v2.css");
+@import url("./css/14-tooltips-v2.css");
+@import url("./css/15-visitor-strip-v2.css");
