@@ -1,0 +1,102 @@
+/* MODULE: 12-infobox-icons.css
+   Current additional Type/Rated/Released/Tags icon assets and label icon placement.
+   Extracted from source lines 2186-2283; import order matters. */
+
+/* =====================================================================
+   TAFIXADOS OSRS — CONSOLIDATED ADD-ON v1
+   Built directly on the last confirmed-good v4.6 + font-layer-v4 file.
+
+   This block appears ONCE and contains:
+     - Type / Rated / Released / Tags icons
+     - OSRS stone sidebar
+     - native-size 103x52 hover menus
+     - native-size 103x84 Settings menu
+     - middle-stone icon centering
+     - Logout hover fix
+     - visitor utility strip above the banner
+
+   It deliberately does NOT modify:
+     - the working card grid
+     - the rounded notch ::after geometry/colors
+     - the working font import
+     - the current infobox/font sizing
+   ===================================================================== */
+
+
+/* =====================================================================
+   INFOBOX ICONS
+   ===================================================================== */
+
+:root {
+  --rs-icon-type:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Character_Summary_-_Combat_Level_icon.png");
+  --rs-icon-rated:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Prayer_tab_icon.png");
+  --rs-icon-released:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Hourglass_(Recruitment_Drive).png");
+  --rs-icon-tags:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Character_Summary_-_Collections_Logged_icon.png");
+
+  --rs-stone-top: url("https://i.imgur.com/YuFM9y1.png");
+  --rs-stone-top-hot: url("https://i.imgur.com/fvrvt7D.png");
+  --rs-stone-mid: url("https://i.imgur.com/tuYzBdL.png");
+  --rs-stone-mid-hot: url("https://i.imgur.com/myeLaww.png");
+  --rs-stone-bottom: url("https://i.imgur.com/TjUwYKN.png");
+  --rs-stone-bottom-hot: url("https://i.imgur.com/289VuKk.png");
+
+  --rs-side-quick:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Inventory.png");
+  --rs-side-anime:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Music.png");
+  --rs-side-manga:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Spellbook.png");
+  --rs-side-statistics:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Stats_icon.png");
+  --rs-side-history:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Activity_Adviser_orb.png");
+  --rs-side-export:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Account_Management.png");
+  --rs-side-logout:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Logout.png");
+  --rs-side-settings:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Settings.png");
+
+  --rs-option-menu: url("https://i.imgur.com/wcjZ7hd.png");
+  --rs-option-menu-settings: url("https://i.imgur.com/BYhIGPI.png");
+}
+
+
+/* Add only backgrounds to the EXISTING labels. Do not touch ::after:
+   ::after is where the working rounded corner notches live. */
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.rated::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.tags::before {
+  background-repeat: no-repeat !important;
+}
+
+.list-table .list-table-data .data.type::before {
+  background-image: var(--rs-icon-type) !important;
+  background-size: 16px 16px !important;
+  background-position: calc(50% - 27px) center !important;
+}
+
+.list-table .list-table-data .data.rated::before {
+  background-image: var(--rs-icon-rated) !important;
+  background-size: 17px 17px !important;
+  background-position: calc(50% - 29px) center !important;
+}
+
+.list-table .list-table-data .data.season::before {
+  background-image: var(--rs-icon-released) !important;
+  background-size: 11px 17px !important;
+  background-position: calc(50% - 38px) center !important;
+}
+
+.list-table .list-table-data .data.tags::before {
+  background-image: var(--rs-icon-tags) !important;
+  background-size: 16px 16px !important;
+  background-position: calc(50% - 27px) center !important;
+}
+
+

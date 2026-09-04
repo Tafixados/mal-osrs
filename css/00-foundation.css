@@ -1,0 +1,141 @@
+/* MODULE: 00-foundation.css
+   Global variables, page background/cursor, MAL header, and outer list frame.
+   Extracted from source lines 4-140; import order matters. */
+
+/* =====================================================================
+   TAFIXADOS' OSRS ANIME COLLECTION LOG — MAL Modern
+   v4.1: side-layout cards, NO embedded fonts
+
+   MAL's list CSS editor only allows url() resources ending in
+   .jpg, .gif, or .png. Embedded/font URLs make the stylesheet fail,
+   so this version intentionally uses safe fallback fonts.
+
+   Replace the previous CSS completely with this file.
+   ===================================================================== */
+
+
+:root {
+  --rs-bg: #17130f;
+  --rs-bg2: #0d0b08;
+  --rs-panel: #332d25;
+  --rs-panel-dark: #211c17;
+  --rs-panel-mid: #3b342b;
+  --rs-panel-light: #4c4438;
+  --rs-border: #17130f;
+  --rs-border-mid: #6d6250;
+  --rs-border-light: #90836d;
+  --rs-gold: #ffb000;
+  --rs-yellow: #ffff00;
+  --rs-cream: #f0dfb4;
+  --rs-text: #d8c9aa;
+  --rs-muted: #8d816d;
+
+  --status-blue: #5d82d9;
+  --status-yellow: #ecea31;
+  --status-green: #3db544;
+  --status-brown: #9a6d3a;
+  --status-red: #d45b50;
+  --status-purple: #9948c4;
+
+  --tab-blue: url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Quests.png");
+  --tab-yellow: url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Distractions_and_Diversions.png");
+  --tab-green: url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Achievement_Diaries.png");
+  --tab-brown: url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Raids.png");
+  --tab-red: url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Minigames.png");
+  --tab-purple: url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Kourend_Favour.png");
+
+  --cursor-sword: url("https://i.imgur.com/7ppAQ8f.png") 2 2, auto;
+
+  /* Optional future banner slot */
+  --hero-banner: none;
+}
+
+html,
+body.ownlist {
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 16% 0%, rgba(155,113,54,.12), transparent 34rem),
+    radial-gradient(circle at 84% 15%, rgba(105,76,40,.10), transparent 32rem),
+    repeating-linear-gradient(135deg, #17130f 0 4px, #14110e 4px 8px) !important;
+  background-attachment: fixed !important;
+}
+
+body.ownlist {
+  margin: 0 !important;
+  padding: 18px 0 70px !important;
+  overflow-x: hidden;
+  color: var(--rs-text);
+  text-align: left;
+  font-family: "RSChat07", Tahoma, Verdana, sans-serif !important;
+  cursor: var(--cursor-sword);
+}
+
+body.ownlist a,
+body.ownlist button,
+body.ownlist input,
+body.ownlist select,
+body.ownlist textarea,
+body.ownlist .status-button,
+body.ownlist .icon-menu,
+body.ownlist .btn-list-setting {
+  cursor: var(--cursor-sword);
+}
+
+body.ownlist a {
+  color: var(--rs-cream);
+  text-decoration: none;
+}
+
+body.ownlist a:hover {
+  color: var(--rs-yellow);
+  text-decoration: none;
+}
+
+.header {
+  width: min(1320px, calc(100vw - 64px)) !important;
+  height: 20px !important;
+  margin: 0 auto 8px !important;
+  color: var(--rs-muted);
+}
+
+.header .header-title {
+  display: none !important;
+}
+
+.header .header-menu {
+  position: static !important;
+  float: right;
+}
+
+.header .header-menu .btn-menu,
+.header .header-menu .header-info {
+  color: #9c9079 !important;
+  font-family: "RSSmall", "RSChat07", sans-serif !important;
+  font-size: 10px !important;
+}
+
+.list-container {
+  position: relative !important;
+  width: min(1320px, calc(100vw - 64px)) !important;
+  margin: 0 auto !important;
+  border: 3px solid var(--rs-border) !important;
+  outline: 2px solid var(--rs-border-mid);
+  background: #211c17 !important;
+  box-shadow:
+    0 0 0 5px #393329,
+    0 0 0 7px #15120e,
+    0 18px 55px rgba(0,0,0,.68);
+  text-align: left;
+}
+
+.list-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.05),
+    inset 0 0 40px rgba(0,0,0,.38);
+}
+

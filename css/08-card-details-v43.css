@@ -1,0 +1,181 @@
+/* MODULE: 08-card-details-v43.css
+   v4.3 six-box metadata layout including restored Tags.
+   Extracted from source lines 1294-1470; import order matters. */
+
+/* =====================================================================
+   v4.3 DETAIL PANEL CLEANUP
+   - 6 equal metadata boxes
+   - Score label/value share one box
+   - Progress label/value share one box
+   - Tags restored as sixth box
+   - Released and Tags split the final row evenly
+   ===================================================================== */
+
+/* Right-hand metadata columns are now exactly equal width. */
+.list-table .list-table-data {
+  grid-template-columns: 132px repeat(2, minmax(0, 1fr)) !important;
+  grid-template-rows: 58px 44px 44px 44px !important;
+  grid-template-areas:
+    "image title    title"
+    "image progress score"
+    "image type     rated"
+    "image season   tags" !important;
+}
+
+/* All six metadata fields use one identical box model. */
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.rated,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.tags {
+  position: static !important;
+  inset: auto !important;
+
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+
+  margin: 0 !important;
+  padding: 5px 7px 4px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid rgba(111,100,82,.52) !important;
+  background: linear-gradient(rgba(74,65,53,.40), rgba(39,34,28,.40)) !important;
+
+  color: #e3d3af !important;
+  font-family: Tahoma, Verdana, sans-serif !important;
+  font-size: 10px !important;
+  line-height: 12px !important;
+  text-align: center !important;
+
+  overflow: hidden !important;
+}
+
+/* Explicit grid placement. */
+.list-table .list-table-data .data.progress { grid-area: progress !important; }
+.list-table .list-table-data .data.score    { grid-area: score !important; }
+.list-table .list-table-data .data.type     { grid-area: type !important; }
+.list-table .list-table-data .data.rated    { grid-area: rated !important; }
+.list-table .list-table-data .data.season   { grid-area: season !important; }
+.list-table .list-table-data .data.tags     { grid-area: tags !important; }
+
+/* CRITICAL RESET:
+   Older experiments gave Score's ::before its own bordered mini-box.
+   Strip ALL that styling so every label sits inside its parent box,
+   just like Progress. */
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.score::before,
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.rated::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.tags::before {
+  position: static !important;
+  display: block !important;
+
+  width: auto !important;
+  height: 9px !important;
+
+  margin: 0 0 3px !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+
+  color: #8f846e !important;
+  font-family: Tahoma, Verdana, sans-serif !important;
+  font-size: 8px !important;
+  font-weight: normal !important;
+  line-height: 9px !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+}
+
+.list-table .list-table-data .data.progress::before { content: "Progress" !important; }
+.list-table .list-table-data .data.score::before    { content: "Score" !important; }
+.list-table .list-table-data .data.type::before     { content: "Type" !important; }
+.list-table .list-table-data .data.rated::before    { content: "Rated" !important; }
+.list-table .list-table-data .data.season::before   { content: "Released" !important; }
+.list-table .list-table-data .data.tags::before     { content: "Tags" !important; }
+
+/* Score value lives normally below the Score label. */
+.list-table .list-table-data .data.score .link,
+.list-table .list-table-data .data.score .score-label {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+
+  color: #f0ce64 !important;
+  font-family: Georgia, serif !important;
+  font-size: 15px !important;
+  font-weight: normal !important;
+  line-height: 12px !important;
+}
+
+/* Progress value likewise stays in the same box as its label. */
+.list-table .list-table-data .data.progress .link,
+.list-table .list-table-data .data.progress > span {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+
+  color: #e8d8b5 !important;
+}
+
+.list-table .list-table-data .data.progress .icon-add-episode {
+  display: inline !important;
+  color: #64c769 !important;
+}
+
+/* Season and tag links remain functional.
+   Tags are primarily being used as custom season filters. */
+.list-table .list-table-data .data.season a,
+.list-table .list-table-data .data.tags a {
+  display: inline !important;
+  color: #e8d8b5 !important;
+  font-size: 10px !important;
+  line-height: 12px !important;
+  white-space: nowrap !important;
+}
+
+.list-table .list-table-data .data.tags > div {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Don't waste the compact Tags box on MAL's "Edit" link. */
+.list-table .list-table-data .data.tags .edit {
+  display: none !important;
+}
+
+/* Kill leftover generated/pseudo content from earlier experiments. */
+.list-table .list-table-data .data.score::after,
+.list-table .list-table-data .data.progress::after,
+.list-table .list-table-data .data.type::after,
+.list-table .list-table-data .data.rated::after,
+.list-table .list-table-data .data.season::after,
+.list-table .list-table-data .data.tags::after {
+  display: none !important;
+  content: none !important;
+}
+
+

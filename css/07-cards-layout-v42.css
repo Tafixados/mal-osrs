@@ -1,0 +1,273 @@
+/* MODULE: 07-cards-layout-v42.css
+   v4.2 three-column fixed card layout, larger covers, and card responsiveness.
+   Extracted from source lines 1025-1293; import order matters. */
+
+/* =====================================================================
+   v4.2 FORMAT OVERRIDE
+   Clean 3-column layout with fixed-size cards and larger covers.
+   This block intentionally overrides the experimental absolute-position
+   rules above without changing the rest of the theme.
+   ===================================================================== */
+
+/* --- three entries per row --- */
+.list-table {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+/* --- every card uses the exact same internal grid --- */
+.list-table .list-table-data {
+  position: relative !important;
+  display: grid !important;
+
+  grid-template-columns: 132px minmax(0, 1fr) minmax(82px, .72fr) !important;
+  grid-template-rows: 58px 44px 44px 44px !important;
+  grid-template-areas:
+    "image title    title"
+    "image progress score"
+    "image type     rated"
+    "image season   season" !important;
+
+  column-gap: 12px !important;
+  row-gap: 6px !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 232px !important;
+  min-height: 232px !important;
+  max-height: 232px !important;
+  padding: 12px !important;
+  overflow: hidden !important;
+}
+
+/* --- common cell reset: NO absolute positioning --- */
+.list-table .list-table-data .data.image,
+.list-table .list-table-data .data.title,
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.rated {
+  position: static !important;
+  inset: auto !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+
+  box-sizing: border-box !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+}
+
+/* --- cover fills almost the whole card height --- */
+.list-table .list-table-data .data.image {
+  grid-area: image !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  padding: 4px 0 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+}
+
+.list-table .list-table-data .data.image a {
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 126px !important;
+  height: 190px !important;
+  margin: 0 !important;
+  padding: 4px !important;
+
+  border: 2px solid #15120e !important;
+  outline: 1px solid #796e59 !important;
+  background: linear-gradient(#41392f, #2c2720) !important;
+  box-shadow:
+    inset 0 0 12px rgba(0,0,0,.42),
+    0 2px 5px rgba(0,0,0,.46) !important;
+  overflow: hidden !important;
+}
+
+.list-table .list-table-data .data.image .image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* --- fixed-height title + quest status --- */
+.list-table .list-table-data .data.title {
+  grid-area: title !important;
+  display: block !important;
+  padding: 3px 2px 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  text-align: left !important;
+}
+
+.list-table .list-table-data .data.title > .link {
+  display: -webkit-box !important;
+  overflow: hidden !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+
+  height: 36px !important;
+  min-height: 36px !important;
+  max-height: 36px !important;
+
+  color: var(--rs-gold) !important;
+  font-size: 16px !important;
+  line-height: 18px !important;
+  text-align: left !important;
+}
+
+/* restore the quest-state line under the title */
+.list-table .list-table-data .data.title::after {
+  position: static !important;
+  display: block !important;
+  width: auto !important;
+  height: 14px !important;
+  margin: 4px 0 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+
+  font-family: Tahoma, Verdana, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: bold !important;
+  line-height: 14px !important;
+  text-align: left !important;
+  text-transform: none !important;
+}
+
+.list-table .list-table-data:has(.status.watching) .data.title::after {
+  content: "Quest Started" !important;
+  color: #f0ed49 !important;
+}
+
+.list-table .list-table-data:has(.status.completed) .data.title::after {
+  content: "Quest Complete" !important;
+  color: #68d66a !important;
+}
+
+.list-table .list-table-data:has(.status.onhold) .data.title::after {
+  content: "Quest Paused" !important;
+  color: #cf9a62 !important;
+}
+
+.list-table .list-table-data:has(.status.dropped) .data.title::after {
+  content: "Quest Abandoned" !important;
+  color: #ef756a !important;
+}
+
+.list-table .list-table-data:has(.status.plantowatch) .data.title::after {
+  content: "Quest Not Started" !important;
+  color: #c48be5 !important;
+}
+
+/* --- compact details: every box is the same height --- */
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.rated {
+  display: block !important;
+  padding: 6px 7px 5px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid rgba(111,100,82,.52) !important;
+  background: linear-gradient(rgba(74,65,53,.40), rgba(39,34,28,.40)) !important;
+
+  color: #e3d3af !important;
+  font-family: Tahoma, Verdana, sans-serif !important;
+  font-size: 10px !important;
+  line-height: 12px !important;
+  text-align: center !important;
+
+  overflow: hidden !important;
+}
+
+.list-table .list-table-data .data.progress { grid-area: progress !important; }
+.list-table .list-table-data .data.score    { grid-area: score !important; }
+.list-table .list-table-data .data.type     { grid-area: type !important; }
+.list-table .list-table-data .data.rated    { grid-area: rated !important; }
+.list-table .list-table-data .data.season   { grid-area: season !important; }
+
+/* labels */
+.list-table .list-table-data .data.score::before,
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.rated::before {
+  display: block !important;
+  margin: 0 0 3px !important;
+  color: #8f846e !important;
+  font-family: Tahoma, Verdana, sans-serif !important;
+  font-size: 8px !important;
+  font-weight: normal !important;
+  line-height: 9px !important;
+  text-transform: uppercase !important;
+}
+
+.list-table .list-table-data .data.score::before    { content: "Score" !important; }
+.list-table .list-table-data .data.progress::before { content: "Progress" !important; }
+.list-table .list-table-data .data.type::before     { content: "Type" !important; }
+.list-table .list-table-data .data.rated::before    { content: "Rated" !important; }
+.list-table .list-table-data .data.season::before   { content: "Released" !important; }
+
+/* undo the old score-as-status experiment */
+.list-table .list-table-data .data.score .link,
+.list-table .list-table-data .data.score .score-label {
+  display: inline !important;
+  color: #f0ce64 !important;
+  font-family: Georgia, serif !important;
+  font-size: 15px !important;
+  line-height: 12px !important;
+}
+
+/* restore real progress content */
+.list-table .list-table-data .data.progress .link,
+.list-table .list-table-data .data.progress > span {
+  display: inline !important;
+  color: #e8d8b5 !important;
+}
+
+.list-table .list-table-data .data.progress .icon-add-episode {
+  display: inline !important;
+  color: #64c769 !important;
+}
+
+/* tags stay hidden in compact 3-column mode */
+.list-table .list-table-data .data.tags {
+  display: none !important;
+}
+
+/* --- responsive fallbacks --- */
+@media (max-width: 1450px) {
+  .list-table {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 1050px) {
+  .list-table {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .list-table {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+

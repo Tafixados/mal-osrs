@@ -1,0 +1,354 @@
+/* MODULE: 11-card-final-v46.css
+   v4.6 current card geometry, centered titles, spacing, rounded OSRS notches, and status stripe.
+   Extracted from source lines 1836-2185; import order matters. */
+
+/* =====================================================================
+   v4.6 TILE GEOMETRY + ROUNDED OSRS NOTCHES
+   - title centered
+   - detail grid moved upward
+   - bottom detail row aligns with bottom of cover
+   - 5px vertical + horizontal gaps between the six detail boxes
+   - rounded inward corner "bites" drawn in CSS while preserving borders
+   - completed status stripe test changed to #00ff00
+   ===================================================================== */
+
+:root {
+  --osrs-card-bg: #3e3529;
+  --osrs-box-bg: #554c41;
+  --osrs-box-inner: #726451;
+  --osrs-box-outer: #2d2a22;
+  --osrs-orange: #ff9933;
+
+  /* Color behind the notches. Keep this matched to the card body. */
+  --osrs-notch-bg: #3e3529;
+}
+
+/* ---------------------------------------------------------------------
+   CARD GEOMETRY
+   Right side:
+     TITLE
+     PROGRESS | SCORE
+     TYPE     | RATED
+     RELEASED | TAGS
+
+   50 + 5 + 42 + 5 + 42 + 5 + 42 = 191px
+   The cover frame is also exactly 191px tall.
+   --------------------------------------------------------------------- */
+.list-table .list-table-data {
+  display: grid !important;
+
+  grid-template-columns:
+    132px
+    12px
+    minmax(0, 1fr)
+    5px
+    minmax(0, 1fr) !important;
+
+  grid-template-rows:
+    50px
+    42px
+    42px
+    42px !important;
+
+  grid-template-areas:
+    "image . title    title title"
+    "image . progress .    score"
+    "image . type     .    rated"
+    "image . season   .    tags" !important;
+
+  row-gap: 5px !important;
+  column-gap: 0 !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 215px !important;
+  min-height: 215px !important;
+  max-height: 215px !important;
+
+  padding: 12px !important;
+
+  border: 1px solid var(--osrs-box-outer) !important;
+  outline: 1px solid #8b7c60 !important;
+
+  background: var(--osrs-card-bg) !important;
+
+  box-shadow:
+    inset 0 0 0 1px #5f5444,
+    0 4px 10px rgba(0,0,0,.28) !important;
+}
+
+/* test the brighter OSRS-like completed green */
+.list-table .list-table-data:has(.status.completed)::before {
+  background: #00ff00 !important;
+}
+
+/* ---------------------------------------------------------------------
+   COVER — exactly same vertical extent as title + 3 detail rows
+   --------------------------------------------------------------------- */
+.list-table .list-table-data .data.image {
+  grid-area: image !important;
+
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+
+  width: 132px !important;
+  height: 191px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+}
+
+.list-table .list-table-data .data.image a {
+  display: block !important;
+
+  box-sizing: border-box !important;
+  width: 126px !important;
+  height: 191px !important;
+
+  margin: 0 auto !important;
+  padding: 5px !important;
+
+  border: 2px solid #17130f !important;
+  outline: 1px solid #796e59 !important;
+
+  background: #2b261f !important;
+
+  box-shadow:
+    inset 0 0 0 1px #4b4236,
+    inset 0 0 12px rgba(0,0,0,.42),
+    0 2px 5px rgba(0,0,0,.46) !important;
+
+  overflow: hidden !important;
+}
+
+.list-table .list-table-data .data.image .image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* ---------------------------------------------------------------------
+   CENTERED TITLE
+   --------------------------------------------------------------------- */
+.list-table .list-table-data .data.title {
+  grid-area: title !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 50px !important;
+
+  margin: 0 !important;
+  padding: 0 8px !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+
+  text-align: center !important;
+}
+
+.list-table .list-table-data .data.title > .link {
+  display: -webkit-box !important;
+
+  width: 100% !important;
+  height: auto !important;
+  max-height: 38px !important;
+
+  overflow: hidden !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+
+  color: var(--osrs-orange) !important;
+
+  font-size: 17px !important;
+  line-height: 19px !important;
+
+  text-align: center !important;
+  text-shadow: 2px 2px 0 rgba(0,0,0,.60) !important;
+}
+
+/* no extra quest-status line in the compact card header */
+.list-table .list-table-data .data.title::after {
+  display: none !important;
+}
+
+/* ---------------------------------------------------------------------
+   SIX DETAIL BOXES — EXACTLY 5px APART
+   --------------------------------------------------------------------- */
+.list-table .list-table-data .data.progress { grid-area: progress !important; }
+.list-table .list-table-data .data.score    { grid-area: score !important; }
+.list-table .list-table-data .data.type     { grid-area: type !important; }
+.list-table .list-table-data .data.rated    { grid-area: rated !important; }
+.list-table .list-table-data .data.season   { grid-area: season !important; }
+.list-table .list-table-data .data.tags     { grid-area: tags !important; }
+
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.rated,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.tags {
+  position: relative !important;
+  inset: auto !important;
+
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+
+  margin: 0 !important;
+  padding: 5px 7px 4px !important;
+
+  /* Real rectangular double border beneath the corner overlays. */
+  border: 1px solid var(--osrs-box-outer) !important;
+  outline: 0 !important;
+  border-radius: 2px !important;
+
+  background: var(--osrs-box-bg) !important;
+
+  box-shadow:
+    inset 0 0 0 1px var(--osrs-box-inner),
+    inset 0 1px 0 rgba(255,255,255,.035),
+    inset 0 -1px 0 rgba(0,0,0,.12) !important;
+
+  overflow: hidden !important;
+
+  color: #f2e2bf !important;
+  text-align: center !important;
+}
+
+/* ---------------------------------------------------------------------
+   ROUNDED INWARD CORNER BITES
+
+   Instead of clip-path, these paint four tiny quarter-circles in the
+   CARD color over the corners, then draw a crisp outer+inner border
+   ring around each bite. Visually this behaves like a concave rounded
+   notch, but it keeps the panel border intact and intentional.
+   --------------------------------------------------------------------- */
+.list-table .list-table-data .data.progress::after,
+.list-table .list-table-data .data.score::after,
+.list-table .list-table-data .data.type::after,
+.list-table .list-table-data .data.rated::after,
+.list-table .list-table-data .data.season::after,
+.list-table .list-table-data .data.tags::after {
+  content: "" !important;
+
+  position: absolute !important;
+  inset: 0 !important;
+
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  pointer-events: none !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  /*
+    0–4.5px  = card background (the actual "bite")
+    4.5–5.5  = dark outer border
+    5.5–6.5  = lighter inner border
+    >6.5px   = transparent, revealing panel fill
+  */
+  background:
+    radial-gradient(
+      circle at 0 0,
+      var(--osrs-notch-bg) 0 4.5px,
+      var(--osrs-box-outer) 4.7px 5.6px,
+      var(--osrs-box-inner) 5.8px 6.7px,
+      transparent 6.9px
+    ) top left / 14px 14px no-repeat,
+
+    radial-gradient(
+      circle at 100% 0,
+      var(--osrs-notch-bg) 0 4.5px,
+      var(--osrs-box-outer) 4.7px 5.6px,
+      var(--osrs-box-inner) 5.8px 6.7px,
+      transparent 6.9px
+    ) top right / 14px 14px no-repeat,
+
+    radial-gradient(
+      circle at 0 100%,
+      var(--osrs-notch-bg) 0 4.5px,
+      var(--osrs-box-outer) 4.7px 5.6px,
+      var(--osrs-box-inner) 5.8px 6.7px,
+      transparent 6.9px
+    ) bottom left / 14px 14px no-repeat,
+
+    radial-gradient(
+      circle at 100% 100%,
+      var(--osrs-notch-bg) 0 4.5px,
+      var(--osrs-box-outer) 4.7px 5.6px,
+      var(--osrs-box-inner) 5.8px 6.7px,
+      transparent 6.9px
+    ) bottom right / 14px 14px no-repeat !important;
+
+  opacity: 1 !important;
+  z-index: 2 !important;
+}
+
+/* labels and values must stay above the decorative corner overlay */
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.score::before,
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.rated::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.tags::before,
+.list-table .list-table-data .data.progress > *,
+.list-table .list-table-data .data.score > *,
+.list-table .list-table-data .data.type > *,
+.list-table .list-table-data .data.rated > *,
+.list-table .list-table-data .data.season > *,
+.list-table .list-table-data .data.tags > * {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+/* Keep the OSRS label treatment from v4.5. */
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.score::before,
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.rated::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.tags::before {
+  color: var(--osrs-orange) !important;
+}
+
+/* Hover should be subtle, not modern-button-like. */
+.list-table .list-table-data .data.progress:hover,
+.list-table .list-table-data .data.score:hover,
+.list-table .list-table-data .data.type:hover,
+.list-table .list-table-data .data.rated:hover,
+.list-table .list-table-data .data.season:hover,
+.list-table .list-table-data .data.tags:hover {
+  background: #5a5044 !important;
+}
+
+/* Responsive: at 2 columns give the info area slightly more breathing room. */
+@media (max-width: 1050px) {
+  .list-table .list-table-data {
+    grid-template-columns:
+      132px
+      12px
+      minmax(0, 1fr)
+      5px
+      minmax(0, 1fr) !important;
+  }
+}
+
+

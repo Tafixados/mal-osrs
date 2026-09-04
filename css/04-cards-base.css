@@ -1,0 +1,399 @@
+/* MODULE: 04-cards-base.css
+   Original card/grid foundation and early metadata positioning rules. Kept for cascade compatibility.
+   Extracted from source lines 445-839; import order matters. */
+
+.list-table {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)) !important;
+  gap: 16px !important;
+  width: 100% !important;
+  margin: 16px 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.list-table > tbody:not(.list-item),
+.list-table > tbody:has(.list-table-header),
+.list-table .list-table-header {
+  display: none !important;
+}
+
+.list-table > tbody.list-item {
+  display: block !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.list-table .more-info,
+.list-table .more-content {
+  display: none !important;
+}
+
+.list-table .list-table-data {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 116px minmax(0, 1fr) !important;
+  grid-template-rows: auto auto 1fr !important;
+  grid-template-areas:
+    "image title"
+    "image state"
+    "image meta" !important;
+  gap: 4px 14px !important;
+  align-items: start !important;
+
+  width: 100% !important;
+  min-height: 210px !important;
+  margin: 0 !important;
+  padding: 12px 12px 12px 12px !important;
+
+  border: 2px solid var(--rs-border) !important;
+  outline: 1px solid var(--rs-border-mid);
+  background:
+    linear-gradient(180deg, rgba(77,68,55,.18), rgba(41,36,29,.18)),
+    linear-gradient(#39332a, #2a251f) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.045),
+    0 4px 10px rgba(0,0,0,.34);
+
+  overflow: hidden !important;
+  transition: transform .14s ease, outline-color .14s ease, box-shadow .14s ease;
+}
+
+.list-table .list-table-data:hover {
+  transform: translateY(-2px);
+  outline-color: #9c8552;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.06),
+    0 9px 18px rgba(0,0,0,.40);
+}
+
+.list-table .list-table-data::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 5px;
+  background: var(--status-blue);
+}
+
+.list-table .list-table-data:has(.status.watching)::before { background: var(--status-yellow); }
+.list-table .list-table-data:has(.status.completed)::before { background: var(--status-green); }
+.list-table .list-table-data:has(.status.onhold)::before { background: var(--status-brown); }
+.list-table .list-table-data:has(.status.dropped)::before { background: var(--status-red); }
+.list-table .list-table-data:has(.status.plantowatch)::before { background: var(--status-purple); }
+
+.list-table .list-table-data .data {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--rs-text) !important;
+  font-family: "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 12px !important;
+  vertical-align: top;
+}
+
+.list-table .list-table-data .data.status,
+.list-table .list-table-data .data.number,
+.list-table .list-table-data .data.started,
+.list-table .list-table-data .data.finished,
+.list-table .list-table-data .data.tags {
+  display: none !important;
+}
+
+.list-table .list-table-data .data.image {
+  grid-area: image;
+  display: flex !important;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 4px !important;
+}
+
+.list-table .list-table-data .data.image a {
+  display: block !important;
+  width: 104px !important;
+  height: 148px !important;
+  margin: 0 auto !important;
+  padding: 4px !important;
+  border: 2px solid #15120e !important;
+  outline: 1px solid #796e59;
+  background: linear-gradient(#41392f, #2c2720) !important;
+  box-shadow: inset 0 0 12px rgba(0,0,0,.42), 0 2px 5px rgba(0,0,0,.46);
+  overflow: hidden;
+}
+
+.list-table .list-table-data .data.image .image {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  object-fit: cover !important;
+  filter: saturate(.96) contrast(1.02);
+  transition: transform .16s ease, filter .16s ease;
+}
+
+.list-table .list-table-data:hover .data.image .image {
+  transform: scale(1.03);
+  filter: saturate(1.04) contrast(1.04);
+}
+
+.list-table .list-table-data .data.title {
+  grid-area: title;
+  padding-top: 6px !important;
+  text-align: left !important;
+}
+
+.list-table .list-table-data .data.title > .link {
+  display: -webkit-box !important;
+  overflow: hidden !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 3 !important;
+  line-clamp: 3 !important;
+  min-height: 62px !important;
+  color: var(--rs-gold) !important;
+  font-family: "RSLarge", Georgia, serif !important;
+  font-size: 19px !important;
+  font-weight: normal !important;
+  line-height: 1.08 !important;
+  text-align: left !important;
+  text-shadow: 1px 1px #000;
+}
+
+.list-table .list-table-data .data.title > .link:hover {
+  color: var(--rs-yellow) !important;
+}
+
+.list-table .list-table-data .data.title .icon-watch2,
+.list-table .list-table-data .data.title .add-edit-more,
+.list-table .list-table-data .data.title .notes {
+  display: none !important;
+}
+
+.list-table .list-table-data .data.title::after {
+  display: none !important;
+}
+
+.list-table .list-table-data:has(.status.watching) .data.title {
+  --state-color: #f0ed49;
+  --state-text: "Quest Started";
+}
+.list-table .list-table-data:has(.status.completed) .data.title {
+  --state-color: #68d66a;
+  --state-text: "Quest Complete";
+}
+.list-table .list-table-data:has(.status.onhold) .data.title {
+  --state-color: #cf9a62;
+  --state-text: "Quest Paused";
+}
+.list-table .list-table-data:has(.status.dropped) .data.title {
+  --state-color: #ef756a;
+  --state-text: "Quest Abandoned";
+}
+.list-table .list-table-data:has(.status.plantowatch) .data.title {
+  --state-color: #c48be5;
+  --state-text: "Quest Not Started";
+}
+.list-table .list-table-data:not(:has(.status.watching,.status.completed,.status.onhold,.status.dropped,.status.plantowatch)) .data.title {
+  --state-color: #8cb2ff;
+  --state-text: "Quest Log";
+}
+
+.list-table .list-table-data .data.score {
+  grid-area: state;
+  padding: 0 !important;
+  margin-top: 0 !important;
+}
+
+.list-table .list-table-data .data.score::before {
+  content: var(--state-text);
+  display: inline-block !important;
+  margin: 0 !important;
+  padding: 5px 9px 4px !important;
+  border: 1px solid #17130f !important;
+  outline: 1px solid rgba(111,100,82,.52);
+  background: linear-gradient(rgba(74,65,53,.44), rgba(39,34,28,.44)) !important;
+  color: var(--state-color) !important;
+  font-family: "RSSmall", "RSChat07", sans-serif !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  text-transform: none !important;
+}
+
+.list-table .list-table-data .data.score .link,
+.list-table .list-table-data .data.score .score-label {
+  display: none !important;
+}
+
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.rated {
+  padding: 7px 8px 6px !important;
+  border: 1px solid #17130f !important;
+  outline: 1px solid rgba(111,100,82,.52);
+  background: linear-gradient(rgba(74,65,53,.40), rgba(39,34,28,.40)) !important;
+  text-align: center !important;
+}
+
+.list-table .list-table-data .data.progress {
+  grid-area: meta;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-auto-rows: minmax(0, auto);
+  gap: 8px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+}
+
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.progress .link,
+.list-table .list-table-data .data.progress > span {
+  display: none !important;
+}
+
+.list-table .list-table-data .data.progress .icon-add-episode {
+  display: none !important;
+}
+
+/* Turn the four remaining fields into the actual meta grid */
+.list-table .list-table-data .data.type { order: 1; }
+.list-table .list-table-data .data.rated { order: 2; }
+.list-table .list-table-data .data.season { order: 3; }
+
+/* We re-purpose .progress itself as a wrapper target, so force the fields into one visual block */
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.rated,
+.list-table .list-table-data .data.season {
+  display: block !important;
+}
+
+/* Actual field labels */
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.progress::after,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.rated::before {
+  display: block !important;
+  margin: 0 0 4px !important;
+  color: #8f846e !important;
+  font-family: "RSSmall", "RSChat07", sans-serif !important;
+  font-size: 9px !important;
+  font-weight: normal !important;
+  line-height: 1 !important;
+  text-transform: uppercase;
+}
+
+.list-table .list-table-data .data.type::before { content: "Type"; }
+.list-table .list-table-data .data.season::before { content: "Released"; }
+.list-table .list-table-data .data.rated::before { content: "Rated"; }
+
+/* A dedicated pseudo-field for progress value */
+.list-table .list-table-data .data.progress::after {
+  content: "";
+  display: none !important;
+}
+
+/* Separate dedicated progress box using the MAL progress cell itself */
+.list-table .list-table-data .data.progress {
+  display: none !important;
+}
+
+/* So instead, use the score cell after-state pill plus a real field box from title-area sibling */
+.list-table .list-table-data .data.title {
+  position: relative !important;
+}
+
+.list-table .list-table-data .data.title .rs-meta {
+  display: none !important;
+}
+
+/* Fallback: show actual score value in a small box below the state, and keep other native boxes below */
+.list-table .list-table-data .data.score {
+  grid-area: state;
+}
+
+.list-table .list-table-data .data.score::after {
+  content: "" !important;
+  display: none !important;
+}
+
+/* We will place native fields individually under the state tag */
+.list-table .list-table-data .data.type {
+  grid-area: auto;
+}
+
+.list-table .list-table-data .data.season {
+  grid-area: auto;
+}
+
+.list-table .list-table-data .data.rated {
+  grid-area: auto;
+}
+
+/* Make the right-hand info area itself a subgrid by assigning the fields fixed positions */
+.list-table .list-table-data .data.type {
+  position: absolute !important;
+  left: 142px;
+  top: 122px;
+  width: calc(50% - 84px) !important;
+  min-height: 43px !important;
+}
+
+.list-table .list-table-data .data.rated {
+  position: absolute !important;
+  right: 12px;
+  top: 122px;
+  width: calc(50% - 20px) !important;
+  min-height: 43px !important;
+}
+
+.list-table .list-table-data .data.season {
+  position: absolute !important;
+  left: 142px;
+  top: 173px;
+  width: calc(100% - 154px) !important;
+  min-height: 43px !important;
+}
+
+/* Use the real progress cell as a box too */
+.list-table .list-table-data .data.progress {
+  position: absolute !important;
+  right: 12px;
+  top: 71px;
+  display: block !important;
+  width: calc(50% - 20px) !important;
+  min-height: 43px !important;
+  padding: 7px 8px 6px !important;
+  border: 1px solid #17130f !important;
+  outline: 1px solid rgba(111,100,82,.52);
+  background: linear-gradient(rgba(74,65,53,.40), rgba(39,34,28,.40)) !important;
+  text-align: center !important;
+}
+
+.list-table .list-table-data .data.progress::before {
+  content: "Progress" !important;
+  display: block !important;
+  margin: 0 0 4px !important;
+  color: #8f846e !important;
+  font-family: "RSSmall", "RSChat07", sans-serif !important;
+  font-size: 9px !important;
+  line-height: 1 !important;
+  text-transform: uppercase;
+}
+
+.list-table .list-table-data .data.progress .link {
+  color: #e8d8b5 !important;
+}
+
+.list-table .list-table-data .data.progress .icon-add-episode {
+  color: #64c769 !important;
+}
+

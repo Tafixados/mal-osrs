@@ -1,0 +1,179 @@
+/* MODULE: 10-card-polish-v45.css
+   v4.5 character-summary colors, panel refinement, and Progress/Score icon styling.
+   Extracted from source lines 1661-1835; import order matters. */
+
+/* =====================================================================
+   v4.5 OSRS PANEL REFINEMENT
+   - remove the harsh clipped "missing corner" look
+   - shift toward the real OSRS character-summary panels
+   - lighter inner boxes, double borders, softer corners
+   - small icons for Progress and Score labels
+   ===================================================================== */
+
+:root {
+  --osrs-card-bg: #3e3529;
+  --osrs-box-bg: #554c41;
+  --osrs-box-inner: #726451;
+  --osrs-box-outer: #2d2a22;
+  --osrs-orange: #ff9933;
+  --osrs-green: #0dc10d;
+  --osrs-cream: #ead9b5;
+
+  --osrs-xp-icon: url("https://oldschool.runescape.wiki/images/Character_Summary_-_Total_XP_icon.png");
+  --osrs-level-icon: url("https://oldschool.runescape.wiki/images/Character_Summary_-_Total_Level.png");
+}
+
+/* Main tile background closer to the OSRS wiki summary panel. */
+.list-table .list-table-data {
+  border: 1px solid var(--osrs-box-outer) !important;
+  outline: 1px solid #8b7c60 !important;
+  background:
+    linear-gradient(90deg, #342d24 0%, var(--osrs-card-bg) 10%, var(--osrs-card-bg) 90%, #342d24 100%) !important;
+  box-shadow:
+    inset 0 0 0 1px #5f5444,
+    0 4px 10px rgba(0,0,0,.28) !important;
+}
+
+/* Softer, intentional OSRS-style inner panels.
+   We are deliberately abandoning the fake "missing" clipped corners. */
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.rated,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.tags {
+  clip-path: none !important;
+  border: 1px solid var(--osrs-box-outer) !important;
+  outline: 0 !important;
+  border-radius: 3px !important;
+
+  background:
+    linear-gradient(180deg, #5a5146 0%, var(--osrs-box-bg) 16%, #4e453a 100%) !important;
+
+  box-shadow:
+    inset 0 0 0 1px var(--osrs-box-inner),
+    inset 0 1px 0 rgba(255,255,255,.05),
+    inset 0 -1px 0 rgba(0,0,0,.16) !important;
+
+  color: var(--osrs-cream) !important;
+}
+
+/* Subtle decorative corner nicks / bevel hints instead of hard clipping. */
+.list-table .list-table-data .data.progress::after,
+.list-table .list-table-data .data.score::after,
+.list-table .list-table-data .data.type::after,
+.list-table .list-table-data .data.rated::after,
+.list-table .list-table-data .data.season::after,
+.list-table .list-table-data .data.tags::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  border-radius: 3px !important;
+  background:
+    radial-gradient(circle at 0 0, transparent 0 5px, rgba(114,100,81,.85) 5.5px 6px, transparent 6.5px) top left / 12px 12px no-repeat,
+    radial-gradient(circle at 100% 0, transparent 0 5px, rgba(114,100,81,.85) 5.5px 6px, transparent 6.5px) top right / 12px 12px no-repeat,
+    radial-gradient(circle at 0 100%, transparent 0 5px, rgba(45,42,34,.85) 5.5px 6px, transparent 6.5px) bottom left / 12px 12px no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 0 5px, rgba(45,42,34,.85) 5.5px 6px, transparent 6.5px) bottom right / 12px 12px no-repeat !important;
+  opacity: .45 !important;
+}
+
+/* Ensure the panels are a positioning context for the decorative overlay. */
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.rated,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.tags {
+  position: relative !important;
+}
+
+/* Label color and typography closer to OSRS orange. */
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.score::before,
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.rated::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.tags::before {
+  color: var(--osrs-orange) !important;
+  font-size: 8px !important;
+  letter-spacing: .2px !important;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.45) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Tiny icons beside the two key labels. */
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.score::before {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  height: 10px !important;
+  margin-bottom: 4px !important;
+  padding: 0 !important;
+  background-position: left center !important;
+  background-repeat: no-repeat !important;
+  background-size: 11px 11px !important;
+}
+
+.list-table .list-table-data .data.progress::before {
+  content: "PROGRESS" !important;
+  background-image: var(--osrs-xp-icon) !important;
+  background-position: calc(50% - 28px) center !important;
+}
+
+.list-table .list-table-data .data.score::before {
+  content: "SCORE" !important;
+  background-image: var(--osrs-level-icon) !important;
+  background-position: calc(50% - 20px) center !important;
+}
+
+/* Non-icon labels keep the simpler centered style. */
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.rated::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.tags::before {
+  display: block !important;
+  text-align: center !important;
+}
+
+/* Warm up the values a bit. */
+.list-table .list-table-data .data.progress .link,
+.list-table .list-table-data .data.progress > span,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.rated,
+.list-table .list-table-data .data.season a,
+.list-table .list-table-data .data.tags a,
+.list-table .list-table-data .data.tags > div {
+  color: #f2e2bf !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.list-table .list-table-data .data.score .link,
+.list-table .list-table-data .data.score .score-label {
+  color: #ffd46b !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Make title color match the OSRS reference more closely. */
+.list-table .list-table-data .data.title > .link {
+  color: var(--osrs-orange) !important;
+  text-shadow: 2px 2px 0 rgba(0,0,0,.60) !important;
+}
+
+/* Optional soft hover just to keep them alive without departing from OSRS too much. */
+.list-table .list-table-data .data.progress:hover,
+.list-table .list-table-data .data.score:hover,
+.list-table .list-table-data .data.type:hover,
+.list-table .list-table-data .data.rated:hover,
+.list-table .list-table-data .data.season:hover,
+.list-table .list-table-data .data.tags:hover {
+  background:
+    linear-gradient(180deg, #61584d 0%, #5a5044 18%, #52493e 100%) !important;
+}
+
+

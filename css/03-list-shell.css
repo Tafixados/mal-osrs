@@ -1,0 +1,70 @@
+/* MODULE: 03-list-shell.css
+   List content shell, section heading ribbon, Stats/Filters, and list statistics.
+   Extracted from source lines 379-444; import order matters. */
+
+.list-block {
+  min-height: 600px;
+  margin-top: 0 !important;
+  padding: 18px 22px 32px !important;
+  background:
+    radial-gradient(circle at 50% -20%, rgba(170,142,83,.07), transparent 42rem),
+    linear-gradient(#29241e, #211d18) !important;
+}
+
+.list-unit {
+  width: 100% !important;
+}
+
+.list-unit .list-status-title {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 48px !important;
+  border: 2px solid var(--rs-border) !important;
+  outline: 1px solid var(--rs-border-mid);
+  background: linear-gradient(#4e473b, #332e26) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.06),
+    0 3px 8px rgba(0,0,0,.28);
+}
+
+.list-unit .list-status-title .text {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 0 0 16px !important;
+  color: var(--rs-gold) !important;
+  font-family: "RSLarge", Georgia, serif !important;
+  font-size: 23px !important;
+  font-weight: normal !important;
+  line-height: 1 !important;
+  text-align: left !important;
+  text-transform: capitalize;
+  text-shadow: 1px 2px #000;
+}
+
+.list-unit .list-status-title .stats {
+  right: 8px !important;
+  height: 48px !important;
+  line-height: 48px !important;
+}
+
+.list-unit .list-status-title .stats a {
+  margin-right: 10px !important;
+  color: #e1c279 !important;
+  font-family: "RSSmall", "RSChat07", sans-serif !important;
+  font-size: 11px !important;
+}
+
+.list-unit .list-stats {
+  width: calc(100% - 4px) !important;
+  margin: 1px 2px 15px !important;
+  padding: 9px 12px !important;
+  border: 1px solid var(--rs-border) !important;
+  background: #1b1814 !important;
+  color: #d6c6a5 !important;
+  font-family: "RSSmall", "RSChat07", sans-serif !important;
+  font-size: 12px !important;
+  line-height: 1.6 !important;
+}
+

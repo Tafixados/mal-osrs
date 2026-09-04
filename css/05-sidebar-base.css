@@ -1,0 +1,72 @@
+/* MODULE: 05-sidebar-base.css
+   Original MAL floating sidebar styling. The later final sidebar module overrides most of this.
+   Extracted from source lines 840-907; import order matters. */
+
+.list-menu-float {
+  position: fixed !important;
+  top: 88px !important;
+  left: 12px !important;
+  width: 40px !important;
+  border: 2px solid var(--rs-border) !important;
+  outline: 1px solid var(--rs-border-mid);
+  background: #332e26 !important;
+  box-shadow: 0 5px 14px rgba(0,0,0,.48);
+  z-index: 100;
+}
+
+.list-menu-float .icon-menu {
+  width: 40px !important;
+  height: 40px !important;
+  background-color: #332e26 !important;
+  border-bottom: 1px solid var(--rs-border);
+}
+
+.list-menu-float .icon-menu.profile {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.list-menu-float .icon-menu svg.icon {
+  left: 9px !important;
+  top: 9px !important;
+  width: 20px !important;
+  height: 20px !important;
+  fill: #b4a58a !important;
+}
+
+.list-menu-float .icon-menu:hover,
+.list-menu-float .icon-menu:not(.profile):hover {
+  width: 142px !important;
+  background-color: #50483a !important;
+}
+
+.list-menu-float .icon-menu:hover svg.icon {
+  fill: #f1ce66 !important;
+}
+
+.list-menu-float .icon-menu .text {
+  top: 11px !important;
+  left: 40px !important;
+  color: #f2ddaa !important;
+  font-family: "RSSmall", "RSChat07", sans-serif !important;
+  font-size: 12px !important;
+}
+
+.list-menu-float .icon-menu:hover .text {
+  width: 102px !important;
+}
+
+.list-menu-float .icon-menu.setting:hover .text .link-list-setting,
+.list-menu-float .icon-menu.setting:hover .text .link-style-setting {
+  width: 110px !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  background: #50483a !important;
+  color: #f2ddaa !important;
+}
+
+.list-menu-float .icon-menu.setting:hover .text .link-style-setting {
+  top: 40px !important;
+  border-top: 1px solid var(--rs-border) !important;
+}
+
