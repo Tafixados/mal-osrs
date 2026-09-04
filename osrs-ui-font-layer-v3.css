@@ -1,0 +1,323 @@
+/* ================================================================
+   Tafixados MAL OSRS — external UI/font layer v3
+
+   Built on the exact working v4.6 layout.
+   This layer:
+   - increases typography across the interface
+   - puts infobox labels + values on one line
+   - keeps all six boxes the same geometry
+   - preserves/restores the dark rounded corner bites
+   - reserves enough header space for visitor affinity/shared-list info
+   ================================================================ */
+
+@font-face {
+  font-family: "RS Chat 07";
+  src: url("./fonts-fixed/RUNESCAPE-CHAT-07.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS Large";
+  src: url("./fonts-fixed/RUNESCAPE_LARGE.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS NPC Chat";
+  src: url("./fonts-fixed/RUNESCAPE_NPC_CHAT.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS Small";
+  src: url("./fonts-fixed/RUNESCAPE_SMALL.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS UF";
+  src: url("./fonts-fixed/RUNESCAPE_UF.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ================================================================
+   GLOBAL / TOP-LEVEL TYPE
+   ================================================================ */
+
+html body.ownlist {
+  font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+}
+
+/* Main banner title */
+html body.ownlist .list-container .cover-block .image-container::before {
+  font-family: "RS Large", Georgia, serif !important;
+  font-weight: 400 !important;
+  font-size: clamp(42px, 3.7vw, 62px) !important;
+  line-height: 1 !important;
+}
+
+/* Banner subtitle */
+html body.ownlist .list-container .cover-block .image-container::after {
+  font-family: "RS Small", Tahoma, Verdana, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 17px !important;
+  line-height: 1 !important;
+}
+
+/* ALL ANIME / COMPLETED etc. */
+html body.ownlist .list-container .list-unit .list-status-title .text {
+  font-family: "RS Large", Georgia, serif !important;
+  font-weight: 400 !important;
+  font-size: 34px !important;
+  line-height: 1 !important;
+}
+
+/* Stats / Filters in section header */
+html body.ownlist .list-container .list-unit .list-status-title .stats a {
+  font-family: "RS Small", Tahoma, Verdana, sans-serif !important;
+  font-size: 14px !important;
+}
+
+/* Status tab labels */
+html body.ownlist .list-container .status-menu-container .status-menu .status-button::after {
+  font-family: "RS Small", Tahoma, Verdana, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 17px !important;
+  line-height: 17px !important;
+}
+
+
+/* ================================================================
+   CARD TITLES
+   ================================================================ */
+
+html body.ownlist .list-container .list-table .list-table-data .data.title > .link {
+  font-family: "RS Large", Georgia, serif !important;
+  font-weight: 400 !important;
+
+  /* RuneScape Large has small visual metrics, so this sounds huge but
+     renders at a much more normal apparent size. */
+  font-size: 28px !important;
+  line-height: 23px !important;
+
+  max-height: 46px !important;
+}
+
+
+/* ================================================================
+   SIX INNER INFOBOXES — INLINE LABEL : VALUE
+   ================================================================ */
+
+html body.ownlist .list-container .list-table .list-table-data .data.progress,
+html body.ownlist .list-container .list-table .list-table-data .data.score,
+html body.ownlist .list-container .list-table .list-table-data .data.type,
+html body.ownlist .list-container .list-table .list-table-data .data.rated,
+html body.ownlist .list-container .list-table .list-table-data .data.season,
+html body.ownlist .list-container .list-table .list-table-data .data.tags {
+  /* Keep v4.6 geometry, only change text flow. */
+  display: block !important;
+  height: 42px !important;
+  padding: 0 6px !important;
+
+  font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 18px !important;
+  line-height: 40px !important;
+
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+/* Labels now sit inline before values instead of using a second line. */
+html body.ownlist .list-container .list-table .list-table-data .data.progress::before,
+html body.ownlist .list-container .list-table .list-table-data .data.score::before,
+html body.ownlist .list-container .list-table .list-table-data .data.type::before,
+html body.ownlist .list-container .list-table .list-table-data .data.rated::before,
+html body.ownlist .list-container .list-table .list-table-data .data.season::before,
+html body.ownlist .list-container .list-table .list-table-data .data.tags::before {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: auto !important;
+  height: auto !important;
+
+  margin: 0 7px 0 0 !important;
+  padding: 0 !important;
+
+  font-family: "RS Small", Tahoma, Verdana, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+
+  vertical-align: middle !important;
+}
+
+/* Progress + Score retain their small OSRS icons. */
+html body.ownlist .list-container .list-table .list-table-data .data.progress::before,
+html body.ownlist .list-container .list-table .list-table-data .data.score::before {
+  padding-left: 18px !important;
+  background-position: left center !important;
+  background-repeat: no-repeat !important;
+  background-size: 14px 14px !important;
+}
+
+/* Explicitly make every visible value the same readable size.
+   This fixes Released/Tags inheriting old 10px rules from v4.6. */
+html body.ownlist .list-container .list-table .list-table-data .data.progress .link,
+html body.ownlist .list-container .list-table .list-table-data .data.progress > span,
+html body.ownlist .list-container .list-table .list-table-data .data.type > *,
+html body.ownlist .list-container .list-table .list-table-data .data.rated > *,
+html body.ownlist .list-container .list-table .list-table-data .data.season a,
+html body.ownlist .list-container .list-table .list-table-data .data.tags a,
+html body.ownlist .list-container .list-table .list-table-data .data.tags > div {
+  display: inline !important;
+
+  font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+}
+
+/* Some fields are raw text nodes rather than child elements; parent size
+   above covers those. */
+
+html body.ownlist .list-container .list-table .list-table-data .data.score .link,
+html body.ownlist .list-container .list-table .list-table-data .data.score .score-label {
+  display: inline !important;
+
+  font-family: "RS Large", Georgia, serif !important;
+  font-weight: 400 !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+
+  vertical-align: middle !important;
+}
+
+/* The little green plus/add-episode icon should not disturb baseline. */
+html body.ownlist .list-container .list-table .list-table-data .data.progress .icon-add-episode {
+  display: inline !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+}
+
+
+/* ================================================================
+   NOTCH COLOUR — EXACT v4.6 GEOMETRY, EXPLICIT COLORS
+   ================================================================ */
+
+html body.ownlist .list-container .list-table .list-table-data .data.progress::after,
+html body.ownlist .list-container .list-table .list-table-data .data.score::after,
+html body.ownlist .list-container .list-table .list-table-data .data.type::after,
+html body.ownlist .list-container .list-table .list-table-data .data.rated::after,
+html body.ownlist .list-container .list-table .list-table-data .data.season::after,
+html body.ownlist .list-container .list-table .list-table-data .data.tags::after {
+  background:
+    radial-gradient(circle at 0 0,
+      #3e3529 0 4.5px,
+      #2d2a22 4.7px 5.6px,
+      #726451 5.8px 6.7px,
+      transparent 6.9px
+    ) top left / 14px 14px no-repeat,
+
+    radial-gradient(circle at 100% 0,
+      #3e3529 0 4.5px,
+      #2d2a22 4.7px 5.6px,
+      #726451 5.8px 6.7px,
+      transparent 6.9px
+    ) top right / 14px 14px no-repeat,
+
+    radial-gradient(circle at 0 100%,
+      #3e3529 0 4.5px,
+      #2d2a22 4.7px 5.6px,
+      #726451 5.8px 6.7px,
+      transparent 6.9px
+    ) bottom left / 14px 14px no-repeat,
+
+    radial-gradient(circle at 100% 100%,
+      #3e3529 0 4.5px,
+      #2d2a22 4.7px 5.6px,
+      #726451 5.8px 6.7px,
+      transparent 6.9px
+    ) bottom right / 14px 14px no-repeat !important;
+
+  opacity: 1 !important;
+}
+
+
+/* ================================================================
+   VISITOR HEADER / SHARED ANIME + AFFINITY INFO
+
+   MAL uses body[data-owner=""] when someone else is viewing the list.
+   v4.6 compressed .header to 20px, which is enough for the "Viewing..."
+   line but can hide the second affinity/shared-list line behind the
+   cover banner. Reserve two lines only for non-owner viewers.
+   ================================================================ */
+
+html body.ownlist[data-owner=""] .header {
+  position: relative !important;
+  box-sizing: border-box !important;
+
+  height: 40px !important;
+  min-height: 40px !important;
+
+  margin-bottom: 8px !important;
+  overflow: visible !important;
+
+  z-index: 80 !important;
+}
+
+html body.ownlist[data-owner=""] .header .header-menu {
+  position: relative !important;
+  z-index: 81 !important;
+
+  display: flex !important;
+  flex-flow: column nowrap !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+
+  float: none !important;
+
+  width: 100% !important;
+  height: 38px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  line-height: 16px !important;
+}
+
+html body.ownlist[data-owner=""] .header .header-menu .btn-menu,
+html body.ownlist[data-owner=""] .header .header-menu .header-info,
+html body.ownlist[data-owner=""] .header .header-menu .header-info a {
+  position: static !important;
+
+  height: auto !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #b4a98f !important;
+
+  font-family: "RS Small", Tahoma, Verdana, sans-serif !important;
+  font-size: 13px !important;
+  line-height: 16px !important;
+
+  white-space: nowrap !important;
+  overflow: visible !important;
+}
