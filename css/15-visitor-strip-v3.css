@@ -1,6 +1,10 @@
-/* MODULE: 15-visitor-strip.css
+/* MODULE: 15-visitor-strip-v3.css
    Visitor-only utility strip above the banner.
-   Owner view is untouched. */
+   v3 tightens layout so the left "Manga/Anime List" button and the
+   right visitor info do not collide on desktop visitor views.
+
+   Owner view is untouched.
+*/
 
 /* =====================================================================
    VISITOR UTILITY STRIP
@@ -14,12 +18,13 @@ body.ownlist[data-owner=""] .header {
   box-sizing: border-box !important;
   display: block !important;
 
-  width: min(1320px, calc(100vw - 64px)) !important;
-  height: 56px !important;
-  min-height: 56px !important;
+  /* Slightly wider than the list container to give visitor metadata room. */
+  width: min(1348px, calc(100vw - 40px)) !important;
+  height: 60px !important;
+  min-height: 60px !important;
 
   margin: 0 auto 12px !important;
-  padding: 5px 10px !important;
+  padding: 5px 12px !important;
 
   border: 2px solid #17130f !important;
   outline: 1px solid #6d6250 !important;
@@ -47,15 +52,15 @@ body.ownlist[data-owner=""] .header .header-menu.other {
   float: none !important;
 
   display: grid !important;
-  grid-template-columns: minmax(150px, auto) 1fr !important;
-  grid-template-rows: 20px 20px !important;
-  column-gap: 14px !important;
+  grid-template-columns: minmax(118px, 150px) minmax(0, 1fr) !important;
+  grid-template-rows: 21px 18px !important;
+  column-gap: 12px !important;
   row-gap: 2px !important;
   align-items: center !important;
 
   box-sizing: border-box !important;
   width: 100% !important;
-  height: 44px !important;
+  height: 48px !important;
 
   margin: 0 !important;
   padding: 0 !important;
@@ -100,11 +105,12 @@ body.ownlist[data-owner=""] .header .header-menu .list-menu .icon-menu {
 
   box-sizing: border-box !important;
   width: auto !important;
-  min-width: 118px !important;
+  min-width: 102px !important;
+  max-width: 132px !important;
   height: 32px !important;
 
   margin: 0 !important;
-  padding: 0 10px 0 7px !important;
+  padding: 0 9px 0 7px !important;
 
   border: 1px solid #17130f !important;
   outline: 1px solid #6d6250 !important;
@@ -113,7 +119,7 @@ body.ownlist[data-owner=""] .header .header-menu .list-menu .icon-menu {
 
   color: #d8c9aa !important;
   font-family: "RS Small", "RS Chat 07", sans-serif !important;
-  font-size: 15px !important;
+  font-size: 13px !important;
   font-weight: 400 !important;
   line-height: 32px !important;
 
@@ -128,10 +134,10 @@ body.ownlist[data-owner=""] .header .header-menu .list-menu .icon-menu:hover {
 body.ownlist[data-owner=""] .header .header-menu .list-menu .icon-menu svg.icon {
   position: static !important;
 
-  width: 16px !important;
-  height: 16px !important;
+  width: 15px !important;
+  height: 15px !important;
 
-  margin: 0 7px 0 0 !important;
+  margin: 0 6px 0 0 !important;
   padding: 0 !important;
 
   fill: #d8c9aa !important;
@@ -174,7 +180,8 @@ body.ownlist[data-owner=""] .header .header-menu .btn-menu {
   display: block !important;
 
   width: auto !important;
-  height: 19px !important;
+  max-width: 100% !important;
+  height: 18px !important;
 
   margin: 0 !important;
   padding: 0 !important;
@@ -185,13 +192,13 @@ body.ownlist[data-owner=""] .header .header-menu .btn-menu {
 
   color: #d8c9aa !important;
   font-family: "RS Small", "RS Chat 07", sans-serif !important;
-  font-size: 14px !important;
+  font-size: 12px !important;
   font-weight: 400 !important;
-  line-height: 19px !important;
+  line-height: 18px !important;
   text-align: right !important;
   white-space: nowrap !important;
-
-  overflow: visible !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 body.ownlist[data-owner=""] .header .header-menu .header-info {
@@ -205,20 +212,21 @@ body.ownlist[data-owner=""] .header .header-menu .header-info {
   display: block !important;
 
   width: auto !important;
-  height: 19px !important;
+  max-width: 100% !important;
+  height: 16px !important;
 
   margin: 0 !important;
   padding: 0 !important;
 
   color: #d8c9aa !important;
   font-family: "RS Small", "RS Chat 07", sans-serif !important;
-  font-size: 14px !important;
+  font-size: 10px !important;
   font-weight: 400 !important;
-  line-height: 19px !important;
+  line-height: 16px !important;
   text-align: right !important;
   white-space: nowrap !important;
-
-  overflow: visible !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 body.ownlist[data-owner=""] .header .header-menu .btn-menu a,
@@ -234,12 +242,10 @@ body.ownlist[data-owner=""] .header .header-menu .header-info a:hover {
 
 /* ---------------------------------------------------------------------
    MAL dropdown opened from "Viewing ... List"
-   Do NOT force display; only skin/position it when MAL itself opens it.
-   This prevents the native white rectangle from sitting on the strip.
    --------------------------------------------------------------------- */
 
 body.ownlist[data-owner=""] #header-menu-dropdown {
-  top: 26px !important;
+  top: 30px !important;
   right: 0 !important;
 
   min-width: 170px !important;
@@ -273,19 +279,28 @@ body.ownlist[data-owner=""] .list-container {
 
 /* Keep the visitor strip usable on narrower windows before the rest of the
    theme reaches its mobile breakpoint. */
-@media (max-width: 900px) {
+@media (max-width: 1180px) {
+  body.ownlist[data-owner=""] .header {
+    width: calc(100vw - 20px) !important;
+  }
+}
+
+@media (max-width: 960px) {
   body.ownlist[data-owner=""] .header .header-menu,
   body.ownlist[data-owner=""] .header .header-menu.other {
-    grid-template-columns: 120px 1fr !important;
+    grid-template-columns: 104px minmax(0, 1fr) !important;
   }
 
   body.ownlist[data-owner=""] .header .header-menu .list-menu .icon-menu {
-    min-width: 108px !important;
-    font-size: 13px !important;
+    min-width: 96px !important;
+    font-size: 12px !important;
   }
 
-  body.ownlist[data-owner=""] .header .header-menu .btn-menu,
+  body.ownlist[data-owner=""] .header .header-menu .btn-menu {
+    font-size: 11px !important;
+  }
+
   body.ownlist[data-owner=""] .header .header-menu .header-info {
-    font-size: 12px !important;
+    font-size: 9px !important;
   }
 }
