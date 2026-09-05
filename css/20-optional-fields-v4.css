@@ -824,3 +824,125 @@ body.ownlist .list-table .list-table-data .data.title .notes {
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* =================================================================
+   V4 GRID-SPAN CORRECTION
+
+   IMPORTANT:
+   The v3 optional-box base uses:
+       grid-area: auto !important;
+
+   That shorthand resets grid-column. Because the base selector is more
+   specific than the later width rules, the intended span 6 / span 9 rules
+   were losing in the cascade, producing the extremely narrow vertical boxes.
+
+   These selectors deliberately match/exceed the advanced-mode specificity
+   and are placed LAST so the intended horizontal widths win.
+   ================================================================= */
+
+/* ---------------- ANIME: thirds ---------------- */
+body.ownlist[data-work="anime"] .list-table:has(
+  .list-table-data > :is(
+    .data.days,.data.storage,.data.priority,.data.genre,.data.demographic,
+    .data.airing-started,.data.airing-finished,.data.studio,.data.licensor,
+    .data.mal_score,.data.score_diff,.data.popularity
+  )
+) .list-table-data > :is(
+  .data.started,
+  .data.finished,
+  .data.days,
+  .data.airing-started,
+  .data.airing-finished,
+  .data.storage,
+  .data.demographic,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity,
+  .data.priority
+) {
+  grid-column: span 6 !important;
+  grid-row: auto !important;
+}
+
+/* ---------------- ANIME: halves ---------------- */
+body.ownlist[data-work="anime"] .list-table:has(
+  .list-table-data > :is(
+    .data.days,.data.storage,.data.priority,.data.genre,.data.demographic,
+    .data.airing-started,.data.airing-finished,.data.studio,.data.licensor,
+    .data.mal_score,.data.score_diff,.data.popularity
+  )
+) .list-table-data > :is(
+  .data.studio,
+  .data.licensor
+) {
+  grid-column: span 9 !important;
+  grid-row: auto !important;
+}
+
+/* ---------------- ANIME: full ---------------- */
+body.ownlist[data-work="anime"] .list-table:has(
+  .list-table-data > :is(
+    .data.days,.data.storage,.data.priority,.data.genre,.data.demographic,
+    .data.airing-started,.data.airing-finished,.data.studio,.data.licensor,
+    .data.mal_score,.data.score_diff,.data.popularity
+  )
+) .list-table-data > .data.genre {
+  grid-column: 1 / 19 !important;
+  grid-row: auto !important;
+}
+
+
+/* ---------------- MANGA: thirds ---------------- */
+body.ownlist[data-work="manga"] .list-table:has(
+  .list-table-data > :is(
+    .data.started,.data.finished,.data.days,.data.retail,.data.priority,
+    .data.genre,.data.magazine,.data.mal_score,.data.score_diff,.data.popularity
+  )
+) .list-table-data > :is(
+  .data.started,
+  .data.finished,
+  .data.days,
+  .data.airing-finished,
+  .data.retail,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity,
+  .data.priority
+) {
+  grid-column: span 6 !important;
+  grid-row: auto !important;
+}
+
+/* ---------------- MANGA: magazine half ---------------- */
+body.ownlist[data-work="manga"] .list-table:has(
+  .list-table-data > :is(
+    .data.started,.data.finished,.data.days,.data.retail,.data.priority,
+    .data.genre,.data.magazine,.data.mal_score,.data.score_diff,.data.popularity
+  )
+) .list-table-data > .data.magazine {
+  grid-column: span 9 !important;
+  grid-row: auto !important;
+}
+
+/* ---------------- MANGA: first/lone genre full ---------------- */
+body.ownlist[data-work="manga"] .list-table:has(
+  .list-table-data > :is(
+    .data.started,.data.finished,.data.days,.data.retail,.data.priority,
+    .data.genre,.data.magazine,.data.mal_score,.data.score_diff,.data.popularity
+  )
+) .list-table-data > .data.genre {
+  grid-column: 1 / 19 !important;
+  grid-row: auto !important;
+}
+
+/* ---------------- MANGA: second genre = demographics third ---------------- */
+body.ownlist[data-work="manga"] .list-table:has(
+  .list-table-data > :is(
+    .data.started,.data.finished,.data.days,.data.retail,.data.priority,
+    .data.genre,.data.magazine,.data.mal_score,.data.score_diff,.data.popularity
+  )
+) .list-table-data > .data.genre + .data.genre {
+  grid-column: span 6 !important;
+  grid-row: auto !important;
+}
