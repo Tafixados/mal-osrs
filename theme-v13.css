@@ -1,6 +1,7 @@
-/* Tafixados MAL OSRS — modular master stylesheet v12
-   Fresh filenames are intentional cache-busters while the theme is in development.
-   Do not import old optional modules 17/18/19/20 alongside this version.
+/* Tafixados MAL OSRS — modular master stylesheet v13
+   Cache-busting development filename.
+   V13 restores the original poster/core-box separation while keeping
+   V12's denser optional metadata layout.
 */
 
 @import url("./osrs-ui-font-layer-v4-clean.css");
@@ -21,4 +22,4 @@
 @import url("./css/14-tooltips-v2.css");
 @import url("./css/15-visitor-strip-v5.css");
 @import url("./css/16-manga-overrides-v1.css");
-@import url("./css/21-optional-fields-v5.css");
+@import url("./css/22-optional-fields-v6.css");

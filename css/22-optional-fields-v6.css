@@ -1,11 +1,12 @@
-/* MODULE: 21-optional-fields-v5.css
+/* MODULE: 22-optional-fields-v6.css
    Compact optional-column layout — Anime + Manga
 
    Based on the exact MAL DOM dumps supplied by Tafixados.
 
-   V5 layout:
-   - Advanced cards use a 20-column internal grid.
-   - Core cover/title/six boxes keep the familiar compact layout.
+   V6 layout:
+   - Advanced cards use a 36-column internal grid.
+   - Core cover/title/six-box proportions are restored exactly to the
+     pre-V12 geometry, so core boxes never intrude over the poster.
    - Short optional fields auto-pack 4 per row.
    - Anime Studios/Licensors auto-pack 2 per row.
    - Anime Genres keep a full row.
@@ -70,12 +71,14 @@ body.ownlist[data-work="manga"] .list-table:has(
 /* ================================================================
    2. ADVANCED CARD INTERNAL GRID
 
-   20 equal tracks lets us cleanly create:
-     cover = 4/20 tracks (20%)
-     detail area = remaining 16/20 tracks
-     quarters = 5 tracks
-     halves = 10 tracks
-     full = 20 tracks
+   36 equal tracks lets us preserve the original card geometry while
+   still getting exact quarters and halves:
+     cover = 8/36 tracks (22.22%, same as old 4/18)
+     detail area = remaining 28/36 tracks
+     core detail halves = 14 + 14 tracks
+     quarters = 9 tracks
+     halves = 18 tracks
+     full = 36 tracks
    ================================================================ */
 
 body.ownlist[data-work="anime"] .list-table:has(
@@ -115,7 +118,7 @@ body.ownlist[data-work="manga"] .list-table:has(
   overflow: visible !important;
 
   grid-template-areas: none !important;
-  grid-template-columns: repeat(20, minmax(0, 1fr)) !important;
+  grid-template-columns: repeat(36, minmax(0, 1fr)) !important;
   grid-auto-flow: row dense !important;
   grid-auto-rows: minmax(42px, auto) !important;
 
@@ -147,7 +150,7 @@ body.ownlist[data-work="anime"] .list-table:has(
   )
 ) .list-table-data > .data.image {
   grid-area: auto !important;
-  grid-column: 1 / 5 !important;
+  grid-column: 1 / 9 !important;
   grid-row: 1 / 5 !important;
 }
 
@@ -159,7 +162,7 @@ body.ownlist[data-work="anime"] .list-table:has(
   )
 ) .list-table-data > .data.title {
   grid-area: auto !important;
-  grid-column: 5 / 21 !important;
+  grid-column: 9 / 37 !important;
   grid-row: 1 !important;
 }
 
@@ -171,7 +174,7 @@ body.ownlist[data-work="anime"] .list-table:has(
   )
 ) .list-table-data > .data.progress {
   grid-area: auto !important;
-  grid-column: 5 / 13 !important;
+  grid-column: 9 / 23 !important;
   grid-row: 2 !important;
 }
 
@@ -183,7 +186,7 @@ body.ownlist[data-work="anime"] .list-table:has(
   )
 ) .list-table-data > .data.score {
   grid-area: auto !important;
-  grid-column: 13 / 21 !important;
+  grid-column: 23 / 37 !important;
   grid-row: 2 !important;
 }
 
@@ -195,7 +198,7 @@ body.ownlist[data-work="anime"] .list-table:has(
   )
 ) .list-table-data > .data.type {
   grid-area: auto !important;
-  grid-column: 5 / 13 !important;
+  grid-column: 9 / 23 !important;
   grid-row: 3 !important;
 }
 
@@ -207,7 +210,7 @@ body.ownlist[data-work="anime"] .list-table:has(
   )
 ) .list-table-data > .data.rated {
   grid-area: auto !important;
-  grid-column: 13 / 21 !important;
+  grid-column: 23 / 37 !important;
   grid-row: 3 !important;
 }
 
@@ -219,7 +222,7 @@ body.ownlist[data-work="anime"] .list-table:has(
   )
 ) .list-table-data > .data.season {
   grid-area: auto !important;
-  grid-column: 5 / 13 !important;
+  grid-column: 9 / 23 !important;
   grid-row: 4 !important;
 }
 
@@ -231,7 +234,7 @@ body.ownlist[data-work="anime"] .list-table:has(
   )
 ) .list-table-data > .data.tags {
   grid-area: auto !important;
-  grid-column: 13 / 21 !important;
+  grid-column: 23 / 37 !important;
   grid-row: 4 !important;
 }
 
@@ -247,7 +250,7 @@ body.ownlist[data-work="manga"] .list-table:has(
   )
 ) .list-table-data > .data.image {
   grid-area: auto !important;
-  grid-column: 1 / 5 !important;
+  grid-column: 1 / 9 !important;
   grid-row: 1 / 5 !important;
 }
 
@@ -258,7 +261,7 @@ body.ownlist[data-work="manga"] .list-table:has(
   )
 ) .list-table-data > .data.title {
   grid-area: auto !important;
-  grid-column: 5 / 21 !important;
+  grid-column: 9 / 37 !important;
   grid-row: 1 !important;
 }
 
@@ -269,7 +272,7 @@ body.ownlist[data-work="manga"] .list-table:has(
   )
 ) .list-table-data > .data.chapter {
   grid-area: auto !important;
-  grid-column: 5 / 13 !important;
+  grid-column: 9 / 23 !important;
   grid-row: 2 !important;
 }
 
@@ -280,7 +283,7 @@ body.ownlist[data-work="manga"] .list-table:has(
   )
 ) .list-table-data > .data.score {
   grid-area: auto !important;
-  grid-column: 13 / 21 !important;
+  grid-column: 23 / 37 !important;
   grid-row: 2 !important;
 }
 
@@ -291,7 +294,7 @@ body.ownlist[data-work="manga"] .list-table:has(
   )
 ) .list-table-data > .data.volume {
   grid-area: auto !important;
-  grid-column: 5 / 13 !important;
+  grid-column: 9 / 23 !important;
   grid-row: 3 !important;
 }
 
@@ -302,7 +305,7 @@ body.ownlist[data-work="manga"] .list-table:has(
   )
 ) .list-table-data > .data.type {
   grid-area: auto !important;
-  grid-column: 13 / 21 !important;
+  grid-column: 23 / 37 !important;
   grid-row: 3 !important;
 }
 
@@ -313,7 +316,7 @@ body.ownlist[data-work="manga"] .list-table:has(
   )
 ) .list-table-data > .data.airing-started {
   grid-area: auto !important;
-  grid-column: 5 / 13 !important;
+  grid-column: 9 / 23 !important;
   grid-row: 4 !important;
 }
 
@@ -324,7 +327,7 @@ body.ownlist[data-work="manga"] .list-table:has(
   )
 ) .list-table-data > .data.tags {
   grid-area: auto !important;
-  grid-column: 13 / 21 !important;
+  grid-column: 23 / 37 !important;
   grid-row: 4 !important;
 }
 
@@ -600,7 +603,7 @@ body.ownlist[data-work="anime"] .list-table-data > :is(
   .data.popularity,
   .data.priority
 ) {
-  grid-column: span 5 !important;
+  grid-column: span 9 !important;
 }
 
 /* ---------- ANIME: 1/2 WIDTH ---------- */
@@ -608,12 +611,12 @@ body.ownlist[data-work="anime"] .list-table-data > :is(
   .data.studio,
   .data.licensor
 ) {
-  grid-column: span 10 !important;
+  grid-column: span 18 !important;
 }
 
 /* ---------- ANIME: FULL WIDTH ---------- */
 body.ownlist[data-work="anime"] .list-table-data > .data.genre {
-  grid-column: 1 / 21 !important;
+  grid-column: 1 / 37 !important;
   min-height: 44px !important;
 }
 
@@ -630,30 +633,30 @@ body.ownlist[data-work="manga"] .list-table-data > :is(
   .data.popularity,
   .data.priority
 ) {
-  grid-column: span 5 !important;
+  grid-column: span 9 !important;
 }
 
 /* Manga Demographics: when it is the second adjacent .genre cell,
    treat it like Anime Demographics and make it 1/4 width. */
 body.ownlist[data-work="manga"] .list-table-data > .data.genre + .data.genre {
-  grid-column: span 5 !important;
+  grid-column: span 9 !important;
 }
 
 /* ---------- MANGA: 1/2 WIDTH ---------- */
 body.ownlist[data-work="manga"] .list-table-data > .data.magazine {
-  grid-column: span 10 !important;
+  grid-column: span 18 !important;
 }
 
 /* ---------- MANGA: HALF WIDTH ----------
    The first/lone .genre cell is Genres. It shares a line with Magazine. */
 body.ownlist[data-work="manga"] .list-table-data > .data.genre {
-  grid-column: span 10 !important;
+  grid-column: span 18 !important;
   min-height: 44px !important;
 }
 
 /* Second genre = Demographics; this override MUST come after the full rule. */
 body.ownlist[data-work="manga"] .list-table-data > .data.genre + .data.genre {
-  grid-column: span 5 !important;
+  grid-column: span 9 !important;
   min-height: 42px !important;
 }
 
@@ -827,7 +830,7 @@ body.ownlist .list-table .list-table-data .data.title .notes {
 
 
 /* =================================================================
-   V5 GRID-SPAN CORRECTION
+   V6 GRID-SPAN CORRECTION
 
    IMPORTANT:
    The v3 optional-box base uses:
@@ -861,7 +864,7 @@ body.ownlist[data-work="anime"] .list-table:has(
   .data.popularity,
   .data.priority
 ) {
-  grid-column: span 5 !important;
+  grid-column: span 9 !important;
   grid-row: auto !important;
 }
 
@@ -876,7 +879,7 @@ body.ownlist[data-work="anime"] .list-table:has(
   .data.studio,
   .data.licensor
 ) {
-  grid-column: span 10 !important;
+  grid-column: span 18 !important;
   grid-row: auto !important;
 }
 
@@ -888,7 +891,7 @@ body.ownlist[data-work="anime"] .list-table:has(
     .data.mal_score,.data.score_diff,.data.popularity
   )
 ) .list-table-data > .data.genre {
-  grid-column: 1 / 21 !important;
+  grid-column: 1 / 37 !important;
   grid-row: auto !important;
 }
 
@@ -910,7 +913,7 @@ body.ownlist[data-work="manga"] .list-table:has(
   .data.popularity,
   .data.priority
 ) {
-  grid-column: span 5 !important;
+  grid-column: span 9 !important;
   grid-row: auto !important;
 }
 
@@ -921,7 +924,7 @@ body.ownlist[data-work="manga"] .list-table:has(
     .data.genre,.data.magazine,.data.mal_score,.data.score_diff,.data.popularity
   )
 ) .list-table-data > .data.magazine {
-  grid-column: span 10 !important;
+  grid-column: span 18 !important;
   grid-row: auto !important;
 }
 
@@ -932,7 +935,7 @@ body.ownlist[data-work="manga"] .list-table:has(
     .data.genre,.data.magazine,.data.mal_score,.data.score_diff,.data.popularity
   )
 ) .list-table-data > .data.genre {
-  grid-column: span 10 !important;
+  grid-column: span 18 !important;
   grid-row: auto !important;
 }
 
@@ -943,6 +946,6 @@ body.ownlist[data-work="manga"] .list-table:has(
     .data.genre,.data.magazine,.data.mal_score,.data.score_diff,.data.popularity
   )
 ) .list-table-data > .data.genre + .data.genre {
-  grid-column: span 5 !important;
+  grid-column: span 9 !important;
   grid-row: auto !important;
 }
