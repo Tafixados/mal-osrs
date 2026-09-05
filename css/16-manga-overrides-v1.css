@@ -16,6 +16,13 @@
      Tags      -> Tags
 */
 
+
+/* Manga-only icon: Combat Tasks Completed -> Volumes */
+body.ownlist[data-work="manga"] {
+  --rs-icon-volumes:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Character_Summary_-_Combat_Tasks_Completed_icon.png");
+}
+
 /* =====================================================================
    MANGA STATUS TABS
    MAL swaps watching -> reading and plantowatch -> plantoread.
@@ -371,10 +378,13 @@ body.ownlist[data-work="manga"]
 }
 
 
-/* Volume count gets a plain label for now. */
+/* Volumes -> Combat Tasks Completed icon. */
 body.ownlist[data-work="manga"]
 .list-table .list-table-data .data.volume::before {
   content: "VOLUMES" !important;
+  background-image: var(--rs-icon-volumes) !important;
+  background-position: calc(50% - 29px) center !important;
+  background-size: 15px 15px !important;
 }
 
 
@@ -445,12 +455,6 @@ body.ownlist[data-work="manga"]
   line-height: 17px !important;
 }
 
-body.ownlist[data-work="manga"]
-.list-table .list-table-data .data.chapter span:nth-of-type(2)::before,
-body.ownlist[data-work="manga"]
-.list-table .list-table-data .data.volume span:nth-of-type(2)::before {
-  content: " / " !important;
-}
 
 
 /* Keep +chapter/+volume controls small and non-destructive. */
