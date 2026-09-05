@@ -1,0 +1,551 @@
+/* MODULE: 16-manga-overrides-v1.css
+   Manga-specific repair layer.
+
+   IMPORTANT:
+   Every layout rule in this file is scoped to:
+       body.ownlist[data-work="manga"]
+
+   so the Anime list is not changed at all.
+
+   Manga mapping used here:
+     Chapters  -> Progress
+     Score     -> Score
+     Volumes   -> Volumes
+     Type      -> Type
+     Published -> Published
+     Tags      -> Tags
+*/
+
+/* =====================================================================
+   MANGA STATUS TABS
+   MAL swaps watching -> reading and plantowatch -> plantoread.
+   ===================================================================== */
+
+body.ownlist[data-work="manga"] .status-button.all_manga::before,
+body.ownlist[data-work="manga"] .status-button.all_anime::before {
+  background-image: var(--tab-blue) !important;
+}
+
+body.ownlist[data-work="manga"] .status-button.reading::before {
+  background-image: var(--tab-yellow) !important;
+}
+
+body.ownlist[data-work="manga"] .status-button.completed::before {
+  background-image: var(--tab-green) !important;
+}
+
+body.ownlist[data-work="manga"] .status-button.onhold::before {
+  background-image: var(--tab-brown) !important;
+}
+
+body.ownlist[data-work="manga"] .status-button.dropped::before {
+  background-image: var(--tab-red) !important;
+}
+
+body.ownlist[data-work="manga"] .status-button.plantoread::before {
+  background-image: var(--tab-purple) !important;
+}
+
+body.ownlist[data-work="manga"] .status-button.all_manga::after,
+body.ownlist[data-work="manga"] .status-button.all_anime::after {
+  content: "Quest Log" !important;
+}
+
+body.ownlist[data-work="manga"] .status-button.reading::after {
+  content: "Quest Started" !important;
+}
+
+body.ownlist[data-work="manga"] .status-button.completed::after {
+  content: "Quest Complete" !important;
+}
+
+body.ownlist[data-work="manga"] .status-button.onhold::after {
+  content: "Paused" !important;
+}
+
+body.ownlist[data-work="manga"] .status-button.dropped::after {
+  content: "Abandoned" !important;
+}
+
+body.ownlist[data-work="manga"] .status-button.plantoread::after {
+  content: "Not Started" !important;
+}
+
+
+/* =====================================================================
+   MANGA STATUS STRIPES
+   The old generic fallback is blue, which is why Reading / Plan to Read
+   cards currently all look blue.
+   ===================================================================== */
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data:has(.status.reading)::before {
+  background: var(--status-yellow) !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data:has(.status.completed)::before {
+  background: #00ff00 !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data:has(.status.onhold)::before {
+  background: var(--status-brown) !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data:has(.status.dropped)::before {
+  background: var(--status-red) !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data:has(.status.plantoread)::before {
+  background: var(--status-purple) !important;
+}
+
+
+/* =====================================================================
+   MANGA CARD GRID
+   Manga does not use Anime's Progress / Rated / Season cells.
+   Use the manga-native chapter / volume / published cells instead.
+   ===================================================================== */
+
+body.ownlist[data-work="manga"] .list-table .list-table-data {
+  grid-template-columns:
+    132px
+    12px
+    minmax(0, 1fr)
+    5px
+    minmax(0, 1fr) !important;
+
+  grid-template-rows:
+    50px
+    42px
+    42px
+    42px !important;
+
+  grid-template-areas:
+    "image . title     title title"
+    "image . chapter   .     score"
+    "image . volume    .     type"
+    "image . published .     tags" !important;
+}
+
+
+/* Remove Anime-only cells if MAL happens to leave any in the manga DOM. */
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.progress,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.rated,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.season {
+  display: none !important;
+}
+
+
+/* Personal start/end reading dates are not part of this compact card. */
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.started,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.finished,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.days {
+  display: none !important;
+}
+
+
+/* For the first pass we show the publication START date in one compact
+   Published box and hide the separate ending-date cell. This avoids MAL's
+   two date cells spilling loose text over the card. */
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.airing-finished {
+  display: none !important;
+}
+
+
+/* Hide MAL's little "Publishing" / "Finished" line beside some manga titles.
+   The status stripe already communicates list state, and the raw publication
+   status is what is currently floating awkwardly beside the title. */
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.title .content-status,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.title .rereading {
+  display: none !important;
+}
+
+
+/* =====================================================================
+   SIX MANGA INFOBOXES
+   ===================================================================== */
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter {
+  grid-area: chapter !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.score {
+  grid-area: score !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume {
+  grid-area: volume !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.type {
+  grid-area: type !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.airing-started {
+  grid-area: published !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.tags {
+  grid-area: tags !important;
+}
+
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.score,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.type,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.airing-started,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.tags {
+  position: relative !important;
+  inset: auto !important;
+
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+
+  margin: 0 !important;
+  padding: 5px 7px 4px !important;
+
+  border: 1px solid var(--osrs-box-outer) !important;
+  outline: 0 !important;
+  border-radius: 2px !important;
+
+  background: var(--osrs-box-bg) !important;
+
+  box-shadow:
+    inset 0 0 0 1px var(--osrs-box-inner),
+    inset 0 1px 0 rgba(255,255,255,.035),
+    inset 0 -1px 0 rgba(0,0,0,.12) !important;
+
+  overflow: hidden !important;
+
+  color: #f2e2bf !important;
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 17px !important;
+  text-align: center !important;
+}
+
+
+/* =====================================================================
+   OSRS ROUNDED INWARD NOTCHES FOR MANGA-SPECIFIC BOXES
+   ===================================================================== */
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter::after,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume::after,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.airing-started::after {
+  content: "" !important;
+
+  position: absolute !important;
+  inset: 0 !important;
+
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+
+  pointer-events: none !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background:
+    radial-gradient(
+      circle at 0 0,
+      var(--osrs-notch-bg) 0 4.5px,
+      var(--osrs-box-outer) 4.7px 5.6px,
+      var(--osrs-box-inner) 5.8px 6.7px,
+      transparent 6.9px
+    ) top left / 14px 14px no-repeat,
+
+    radial-gradient(
+      circle at 100% 0,
+      var(--osrs-notch-bg) 0 4.5px,
+      var(--osrs-box-outer) 4.7px 5.6px,
+      var(--osrs-box-inner) 5.8px 6.7px,
+      transparent 6.9px
+    ) top right / 14px 14px no-repeat,
+
+    radial-gradient(
+      circle at 0 100%,
+      var(--osrs-notch-bg) 0 4.5px,
+      var(--osrs-box-outer) 4.7px 5.6px,
+      var(--osrs-box-inner) 5.8px 6.7px,
+      transparent 6.9px
+    ) bottom left / 14px 14px no-repeat,
+
+    radial-gradient(
+      circle at 100% 100%,
+      var(--osrs-notch-bg) 0 4.5px,
+      var(--osrs-box-outer) 4.7px 5.6px,
+      var(--osrs-box-inner) 5.8px 6.7px,
+      transparent 6.9px
+    ) bottom right / 14px 14px no-repeat !important;
+
+  opacity: 1 !important;
+  z-index: 2 !important;
+}
+
+
+/* =====================================================================
+   LABELS
+   ===================================================================== */
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter::before,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume::before,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.airing-started::before {
+  position: relative !important;
+  z-index: 3 !important;
+
+  display: block !important;
+
+  width: auto !important;
+  height: 10px !important;
+
+  margin: 0 0 3px !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+
+  color: var(--osrs-orange) !important;
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: normal !important;
+  line-height: 10px !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+
+  text-shadow: 1px 1px 0 rgba(0,0,0,.45) !important;
+
+  background-color: transparent !important;
+  background-repeat: no-repeat !important;
+}
+
+
+/* Chapters replaces Anime's Progress, so keep the XP icon. */
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter::before {
+  content: "PROGRESS" !important;
+  background-image: var(--osrs-xp-icon) !important;
+  background-position: calc(50% - 28px) center !important;
+  background-size: 14px 14px !important;
+}
+
+
+/* Volume count gets a plain label for now. */
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume::before {
+  content: "VOLUMES" !important;
+}
+
+
+/* MAL calls manga publication dates airing-started/airing-finished internally. */
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.airing-started::before {
+  content: "PUBLISHED" !important;
+  background-image: var(--rs-icon-released) !important;
+  background-position: calc(50% - 38px) center !important;
+  background-size: 10px 16px !important;
+}
+
+
+/* Keep children over the decorative notch overlay. */
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter > *,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume > *,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.airing-started > * {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+
+/* =====================================================================
+   CHAPTER / VOLUME VALUE NORMALISATION
+   MAL uses slightly different markup than anime episode progress.
+   ===================================================================== */
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter div,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume div {
+  display: inline !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  background: none !important;
+
+  font-size: 0 !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter span,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume span,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter a,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume a {
+  position: relative !important;
+  z-index: 3 !important;
+
+  display: inline !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  background: none !important;
+
+  color: #f2e2bf !important;
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 17px !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter span:nth-of-type(2)::before,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume span:nth-of-type(2)::before {
+  content: " / " !important;
+}
+
+
+/* Keep +chapter/+volume controls small and non-destructive. */
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter .icon-add-chapter,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume .icon-add-volume {
+  display: inline !important;
+
+  margin-left: 3px !important;
+  padding: 0 !important;
+
+  color: #64c769 !important;
+  font-size: 10px !important;
+}
+
+
+/* =====================================================================
+   EXISTING SCORE / TYPE / TAGS BOXES
+   Re-affirm the manga layout without altering their anime equivalents.
+   ===================================================================== */
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.score,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.type,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.tags {
+  display: block !important;
+}
+
+
+/* Ensure Tags is not re-hidden by the old generic base rule. */
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.tags {
+  overflow: hidden !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.tags > div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: hidden !important;
+}
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.tags a:not(.edit) {
+  display: inline-block !important;
+
+  max-width: 100% !important;
+
+  color: #f2e2bf !important;
+  font-size: 13px !important;
+  line-height: 17px !important;
+
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+
+/* =====================================================================
+   HOVER
+   ===================================================================== */
+
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter:hover,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume:hover,
+body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.airing-started:hover {
+  background: #5a5044 !important;
+}
+
+
+/* =====================================================================
+   SMALL SCREEN
+   Keep the same compact card behavior as Anime.
+   ===================================================================== */
+
+@media (max-width: 720px) {
+  body.ownlist[data-work="manga"] .list-table .list-table-data {
+    grid-template-columns:
+      112px
+      10px
+      minmax(0, 1fr)
+      4px
+      minmax(0, 1fr) !important;
+  }
+}
