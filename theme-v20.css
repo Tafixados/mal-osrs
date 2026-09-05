@@ -1,5 +1,5 @@
-/* Tafixados MAL OSRS — modular master stylesheet v19
-   V19 replaces the test minimap route with the full Tree Gnome Maze→Ectofuntus route.
+/* Tafixados MAL OSRS — modular master stylesheet v20
+   V20 corrects the full minimap route back to its original 3635px coordinate scale.
 */
 
 @import url("./osrs-ui-font-layer-v4-clean.css");
@@ -25,3 +25,4 @@
 @import url("./css/26-stats-minimap-v3.css");
 @import url("./css/27-anime-plus-fix-v1.css");
 @import url("./css/28-minimap-full-route-v1.css");
+@import url("./css/29-minimap-full-route-native-v1.css");
