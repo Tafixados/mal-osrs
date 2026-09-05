@@ -1,92 +1,421 @@
 /* MODULE: 17-optional-fields.css
-   SAFE DIAGNOSTIC HOTFIX
+   OPTIONAL COLUMN SUPPORT — exact Anime DOM version
 
-   Purpose:
-   - Restore the clean compact Anime/Manga cards while we inspect MAL's
-     actual DOM for the optional columns.
-   - Hide every direct data cell except the core cells explicitly supported
-     by the current OSRS cards.
-   - This deliberately DOES NOT try to lay out optional columns yet.
+   This version is based on the actual MAL Anime DOM dump:
+     days, genre, demographic, studio, licensor, storage,
+     airing-started, airing-finished, mal_score, priority
 
-   Replace the existing css/17-optional-fields.css with this file.
+   Score Diff / Popularity are also prepared for MAL Supporter accounts.
+
+   IMPORTANT:
+   - Normal compact Anime cards remain unchanged when none of these
+     optional cells are present.
+   - When at least one optional Anime column is rendered, the list switches
+     to two wider cards per row and the extra data becomes full-width rows
+     underneath the existing six OSRS boxes.
+   - Manga remains on the safe compact layout until we inspect its DOM too.
 */
 
 /* ---------------------------------------------------------------------
-   ANIME: keep only the compact card cells
+   THEME VARIABLES
    --------------------------------------------------------------------- */
-
-body.ownlist[data-work="anime"] .list-table .list-table-data > .data {
-  display: none !important;
-}
-
-body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
-  .data.status,
-  .data.image,
-  .data.title,
-  .data.score,
-  .data.type,
-  .data.progress,
-  .data.season,
-  .data.tags,
-  .data.rated
-) {
-  display: block !important;
-}
-
-/* Status still needs to exist in the DOM for :has(.status.completed), etc.,
-   but it should not occupy a grid cell. */
-body.ownlist[data-work="anime"] .list-table .list-table-data > .data.status {
-  position: absolute !important;
-  width: 0 !important;
-  height: 0 !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 0 !important;
-  overflow: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
+:root {
+  --opt-bg: #554c41;
+  --opt-bg-hover: #5d5346;
+  --opt-border-inner: #726451;
+  --opt-border-outer: #2d2a22;
+  --opt-label: #ff9933;
+  --opt-text: #f2e2bf;
+  --opt-link: #e8c46b;
 }
 
 /* ---------------------------------------------------------------------
-   MANGA: keep only the compact manga card cells
+   1. SAFE BASE
+   Hide fields that are not part of the compact Anime card.
+   The explicit optional rules below re-enable them only in expanded mode.
+
+   Start/End Dates and Notes are intentionally left out of the expanded
+   rows for now:
+   - Start/End Dates were already enabled in the user's normal layout and
+     are intentionally hidden by the compact design.
+   - Notes live inside .data.title and are reserved for Quest Details.
    --------------------------------------------------------------------- */
-
-body.ownlist[data-work="manga"] .list-table .list-table-data > .data {
-  display: none !important;
-}
-
-body.ownlist[data-work="manga"] .list-table .list-table-data > :is(
-  .data.status,
-  .data.image,
-  .data.title,
-  .data.score,
-  .data.type,
-  .data.chapter,
-  .data.volume,
+body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
+  .data.number,
+  .data.started,
+  .data.finished,
+  .data.days,
+  .data.genre,
+  .data.demographic,
+  .data.studio,
+  .data.licensor,
+  .data.storage,
   .data.airing-started,
-  .data.tags
+  .data.airing-finished,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity,
+  .data.priority
 ) {
-  display: block !important;
-}
-
-body.ownlist[data-work="manga"] .list-table .list-table-data > .data.status {
-  position: absolute !important;
-  width: 0 !important;
-  height: 0 !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 0 !important;
-  overflow: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Notes are nested in the title cell rather than being a separate card cell.
-   Keep them out of the compact view until the Quest Details panel is built. */
-body.ownlist .list-table .list-table-data .data.title .notes {
   display: none !important;
+}
+
+body.ownlist[data-work="anime"] .list-table .list-table-data .data.title .notes {
+  display: none !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   2. DETECT EXPANDED ANIME MODE
+   This selector uses only the exact MAL classes seen in the DOM dump.
+   --------------------------------------------------------------------- */
+body.ownlist[data-work="anime"]:has(
+  .list-table-data > .data.days,
+  .list-table-data > .data.genre,
+  .list-table-data > .data.demographic,
+  .list-table-data > .data.studio,
+  .list-table-data > .data.licensor,
+  .list-table-data > .data.storage,
+  .list-table-data > .data.airing-started,
+  .list-table-data > .data.airing-finished,
+  .list-table-data > .data.mal_score,
+  .list-table-data > .data.score_diff,
+  .list-table-data > .data.popularity,
+  .list-table-data > .data.priority
+) .list-table {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   3. LET EXPANDED CARDS GROW
+   Core layout remains:
+     cover | title
+           | progress / score
+           | type     / rated
+           | season   / tags
+
+   Optional rows are auto-placed after that explicit 4-row grid.
+   --------------------------------------------------------------------- */
+body.ownlist[data-work="anime"]:has(
+  .list-table-data > .data.days,
+  .list-table-data > .data.genre,
+  .list-table-data > .data.demographic,
+  .list-table-data > .data.studio,
+  .list-table-data > .data.licensor,
+  .list-table-data > .data.storage,
+  .list-table-data > .data.airing-started,
+  .list-table-data > .data.airing-finished,
+  .list-table-data > .data.mal_score,
+  .list-table-data > .data.score_diff,
+  .list-table-data > .data.popularity,
+  .list-table-data > .data.priority
+) .list-table .list-table-data {
+  height: auto !important;
+  min-height: 215px !important;
+  max-height: none !important;
+
+  overflow: visible !important;
+
+  grid-auto-flow: row !important;
+  grid-auto-rows: minmax(34px, auto) !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   4. OPTIONAL ROWS
+   Every enabled optional cell becomes one full-card-width OSRS panel.
+   --------------------------------------------------------------------- */
+body.ownlist[data-work="anime"]:has(
+  .list-table-data > .data.days,
+  .list-table-data > .data.genre,
+  .list-table-data > .data.demographic,
+  .list-table-data > .data.studio,
+  .list-table-data > .data.licensor,
+  .list-table-data > .data.storage,
+  .list-table-data > .data.airing-started,
+  .list-table-data > .data.airing-finished,
+  .list-table-data > .data.mal_score,
+  .list-table-data > .data.score_diff,
+  .list-table-data > .data.popularity,
+  .list-table-data > .data.priority
+) .list-table .list-table-data > :is(
+  .data.days,
+  .data.genre,
+  .data.demographic,
+  .data.studio,
+  .data.licensor,
+  .data.storage,
+  .data.airing-started,
+  .data.airing-finished,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity,
+  .data.priority
+) {
+  position: relative !important;
+  inset: auto !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: wrap !important;
+
+  grid-column: 1 / -1 !important;
+  grid-row: auto !important;
+  grid-area: auto !important;
+
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  height: auto !important;
+  min-height: 34px !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 6px 10px 6px 118px !important;
+
+  border: 1px solid var(--opt-border-outer) !important;
+  outline: 0 !important;
+  border-radius: 2px !important;
+
+  background: var(--opt-bg) !important;
+
+  box-shadow:
+    inset 0 0 0 1px var(--opt-border-inner),
+    inset 0 1px 0 rgba(255,255,255,.035),
+    inset 0 -1px 0 rgba(0,0,0,.12) !important;
+
+  overflow: hidden !important;
+
+  color: var(--opt-text) !important;
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 18px !important;
+  text-align: left !important;
+}
+
+/* Truly empty MAL cells should not create blank rows. */
+body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
+  .data.days,
+  .data.genre,
+  .data.demographic,
+  .data.studio,
+  .data.licensor,
+  .data.storage,
+  .data.airing-started,
+  .data.airing-finished,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity,
+  .data.priority
+):empty {
+  display: none !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   5. OPTIONAL ROW LABELS
+   --------------------------------------------------------------------- */
+body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
+  .data.days,
+  .data.genre,
+  .data.demographic,
+  .data.studio,
+  .data.licensor,
+  .data.storage,
+  .data.airing-started,
+  .data.airing-finished,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity,
+  .data.priority
+)::before {
+  position: absolute !important;
+  left: 11px !important;
+  top: 50% !important;
+
+  display: block !important;
+  width: 98px !important;
+
+  transform: translateY(-50%) !important;
+
+  color: var(--opt-label) !important;
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: normal !important;
+  line-height: 13px !important;
+  text-align: left !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+
+  text-shadow: 1px 1px 0 rgba(0,0,0,.55) !important;
+}
+
+body.ownlist[data-work="anime"] .data.days::before            { content: "DAYS WATCHED" !important; }
+body.ownlist[data-work="anime"] .data.genre::before           { content: "GENRES" !important; }
+body.ownlist[data-work="anime"] .data.demographic::before     { content: "DEMOGRAPHICS" !important; }
+body.ownlist[data-work="anime"] .data.studio::before          { content: "STUDIOS" !important; }
+body.ownlist[data-work="anime"] .data.licensor::before        { content: "LICENSORS" !important; }
+body.ownlist[data-work="anime"] .data.storage::before         { content: "STORAGE" !important; }
+body.ownlist[data-work="anime"] .data.airing-started::before  { content: "AIRED FROM" !important; }
+body.ownlist[data-work="anime"] .data.airing-finished::before { content: "AIRED TO" !important; }
+body.ownlist[data-work="anime"] .data.mal_score::before       { content: "MAL SCORE" !important; }
+body.ownlist[data-work="anime"] .data.score_diff::before      { content: "SCORE DIFF" !important; }
+body.ownlist[data-work="anime"] .data.popularity::before      { content: "POPULARITY" !important; }
+body.ownlist[data-work="anime"] .data.priority::before        { content: "PRIORITY" !important; }
+
+
+/* ---------------------------------------------------------------------
+   6. LONG TEXT ROWS
+   Genres, studios and licensors can contain many entries.
+   --------------------------------------------------------------------- */
+body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
+  .data.genre,
+  .data.demographic,
+  .data.studio,
+  .data.licensor
+) {
+  align-items: flex-start !important;
+  min-height: 38px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
+  .data.genre,
+  .data.demographic,
+  .data.studio,
+  .data.licensor
+)::before {
+  top: 9px !important;
+  transform: none !important;
+}
+
+
+/* MAL may wrap these values in links/spans. Remove table/chip styling and
+   let the text wrap naturally inside the expanded row. */
+body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
+  .data.genre,
+  .data.demographic,
+  .data.studio,
+  .data.licensor
+) :is(a, span) {
+  display: inline !important;
+
+  max-width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background: none !important;
+
+  color: inherit !important;
+  font: inherit !important;
+  line-height: inherit !important;
+
+  white-space: normal !important;
+}
+
+body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
+  .data.genre,
+  .data.demographic,
+  .data.studio,
+  .data.licensor
+) a {
+  color: var(--opt-link) !important;
+}
+
+body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
+  .data.genre,
+  .data.demographic,
+  .data.studio,
+  .data.licensor
+) a:hover {
+  color: var(--rs-yellow) !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   7. EDITABLE / SHORT FIELDS
+   --------------------------------------------------------------------- */
+body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
+  .data.storage,
+  .data.priority
+) :is(select, input) {
+  max-width: calc(100% - 4px) !important;
+  height: 22px !important;
+
+  margin: 0 !important;
+  padding: 1px 5px !important;
+
+  border: 1px solid var(--opt-border-outer) !important;
+
+  background: #302a22 !important;
+  color: var(--opt-text) !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 12px !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   8. HOVER
+   --------------------------------------------------------------------- */
+body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
+  .data.days,
+  .data.genre,
+  .data.demographic,
+  .data.studio,
+  .data.licensor,
+  .data.storage,
+  .data.airing-started,
+  .data.airing-finished,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity,
+  .data.priority
+):hover {
+  background: var(--opt-bg-hover) !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   9. MANGA SAFETY
+   Until its real DOM dump is supplied, do NOT guess at expanded Manga
+   classes again. Keep the known compact manga card clean.
+   --------------------------------------------------------------------- */
+body.ownlist[data-work="manga"] .list-table .list-table-data > :is(
+  .data.number,
+  .data.started,
+  .data.finished,
+  .data.days,
+  .data.genre,
+  .data.demographic,
+  .data.magazine,
+  .data.retail,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity,
+  .data.priority,
+  .data.airing-finished
+) {
+  display: none !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   10. RESPONSIVE
+   --------------------------------------------------------------------- */
+@media (max-width: 1050px) {
+  body.ownlist[data-work="anime"] .list-table {
+    grid-template-columns: 1fr !important;
+  }
 }
