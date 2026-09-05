@@ -1,0 +1,544 @@
+/* MODULE: 18-optional-fields-v2.css
+   Optional-column expansion for MAL Modern lists.
+
+   Built from the exact Anime + Manga DOM dumps supplied by Tafixados.
+
+   IMPORTANT:
+   - This replaces the failed 17-optional-fields.css experiment.
+   - Do NOT import 17 and 18 together.
+   - Normal compact cards are untouched unless a genuinely optional column
+     is present.
+*/
+
+:root {
+  --opt-bg: #554c41;
+  --opt-bg-hover: #5d5346;
+  --opt-border-inner: #726451;
+  --opt-border-outer: #2d2a22;
+  --opt-label: #ff9933;
+  --opt-text: #f2e2bf;
+  --opt-link: #e8c46b;
+}
+
+/* ================================================================
+   1. ADVANCED-MODE TRIGGERS
+   ================================================================ */
+
+/* Anime baseline already has Start/End Dates enabled but intentionally hidden,
+   so started/finished alone do not trigger expansion. */
+body.ownlist[data-work="anime"] .list-table:has(
+  .list-table-data > :is(
+    .data.days,
+    .data.storage,
+    .data.priority,
+    .data.genre,
+    .data.demographic,
+    .data.airing-started,
+    .data.airing-finished,
+    .data.studio,
+    .data.licensor,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+  )
+),
+
+/* Manga Start/End Dates are optional in the normal setup, so they can trigger. */
+body.ownlist[data-work="manga"] .list-table:has(
+  .list-table-data > :is(
+    .data.started,
+    .data.finished,
+    .data.days,
+    .data.retail,
+    .data.priority,
+    .data.genre,
+    .data.magazine,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+  )
+) {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+
+/* ================================================================
+   2. EXPANDED CARD GEOMETRY
+   ================================================================ */
+
+body.ownlist[data-work="anime"] .list-table:has(
+  .list-table-data > :is(
+    .data.days,
+    .data.storage,
+    .data.priority,
+    .data.genre,
+    .data.demographic,
+    .data.airing-started,
+    .data.airing-finished,
+    .data.studio,
+    .data.licensor,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+  )
+) .list-table-data,
+
+body.ownlist[data-work="manga"] .list-table:has(
+  .list-table-data > :is(
+    .data.started,
+    .data.finished,
+    .data.days,
+    .data.retail,
+    .data.priority,
+    .data.genre,
+    .data.magazine,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+  )
+) .list-table-data {
+  height: auto !important;
+  min-height: 215px !important;
+  max-height: none !important;
+  overflow: visible !important;
+
+  /* Keep the original four explicit card rows.
+     Extra metadata is auto-created only BELOW row 4. */
+  grid-auto-flow: row !important;
+  grid-auto-rows: minmax(36px, auto) !important;
+}
+
+
+/* ================================================================
+   3. ANIME OPTIONAL ROWS
+
+   CRITICAL FIX:
+   The failed version used "grid-area:auto" AFTER "grid-column:1/-1".
+   grid-area is a shorthand and silently reset the grid-column span,
+   which is why the optional cells were scattered through the existing
+   card. This version never sets grid-area on optional rows.
+   ================================================================ */
+
+body.ownlist[data-work="anime"] .list-table:has(
+  .list-table-data > :is(
+    .data.days,
+    .data.storage,
+    .data.priority,
+    .data.genre,
+    .data.demographic,
+    .data.airing-started,
+    .data.airing-finished,
+    .data.studio,
+    .data.licensor,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+  )
+) .list-table-data > :is(
+  .data.started,
+  .data.finished,
+  .data.days,
+  .data.storage,
+  .data.priority,
+  .data.genre,
+  .data.demographic,
+  .data.airing-started,
+  .data.airing-finished,
+  .data.studio,
+  .data.licensor,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity
+),
+
+/* ================================================================
+   4. MANGA OPTIONAL ROWS
+   airing-started stays in the normal six-box layout as PUBLISHED.
+   airing-finished becomes the expanded PUBLISHED TO row.
+   ================================================================ */
+
+body.ownlist[data-work="manga"] .list-table:has(
+  .list-table-data > :is(
+    .data.started,
+    .data.finished,
+    .data.days,
+    .data.retail,
+    .data.priority,
+    .data.genre,
+    .data.magazine,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+  )
+) .list-table-data > :is(
+  .data.started,
+  .data.finished,
+  .data.days,
+  .data.retail,
+  .data.priority,
+  .data.genre,
+  .data.magazine,
+  .data.airing-finished,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity
+) {
+  position: relative !important;
+  inset: auto !important;
+
+  display: block !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  height: auto !important;
+  min-height: 36px !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 8px 10px 8px 126px !important;
+
+  border: 1px solid var(--opt-border-outer) !important;
+  outline: 0 !important;
+  border-radius: 2px !important;
+
+  background: var(--opt-bg) !important;
+
+  box-shadow:
+    inset 0 0 0 1px var(--opt-border-inner),
+    inset 0 1px 0 rgba(255,255,255,.035),
+    inset 0 -1px 0 rgba(0,0,0,.12) !important;
+
+  overflow: hidden !important;
+
+  color: var(--opt-text) !important;
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 18px !important;
+  text-align: left !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+
+  /* These must remain the LAST grid declarations in this rule. */
+  grid-row: auto !important;
+  grid-column: 1 / 6 !important;
+}
+
+
+/* ================================================================
+   5. EMPTY ROWS
+   ================================================================ */
+
+body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
+  .data.started,
+  .data.finished,
+  .data.days,
+  .data.storage,
+  .data.priority,
+  .data.genre,
+  .data.demographic,
+  .data.airing-started,
+  .data.airing-finished,
+  .data.studio,
+  .data.licensor,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity
+):empty,
+
+body.ownlist[data-work="manga"] .list-table .list-table-data > :is(
+  .data.started,
+  .data.finished,
+  .data.days,
+  .data.retail,
+  .data.priority,
+  .data.genre,
+  .data.magazine,
+  .data.airing-finished,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity
+):empty {
+  display: none !important;
+}
+
+
+/* ================================================================
+   6. LABEL BASE
+   ================================================================ */
+
+body.ownlist[data-work="anime"] .list-table:has(
+  .list-table-data > :is(
+    .data.days,
+    .data.storage,
+    .data.priority,
+    .data.genre,
+    .data.demographic,
+    .data.airing-started,
+    .data.airing-finished,
+    .data.studio,
+    .data.licensor,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+  )
+) .list-table-data > :is(
+  .data.started,
+  .data.finished,
+  .data.days,
+  .data.storage,
+  .data.priority,
+  .data.genre,
+  .data.demographic,
+  .data.airing-started,
+  .data.airing-finished,
+  .data.studio,
+  .data.licensor,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity
+)::before,
+
+body.ownlist[data-work="manga"] .list-table:has(
+  .list-table-data > :is(
+    .data.started,
+    .data.finished,
+    .data.days,
+    .data.retail,
+    .data.priority,
+    .data.genre,
+    .data.magazine,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+  )
+) .list-table-data > :is(
+  .data.started,
+  .data.finished,
+  .data.days,
+  .data.retail,
+  .data.priority,
+  .data.genre,
+  .data.magazine,
+  .data.airing-finished,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity
+)::before {
+  position: absolute !important;
+  left: 11px !important;
+  top: 8px !important;
+
+  display: block !important;
+  width: 106px !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+
+  color: var(--opt-label) !important;
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: normal !important;
+  line-height: 18px !important;
+  text-align: left !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+
+  text-shadow: 1px 1px 0 rgba(0,0,0,.55) !important;
+}
+
+/* Shared labels */
+body.ownlist .data.started::before    { content: "STARTED" !important; }
+body.ownlist .data.finished::before   { content: "FINISHED" !important; }
+body.ownlist .data.priority::before   { content: "PRIORITY" !important; }
+body.ownlist .data.mal_score::before  { content: "MAL SCORE" !important; }
+body.ownlist .data.score_diff::before { content: "SCORE DIFF" !important; }
+body.ownlist .data.popularity::before { content: "POPULARITY" !important; }
+
+/* Anime */
+body.ownlist[data-work="anime"] .data.days::before            { content: "DAYS WATCHED" !important; }
+body.ownlist[data-work="anime"] .data.storage::before         { content: "STORAGE" !important; }
+body.ownlist[data-work="anime"] .data.genre::before           { content: "GENRES" !important; }
+body.ownlist[data-work="anime"] .data.demographic::before     { content: "DEMOGRAPHICS" !important; }
+body.ownlist[data-work="anime"] .data.airing-started::before  { content: "AIRED FROM" !important; }
+body.ownlist[data-work="anime"] .data.airing-finished::before { content: "AIRED TO" !important; }
+body.ownlist[data-work="anime"] .data.studio::before          { content: "STUDIOS" !important; }
+body.ownlist[data-work="anime"] .data.licensor::before        { content: "LICENSORS" !important; }
+
+/* Manga */
+body.ownlist[data-work="manga"] .data.days::before            { content: "DAYS READ" !important; }
+body.ownlist[data-work="manga"] .data.retail::before          { content: "RETAIL MANGA" !important; }
+/* MAL uses .genre for BOTH Manga Genres and Manga Demographics. */
+body.ownlist[data-work="manga"] .data.genre::before           { content: "GENRES / DEMOGRAPHICS" !important; }
+body.ownlist[data-work="manga"] .data.magazine::before        { content: "MAGAZINE" !important; }
+body.ownlist[data-work="manga"] .data.airing-finished::before { content: "PUBLISHED TO" !important; }
+
+
+/* ================================================================
+   7. RESET MAL'S INTERNAL VALUE MARKUP
+
+   This prevents the narrow vertical number/text columns visible in the
+   broken screenshots.
+   ================================================================ */
+
+body.ownlist[data-work="anime"] .list-table:has(
+  .list-table-data > :is(
+    .data.days,
+    .data.storage,
+    .data.priority,
+    .data.genre,
+    .data.demographic,
+    .data.airing-started,
+    .data.airing-finished,
+    .data.studio,
+    .data.licensor,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+  )
+) .list-table-data > :is(
+  .data.started,
+  .data.finished,
+  .data.days,
+  .data.storage,
+  .data.priority,
+  .data.genre,
+  .data.demographic,
+  .data.airing-started,
+  .data.airing-finished,
+  .data.studio,
+  .data.licensor,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity
+) > *,
+
+body.ownlist[data-work="manga"] .list-table:has(
+  .list-table-data > :is(
+    .data.started,
+    .data.finished,
+    .data.days,
+    .data.retail,
+    .data.priority,
+    .data.genre,
+    .data.magazine,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+  )
+) .list-table-data > :is(
+  .data.started,
+  .data.finished,
+  .data.days,
+  .data.retail,
+  .data.priority,
+  .data.genre,
+  .data.magazine,
+  .data.airing-finished,
+  .data.mal_score,
+  .data.score_diff,
+  .data.popularity
+) > * {
+  position: static !important;
+  inset: auto !important;
+
+  display: inline !important;
+
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+
+  background: none !important;
+  box-shadow: none !important;
+
+  color: inherit !important;
+  font: inherit !important;
+  line-height: inherit !important;
+  text-align: inherit !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+}
+
+/* Link colour */
+body.ownlist .list-table .list-table-data > :is(
+  .data.genre,
+  .data.demographic,
+  .data.studio,
+  .data.licensor,
+  .data.magazine
+) a {
+  color: var(--opt-link) !important;
+}
+
+body.ownlist .list-table .list-table-data > :is(
+  .data.genre,
+  .data.demographic,
+  .data.studio,
+  .data.licensor,
+  .data.magazine
+) a:hover {
+  color: var(--rs-yellow) !important;
+}
+
+/* Restore controls where MAL supplies one. */
+body.ownlist .list-table .list-table-data > :is(
+  .data.storage,
+  .data.retail,
+  .data.priority
+) :is(input, select) {
+  display: inline-block !important;
+  width: auto !important;
+  max-width: 100% !important;
+  height: 22px !important;
+
+  margin: 0 !important;
+  padding: 1px 5px !important;
+
+  border: 1px solid var(--opt-border-outer) !important;
+  background: #302a22 !important;
+  color: var(--opt-text) !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 12px !important;
+}
+
+
+/* ================================================================
+   8. NOTES
+   ================================================================ */
+
+body.ownlist .list-table .list-table-data .data.title .notes {
+  display: none !important;
+}
+
+
+/* ================================================================
+   9. RESPONSIVE
+   ================================================================ */
+
+@media (max-width: 1050px) {
+  body.ownlist[data-work="anime"] .list-table,
+  body.ownlist[data-work="manga"] .list-table {
+    grid-template-columns: 1fr !important;
+  }
+}
