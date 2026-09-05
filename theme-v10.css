@@ -1,6 +1,7 @@
-/* Tafixados MAL OSRS — modular master stylesheet
-   Keep every @import above normal CSS rules.
-   Edit the individual files in /css; this file should rarely need changes. */
+/* Tafixados MAL OSRS — modular master stylesheet v10
+   Fresh filenames are intentional cache-busters while the theme is in development.
+   Do not import old optional modules 17 or 18 alongside this version.
+*/
 
 @import url("./osrs-ui-font-layer-v4-clean.css");
 @import url("./css/00-foundation.css");
@@ -20,4 +21,4 @@
 @import url("./css/14-tooltips-v2.css");
 @import url("./css/15-visitor-strip-v5.css");
 @import url("./css/16-manga-overrides-v1.css");
-@import url("./css/17-optional-fields.css");
+@import url("./css/19-optional-fields-v3.css");
