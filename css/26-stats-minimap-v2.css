@@ -1,5 +1,5 @@
-/* MODULE: 25-stats-minimap-v1.css
-   V16 polish:
+/* MODULE: 26-stats-minimap-v2.css
+   V17 minimap fix:
    - RuneScape-styled expandable MAL statistics ribbon
    - Responsive fixed OSRS minimap in the right-side gutter
    - Scroll-driven zig-zag world-map movement
@@ -26,11 +26,10 @@
 
   /* Circular opening inside the supplied frame */
   --rs-minimap-hole-x: 129px;
-  --rs-minimap-hole-y: 80px;
-  --rs-minimap-hole-radius: 72px;
+  --rs-minimap-hole-y: 83px;
+  --rs-minimap-hole-radius: 76px;
 
-  /* World-map zoom inside the circular viewport */
-  --rs-minimap-map-width: 1320px;
+  /* World map is rendered at its intrinsic/native image size. */
 }
 
 
@@ -209,10 +208,10 @@ html body.ownlist::before {
   background-color: transparent !important;
   background-image: var(--rs-minimap-world) !important;
   background-repeat: no-repeat !important;
-  background-size: var(--rs-minimap-map-width) auto !important;
+  background-size: auto auto !important;
 
   /* Static fallback position if scroll-driven animations aren't supported. */
-  background-position: 48% 49% !important;
+  background-position: 50% 50%;
 
   clip-path:
     circle(
@@ -256,27 +255,28 @@ html body.ownlist::after {
    This is intentionally modest and stays around the middle of the world map.
    You can replace THIS KEYFRAME ONLY in MAL's Custom CSS while iterating. */
 @keyframes rs-minimap-route {
-  0%   { background-position: 47% 47%; }
-  10%  { background-position: 45% 49%; }
-  22%  { background-position: 48% 51%; }
-  34%  { background-position: 46% 54%; }
-  48%  { background-position: 50% 55%; }
-  61%  { background-position: 53% 52%; }
-  74%  { background-position: 51% 49%; }
-  86%  { background-position: 54% 47%; }
-  100% { background-position: 52% 44%; }
+  0%   { background-position: calc(50% +   0px) calc(50% +   0px); }
+  12%  { background-position: calc(50% + -18px) calc(50% +  10px); }
+  25%  { background-position: calc(50% + -30px) calc(50% +  26px); }
+  38%  { background-position: calc(50% + -12px) calc(50% +  40px); }
+  52%  { background-position: calc(50% +  10px) calc(50% +  28px); }
+  66%  { background-position: calc(50% +  26px) calc(50% +  45px); }
+  80%  { background-position: calc(50% +  40px) calc(50% +  24px); }
+  91%  { background-position: calc(50% +  22px) calc(50% +   8px); }
+  100% { background-position: calc(50% +  34px) calc(50% + -12px); }
 }
 
 
 /* Scroll-driven movement where supported.
    The frame never moves; only the map underneath it pans. */
-@supports (animation-timeline: scroll(root)) {
+@supports (animation-timeline: scroll()) {
   html body.ownlist::before {
     animation-name: rs-minimap-route !important;
-    animation-duration: 1s !important;
+    animation-duration: 1ms !important;
     animation-timing-function: linear !important;
     animation-fill-mode: both !important;
 
+    /* Root page scrolling drives the route. */
     animation-timeline: scroll(root block) !important;
   }
 }
@@ -286,6 +286,6 @@ html body.ownlist::after {
 @media (prefers-reduced-motion: reduce) {
   html body.ownlist::before {
     animation: none !important;
-    background-position: 48% 49% !important;
+    background-position: 50% 50% !important;
   }
 }

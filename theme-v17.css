@@ -1,5 +1,5 @@
-/* Tafixados MAL OSRS — modular master stylesheet v15
-   V15 fixes footer positioning/font and the duplicated /99 suffix.
+/* Tafixados MAL OSRS — modular master stylesheet v17
+   V17 fixes minimap aperture size, native map zoom, and scroll movement.
 */
 
 @import url("./osrs-ui-font-layer-v4-clean.css");
@@ -22,3 +22,4 @@
 @import url("./css/16-manga-overrides-v1.css");
 @import url("./css/22-optional-fields-v6.css");
 @import url("./css/24-footer-progress-score-v2.css");
+@import url("./css/26-stats-minimap-v2.css");
