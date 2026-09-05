@@ -1,4 +1,4 @@
-/* MODULE: 23-footer-progress-score-v1.css
+/* MODULE: 24-footer-progress-score-v2.css
    Fun-polish pass:
    - OSRS logout-feedback-style footer panel
    - custom + buttons for anime episodes / manga chapters / manga volumes
@@ -108,9 +108,15 @@ html body.ownlist[data-work="manga"]
    This is display-only: 9 becomes 9/99, "-" becomes -/99.
    ===================================================================== */
 
+/* Guard against V14's parent-link suffix if an older module is still
+   hanging around in the cascade. */
 html body.ownlist
-.list-table .list-table-data .data.score .link::after,
+.list-table .list-table-data .data.score .link::after {
+  content: none !important;
+  display: none !important;
+}
 
+/* Append exactly once, on the actual score text. */
 html body.ownlist
 .list-table .list-table-data .data.score .score-label::after {
   content: "/99" !important;
@@ -122,7 +128,7 @@ html body.ownlist
 
   color: #ffff00 !important;
 
-  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
   font-size: 14px !important;
   font-weight: 400 !important;
   line-height: 17px !important;
@@ -166,7 +172,7 @@ html body.ownlist #footer-block {
   min-height: 196px !important;
 
   margin: 0 auto !important;
-  padding: 118px 14px 14px !important;
+  padding: 130px 14px 14px !important;
 
   border: 2px solid #2d2a22 !important;
   outline: 1px solid #726451 !important;
@@ -203,10 +209,10 @@ html body.ownlist #footer-block::before {
 
   color: #ff9933 !important;
 
-  font-family: "RS UF", "RS Chat 07", Tahoma, Verdana, sans-serif !important;
-  font-size: 21px !important;
+  font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+  font-size: 19px !important;
   font-weight: 400 !important;
-  line-height: 23px !important;
+  line-height: 21px !important;
 
   text-align: center !important;
   white-space: pre-line !important;
@@ -219,7 +225,7 @@ html body.ownlist #footer-block::before {
 /* Keep the actual MAL legal lines readable. */
 html body.ownlist #copyright,
 html body.ownlist #recaptcha-terms {
-  position: relative !important;
+  position: static !important;
 
   display: block !important;
 
@@ -260,7 +266,7 @@ html body.ownlist #recaptcha-terms::before {
   content: "" !important;
 
   position: absolute !important;
-  top: -63px !important;
+  top: 78px !important;
 
   display: block !important;
 
@@ -311,7 +317,8 @@ html body.ownlist #recaptcha-terms:hover::before {
   }
 
   html body.ownlist #footer-block::before {
-    font-size: 18px !important;
-    line-height: 20px !important;
+    font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+    font-size: 17px !important;
+    line-height: 19px !important;
   }
 }

@@ -1,5 +1,5 @@
-/* Tafixados MAL OSRS — modular master stylesheet v14
-   Adds footer feedback styling, custom progress + icon, and score /99.
+/* Tafixados MAL OSRS — modular master stylesheet v15
+   V15 fixes footer positioning/font and the duplicated /99 suffix.
 */
 
 @import url("./osrs-ui-font-layer-v4-clean.css");
@@ -21,4 +21,4 @@
 @import url("./css/15-visitor-strip-v5.css");
 @import url("./css/16-manga-overrides-v1.css");
 @import url("./css/22-optional-fields-v6.css");
-@import url("./css/23-footer-progress-score-v1.css");
+@import url("./css/24-footer-progress-score-v2.css");
