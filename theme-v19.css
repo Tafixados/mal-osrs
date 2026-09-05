@@ -1,5 +1,5 @@
-/* Tafixados MAL OSRS — modular master stylesheet v18
-   V18 adds a traced Tree Gnome Maze→Yanille route, fixed-distance scrolling, feature-gated minimap, and Anime + fix.
+/* Tafixados MAL OSRS — modular master stylesheet v19
+   V19 replaces the test minimap route with the full Tree Gnome Maze→Ectofuntus route.
 */
 
 @import url("./osrs-ui-font-layer-v4-clean.css");
@@ -24,3 +24,4 @@
 @import url("./css/24-footer-progress-score-v2.css");
 @import url("./css/26-stats-minimap-v3.css");
 @import url("./css/27-anime-plus-fix-v1.css");
+@import url("./css/28-minimap-full-route-v1.css");
