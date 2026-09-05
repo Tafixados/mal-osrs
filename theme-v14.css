@@ -1,7 +1,5 @@
-/* Tafixados MAL OSRS — modular master stylesheet v13
-   Cache-busting development filename.
-   V13 restores the original poster/core-box separation while keeping
-   V12's denser optional metadata layout.
+/* Tafixados MAL OSRS — modular master stylesheet v14
+   Adds footer feedback styling, custom progress + icon, and score /99.
 */
 
 @import url("./osrs-ui-font-layer-v4-clean.css");
@@ -23,3 +21,4 @@
 @import url("./css/15-visitor-strip-v5.css");
 @import url("./css/16-manga-overrides-v1.css");
 @import url("./css/22-optional-fields-v6.css");
+@import url("./css/23-footer-progress-score-v1.css");
