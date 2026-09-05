@@ -1,408 +1,92 @@
 /* MODULE: 17-optional-fields.css
-   Robust optional-column compatibility layer for MAL Modern lists.
+   SAFE DIAGNOSTIC HOTFIX
 
-   Design:
-   - With the normal/recommended columns, cards remain the current compact
-     3-column, 215px-tall OSRS cards.
-   - If MAL renders ANY extra data-cell beyond the normal card schema, the
-     list automatically switches to two wider cards per row.
-   - Extra cells are then placed as full-width OSRS information rows below
-     the cover + six core boxes. Long values such as genres/studios/licensors
-     can wrap safely.
-   - Anime and Manga are isolated with data-work selectors.
+   Purpose:
+   - Restore the clean compact Anime/Manga cards while we inspect MAL's
+     actual DOM for the optional columns.
+   - Hide every direct data cell except the core cells explicitly supported
+     by the current OSRS cards.
+   - This deliberately DOES NOT try to lay out optional columns yet.
 
-   This module must load AFTER:
-     11-card-final-v46.css
-     16-manga-overrides-v1.css
+   Replace the existing css/17-optional-fields.css with this file.
 */
 
-:root {
-  --osrs-extra-bg: #554c41;
-  --osrs-extra-bg-hover: #5d5346;
-  --osrs-extra-border-inner: #726451;
-  --osrs-extra-border-outer: #2d2a22;
-  --osrs-extra-label: #ff9933;
-  --osrs-extra-text: #f2e2bf;
-  --osrs-extra-link: #e8c46b;
-}
+/* ---------------------------------------------------------------------
+   ANIME: keep only the compact card cells
+   --------------------------------------------------------------------- */
 
-/* =====================================================================
-   ADVANCED-MODE DETECTION
-
-   Detect any direct .data cell MAL rendered which isn't part of the
-   normal compact card. This gives us a fallback even if MAL adds another
-   optional column later.
-   ===================================================================== */
-
-body.ownlist[data-work="anime"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.progress):not(.started):not(.finished):not(.season):
-       not(.tags):not(.rated)
-) {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 14px !important;
-}
-
-body.ownlist[data-work="manga"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.chapter):not(.volume):not(.airing-started):
-       not(.airing-finished):not(.tags)
-) {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 14px !important;
-}
-
-/* =====================================================================
-   EXPANDED CARD GEOMETRY
-   ===================================================================== */
-
-body.ownlist[data-work="anime"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.progress):not(.started):not(.finished):not(.season):
-       not(.tags):not(.rated)
-)
-.list-table-data,
-
-body.ownlist[data-work="manga"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.chapter):not(.volume):not(.airing-started):
-       not(.airing-finished):not(.tags)
-)
-.list-table-data {
-  height: auto !important;
-  min-height: 215px !important;
-  max-height: none !important;
-  overflow: visible !important;
-
-  grid-auto-flow: row !important;
-  grid-auto-rows: minmax(32px, auto) !important;
-}
-
-/* =====================================================================
-   OPTIONAL DATA ROWS
-   ===================================================================== */
-
-/* Anime optional cells + the personal Start/End dates that the compact
-   theme normally suppresses. */
-body.ownlist[data-work="anime"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.progress):not(.started):not(.finished):not(.season):
-       not(.tags):not(.rated)
-)
-.list-table-data > .data:not(.status):not(.number):not(.image):not(.title):
-                      not(.score):not(.type):not(.progress):not(.season):
-                      not(.tags):not(.rated),
-
-body.ownlist[data-work="anime"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.progress):not(.started):not(.finished):not(.season):
-       not(.tags):not(.rated)
-)
-.list-table-data > .data.started,
-
-body.ownlist[data-work="anime"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.progress):not(.started):not(.finished):not(.season):
-       not(.tags):not(.rated)
-)
-.list-table-data > .data.finished,
-
-/* Manga optional cells. */
-body.ownlist[data-work="manga"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.chapter):not(.volume):not(.airing-started):
-       not(.airing-finished):not(.tags)
-)
-.list-table-data > .data:not(.status):not(.number):not(.image):not(.title):
-                      not(.score):not(.type):not(.chapter):not(.volume):
-                      not(.airing-started):not(.airing-finished):not(.tags),
-
-/* Published Dates already uses airing-started as the compact manga box.
-   In expanded mode also expose the publication end date as a row. */
-body.ownlist[data-work="manga"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.chapter):not(.volume):not(.airing-started):
-       not(.airing-finished):not(.tags)
-)
-.list-table-data > .data.airing-finished {
-  position: relative !important;
-  inset: auto !important;
-
-  grid-column: 1 / -1 !important;
-  grid-row: auto !important;
-  grid-area: auto !important;
-
-  box-sizing: border-box !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  flex-wrap: wrap !important;
-
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: none !important;
-
-  height: auto !important;
-  min-height: 32px !important;
-  max-height: none !important;
-
-  margin: 0 !important;
-  padding: 5px 9px 5px 112px !important;
-
-  border: 1px solid var(--osrs-extra-border-outer) !important;
-  outline: 0 !important;
-  border-radius: 2px !important;
-
-  background: var(--osrs-extra-bg) !important;
-
-  box-shadow:
-    inset 0 0 0 1px var(--osrs-extra-border-inner),
-    inset 0 1px 0 rgba(255,255,255,.035),
-    inset 0 -1px 0 rgba(0,0,0,.12) !important;
-
-  overflow: hidden !important;
-
-  color: var(--osrs-extra-text) !important;
-  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
-  font-size: 13px !important;
-  line-height: 18px !important;
-  text-align: left !important;
-}
-
-/* Empty optional cells do not get a blank row. */
-body.ownlist[data-work="anime"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.progress):not(.started):not(.finished):not(.season):
-       not(.tags):not(.rated)
-)
-.list-table-data > .data:not(.status):not(.number):not(.image):not(.title):
-                      not(.score):not(.type):not(.progress):not(.season):
-                      not(.tags):not(.rated):empty,
-
-body.ownlist[data-work="manga"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.chapter):not(.volume):not(.airing-started):
-       not(.airing-finished):not(.tags)
-)
-.list-table-data > .data:not(.status):not(.number):not(.image):not(.title):
-                      not(.score):not(.type):not(.chapter):not(.volume):
-                      not(.airing-started):not(.airing-finished):not(.tags):empty {
+body.ownlist[data-work="anime"] .list-table .list-table-data > .data {
   display: none !important;
 }
 
-/* =====================================================================
-   LABEL BASE
-   ===================================================================== */
-
-body.ownlist[data-work="anime"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.progress):not(.started):not(.finished):not(.season):
-       not(.tags):not(.rated)
-)
-.list-table-data > .data:not(.status):not(.number):not(.image):not(.title):
-                      not(.score):not(.type):not(.progress):not(.season):
-                      not(.tags):not(.rated)::before,
-
-body.ownlist[data-work="manga"]
-.list-table:has(
-  .list-table-data >
-  .data:not(.status):not(.number):not(.image):not(.title):not(.score):
-       not(.type):not(.chapter):not(.volume):not(.airing-started):
-       not(.airing-finished):not(.tags)
-)
-.list-table-data > .data:not(.status):not(.number):not(.image):not(.title):
-                      not(.score):not(.type):not(.chapter):not(.volume):
-                      not(.airing-started):not(.tags)::before {
-  position: absolute !important;
-  left: 10px !important;
-  top: 50% !important;
-
-  display: block !important;
-  width: 94px !important;
-
-  transform: translateY(-50%) !important;
-
-  color: var(--osrs-extra-label) !important;
-  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
-  font-size: 10px !important;
-  font-weight: normal !important;
-  line-height: 12px !important;
-  text-align: left !important;
-  text-transform: uppercase !important;
-  white-space: nowrap !important;
-
-  text-shadow: 1px 1px 0 rgba(0,0,0,.55) !important;
-}
-
-/* =====================================================================
-   LABEL TEXT — ANIME
-   ===================================================================== */
-
-body.ownlist[data-work="anime"] .data.started::before         { content: "STARTED" !important; }
-body.ownlist[data-work="anime"] .data.finished::before        { content: "FINISHED" !important; }
-body.ownlist[data-work="anime"] .data.days::before            { content: "DAYS WATCHED" !important; }
-body.ownlist[data-work="anime"] .data.storage::before         { content: "STORAGE" !important; }
-body.ownlist[data-work="anime"] .data.priority::before        { content: "PRIORITY" !important; }
-body.ownlist[data-work="anime"] .data.genre::before           { content: "GENRES" !important; }
-body.ownlist[data-work="anime"] .data.genres::before          { content: "GENRES" !important; }
-body.ownlist[data-work="anime"] .data.demographic::before     { content: "DEMOGRAPHICS" !important; }
-body.ownlist[data-work="anime"] .data.demographics::before    { content: "DEMOGRAPHICS" !important; }
-body.ownlist[data-work="anime"] .data.airing-started::before  { content: "AIRED FROM" !important; }
-body.ownlist[data-work="anime"] .data.airing-finished::before { content: "AIRED TO" !important; }
-body.ownlist[data-work="anime"] .data.studio::before          { content: "STUDIOS" !important; }
-body.ownlist[data-work="anime"] .data.studios::before         { content: "STUDIOS" !important; }
-body.ownlist[data-work="anime"] .data.licensor::before        { content: "LICENSORS" !important; }
-body.ownlist[data-work="anime"] .data.licensors::before       { content: "LICENSORS" !important; }
-body.ownlist[data-work="anime"] .data.mal_score::before       { content: "MAL SCORE" !important; }
-body.ownlist[data-work="anime"] .data.score_diff::before      { content: "SCORE DIFF" !important; }
-body.ownlist[data-work="anime"] .data.popularity::before      { content: "POPULARITY" !important; }
-
-/* =====================================================================
-   LABEL TEXT — MANGA
-   ===================================================================== */
-
-body.ownlist[data-work="manga"] .data.started::before         { content: "STARTED" !important; }
-body.ownlist[data-work="manga"] .data.finished::before        { content: "FINISHED" !important; }
-body.ownlist[data-work="manga"] .data.days::before            { content: "DAYS READ" !important; }
-body.ownlist[data-work="manga"] .data.retail::before          { content: "RETAIL MANGA" !important; }
-body.ownlist[data-work="manga"] .data.priority::before        { content: "PRIORITY" !important; }
-body.ownlist[data-work="manga"] .data.genre::before           { content: "GENRES" !important; }
-body.ownlist[data-work="manga"] .data.genres::before          { content: "GENRES" !important; }
-body.ownlist[data-work="manga"] .data.demographic::before     { content: "DEMOGRAPHICS" !important; }
-body.ownlist[data-work="manga"] .data.demographics::before    { content: "DEMOGRAPHICS" !important; }
-body.ownlist[data-work="manga"] .data.magazine::before        { content: "MAGAZINE" !important; }
-body.ownlist[data-work="manga"] .data.mal_score::before       { content: "MAL SCORE" !important; }
-body.ownlist[data-work="manga"] .data.score_diff::before      { content: "SCORE DIFF" !important; }
-body.ownlist[data-work="manga"] .data.popularity::before      { content: "POPULARITY" !important; }
-body.ownlist[data-work="manga"] .data.airing-finished::before { content: "PUBLISHED TO" !important; }
-
-/* =====================================================================
-   LONG TEXT FIELDS
-   ===================================================================== */
-
-body.ownlist .list-table .list-table-data > :is(
-  .data.genre,
-  .data.genres,
-  .data.demographic,
-  .data.demographics,
-  .data.studio,
-  .data.studios,
-  .data.licensor,
-  .data.licensors,
-  .data.magazine
+body.ownlist[data-work="anime"] .list-table .list-table-data > :is(
+  .data.status,
+  .data.image,
+  .data.title,
+  .data.score,
+  .data.type,
+  .data.progress,
+  .data.season,
+  .data.tags,
+  .data.rated
 ) {
-  min-height: 38px !important;
-  align-items: flex-start !important;
-  padding-top: 7px !important;
-  padding-bottom: 7px !important;
+  display: block !important;
 }
 
-body.ownlist .list-table .list-table-data > :is(
-  .data.genre,
-  .data.genres,
-  .data.demographic,
-  .data.demographics,
-  .data.studio,
-  .data.studios,
-  .data.licensor,
-  .data.licensors,
-  .data.magazine
-)::before {
-  top: 9px !important;
-  transform: none !important;
-}
-
-body.ownlist .list-table .list-table-data > :is(
-  .data.genre,
-  .data.genres,
-  .data.demographic,
-  .data.demographics,
-  .data.studio,
-  .data.studios,
-  .data.licensor,
-  .data.licensors,
-  .data.magazine
-) :is(span, a) {
-  max-width: 100% !important;
-  margin: 0 !important;
+/* Status still needs to exist in the DOM for :has(.status.completed), etc.,
+   but it should not occupy a grid cell. */
+body.ownlist[data-work="anime"] .list-table .list-table-data > .data.status {
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
   padding: 0 !important;
-
-  border: 0 !important;
-  border-radius: 0 !important;
-  background: none !important;
-
-  color: inherit !important;
-  font: inherit !important;
-  line-height: inherit !important;
-  white-space: normal !important;
-}
-
-/* Optional links. */
-body.ownlist .list-table .list-table-data > .data a {
-  color: var(--osrs-extra-link) !important;
-}
-
-body.ownlist .list-table .list-table-data > .data a:hover {
-  color: var(--rs-yellow) !important;
-}
-
-/* Editable controls. */
-body.ownlist .list-table .list-table-data > :is(
-  .data.storage,
-  .data.retail,
-  .data.priority
-) :is(select, input) {
-  max-width: calc(100% - 4px) !important;
-  height: 21px !important;
   margin: 0 !important;
-  padding: 1px 4px !important;
-
-  border: 1px solid var(--osrs-extra-border-outer) !important;
-  background: #302a22 !important;
-  color: var(--osrs-extra-text) !important;
-
-  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
-  font-size: 12px !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
-/* Hover feedback. */
-body.ownlist .list-table .list-table-data >
-.data:not(.status):not(.number):not(.image):not(.title):not(.score):
-     not(.type):not(.progress):not(.chapter):not(.volume):not(.season):
-     not(.tags):not(.rated):hover {
-  background: var(--osrs-extra-bg-hover) !important;
+/* ---------------------------------------------------------------------
+   MANGA: keep only the compact manga card cells
+   --------------------------------------------------------------------- */
+
+body.ownlist[data-work="manga"] .list-table .list-table-data > .data {
+  display: none !important;
 }
 
-/* Notes are nested inside MAL's title cell instead of being their own data
-   cell. Leave them for the forthcoming Quest Details / More panel module. */
+body.ownlist[data-work="manga"] .list-table .list-table-data > :is(
+  .data.status,
+  .data.image,
+  .data.title,
+  .data.score,
+  .data.type,
+  .data.chapter,
+  .data.volume,
+  .data.airing-started,
+  .data.tags
+) {
+  display: block !important;
+}
 
-@media (max-width: 1050px) {
-  body.ownlist[data-work="anime"] .list-table,
-  body.ownlist[data-work="manga"] .list-table {
-    grid-template-columns: 1fr !important;
-  }
+body.ownlist[data-work="manga"] .list-table .list-table-data > .data.status {
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Notes are nested in the title cell rather than being a separate card cell.
+   Keep them out of the compact view until the Quest Details panel is built. */
+body.ownlist .list-table .list-table-data .data.title .notes {
+  display: none !important;
 }
