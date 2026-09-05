@@ -1,5 +1,5 @@
-/* Tafixados MAL OSRS — modular master stylesheet v20
-   V20 corrects the full minimap route back to its original 3635px coordinate scale.
+/* Tafixados MAL OSRS — modular master stylesheet v22
+   V22 tightens the footer legal layout and makes all legal/attribution text readable.
 */
 
 @import url("./osrs-ui-font-layer-v4-clean.css");
@@ -26,3 +26,5 @@
 @import url("./css/27-anime-plus-fix-v1.css");
 @import url("./css/28-minimap-full-route-v1.css");
 @import url("./css/29-minimap-full-route-native-v1.css");
+@import url("./css/30-footer-legal-cursor-v1.css");
+@import url("./css/31-footer-readable-legal-v1.css");
