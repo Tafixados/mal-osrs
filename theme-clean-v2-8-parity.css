@@ -1,0 +1,10 @@
+/* Tafixados MAL-OSRS — parity v2.8
+   Base: v2.3 parity (last pre-rating build)
+   Episode rating UI: ONE consolidated stylesheet only.
+
+   Do NOT import theme-clean-v2-4/5/6/7-parity.css here; those contain the
+   conflicting experimental rating-dialog layers.
+*/
+
+@import url("./theme-clean-v2-3-parity.css");
+@import url("./css/13-episode-rating-dialog.css");

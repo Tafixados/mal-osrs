@@ -1,7 +1,0 @@
-/* Tafixados MAL-OSRS — parity v2.4
-   Base: theme-clean-v2-3-parity.css
-   Feature: OSRS episode rating / discussion dialog v1
-*/
-
-@import url("./theme-clean-v2-3-parity.css");
-@import url("./css/13-episode-rating-dialog-v1.css");
