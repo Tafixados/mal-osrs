@@ -26,7 +26,7 @@
 
 @font-face {
   font-family: "RS Chat 07";
-  src: url("./fonts-fixed/RUNESCAPE-CHAT-07.woff2") format("woff2");
+  src: url("../fonts-fixed/RUNESCAPE-CHAT-07.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -34,7 +34,7 @@
 
 @font-face {
   font-family: "RS Large";
-  src: url("./fonts-fixed/RUNESCAPE_LARGE.woff2") format("woff2");
+  src: url("../fonts-fixed/RUNESCAPE_LARGE.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -42,7 +42,7 @@
 
 @font-face {
   font-family: "RS NPC Chat";
-  src: url("./fonts-fixed/RUNESCAPE_NPC_CHAT.woff2") format("woff2");
+  src: url("../fonts-fixed/RUNESCAPE_NPC_CHAT.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -50,7 +50,7 @@
 
 @font-face {
   font-family: "RS Small";
-  src: url("./fonts-fixed/RUNESCAPE_SMALL.woff2") format("woff2");
+  src: url("../fonts-fixed/RUNESCAPE_SMALL.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -58,7 +58,7 @@
 
 @font-face {
   font-family: "RS UF";
-  src: url("./fonts-fixed/RUNESCAPE_UF.woff2") format("woff2");
+  src: url("../fonts-fixed/RUNESCAPE_UF.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;

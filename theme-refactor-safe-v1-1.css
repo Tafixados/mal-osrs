@@ -1,0 +1,20 @@
+/* Tafixados MAL OSRS — SAFE CLEAN REFACTOR v1.1
+
+   Corrections over safe-v1:
+   - font layer stays at repository root so its ./fonts-fixed/ URLs remain valid
+   - uses the corrected manga override (no duplicate slash injection)
+   - restores Combat Tasks Completed icon for manga Volumes
+   - preserves the rest of the v27 cascade order
+*/
+
+@import url("./osrs-ui-font-layer-v4-clean.css");
+@import url("./css/00-foundation.css");
+@import url("./css/01-shell-banner-nav.css");
+@import url("./css/02-cards-sidebar-dialogs-base.css");
+@import url("./css/03-cards-polish-icons.css");
+@import url("./css/04-sidebar-tooltips-visitor.css");
+@import url("./css/05-manga-optional-fields.css");
+@import url("./css/06-footer-stats-progress.css");
+@import url("./css/07-minimap-footer.css");
+@import url("./css/08-search-filter-score.css");
+@import url("./css/09-search-final.css");

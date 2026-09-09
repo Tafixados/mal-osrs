@@ -1,6 +1,5 @@
 {
-  "00-foundation-fonts.css": [
-    "osrs-ui-font-layer-v4-clean.css",
+  "00-foundation.css": [
     "00-foundation.css"
   ],
   "01-shell-banner-nav.css": [
