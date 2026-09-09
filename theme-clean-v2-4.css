@@ -1,0 +1,9 @@
+/* Tafixados MAL-OSRS — development v2.4
+   Known-good base: clean-v2.1 parity
+   Feature: clean quest-completion dialog v3
+
+   v2.2 and v2.3 are intentionally NOT imported.
+*/
+
+@import url("./theme-clean-v2-1-parity.css");
+@import url("./css/11-quest-completion-dialog-v3.css");
