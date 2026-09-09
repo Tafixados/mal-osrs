@@ -1,0 +1,49 @@
+/* MAL-OSRS CLEAN v2 — 99-mal-compat.css
+   Narrow MAL DOM/browser compatibility rules that should stay isolated from visual modules. */
+
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter span:nth-of-type(2)::before,
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume span:nth-of-type(2)::before {
+  content: "" !important;
+  display: none !important;
+}
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter div,
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume div {
+  font-size: 0 !important;
+}
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter span,
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume span,
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter a,
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume a {
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 17px !important;
+}
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume::before {
+  content: "VOLUMES" !important;
+  background-image: url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Character_Summary_-_Combat_Tasks_Completed_icon.png") !important;
+  background-repeat: no-repeat !important;
+  background-position: calc(50% - 29px) center !important;
+  background-size: 15px 15px !important;
+}
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter::before {
+  content: "PROGRESS" !important;
+  background-image: var(--osrs-xp-icon) !important;
+  background-repeat: no-repeat !important;
+  background-position: calc(50% - 28px) center !important;
+  background-size: 14px 14px !important;
+}

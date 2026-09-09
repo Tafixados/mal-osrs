@@ -1,0 +1,17 @@
+/* Tafixados MAL-OSRS — CLEAN v2
+
+   Rebuilt from the user-tested safe-refactor v1.2 baseline.
+   This is the new development architecture; it does not import legacy CSS.
+*/
+
+@import url("./css/00-tokens-fonts.css");
+@import url("./css/01-shell-banner-nav.css");
+@import url("./css/02-sidebar.css");
+@import url("./css/03-cards-shared.css");
+@import url("./css/04-anime.css");
+@import url("./css/05-manga.css");
+@import url("./css/06-optional-fields.css");
+@import url("./css/07-dialogs-controls.css");
+@import url("./css/08-footer.css");
+@import url("./css/09-minimap.css");
+@import url("./css/99-mal-compat.css");

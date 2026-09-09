@@ -1,8 +1,6 @@
-/* MODULE: 27-anime-plus-fix-v1.css
-   Restores the custom OSRS-styled + image on Anime episode progress.
+/* MAL-OSRS CLEAN v2 — 04-anime.css
+   Anime-only behavior layered over the shared card system. */
 
-   Manga chapter/volume controls already work and are intentionally untouched.
-*/
 
 html body.ownlist[data-work="anime"]
 .list-table .list-table-data .data.progress .icon-add-episode,
@@ -22,46 +20,35 @@ html body.ownlist[data-work="anime"]
   bottom: auto !important;
   transform: none !important;
   float: none !important;
-
   display: inline-block !important;
   visibility: visible !important;
   opacity: 1 !important;
-
   box-sizing: border-box !important;
-
   width: 14px !important;
   min-width: 14px !important;
   max-width: 14px !important;
-
   height: 14px !important;
   min-height: 14px !important;
   max-height: 14px !important;
-
   margin: 0 0 0 3px !important;
   padding: 0 !important;
-
   border: 0 !important;
   outline: 0 !important;
   border-radius: 0 !important;
-
   background-color: transparent !important;
   background-image: var(--rs-progress-plus) !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-size: contain !important;
-
   color: transparent !important;
   font-size: 0 !important;
   line-height: 0 !important;
-
   overflow: hidden !important;
   vertical-align: -2px !important;
-
   pointer-events: auto !important;
   cursor: pointer !important;
 }
 
-/* Suppress whatever MAL/FontAwesome glyph happens to be inside the control. */
 html body.ownlist[data-work="anime"]
 .list-table .list-table-data .data.progress .icon-add-episode::before,
 

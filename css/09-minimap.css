@@ -1,24 +1,35 @@
-/* MODULE: 29-minimap-full-route-native-v1.css
-   V20 correction for the full Tree Gnome Village maze -> Ectofuntus route.
+/* MAL-OSRS CLEAN v2 — 09-minimap.css
+   Responsive fixed minimap, scroll-driven world-map movement, and native full route. */
 
-   IMPORTANT:
-   The image supplied through chat was automatically downscaled from the
-   original 3635x1284 to 2048x723 before V19 traced it.
 
-   V20 rescales every generated route offset back to the ORIGINAL coordinate
-   system using the uniform width ratio:
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 1820px) {
+    html body.ownlist::before,
+    html body.ownlist::after {
+      display: block !important;
+    }
+  }
 
-       3635 / 2048 = 1.774902344
+  html body.ownlist::before {
+    animation-name: rs-minimap-route !important;
+    animation-duration: 1ms !important;
+    animation-timing-function: linear !important;
+    animation-fill-mode: both !important;
+    animation-timeline: scroll(root block) !important;
 
-   This restores the same native world-map scale used by the successful
-   maze -> Yanille V18 test.
+    
+    animation-range-start: 0px !important;
+    animation-range-end: var(--rs-minimap-route-scroll-distance) !important;
+  }
+}
 
-   V19 route scroll span: 66142px
-   V20 corrected span:    117396px
-*/
-
-:root {
-  --rs-minimap-route-scroll-distance: 117396px;
+@media (prefers-reduced-motion: reduce) {
+  html body.ownlist::before {
+    animation: none !important;
+    background-position:
+      calc(50% + var(--rs-minimap-start-x))
+      calc(50% + var(--rs-minimap-start-y)) !important;
+  }
 }
 
 @keyframes rs-minimap-route {
