@@ -1,0 +1,9 @@
+/* Tafixados MAL-OSRS — parity v2.5
+   Base: theme-clean-v2-3-parity.css
+   Feature: narrower/taller episode-rating dialog v2
+
+   v2.4 rating-dialog experiment is intentionally skipped.
+*/
+
+@import url("./theme-clean-v2-3-parity.css");
+@import url("./css/13-episode-rating-dialog-v2.css");
