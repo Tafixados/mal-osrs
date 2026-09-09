@@ -1,0 +1,381 @@
+/* MAL-OSRS — Quest Completion Dialog v4
+   HARD RESET implementation for MAL's completion Fancybox.
+
+   This version loads directly on top of theme-clean-v2-1-parity.css.
+   It DOES NOT import any of the v2.2/v2.3/v2.4 quest-dialog experiments.
+
+   The parchment image used here is the NEW blank one:
+   https://i.imgur.com/ImbCBCz.png
+*/
+
+:root {
+  --osrs-quest-scroll-v4: url("https://i.imgur.com/ImbCBCz.png");
+  --osrs-quest-close-v4: url("https://i.imgur.com/B2GzCjT.png");
+
+  --osrs-quest-w: 720px;
+  --osrs-quest-h: 495px;
+}
+
+
+/* =====================================================================
+   1. COMPLETELY RESET THE MODAL CHROME
+   ===================================================================== */
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]),
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) #fancybox-outer,
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) #fancybox-content {
+  box-sizing: border-box !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+
+  background-color: transparent !important;
+  box-shadow: none !important;
+
+  overflow: visible !important;
+}
+
+
+/* Kill any old Fancybox decorative slabs/background strips. */
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+[id^="fancybox-bg-"],
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+.fancybox-bg {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Any inner wrapper MAL/Fancybox inserts must also be visually transparent.
+   This is the part that removes the giant gray rectangle seen in v2.4. */
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+#fancybox-content > *:not(input):not(button):not(select):not(textarea) {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+
+/* =====================================================================
+   2. FIX THE WHOLE DIALOG TO ONE PARCHMENT-SIZED CANVAS
+   ===================================================================== */
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) {
+  position: fixed !important;
+
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+
+  width: var(--osrs-quest-w) !important;
+  min-width: var(--osrs-quest-w) !important;
+  max-width: var(--osrs-quest-w) !important;
+
+  height: var(--osrs-quest-h) !important;
+  min-height: var(--osrs-quest-h) !important;
+  max-height: var(--osrs-quest-h) !important;
+
+  transform: translate(-50%, -50%) !important;
+
+  z-index: 11050 !important;
+}
+
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) #fancybox-outer,
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) #fancybox-content {
+  position: relative !important;
+
+  width: var(--osrs-quest-w) !important;
+  min-width: var(--osrs-quest-w) !important;
+  max-width: var(--osrs-quest-w) !important;
+
+  height: var(--osrs-quest-h) !important;
+  min-height: var(--osrs-quest-h) !important;
+  max-height: var(--osrs-quest-h) !important;
+}
+
+
+/* The actual parchment goes on #fancybox-content itself.
+   No descendant receives the parchment image, so there cannot be a second,
+   smaller scroll layered inside it. */
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) #fancybox-content {
+  background-image: var(--osrs-quest-scroll-v4) !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+
+  text-align: center !important;
+
+  scrollbar-width: none !important;
+}
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+#fancybox-content::-webkit-scrollbar,
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+#fancybox-content *::-webkit-scrollbar {
+  display: none !important;
+}
+
+
+/* =====================================================================
+   3. HIDE MAL'S ORIGINAL QUESTION AND BUTTON PRESENTATION
+   ===================================================================== */
+
+/* Hide text nodes indirectly by inheriting transparent/0-size from content.
+   Re-enable only the real inputs as invisible click areas below. */
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+input[value="Set as Completed"],
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+input[value="Do not set as Completed"] {
+  position: absolute !important;
+  left: 50% !important;
+
+  display: block !important;
+
+  width: 350px !important;
+  height: 34px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: translateX(-50%) !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-shadow: none !important;
+
+  opacity: 1 !important;
+
+  cursor: var(--cursor-sword, pointer) !important;
+
+  z-index: 20 !important;
+}
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+input[value="Set as Completed"] {
+  top: 382px !important;
+}
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+input[value="Do not set as Completed"] {
+  top: 420px !important;
+}
+
+
+/* =====================================================================
+   4. TEXT — USE ANCESTOR PSEUDO-ELEMENTS, NOT INNER WRAPPERS
+   ===================================================================== */
+
+/* Main copy + the replacement question all live in one pseudo-element.
+   This avoids relying on MAL's internal wrapper structure. */
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+#fancybox-content::before {
+  content:
+    "Congratulations!\A"
+    "\A"
+    "You have completed this quest!\A"
+    "\A"
+    "You are awarded:\A"
+    "1 Quest Point\A"
+    "\A"
+    "\A"
+    "Set quest as 'Completed'?";
+
+  position: absolute !important;
+
+  top: 102px !important;
+  left: 145px !important;
+  right: 115px !important;
+
+  display: block !important;
+
+  color: #2b1a10 !important;
+
+  font-family: "RS NPC Chat", "RS Chat 07", serif !important;
+  font-size: 29px !important;
+  font-weight: 400 !important;
+  line-height: 29px !important;
+
+  text-align: center !important;
+  white-space: pre-line !important;
+
+  text-shadow: none !important;
+
+  pointer-events: none !important;
+
+  z-index: 8 !important;
+}
+
+
+/* Visible positive choice. */
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+#fancybox-outer::before {
+  content: "Set quest as completed";
+
+  position: absolute !important;
+
+  top: 385px !important;
+  left: 170px !important;
+  right: 140px !important;
+
+  color: #31180c !important;
+
+  font-family: "RS NPC Chat", "RS Chat 07", serif !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  line-height: 30px !important;
+
+  text-align: center !important;
+
+  text-shadow: none !important;
+
+  pointer-events: none !important;
+
+  z-index: 15 !important;
+}
+
+
+/* Visible negative choice. */
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+#fancybox-outer::after {
+  content: "Return to quest log";
+
+  position: absolute !important;
+
+  top: 423px !important;
+  left: 170px !important;
+  right: 140px !important;
+
+  color: #31180c !important;
+
+  font-family: "RS NPC Chat", "RS Chat 07", serif !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  line-height: 30px !important;
+
+  text-align: center !important;
+
+  text-shadow: none !important;
+
+  pointer-events: none !important;
+
+  z-index: 15 !important;
+}
+
+
+/* Hover the invisible real controls -> highlight the matching visible label. */
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]:hover)
+#fancybox-outer::before,
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]:focus)
+#fancybox-outer::before {
+  color: #9b271d !important;
+  filter: brightness(1.20) !important;
+}
+
+html body.ownlist #fancybox-wrap:has(input[value="Do not set as Completed"]:hover)
+#fancybox-outer::after,
+html body.ownlist #fancybox-wrap:has(input[value="Do not set as Completed"]:focus)
+#fancybox-outer::after {
+  color: #9b271d !important;
+  filter: brightness(1.20) !important;
+}
+
+
+/* =====================================================================
+   5. CLOSE X — INSIDE THE PARCHMENT
+   ===================================================================== */
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+#fancybox-close {
+  position: absolute !important;
+
+  top: 70px !important;
+  right: 92px !important;
+
+  display: block !important;
+
+  width: 35px !important;
+  height: 35px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background-image: var(--osrs-quest-close-v4) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  background-color: transparent !important;
+
+  box-shadow: none !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+
+  filter: brightness(.90) !important;
+
+  cursor: var(--cursor-sword, pointer) !important;
+
+  z-index: 40 !important;
+}
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"])
+#fancybox-close:hover {
+  filter: brightness(1.45) saturate(1.08) !important;
+}
+
+
+/* =====================================================================
+   6. NUCLEAR SHADOW REMOVAL FOR THIS MODAL ONLY
+   ===================================================================== */
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]),
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) *,
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) *::before,
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) *::after {
+  /* Re-added selectively where needed above. */
+  box-shadow: none !important;
+}
+
+
+/* =====================================================================
+   7. RESPONSIVE FALLBACK
+   ===================================================================== */
+
+@media (max-width: 790px), (max-height: 545px) {
+  html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) {
+    transform: translate(-50%, -50%) scale(.84) !important;
+  }
+}
+
+@media (max-width: 660px), (max-height: 455px) {
+  html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) {
+    transform: translate(-50%, -50%) scale(.70) !important;
+  }
+}
