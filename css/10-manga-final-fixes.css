@@ -1,0 +1,78 @@
+/* MODULE: 10-manga-final-fixes.css
+   Safe-refactor v1.2 compatibility patch.
+
+   Why this exists:
+   The uploaded 16-manga-overrides file is the correct newer source:
+   it no longer injects an extra " / " and it defines the Combat Tasks
+   Completed icon for Volumes.
+
+   On MAL, however, a slash can still be supplied by the site's/native
+   chapter-volume markup/pseudo styling. This final layer explicitly suppresses
+   that pseudo separator and reasserts the Volumes icon after every other
+   refactored module has loaded.
+*/
+
+
+/* =====================================================================
+   1. CHAPTER / VOLUME — REMOVE THE SECOND GENERATED SLASH
+   ===================================================================== */
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter span:nth-of-type(2)::before,
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume span:nth-of-type(2)::before {
+  content: "" !important;
+  display: none !important;
+}
+
+
+/* Keep the native/current/total values compact after the pseudo reset. */
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter div,
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume div {
+  font-size: 0 !important;
+}
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter span,
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume span,
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter a,
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume a {
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 17px !important;
+}
+
+
+/* =====================================================================
+   2. VOLUMES — FORCE THE COMBAT TASKS COMPLETED ICON
+   ===================================================================== */
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume::before {
+  content: "VOLUMES" !important;
+
+  /* Literal URL on purpose: avoid any custom-property/cascade ambiguity. */
+  background-image:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Character_Summary_-_Combat_Tasks_Completed_icon.png") !important;
+
+  background-repeat: no-repeat !important;
+  background-position: calc(50% - 29px) center !important;
+  background-size: 15px 15px !important;
+}
+
+
+/* Reassert the chapter XP icon too, so the two manga progress boxes are
+   governed by the same final layer. */
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter::before {
+  content: "PROGRESS" !important;
+  background-image: var(--osrs-xp-icon) !important;
+  background-repeat: no-repeat !important;
+  background-position: calc(50% - 28px) center !important;
+  background-size: 14px 14px !important;
+}
