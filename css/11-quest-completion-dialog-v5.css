@@ -1,0 +1,498 @@
+/* MAL-OSRS — Quest Completion Dialog v5
+   Exact-DOM implementation based on the live MAL Fancybox dump.
+
+   Confirmed live structure:
+     #fancybox-wrap
+       #fancybox-outer
+         .fancy-bg x8
+         #fancybox-inner
+           > div (native question)
+             > div (native button row)
+               #fancybox-confirm-yes-button
+               #fancybox-confirm-no-button
+         #fancybox-close
+         #fancybox-left
+         #fancybox-right
+
+   This module MUST load directly after the known-good v2.1 parity theme.
+   Do not chain the earlier quest-dialog experiments.
+*/
+
+:root {
+  --osrs-quest-scroll-v5: url("https://i.imgur.com/ImbCBCz.png");
+  --osrs-quest-close-v5: url("https://i.imgur.com/B2GzCjT.png");
+
+  --osrs-quest-w: 720px;
+  --osrs-quest-h: 495px;
+}
+
+
+/* =====================================================================
+   1. OUTER FANCYBOX GEOMETRY
+   ===================================================================== */
+
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-wrap {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+
+  width: var(--osrs-quest-w) !important;
+  min-width: var(--osrs-quest-w) !important;
+  max-width: var(--osrs-quest-w) !important;
+
+  height: var(--osrs-quest-h) !important;
+  min-height: var(--osrs-quest-h) !important;
+  max-height: var(--osrs-quest-h) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: translate(-50%, -50%) !important;
+
+  overflow: visible !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+
+  z-index: 11050 !important;
+}
+
+
+/* The parchment itself lives on #fancybox-outer.
+   The DOM dump confirms this is the element MAL normally paints dark (#121212). */
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-outer {
+  position: relative !important;
+
+  width: var(--osrs-quest-w) !important;
+  min-width: var(--osrs-quest-w) !important;
+  max-width: var(--osrs-quest-w) !important;
+
+  height: var(--osrs-quest-h) !important;
+  min-height: var(--osrs-quest-h) !important;
+  max-height: var(--osrs-quest-h) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: visible !important;
+
+  background:
+    transparent
+    var(--osrs-quest-scroll-v5)
+    center center / 100% 100%
+    no-repeat !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* Remove Fancybox's eight decorative edge pieces. The live classes are
+   .fancy-bg (not .fancybox-bg). */
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-outer > .fancy-bg {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Fancybox slideshow navigation is irrelevant for a confirmation modal. */
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-left,
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-right {
+  display: none !important;
+}
+
+
+/* =====================================================================
+   2. #FANCYBOX-INNER — EXACT ELEMENT THAT OWNED THE SCROLLBARS
+   ===================================================================== */
+
+/* The dump shows inline:
+     top:10px; left:10px; width:300px; height:39.6667px; overflow:auto
+   Override ALL of that explicitly. */
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-inner {
+  position: absolute !important;
+
+  top: 0 !important;
+  left: 0 !important;
+  right: auto !important;
+  bottom: auto !important;
+
+  width: var(--osrs-quest-w) !important;
+  min-width: var(--osrs-quest-w) !important;
+  max-width: var(--osrs-quest-w) !important;
+
+  height: var(--osrs-quest-h) !important;
+  min-height: var(--osrs-quest-h) !important;
+  max-height: var(--osrs-quest-h) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+
+  scrollbar-width: none !important;
+}
+
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-inner::-webkit-scrollbar {
+  display: none !important;
+}
+
+
+/* =====================================================================
+   3. NATIVE QUESTION WRAPPER — TURN IT INTO OUR TEXT CANVAS
+   ===================================================================== */
+
+/* Exact live node:
+   <div style="width:300px;font-family:verdana...">
+       Do you want to set this entry as completed?
+       <div style="margin-top:5px">...</div>
+   </div>
+*/
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-inner > div:first-child {
+  position: relative !important;
+
+  box-sizing: border-box !important;
+
+  width: var(--osrs-quest-w) !important;
+  min-width: var(--osrs-quest-w) !important;
+  max-width: var(--osrs-quest-w) !important;
+
+  height: var(--osrs-quest-h) !important;
+  min-height: var(--osrs-quest-h) !important;
+  max-height: var(--osrs-quest-h) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: visible !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+
+  /* Hide the original MAL text node without hiding the descendants. */
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+
+  text-align: center !important;
+}
+
+
+/* Main completion copy. */
+body.ownlist:has(#fancybox-confirm-yes-button)
+#fancybox-inner > div:first-child::before {
+  content:
+    "Congratulations!\A"
+    "\A"
+    "You have completed this quest!\A"
+    "\A"
+    "You are awarded:\A"
+    "1 Quest Point";
+
+  position: absolute !important;
+  top: 98px !important;
+  left: 155px !important;
+  right: 125px !important;
+
+  display: block !important;
+
+  color: #2b1a10 !important;
+
+  font-family: "RS NPC Chat", "RS Chat 07", serif !important;
+  font-size: 28px !important;
+  font-weight: 400 !important;
+  line-height: 29px !important;
+
+  text-align: center !important;
+  white-space: pre-line !important;
+  text-shadow: none !important;
+
+  pointer-events: none !important;
+  z-index: 5 !important;
+}
+
+
+/* Replaces MAL's original question. */
+body.ownlist:has(#fancybox-confirm-yes-button)
+#fancybox-inner > div:first-child::after {
+  content: "Set quest as 'Completed'?";
+
+  position: absolute !important;
+  top: 333px !important;
+  left: 155px !important;
+  right: 125px !important;
+
+  display: block !important;
+
+  color: #2b1a10 !important;
+
+  font-family: "RS NPC Chat", "RS Chat 07", serif !important;
+  font-size: 25px !important;
+  font-weight: 400 !important;
+  line-height: 28px !important;
+
+  text-align: center !important;
+  white-space: nowrap !important;
+  text-shadow: none !important;
+
+  pointer-events: none !important;
+  z-index: 5 !important;
+}
+
+
+/* =====================================================================
+   4. EXACT NATIVE BUTTON ROW
+   ===================================================================== */
+
+body.ownlist:has(#fancybox-confirm-yes-button)
+#fancybox-inner > div:first-child > div:first-of-type {
+  position: absolute !important;
+
+  top: 370px !important;
+  left: 0 !important;
+
+  box-sizing: border-box !important;
+
+  width: var(--osrs-quest-w) !important;
+  height: 82px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+
+  /* Suppress the literal &nbsp;&nbsp; spacing. */
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+
+  text-align: center !important;
+
+  overflow: visible !important;
+
+  z-index: 8 !important;
+}
+
+
+/* Generated visible choices. */
+body.ownlist:has(#fancybox-confirm-yes-button)
+#fancybox-inner > div:first-child > div:first-of-type::before {
+  content: "Set quest as completed";
+
+  position: absolute !important;
+  top: 0 !important;
+  left: 170px !important;
+  right: 140px !important;
+
+  color: #31180c !important;
+
+  font-family: "RS NPC Chat", "RS Chat 07", serif !important;
+  font-size: 23px !important;
+  font-weight: 400 !important;
+  line-height: 31px !important;
+
+  text-align: center !important;
+  text-shadow: none !important;
+
+  pointer-events: none !important;
+  z-index: 9 !important;
+}
+
+body.ownlist:has(#fancybox-confirm-yes-button)
+#fancybox-inner > div:first-child > div:first-of-type::after {
+  content: "Return to quest log";
+
+  position: absolute !important;
+  top: 39px !important;
+  left: 170px !important;
+  right: 140px !important;
+
+  color: #31180c !important;
+
+  font-family: "RS NPC Chat", "RS Chat 07", serif !important;
+  font-size: 23px !important;
+  font-weight: 400 !important;
+  line-height: 31px !important;
+
+  text-align: center !important;
+  text-shadow: none !important;
+
+  pointer-events: none !important;
+  z-index: 9 !important;
+}
+
+
+/* The original <input type=button> elements remain the functional targets,
+   but all native browser presentation/text is made invisible. */
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-confirm-yes-button,
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-confirm-no-button {
+  position: absolute !important;
+  left: 50% !important;
+
+  display: block !important;
+
+  box-sizing: border-box !important;
+
+  width: 350px !important;
+  min-width: 350px !important;
+  max-width: 350px !important;
+
+  height: 31px !important;
+  min-height: 31px !important;
+  max-height: 31px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: translateX(-50%) !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-shadow: none !important;
+
+  opacity: 1 !important;
+
+  cursor: var(--cursor-sword, pointer) !important;
+
+  z-index: 12 !important;
+}
+
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-confirm-yes-button {
+  top: 0 !important;
+}
+
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-confirm-no-button {
+  top: 39px !important;
+}
+
+
+/* Hover/focus the real invisible controls -> highlight the generated label. */
+body.ownlist:has(#fancybox-confirm-yes-button:hover)
+#fancybox-inner > div:first-child > div:first-of-type::before,
+body.ownlist:has(#fancybox-confirm-yes-button:focus)
+#fancybox-inner > div:first-child > div:first-of-type::before {
+  color: #9b271d !important;
+  filter: brightness(1.18) !important;
+}
+
+body.ownlist:has(#fancybox-confirm-no-button:hover)
+#fancybox-inner > div:first-child > div:first-of-type::after,
+body.ownlist:has(#fancybox-confirm-no-button:focus)
+#fancybox-inner > div:first-child > div:first-of-type::after {
+  color: #9b271d !important;
+  filter: brightness(1.18) !important;
+}
+
+
+/* =====================================================================
+   5. CLOSE BUTTON
+   ===================================================================== */
+
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-close {
+  position: absolute !important;
+
+  top: 66px !important;
+  right: 88px !important;
+
+  display: block !important;
+
+  width: 34px !important;
+  height: 34px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background:
+    transparent
+    var(--osrs-quest-close-v5)
+    center / contain
+    no-repeat !important;
+
+  box-shadow: none !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+
+  filter: brightness(.90) !important;
+
+  cursor: var(--cursor-sword, pointer) !important;
+
+  z-index: 30 !important;
+}
+
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-close:hover {
+  filter: brightness(1.42) saturate(1.08) !important;
+}
+
+
+/* =====================================================================
+   6. REMOVE THE RECTANGULAR MODAL SHADOW / KEEP ONLY PAGE DIMMING
+   ===================================================================== */
+
+/* Old Fancybox uses a separate full-page overlay. Keep a gentle dimmer,
+   but it must not look like a box around the parchment. */
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-overlay {
+  background: #000 !important;
+  opacity: .52 !important;
+}
+
+
+/* Ensure NO square shadow survives on the dialog itself. */
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-wrap,
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-outer,
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-inner,
+body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-inner > div {
+  box-shadow: none !important;
+}
+
+
+/* =====================================================================
+   7. RESPONSIVE FALLBACK
+   ===================================================================== */
+
+@media (max-width: 790px), (max-height: 550px) {
+  body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-wrap {
+    transform: translate(-50%, -50%) scale(.84) !important;
+  }
+}
+
+@media (max-width: 660px), (max-height: 455px) {
+  body.ownlist:has(#fancybox-confirm-yes-button) #fancybox-wrap {
+    transform: translate(-50%, -50%) scale(.70) !important;
+  }
+}

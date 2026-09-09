@@ -1,0 +1,9 @@
+/* Tafixados MAL-OSRS — development v2.6
+   Known-good base: clean-v2.1 parity
+   Quest completion: exact live-DOM implementation v5
+
+   Earlier quest-dialog experiments are intentionally NOT imported.
+*/
+
+@import url("./theme-clean-v2-1-parity.css");
+@import url("./css/11-quest-completion-dialog-v5.css");
