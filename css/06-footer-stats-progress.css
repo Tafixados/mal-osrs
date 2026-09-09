@@ -1,0 +1,803 @@
+/* MAL-OSRS SAFE REFACTOR v1
+   Module: 06-footer-stats-progress.css
+
+   IMPORTANT:
+   This file intentionally preserves the exact declaration order from v27.
+   Source boundaries below are comments only; source CSS is otherwise unchanged.
+*/
+
+/* =====================================================================
+   ORIGINAL SOURCE: 24-footer-progress-score-v2.css
+   ===================================================================== */
+/* MODULE: 24-footer-progress-score-v2.css
+   Fun-polish pass:
+   - OSRS logout-feedback-style footer panel
+   - custom + buttons for anime episodes / manga chapters / manga volumes
+   - MAL score displayed as X/99 for the stats-page joke
+
+   This file intentionally does NOT touch:
+   - card/grid geometry
+   - optional-field layout
+   - banner/tabs/sidebar geometry
+   - corner-notch construction
+*/
+
+:root {
+  --rs-footer-thumb-up: url("https://i.imgur.com/iK6T0Cv.png");
+  --rs-footer-thumb-up-hot: url("https://i.imgur.com/A2rAQhm.png");
+  --rs-footer-thumb-down: url("https://i.imgur.com/ZCfhXLY.png");
+  --rs-footer-thumb-down-hot: url("https://i.imgur.com/CTaOlN4.png");
+
+  --rs-progress-plus: url("https://i.imgur.com/apVeLns.png");
+}
+
+
+/* =====================================================================
+   1. CUSTOM PROGRESS + ICON
+   Anime: episode +
+   Manga: chapter + and volume +
+   ===================================================================== */
+
+html body.ownlist
+.list-table .list-table-data .data.progress .icon-add-episode,
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter .icon-add-chapter,
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume .icon-add-volume {
+  position: relative !important;
+  z-index: 4 !important;
+
+  display: inline-block !important;
+  box-sizing: border-box !important;
+
+  width: 14px !important;
+  min-width: 14px !important;
+  max-width: 14px !important;
+
+  height: 14px !important;
+  min-height: 14px !important;
+  max-height: 14px !important;
+
+  margin: 0 0 0 3px !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+
+  background-color: transparent !important;
+  background-image: var(--rs-progress-plus) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+
+  text-indent: -9999px !important;
+  overflow: hidden !important;
+
+  vertical-align: -2px !important;
+  cursor: pointer !important;
+
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* Remove MAL / FontAwesome's original green plus glyph. */
+html body.ownlist
+.list-table .list-table-data .data.progress .icon-add-episode::before,
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter .icon-add-chapter::before,
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume .icon-add-volume::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Tiny feedback without changing the source art. */
+html body.ownlist
+.list-table .list-table-data .data.progress .icon-add-episode:hover,
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.chapter .icon-add-chapter:hover,
+
+html body.ownlist[data-work="manga"]
+.list-table .list-table-data .data.volume .icon-add-volume:hover {
+  filter: brightness(1.15) !important;
+}
+
+
+/* =====================================================================
+   2. SCORE /99
+   MAL still stores and edits the normal 1–10 score.
+   This is display-only: 9 becomes 9/99, "-" becomes -/99.
+   ===================================================================== */
+
+/* Guard against V14's parent-link suffix if an older module is still
+   hanging around in the cascade. */
+html body.ownlist
+.list-table .list-table-data .data.score .link::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Append exactly once, on the actual score text. */
+html body.ownlist
+.list-table .list-table-data .data.score .score-label::after {
+  content: "/99" !important;
+
+  display: inline !important;
+
+  margin-left: 1px !important;
+  padding: 0 !important;
+
+  color: #ffff00 !important;
+
+  font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 17px !important;
+
+  vertical-align: baseline !important;
+
+  text-shadow: 1px 1px 0 rgba(0,0,0,.65) !important;
+}
+
+
+/* =====================================================================
+   3. OSRS "DID YOU ENJOY..." FOOTER
+
+   CSS cannot create new functional links/buttons. We therefore use the two
+   existing footer text blocks as independent hover targets for the two
+   visual feedback buttons while leaving MAL's legal text visible below.
+   ===================================================================== */
+
+html body.ownlist footer {
+  position: relative !important;
+  display: block !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 26px 0 18px !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+}
+
+html body.ownlist #footer-block {
+  position: relative !important;
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 310px !important;
+  min-width: 0 !important;
+  max-width: calc(100vw - 32px) !important;
+
+  min-height: 196px !important;
+
+  margin: 0 auto !important;
+  padding: 130px 14px 14px !important;
+
+  border: 2px solid #2d2a22 !important;
+  outline: 1px solid #726451 !important;
+  border-radius: 2px !important;
+
+  background:
+    linear-gradient(rgba(255,255,255,.025), rgba(0,0,0,.035)),
+    #3e3529 !important;
+
+  box-shadow:
+    inset 0 0 0 1px #17130f,
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 6px 18px rgba(0,0,0,.48) !important;
+
+  color: #d8c9a8 !important;
+  text-align: center !important;
+
+  overflow: visible !important;
+}
+
+/* Prompt text. */
+html body.ownlist #footer-block::before {
+  content: "Did you enjoy visiting\A MyAnimeList today?" !important;
+
+  position: absolute !important;
+  top: 21px !important;
+  left: 12px !important;
+  right: 12px !important;
+
+  display: block !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #ff9933 !important;
+
+  font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+  font-size: 19px !important;
+  font-weight: 400 !important;
+  line-height: 21px !important;
+
+  text-align: center !important;
+  white-space: pre-line !important;
+
+  text-shadow: 1px 1px 0 #000 !important;
+
+  pointer-events: none !important;
+}
+
+/* Keep the actual MAL legal lines readable. */
+html body.ownlist #copyright,
+html body.ownlist #recaptcha-terms {
+  position: static !important;
+
+  display: block !important;
+
+  width: 100% !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #887b65 !important;
+
+  font-family: "RS Small", "RSSmall", "RS Chat 07", sans-serif !important;
+  font-size: 9px !important;
+  font-weight: 400 !important;
+  line-height: 12px !important;
+
+  text-align: center !important;
+}
+
+/* Give the second legal line a little air. */
+html body.ownlist #recaptcha-terms {
+  margin-top: 4px !important;
+}
+
+html body.ownlist #recaptcha-terms a {
+  color: #9a8d73 !important;
+  font: inherit !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   The two footer elements provide separate hover states for the two
+   visual buttons. The pseudo-elements are positioned over the prompt area.
+   --------------------------------------------------------------------- */
+
+html body.ownlist #copyright::before,
+html body.ownlist #recaptcha-terms::before {
+  content: "" !important;
+
+  position: absolute !important;
+  top: 78px !important;
+
+  display: block !important;
+
+  width: 70px !important;
+  height: 38px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+
+  background-color: transparent !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+
+  filter: none !important;
+
+  pointer-events: auto !important;
+  cursor: default !important;
+}
+
+/* Thumbs up, left. */
+html body.ownlist #copyright::before {
+  left: calc(50% - 76px) !important;
+  background-image: var(--rs-footer-thumb-up) !important;
+}
+
+html body.ownlist #copyright:hover::before {
+  background-image: var(--rs-footer-thumb-up-hot) !important;
+}
+
+/* Thumbs down, right. */
+html body.ownlist #recaptcha-terms::before {
+  left: calc(50% + 6px) !important;
+  background-image: var(--rs-footer-thumb-down) !important;
+}
+
+html body.ownlist #recaptcha-terms:hover::before {
+  background-image: var(--rs-footer-thumb-down-hot) !important;
+}
+
+
+/* Mobile-sized screens: keep the footer compact but readable. */
+@media (max-width: 420px) {
+  html body.ownlist #footer-block {
+    width: calc(100vw - 28px) !important;
+  }
+
+  html body.ownlist #footer-block::before {
+    font-family: "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+    font-size: 17px !important;
+    line-height: 19px !important;
+  }
+}
+
+/* =====================================================================
+   ORIGINAL SOURCE: 26-stats-minimap-v3.css
+   ===================================================================== */
+/* MODULE: 26-stats-minimap-v3.css
+   V18 stats + distance-stable minimap:
+   - RuneScape-styled expandable MAL statistics ribbon
+   - Responsive fixed OSRS minimap in the right-side gutter
+   - Scroll-driven zig-zag world-map movement
+
+   Safe scope:
+   - does NOT touch card geometry
+   - does NOT touch banner / tabs / sidebar
+   - does NOT touch footer / plus / score
+*/
+
+:root {
+  --rs-minimap-frame:
+    url("https://i.imgur.com/Kvpbl2F.png");
+
+  /* For testing this uses the OSRS Wiki world map directly.
+     The original is very large, so later I recommend putting a resized
+     ~1280–1600 px copy in /assets/ in the repo and changing only this URL. */
+  --rs-minimap-world:
+    url("https://oldschool.runescape.wiki/images/Old_School_RuneScape_world_map.png");
+
+  /* Native frame dimensions */
+  --rs-minimap-width: 211px;
+  --rs-minimap-height: 191px;
+
+  /* Circular opening inside the supplied frame */
+  --rs-minimap-hole-x: 129px;
+  --rs-minimap-hole-y: 83px;
+  --rs-minimap-hole-radius: 76px;
+
+  /* World map is rendered at its intrinsic/native image size. */
+}
+
+
+/* =====================================================================
+   1. EXPANDABLE STATS RIBBON
+   ===================================================================== */
+
+html body.ownlist .list-unit .list-stats {
+  position: relative !important;
+  box-sizing: border-box !important;
+
+  width: calc(100% - 4px) !important;
+  min-height: 40px !important;
+  height: auto !important;
+
+  margin: 2px 2px 15px !important;
+  padding: 10px 150px 10px 14px !important;
+
+  border: 1px solid #2d2a22 !important;
+  outline: 1px solid #726451 !important;
+  border-radius: 1px !important;
+
+  background:
+    linear-gradient(rgba(255,255,255,.025), rgba(0,0,0,.035)),
+    #3e3529 !important;
+
+  box-shadow:
+    inset 0 0 0 1px #17130f,
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 2px 5px rgba(0,0,0,.32) !important;
+
+  color: #d8c9a8 !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+
+  text-align: center !important;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.75) !important;
+}
+
+
+/* MAL wraps More stats in a span at the end of .list-stats. */
+html body.ownlist .list-unit .list-stats > span:last-child {
+  position: absolute !important;
+  top: 50% !important;
+  right: 12px !important;
+  transform: translateY(-50%) !important;
+
+  display: block !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/* "More stats" becomes a small OSRS utility-link treatment. */
+html body.ownlist .list-unit .list-stats a.floatRightHeader {
+  position: relative !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+
+  min-height: 22px !important;
+
+  margin: 0 !important;
+  padding: 2px 4px 2px 27px !important;
+
+  color: #ff9933 !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+
+  text-decoration: none !important;
+  text-shadow: 1px 1px 0 #000 !important;
+}
+
+
+/* Reuse the same Stats icon as the left sidebar. */
+html body.ownlist .list-unit .list-stats a.floatRightHeader::before {
+  content: "" !important;
+
+  position: absolute !important;
+  left: 3px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+
+  width: 20px !important;
+  height: 20px !important;
+
+  background-image: var(--rs-side-statistics) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+
+  image-rendering: auto !important;
+}
+
+
+/* Replace MAL's FontAwesome chevron with a simple RS-ish text arrow. */
+html body.ownlist .list-unit .list-stats a.floatRightHeader i {
+  display: none !important;
+}
+
+html body.ownlist .list-unit .list-stats a.floatRightHeader::after {
+  content: " >" !important;
+  color: #d8c06d !important;
+}
+
+html body.ownlist .list-unit .list-stats a.floatRightHeader:hover {
+  color: #ffff00 !important;
+}
+
+html body.ownlist .list-unit .list-stats a.floatRightHeader:hover::after {
+  color: #ffff00 !important;
+}
+
+
+/* A little breathing room if a narrow window is used and the stats line wraps.
+   This does NOT control the minimap breakpoint. */
+@media (max-width: 900px) {
+  html body.ownlist .list-unit .list-stats {
+    padding-right: 14px !important;
+    padding-bottom: 38px !important;
+  }
+
+  html body.ownlist .list-unit .list-stats > span:last-child {
+    top: auto !important;
+    right: 10px !important;
+    bottom: 8px !important;
+    transform: none !important;
+  }
+}
+
+
+/* =====================================================================
+   2. FIXED OSRS MINIMAP — V18
+   ===================================================================== */
+
+:root {
+  --rs-minimap-frame:
+    url("https://i.imgur.com/Kvpbl2F.png");
+
+  --rs-minimap-world:
+    url("https://oldschool.runescape.wiki/images/Old_School_RuneScape_world_map.png");
+
+  --rs-minimap-width: 211px;
+  --rs-minimap-height: 191px;
+
+  --rs-minimap-hole-x: 129px;
+  --rs-minimap-hole-y: 83px;
+  --rs-minimap-hole-radius: 76px;
+
+  /* Fine alignment of the FIRST point of the drawn route.
+     Leave at 0/0 if the current Tree Gnome Maze spawn is correct. */
+  --rs-minimap-start-x: 0px;
+  --rs-minimap-start-y: 0px;
+
+  /* IMPORTANT:
+     The route is now tied to a FIXED amount of actual scroll distance,
+     not to a percentage of total document height.
+
+     User route length: ~701.3 native map pixels.
+     7000px gives about 10 CSS-scroll-pixels per map pixel.
+     Increase this to slow walking down; decrease it to speed up. */
+  --rs-minimap-route-scroll-distance: 7000px;
+}
+
+/* Hidden by default. Unsupported browsers never get a static fake minimap. */
+html body.ownlist::before,
+html body.ownlist::after {
+  content: "" !important;
+  position: fixed !important;
+  top: 24px !important;
+  right: 18px !important;
+
+  display: none !important;
+
+  width: var(--rs-minimap-width) !important;
+  height: var(--rs-minimap-height) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  pointer-events: none !important;
+}
+
+/* Moving native-resolution world map. */
+html body.ownlist::before {
+  z-index: 80 !important;
+
+  background-color: transparent !important;
+  background-image: var(--rs-minimap-world) !important;
+  background-repeat: no-repeat !important;
+
+  /* Intrinsic/native world-map resolution, matching V17. */
+  background-size: auto auto !important;
+
+  background-position:
+    calc(50% + var(--rs-minimap-start-x))
+    calc(50% + var(--rs-minimap-start-y));
+
+  clip-path:
+    circle(
+      var(--rs-minimap-hole-radius)
+      at var(--rs-minimap-hole-x) var(--rs-minimap-hole-y)
+    ) !important;
+
+  -webkit-clip-path:
+    circle(
+      var(--rs-minimap-hole-radius)
+      at var(--rs-minimap-hole-x) var(--rs-minimap-hole-y)
+    ) !important;
+}
+
+/* Stationary frame; its player marker is already baked in. */
+html body.ownlist::after {
+  z-index: 81 !important;
+
+  background-color: transparent !important;
+  background-image: var(--rs-minimap-frame) !important;
+  background-repeat: no-repeat !important;
+  background-position: 0 0 !important;
+  background-size: 211px 191px !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   ROUTE GENERATED FROM THE USER'S RED VECTOR
+   Start: left endpoint
+   End:   right endpoint / Yanille
+   58 generated control points, simplified to <1px error.
+   --------------------------------------------------------------------- */
+
+@keyframes rs-minimap-route {
+    0.00% { background-position: calc(50% + var(--rs-minimap-start-x) + 0px) calc(50% + var(--rs-minimap-start-y) + 0px); }
+    1.76% { background-position: calc(50% + var(--rs-minimap-start-x) - 12px) calc(50% + var(--rs-minimap-start-y) + 3px); }
+    1.97% { background-position: calc(50% + var(--rs-minimap-start-x) - 13px) calc(50% + var(--rs-minimap-start-y) + 4px); }
+    2.96% { background-position: calc(50% + var(--rs-minimap-start-x) - 13px) calc(50% + var(--rs-minimap-start-y) + 11px); }
+    3.17% { background-position: calc(50% + var(--rs-minimap-start-x) - 14px) calc(50% + var(--rs-minimap-start-y) + 12px); }
+    4.31% { background-position: calc(50% + var(--rs-minimap-start-x) - 22px) calc(50% + var(--rs-minimap-start-y) + 12px); }
+    4.51% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 13px); }
+    5.65% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 21px); }
+    5.85% { background-position: calc(50% + var(--rs-minimap-start-x) - 22px) calc(50% + var(--rs-minimap-start-y) + 22px); }
+    6.85% { background-position: calc(50% + var(--rs-minimap-start-x) - 15px) calc(50% + var(--rs-minimap-start-y) + 22px); }
+    8.02% { background-position: calc(50% + var(--rs-minimap-start-x) - 13px) calc(50% + var(--rs-minimap-start-y) + 30px); }
+   10.31% { background-position: calc(50% + var(--rs-minimap-start-x) + 3px) calc(50% + var(--rs-minimap-start-y) + 30px); }
+   10.51% { background-position: calc(50% + var(--rs-minimap-start-x) + 4px) calc(50% + var(--rs-minimap-start-y) + 31px); }
+   11.51% { background-position: calc(50% + var(--rs-minimap-start-x) + 4px) calc(50% + var(--rs-minimap-start-y) + 38px); }
+   12.68% { background-position: calc(50% + var(--rs-minimap-start-x) - 4px) calc(50% + var(--rs-minimap-start-y) + 40px); }
+   20.10% { background-position: calc(50% + var(--rs-minimap-start-x) - 4px) calc(50% + var(--rs-minimap-start-y) + 92px); }
+   20.30% { background-position: calc(50% + var(--rs-minimap-start-x) - 5px) calc(50% + var(--rs-minimap-start-y) + 93px); }
+   21.58% { background-position: calc(50% + var(--rs-minimap-start-x) - 14px) calc(50% + var(--rs-minimap-start-y) + 93px); }
+   22.62% { background-position: calc(50% + var(--rs-minimap-start-x) - 16px) calc(50% + var(--rs-minimap-start-y) + 100px); }
+   23.47% { background-position: calc(50% + var(--rs-minimap-start-x) - 22px) calc(50% + var(--rs-minimap-start-y) + 100px); }
+   23.68% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 99px); }
+   25.53% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 86px); }
+   25.73% { background-position: calc(50% + var(--rs-minimap-start-x) - 22px) calc(50% + var(--rs-minimap-start-y) + 85px); }
+   26.87% { background-position: calc(50% + var(--rs-minimap-start-x) - 14px) calc(50% + var(--rs-minimap-start-y) + 85px); }
+   27.07% { background-position: calc(50% + var(--rs-minimap-start-x) - 13px) calc(50% + var(--rs-minimap-start-y) + 84px); }
+   28.07% { background-position: calc(50% + var(--rs-minimap-start-x) - 13px) calc(50% + var(--rs-minimap-start-y) + 77px); }
+   28.27% { background-position: calc(50% + var(--rs-minimap-start-x) - 14px) calc(50% + var(--rs-minimap-start-y) + 76px); }
+   29.41% { background-position: calc(50% + var(--rs-minimap-start-x) - 22px) calc(50% + var(--rs-minimap-start-y) + 76px); }
+   29.62% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 75px); }
+   32.33% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 56px); }
+   33.50% { background-position: calc(50% + var(--rs-minimap-start-x) - 15px) calc(50% + var(--rs-minimap-start-y) + 54px); }
+   34.36% { background-position: calc(50% + var(--rs-minimap-start-x) - 15px) calc(50% + var(--rs-minimap-start-y) + 48px); }
+   34.56% { background-position: calc(50% + var(--rs-minimap-start-x) - 16px) calc(50% + var(--rs-minimap-start-y) + 47px); }
+   37.84% { background-position: calc(50% + var(--rs-minimap-start-x) - 39px) calc(50% + var(--rs-minimap-start-y) + 47px); }
+   38.04% { background-position: calc(50% + var(--rs-minimap-start-x) - 40px) calc(50% + var(--rs-minimap-start-y) + 46px); }
+   39.04% { background-position: calc(50% + var(--rs-minimap-start-x) - 40px) calc(50% + var(--rs-minimap-start-y) + 39px); }
+   39.24% { background-position: calc(50% + var(--rs-minimap-start-x) - 41px) calc(50% + var(--rs-minimap-start-y) + 38px); }
+   40.52% { background-position: calc(50% + var(--rs-minimap-start-x) - 50px) calc(50% + var(--rs-minimap-start-y) + 38px); }
+   41.42% { background-position: calc(50% + var(--rs-minimap-start-x) - 52px) calc(50% + var(--rs-minimap-start-y) + 32px); }
+   47.56% { background-position: calc(50% + var(--rs-minimap-start-x) - 95px) calc(50% + var(--rs-minimap-start-y) + 32px); }
+   47.76% { background-position: calc(50% + var(--rs-minimap-start-x) - 96px) calc(50% + var(--rs-minimap-start-y) + 31px); }
+   48.47% { background-position: calc(50% + var(--rs-minimap-start-x) - 96px) calc(50% + var(--rs-minimap-start-y) + 26px); }
+   49.11% { background-position: calc(50% + var(--rs-minimap-start-x) - 92px) calc(50% + var(--rs-minimap-start-y) + 24px); }
+   51.82% { background-position: calc(50% + var(--rs-minimap-start-x) - 92px) calc(50% + var(--rs-minimap-start-y) + 5px); }
+   52.02% { background-position: calc(50% + var(--rs-minimap-start-x) - 93px) calc(50% + var(--rs-minimap-start-y) + 4px); }
+   62.57% { background-position: calc(50% + var(--rs-minimap-start-x) - 167px) calc(50% + var(--rs-minimap-start-y) + 4px); }
+   62.77% { background-position: calc(50% + var(--rs-minimap-start-x) - 168px) calc(50% + var(--rs-minimap-start-y) + 3px); }
+   74.61% { background-position: calc(50% + var(--rs-minimap-start-x) - 168px) calc(50% + var(--rs-minimap-start-y) - 80px); }
+   74.81% { background-position: calc(50% + var(--rs-minimap-start-x) - 169px) calc(50% + var(--rs-minimap-start-y) - 81px); }
+   80.80% { background-position: calc(50% + var(--rs-minimap-start-x) - 211px) calc(50% + var(--rs-minimap-start-y) - 81px); }
+   81.00% { background-position: calc(50% + var(--rs-minimap-start-x) - 212px) calc(50% + var(--rs-minimap-start-y) - 82px); }
+   83.00% { background-position: calc(50% + var(--rs-minimap-start-x) - 212px) calc(50% + var(--rs-minimap-start-y) - 96px); }
+   83.20% { background-position: calc(50% + var(--rs-minimap-start-x) - 213px) calc(50% + var(--rs-minimap-start-y) - 97px); }
+   84.62% { background-position: calc(50% + var(--rs-minimap-start-x) - 223px) calc(50% + var(--rs-minimap-start-y) - 97px); }
+   84.83% { background-position: calc(50% + var(--rs-minimap-start-x) - 224px) calc(50% + var(--rs-minimap-start-y) - 98px); }
+   88.82% { background-position: calc(50% + var(--rs-minimap-start-x) - 224px) calc(50% + var(--rs-minimap-start-y) - 126px); }
+   89.02% { background-position: calc(50% + var(--rs-minimap-start-x) - 225px) calc(50% + var(--rs-minimap-start-y) - 127px); }
+  100.00% { background-position: calc(50% + var(--rs-minimap-start-x) - 302px) calc(50% + var(--rs-minimap-start-y) - 127px); }
+}
+
+
+/* ---------------------------------------------------------------------
+   FEATURE + WIDTH GATING
+
+   This is intentionally feature detection rather than browser sniffing.
+   Firefox currently fails @supports(animation-timeline:scroll()), so the
+   minimap stays hidden there. If Firefox gains support later, it will
+   automatically start working instead of remaining arbitrarily disabled.
+
+   Browser zoom also changes CSS viewport width, so zooming in can cross
+   below 1820px and hide the minimap exactly as V17 did.
+   --------------------------------------------------------------------- */
+
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 1820px) {
+    html body.ownlist::before,
+    html body.ownlist::after {
+      display: block !important;
+    }
+  }
+
+  html body.ownlist::before {
+    animation-name: rs-minimap-route !important;
+    animation-duration: 1ms !important;
+    animation-timing-function: linear !important;
+    animation-fill-mode: both !important;
+    animation-timeline: scroll(root block) !important;
+
+    /* THE IMPORTANT V18 CHANGE:
+       absolute scroll coordinates, not 0–100% of document length.
+       Lazy-loading more MAL rows should no longer renormalize the route. */
+    animation-range-start: 0px !important;
+    animation-range-end: var(--rs-minimap-route-scroll-distance) !important;
+  }
+}
+
+
+/* Keep the user's reduced-motion preference authoritative. */
+@media (prefers-reduced-motion: reduce) {
+  html body.ownlist::before {
+    animation: none !important;
+    background-position:
+      calc(50% + var(--rs-minimap-start-x))
+      calc(50% + var(--rs-minimap-start-y)) !important;
+  }
+}
+
+/* =====================================================================
+   ORIGINAL SOURCE: 27-anime-plus-fix-v1.css
+   ===================================================================== */
+/* MODULE: 27-anime-plus-fix-v1.css
+   Restores the custom OSRS-styled + image on Anime episode progress.
+
+   Manga chapter/volume controls already work and are intentionally untouched.
+*/
+
+html body.ownlist[data-work="anime"]
+.list-table .list-table-data .data.progress .icon-add-episode,
+
+html body.ownlist.anime
+.list-table .list-table-data .data.progress .icon-add-episode,
+
+html body.ownlist[data-work="anime"]
+.list-table .list-table-data .data.progress .js-btn-add-episode,
+
+html body.ownlist[data-work="anime"]
+.list-table .list-table-data .data.progress [title*="increase"] {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  float: none !important;
+
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  box-sizing: border-box !important;
+
+  width: 14px !important;
+  min-width: 14px !important;
+  max-width: 14px !important;
+
+  height: 14px !important;
+  min-height: 14px !important;
+  max-height: 14px !important;
+
+  margin: 0 0 0 3px !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+
+  background-color: transparent !important;
+  background-image: var(--rs-progress-plus) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+
+  overflow: hidden !important;
+  vertical-align: -2px !important;
+
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Suppress whatever MAL/FontAwesome glyph happens to be inside the control. */
+html body.ownlist[data-work="anime"]
+.list-table .list-table-data .data.progress .icon-add-episode::before,
+
+html body.ownlist[data-work="anime"]
+.list-table .list-table-data .data.progress .icon-add-episode::after,
+
+html body.ownlist[data-work="anime"]
+.list-table .list-table-data .data.progress .icon-add-episode > i {
+  content: none !important;
+  display: none !important;
+}
+
+html body.ownlist[data-work="anime"]
+.list-table .list-table-data .data.progress .icon-add-episode:hover,
+
+html body.ownlist[data-work="anime"]
+.list-table .list-table-data .data.progress .js-btn-add-episode:hover {
+  filter: brightness(1.15) !important;
+}
