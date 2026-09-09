@@ -1,0 +1,391 @@
+/* MAL-OSRS — Manga minimap route: Arceuus -> Fortis Colosseum
+   Generated from the user's exact native-resolution route image.
+
+   Source dimensions:       3933 x 2370
+   Calibration/default pt:  (3931, 2263)
+   Manga start / first turn:(1873, 108)
+   Actual route length:      11311.9 native map px
+   Scroll span:              113119px
+   Simplified controls:      329
+   RDP tolerance:            1 native map px
+
+   The long diagonal from the far-right edge is NOT animated.
+   It is used only to calculate the offset from the existing Anime/Tree Gnome
+   Village minimap origin to the Arceuus Soul Altar starting position.
+*/
+
+
+/* =====================================================================
+   1. MANGA-SPECIFIC START POSITION / DISTANCE
+   ===================================================================== */
+
+html body.ownlist[data-work="manga"],
+html body.ownlist.manga {
+  --rs-minimap-start-x: 2058px;
+  --rs-minimap-start-y: 2155px;
+  --rs-minimap-route-scroll-distance: 113119px;
+}
+
+
+/* =====================================================================
+   2. MANGA ROUTE
+   ===================================================================== */
+
+@keyframes rs-minimap-route-manga {
+    0.000% { background-position: calc(50% + var(--rs-minimap-start-x) + 0px) calc(50% + var(--rs-minimap-start-y) + 0px); }
+    0.018% { background-position: calc(50% + var(--rs-minimap-start-x) + 0px) calc(50% + var(--rs-minimap-start-y) + 2px); }
+    0.524% { background-position: calc(50% + var(--rs-minimap-start-x) - 32px) calc(50% + var(--rs-minimap-start-y) + 46px); }
+    0.798% { background-position: calc(50% + var(--rs-minimap-start-x) - 32px) calc(50% + var(--rs-minimap-start-y) + 77px); }
+    0.908% { background-position: calc(50% + var(--rs-minimap-start-x) - 22px) calc(50% + var(--rs-minimap-start-y) + 83px); }
+    1.328% { background-position: calc(50% + var(--rs-minimap-start-x) + 18px) calc(50% + var(--rs-minimap-start-y) + 101px); }
+    1.779% { background-position: calc(50% + var(--rs-minimap-start-x) + 69px) calc(50% + var(--rs-minimap-start-y) + 101px); }
+    2.299% { background-position: calc(50% + var(--rs-minimap-start-x) + 125px) calc(50% + var(--rs-minimap-start-y) + 108px); }
+    2.342% { background-position: calc(50% + var(--rs-minimap-start-x) + 127px) calc(50% + var(--rs-minimap-start-y) + 104px); }
+    2.734% { background-position: calc(50% + var(--rs-minimap-start-x) + 135px) calc(50% + var(--rs-minimap-start-y) + 63px); }
+    2.759% { background-position: calc(50% + var(--rs-minimap-start-x) + 137px) calc(50% + var(--rs-minimap-start-y) + 61px); }
+    3.139% { background-position: calc(50% + var(--rs-minimap-start-x) + 178px) calc(50% + var(--rs-minimap-start-y) + 56px); }
+    3.446% { background-position: calc(50% + var(--rs-minimap-start-x) + 206px) calc(50% + var(--rs-minimap-start-y) + 40px); }
+    3.801% { background-position: calc(50% + var(--rs-minimap-start-x) + 245px) calc(50% + var(--rs-minimap-start-y) + 43px); }
+    4.126% { background-position: calc(50% + var(--rs-minimap-start-x) + 273px) calc(50% + var(--rs-minimap-start-y) + 64px); }
+    6.460% { background-position: calc(50% + var(--rs-minimap-start-x) + 537px) calc(50% + var(--rs-minimap-start-y) + 64px); }
+    6.706% { background-position: calc(50% + var(--rs-minimap-start-x) + 556px) calc(50% + var(--rs-minimap-start-y) + 44px); }
+    8.315% { background-position: calc(50% + var(--rs-minimap-start-x) + 556px) calc(50% + var(--rs-minimap-start-y) - 138px); }
+    8.425% { background-position: calc(50% + var(--rs-minimap-start-x) + 544px) calc(50% + var(--rs-minimap-start-y) - 139px); }
+    8.526% { background-position: calc(50% + var(--rs-minimap-start-x) + 543px) calc(50% + var(--rs-minimap-start-y) - 150px); }
+    8.600% { background-position: calc(50% + var(--rs-minimap-start-x) + 535px) calc(50% + var(--rs-minimap-start-y) - 151px); }
+    8.669% { background-position: calc(50% + var(--rs-minimap-start-x) + 533px) calc(50% + var(--rs-minimap-start-y) - 158px); }
+    8.832% { background-position: calc(50% + var(--rs-minimap-start-x) + 515px) calc(50% + var(--rs-minimap-start-y) - 159px); }
+    9.849% { background-position: calc(50% + var(--rs-minimap-start-x) + 515px) calc(50% + var(--rs-minimap-start-y) - 274px); }
+   10.254% { background-position: calc(50% + var(--rs-minimap-start-x) + 470px) calc(50% + var(--rs-minimap-start-y) - 276px); }
+   10.797% { background-position: calc(50% + var(--rs-minimap-start-x) + 469px) calc(50% + var(--rs-minimap-start-y) - 337px); }
+   12.043% { background-position: calc(50% + var(--rs-minimap-start-x) + 328px) calc(50% + var(--rs-minimap-start-y) - 337px); }
+   12.934% { background-position: calc(50% + var(--rs-minimap-start-x) + 326px) calc(50% + var(--rs-minimap-start-y) - 237px); }
+   13.262% { background-position: calc(50% + var(--rs-minimap-start-x) + 289px) calc(50% + var(--rs-minimap-start-y) - 237px); }
+   13.357% { background-position: calc(50% + var(--rs-minimap-start-x) + 287px) calc(50% + var(--rs-minimap-start-y) - 227px); }
+   13.994% { background-position: calc(50% + var(--rs-minimap-start-x) + 215px) calc(50% + var(--rs-minimap-start-y) - 227px); }
+   14.395% { background-position: calc(50% + var(--rs-minimap-start-x) + 214px) calc(50% + var(--rs-minimap-start-y) - 272px); }
+   14.677% { background-position: calc(50% + var(--rs-minimap-start-x) + 183px) calc(50% + var(--rs-minimap-start-y) - 274px); }
+   14.981% { background-position: calc(50% + var(--rs-minimap-start-x) + 182px) calc(50% + var(--rs-minimap-start-y) - 308px); }
+   15.441% { background-position: calc(50% + var(--rs-minimap-start-x) + 130px) calc(50% + var(--rs-minimap-start-y) - 308px); }
+   15.651% { background-position: calc(50% + var(--rs-minimap-start-x) + 128px) calc(50% + var(--rs-minimap-start-y) - 331px); }
+   16.120% { background-position: calc(50% + var(--rs-minimap-start-x) + 75px) calc(50% + var(--rs-minimap-start-y) - 331px); }
+   16.268% { background-position: calc(50% + var(--rs-minimap-start-x) + 73px) calc(50% + var(--rs-minimap-start-y) - 347px); }
+   16.449% { background-position: calc(50% + var(--rs-minimap-start-x) + 53px) calc(50% + var(--rs-minimap-start-y) - 348px); }
+   17.174% { background-position: calc(50% + var(--rs-minimap-start-x) + 53px) calc(50% + var(--rs-minimap-start-y) - 430px); }
+   17.331% { background-position: calc(50% + var(--rs-minimap-start-x) + 36px) calc(50% + var(--rs-minimap-start-y) - 432px); }
+   17.959% { background-position: calc(50% + var(--rs-minimap-start-x) + 36px) calc(50% + var(--rs-minimap-start-y) - 503px); }
+   18.502% { background-position: calc(50% + var(--rs-minimap-start-x) + 97px) calc(50% + var(--rs-minimap-start-y) - 504px); }
+   18.939% { background-position: calc(50% + var(--rs-minimap-start-x) + 98px) calc(50% + var(--rs-minimap-start-y) - 553px); }
+   19.326% { background-position: calc(50% + var(--rs-minimap-start-x) + 141px) calc(50% + var(--rs-minimap-start-y) - 555px); }
+   20.493% { background-position: calc(50% + var(--rs-minimap-start-x) + 141px) calc(50% + var(--rs-minimap-start-y) - 687px); }
+   20.637% { background-position: calc(50% + var(--rs-minimap-start-x) + 154px) calc(50% + var(--rs-minimap-start-y) - 695px); }
+   20.820% { background-position: calc(50% + var(--rs-minimap-start-x) + 173px) calc(50% + var(--rs-minimap-start-y) - 699px); }
+   21.031% { background-position: calc(50% + var(--rs-minimap-start-x) + 180px) calc(50% + var(--rs-minimap-start-y) - 720px); }
+   21.081% { background-position: calc(50% + var(--rs-minimap-start-x) + 184px) calc(50% + var(--rs-minimap-start-y) - 724px); }
+   21.186% { background-position: calc(50% + var(--rs-minimap-start-x) + 195px) calc(50% + var(--rs-minimap-start-y) - 726px); }
+   21.319% { background-position: calc(50% + var(--rs-minimap-start-x) + 190px) calc(50% + var(--rs-minimap-start-y) - 739px); }
+   21.344% { background-position: calc(50% + var(--rs-minimap-start-x) + 188px) calc(50% + var(--rs-minimap-start-y) - 741px); }
+   21.401% { background-position: calc(50% + var(--rs-minimap-start-x) + 182px) calc(50% + var(--rs-minimap-start-y) - 742px); }
+   22.506% { background-position: calc(50% + var(--rs-minimap-start-x) + 182px) calc(50% + var(--rs-minimap-start-y) - 867px); }
+   22.876% { background-position: calc(50% + var(--rs-minimap-start-x) + 223px) calc(50% + var(--rs-minimap-start-y) - 869px); }
+   24.440% { background-position: calc(50% + var(--rs-minimap-start-x) + 223px) calc(50% + var(--rs-minimap-start-y) - 1046px); }
+   24.465% { background-position: calc(50% + var(--rs-minimap-start-x) + 225px) calc(50% + var(--rs-minimap-start-y) - 1048px); }
+   24.937% { background-position: calc(50% + var(--rs-minimap-start-x) + 268px) calc(50% + var(--rs-minimap-start-y) - 1073px); }
+   24.980% { background-position: calc(50% + var(--rs-minimap-start-x) + 272px) calc(50% + var(--rs-minimap-start-y) - 1075px); }
+   25.024% { background-position: calc(50% + var(--rs-minimap-start-x) + 277px) calc(50% + var(--rs-minimap-start-y) - 1075px); }
+   25.193% { background-position: calc(50% + var(--rs-minimap-start-x) + 292px) calc(50% + var(--rs-minimap-start-y) - 1065px); }
+   25.471% { background-position: calc(50% + var(--rs-minimap-start-x) + 291px) calc(50% + var(--rs-minimap-start-y) - 1034px); }
+   25.571% { background-position: calc(50% + var(--rs-minimap-start-x) + 283px) calc(50% + var(--rs-minimap-start-y) - 1026px); }
+   25.746% { background-position: calc(50% + var(--rs-minimap-start-x) + 283px) calc(50% + var(--rs-minimap-start-y) - 1007px); }
+   25.899% { background-position: calc(50% + var(--rs-minimap-start-x) + 297px) calc(50% + var(--rs-minimap-start-y) - 999px); }
+   26.194% { background-position: calc(50% + var(--rs-minimap-start-x) + 327px) calc(50% + var(--rs-minimap-start-y) - 991px); }
+   26.219% { background-position: calc(50% + var(--rs-minimap-start-x) + 329px) calc(50% + var(--rs-minimap-start-y) - 989px); }
+   26.328% { background-position: calc(50% + var(--rs-minimap-start-x) + 330px) calc(50% + var(--rs-minimap-start-y) - 977px); }
+   26.744% { background-position: calc(50% + var(--rs-minimap-start-x) + 377px) calc(50% + var(--rs-minimap-start-y) - 977px); }
+   27.086% { background-position: calc(50% + var(--rs-minimap-start-x) + 412px) calc(50% + var(--rs-minimap-start-y) - 968px); }
+   27.188% { background-position: calc(50% + var(--rs-minimap-start-x) + 421px) calc(50% + var(--rs-minimap-start-y) - 974px); }
+   27.425% { background-position: calc(50% + var(--rs-minimap-start-x) + 447px) calc(50% + var(--rs-minimap-start-y) - 972px); }
+   27.530% { background-position: calc(50% + var(--rs-minimap-start-x) + 454px) calc(50% + var(--rs-minimap-start-y) - 981px); }
+   28.204% { background-position: calc(50% + var(--rs-minimap-start-x) + 457px) calc(50% + var(--rs-minimap-start-y) - 1056px); }
+   28.311% { background-position: calc(50% + var(--rs-minimap-start-x) + 467px) calc(50% + var(--rs-minimap-start-y) - 1061px); }
+   28.859% { background-position: calc(50% + var(--rs-minimap-start-x) + 529px) calc(50% + var(--rs-minimap-start-y) - 1061px); }
+   29.005% { background-position: calc(50% + var(--rs-minimap-start-x) + 543px) calc(50% + var(--rs-minimap-start-y) - 1055px); }
+   29.147% { background-position: calc(50% + var(--rs-minimap-start-x) + 557px) calc(50% + var(--rs-minimap-start-y) - 1060px); }
+   29.607% { background-position: calc(50% + var(--rs-minimap-start-x) + 609px) calc(50% + var(--rs-minimap-start-y) - 1060px); }
+   29.832% { background-position: calc(50% + var(--rs-minimap-start-x) + 627px) calc(50% + var(--rs-minimap-start-y) - 1078px); }
+   30.344% { background-position: calc(50% + var(--rs-minimap-start-x) + 685px) calc(50% + var(--rs-minimap-start-y) - 1078px); }
+   30.428% { background-position: calc(50% + var(--rs-minimap-start-x) + 691px) calc(50% + var(--rs-minimap-start-y) - 1085px); }
+   30.653% { background-position: calc(50% + var(--rs-minimap-start-x) + 692px) calc(50% + var(--rs-minimap-start-y) - 1110px); }
+   31.655% { background-position: calc(50% + var(--rs-minimap-start-x) + 805px) calc(50% + var(--rs-minimap-start-y) - 1109px); }
+   31.842% { background-position: calc(50% + var(--rs-minimap-start-x) + 815px) calc(50% + var(--rs-minimap-start-y) - 1092px); }
+   32.258% { background-position: calc(50% + var(--rs-minimap-start-x) + 815px) calc(50% + var(--rs-minimap-start-y) - 1045px); }
+   32.515% { background-position: calc(50% + var(--rs-minimap-start-x) + 793px) calc(50% + var(--rs-minimap-start-y) - 1028px); }
+   33.204% { background-position: calc(50% + var(--rs-minimap-start-x) + 793px) calc(50% + var(--rs-minimap-start-y) - 950px); }
+   33.406% { background-position: calc(50% + var(--rs-minimap-start-x) + 815px) calc(50% + var(--rs-minimap-start-y) - 948px); }
+   33.813% { background-position: calc(50% + var(--rs-minimap-start-x) + 815px) calc(50% + var(--rs-minimap-start-y) - 902px); }
+   33.978% { background-position: calc(50% + var(--rs-minimap-start-x) + 824px) calc(50% + var(--rs-minimap-start-y) - 887px); }
+   34.145% { background-position: calc(50% + var(--rs-minimap-start-x) + 842px) calc(50% + var(--rs-minimap-start-y) - 885px); }
+   34.431% { background-position: calc(50% + var(--rs-minimap-start-x) + 843px) calc(50% + var(--rs-minimap-start-y) - 853px); }
+   34.757% { background-position: calc(50% + var(--rs-minimap-start-x) + 879px) calc(50% + var(--rs-minimap-start-y) - 851px); }
+   35.207% { background-position: calc(50% + var(--rs-minimap-start-x) + 915px) calc(50% + var(--rs-minimap-start-y) - 815px); }
+   35.608% { background-position: calc(50% + var(--rs-minimap-start-x) + 960px) calc(50% + var(--rs-minimap-start-y) - 814px); }
+   36.377% { background-position: calc(50% + var(--rs-minimap-start-x) + 960px) calc(50% + var(--rs-minimap-start-y) - 727px); }
+   36.552% { background-position: calc(50% + var(--rs-minimap-start-x) + 974px) calc(50% + var(--rs-minimap-start-y) - 713px); }
+   36.711% { background-position: calc(50% + var(--rs-minimap-start-x) + 974px) calc(50% + var(--rs-minimap-start-y) - 695px); }
+   37.643% { background-position: calc(50% + var(--rs-minimap-start-x) + 869px) calc(50% + var(--rs-minimap-start-y) - 694px); }
+   38.181% { background-position: calc(50% + var(--rs-minimap-start-x) + 838px) calc(50% + var(--rs-minimap-start-y) - 742px); }
+   38.422% { background-position: calc(50% + var(--rs-minimap-start-x) + 812px) calc(50% + var(--rs-minimap-start-y) - 745px); }
+   38.988% { background-position: calc(50% + var(--rs-minimap-start-x) + 760px) calc(50% + var(--rs-minimap-start-y) - 716px); }
+   39.068% { background-position: calc(50% + var(--rs-minimap-start-x) + 755px) calc(50% + var(--rs-minimap-start-y) - 709px); }
+   39.454% { background-position: calc(50% + var(--rs-minimap-start-x) + 739px) calc(50% + var(--rs-minimap-start-y) - 672px); }
+   39.633% { background-position: calc(50% + var(--rs-minimap-start-x) + 722px) calc(50% + var(--rs-minimap-start-y) - 664px); }
+   39.885% { background-position: calc(50% + var(--rs-minimap-start-x) + 694px) calc(50% + var(--rs-minimap-start-y) - 663px); }
+   40.386% { background-position: calc(50% + var(--rs-minimap-start-x) + 661px) calc(50% + var(--rs-minimap-start-y) - 620px); }
+   40.611% { background-position: calc(50% + var(--rs-minimap-start-x) + 640px) calc(50% + var(--rs-minimap-start-y) - 609px); }
+   41.239% { background-position: calc(50% + var(--rs-minimap-start-x) + 569px) calc(50% + var(--rs-minimap-start-y) - 609px); }
+   42.587% { background-position: calc(50% + var(--rs-minimap-start-x) + 568px) calc(50% + var(--rs-minimap-start-y) - 457px); }
+   42.620% { background-position: calc(50% + var(--rs-minimap-start-x) + 571px) calc(50% + var(--rs-minimap-start-y) - 455px); }
+   42.922% { background-position: calc(50% + var(--rs-minimap-start-x) + 603px) calc(50% + var(--rs-minimap-start-y) - 450px); }
+   42.973% { background-position: calc(50% + var(--rs-minimap-start-x) + 608px) calc(50% + var(--rs-minimap-start-y) - 448px); }
+   43.563% { background-position: calc(50% + var(--rs-minimap-start-x) + 659px) calc(50% + var(--rs-minimap-start-y) - 410px); }
+   43.616% { background-position: calc(50% + var(--rs-minimap-start-x) + 665px) calc(50% + var(--rs-minimap-start-y) - 410px); }
+   43.707% { background-position: calc(50% + var(--rs-minimap-start-x) + 674px) calc(50% + var(--rs-minimap-start-y) - 413px); }
+   43.833% { background-position: calc(50% + var(--rs-minimap-start-x) + 687px) calc(50% + var(--rs-minimap-start-y) - 410px); }
+   43.925% { background-position: calc(50% + var(--rs-minimap-start-x) + 695px) calc(50% + var(--rs-minimap-start-y) - 416px); }
+   44.123% { background-position: calc(50% + var(--rs-minimap-start-x) + 717px) calc(50% + var(--rs-minimap-start-y) - 415px); }
+   44.198% { background-position: calc(50% + var(--rs-minimap-start-x) + 718px) calc(50% + var(--rs-minimap-start-y) - 407px); }
+   44.308% { background-position: calc(50% + var(--rs-minimap-start-x) + 728px) calc(50% + var(--rs-minimap-start-y) - 401px); }
+   44.551% { background-position: calc(50% + var(--rs-minimap-start-x) + 755px) calc(50% + var(--rs-minimap-start-y) - 402px); }
+   44.734% { background-position: calc(50% + var(--rs-minimap-start-x) + 772px) calc(50% + var(--rs-minimap-start-y) - 393px); }
+   44.927% { background-position: calc(50% + var(--rs-minimap-start-x) + 793px) calc(50% + var(--rs-minimap-start-y) - 395px); }
+   45.010% { background-position: calc(50% + var(--rs-minimap-start-x) + 802px) calc(50% + var(--rs-minimap-start-y) - 394px); }
+   45.436% { background-position: calc(50% + var(--rs-minimap-start-x) + 829px) calc(50% + var(--rs-minimap-start-y) - 357px); }
+   45.471% { background-position: calc(50% + var(--rs-minimap-start-x) + 829px) calc(50% + var(--rs-minimap-start-y) - 353px); }
+   45.578% { background-position: calc(50% + var(--rs-minimap-start-x) + 824px) calc(50% + var(--rs-minimap-start-y) - 343px); }
+   46.225% { background-position: calc(50% + var(--rs-minimap-start-x) + 827px) calc(50% + var(--rs-minimap-start-y) - 271px); }
+   46.576% { background-position: calc(50% + var(--rs-minimap-start-x) + 848px) calc(50% + var(--rs-minimap-start-y) - 240px); }
+   46.612% { background-position: calc(50% + var(--rs-minimap-start-x) + 848px) calc(50% + var(--rs-minimap-start-y) - 236px); }
+   46.788% { background-position: calc(50% + var(--rs-minimap-start-x) + 841px) calc(50% + var(--rs-minimap-start-y) - 219px); }
+   47.083% { background-position: calc(50% + var(--rs-minimap-start-x) + 859px) calc(50% + var(--rs-minimap-start-y) - 193px); }
+   47.461% { background-position: calc(50% + var(--rs-minimap-start-x) + 855px) calc(50% + var(--rs-minimap-start-y) - 152px); }
+   47.505% { background-position: calc(50% + var(--rs-minimap-start-x) + 855px) calc(50% + var(--rs-minimap-start-y) - 147px); }
+   47.530% { background-position: calc(50% + var(--rs-minimap-start-x) + 857px) calc(50% + var(--rs-minimap-start-y) - 145px); }
+   47.633% { background-position: calc(50% + var(--rs-minimap-start-x) + 867px) calc(50% + var(--rs-minimap-start-y) - 141px); }
+   48.188% { background-position: calc(50% + var(--rs-minimap-start-x) + 929px) calc(50% + var(--rs-minimap-start-y) - 139px); }
+   48.326% { background-position: calc(50% + var(--rs-minimap-start-x) + 940px) calc(50% + var(--rs-minimap-start-y) - 150px); }
+   48.374% { background-position: calc(50% + var(--rs-minimap-start-x) + 945px) calc(50% + var(--rs-minimap-start-y) - 149px); }
+   48.482% { background-position: calc(50% + var(--rs-minimap-start-x) + 954px) calc(50% + var(--rs-minimap-start-y) - 141px); }
+   49.067% { background-position: calc(50% + var(--rs-minimap-start-x) + 1018px) calc(50% + var(--rs-minimap-start-y) - 146px); }
+   49.132% { background-position: calc(50% + var(--rs-minimap-start-x) + 1025px) calc(50% + var(--rs-minimap-start-y) - 147px); }
+   49.334% { background-position: calc(50% + var(--rs-minimap-start-x) + 1039px) calc(50% + var(--rs-minimap-start-y) - 164px); }
+   49.877% { background-position: calc(50% + var(--rs-minimap-start-x) + 1045px) calc(50% + var(--rs-minimap-start-y) - 223px); }
+   49.929% { background-position: calc(50% + var(--rs-minimap-start-x) + 1047px) calc(50% + var(--rs-minimap-start-y) - 228px); }
+   50.979% { background-position: calc(50% + var(--rs-minimap-start-x) + 1148px) calc(50% + var(--rs-minimap-start-y) - 271px); }
+   51.077% { background-position: calc(50% + var(--rs-minimap-start-x) + 1157px) calc(50% + var(--rs-minimap-start-y) - 276px); }
+   51.300% { background-position: calc(50% + var(--rs-minimap-start-x) + 1176px) calc(50% + var(--rs-minimap-start-y) - 291px); }
+   51.330% { background-position: calc(50% + var(--rs-minimap-start-x) + 1179px) calc(50% + var(--rs-minimap-start-y) - 290px); }
+   51.463% { background-position: calc(50% + var(--rs-minimap-start-x) + 1184px) calc(50% + var(--rs-minimap-start-y) - 277px); }
+   51.638% { background-position: calc(50% + var(--rs-minimap-start-x) + 1200px) calc(50% + var(--rs-minimap-start-y) - 268px); }
+   51.682% { background-position: calc(50% + var(--rs-minimap-start-x) + 1205px) calc(50% + var(--rs-minimap-start-y) - 268px); }
+   51.863% { background-position: calc(50% + var(--rs-minimap-start-x) + 1223px) calc(50% + var(--rs-minimap-start-y) - 274px); }
+   51.961% { background-position: calc(50% + var(--rs-minimap-start-x) + 1232px) calc(50% + var(--rs-minimap-start-y) - 279px); }
+   52.377% { background-position: calc(50% + var(--rs-minimap-start-x) + 1277px) calc(50% + var(--rs-minimap-start-y) - 284px); }
+   52.512% { background-position: calc(50% + var(--rs-minimap-start-x) + 1289px) calc(50% + var(--rs-minimap-start-y) - 276px); }
+   52.653% { background-position: calc(50% + var(--rs-minimap-start-x) + 1296px) calc(50% + var(--rs-minimap-start-y) - 263px); }
+   53.055% { background-position: calc(50% + var(--rs-minimap-start-x) + 1334px) calc(50% + var(--rs-minimap-start-y) - 245px); }
+   53.386% { background-position: calc(50% + var(--rs-minimap-start-x) + 1369px) calc(50% + var(--rs-minimap-start-y) - 251px); }
+   53.630% { background-position: calc(50% + var(--rs-minimap-start-x) + 1392px) calc(50% + var(--rs-minimap-start-y) - 262px); }
+   53.968% { background-position: calc(50% + var(--rs-minimap-start-x) + 1412px) calc(50% + var(--rs-minimap-start-y) - 292px); }
+   54.184% { background-position: calc(50% + var(--rs-minimap-start-x) + 1436px) calc(50% + var(--rs-minimap-start-y) - 291px); }
+   54.603% { background-position: calc(50% + var(--rs-minimap-start-x) + 1461px) calc(50% + var(--rs-minimap-start-y) - 254px); }
+   54.721% { background-position: calc(50% + var(--rs-minimap-start-x) + 1474px) calc(50% + var(--rs-minimap-start-y) - 253px); }
+   54.870% { background-position: calc(50% + var(--rs-minimap-start-x) + 1490px) calc(50% + var(--rs-minimap-start-y) - 255px); }
+   55.086% { background-position: calc(50% + var(--rs-minimap-start-x) + 1491px) calc(50% + var(--rs-minimap-start-y) - 279px); }
+   55.181% { background-position: calc(50% + var(--rs-minimap-start-x) + 1493px) calc(50% + var(--rs-minimap-start-y) - 289px); }
+   56.004% { background-position: calc(50% + var(--rs-minimap-start-x) + 1586px) calc(50% + var(--rs-minimap-start-y) - 289px); }
+   56.126% { background-position: calc(50% + var(--rs-minimap-start-x) + 1588px) calc(50% + var(--rs-minimap-start-y) - 302px); }
+   56.474% { background-position: calc(50% + var(--rs-minimap-start-x) + 1627px) calc(50% + var(--rs-minimap-start-y) - 303px); }
+   57.349% { background-position: calc(50% + var(--rs-minimap-start-x) + 1627px) calc(50% + var(--rs-minimap-start-y) - 402px); }
+   57.555% { background-position: calc(50% + var(--rs-minimap-start-x) + 1642px) calc(50% + var(--rs-minimap-start-y) - 419px); }
+   58.133% { background-position: calc(50% + var(--rs-minimap-start-x) + 1707px) calc(50% + var(--rs-minimap-start-y) - 420px); }
+   58.327% { background-position: calc(50% + var(--rs-minimap-start-x) + 1707px) calc(50% + var(--rs-minimap-start-y) - 442px); }
+   58.571% { background-position: calc(50% + var(--rs-minimap-start-x) + 1718px) calc(50% + var(--rs-minimap-start-y) - 465px); }
+   58.793% { background-position: calc(50% + var(--rs-minimap-start-x) + 1708px) calc(50% + var(--rs-minimap-start-y) - 486px); }
+   58.971% { background-position: calc(50% + var(--rs-minimap-start-x) + 1713px) calc(50% + var(--rs-minimap-start-y) - 504px); }
+   59.015% { background-position: calc(50% + var(--rs-minimap-start-x) + 1713px) calc(50% + var(--rs-minimap-start-y) - 509px); }
+   59.368% { background-position: calc(50% + var(--rs-minimap-start-x) + 1689px) calc(50% + var(--rs-minimap-start-y) - 539px); }
+   59.773% { background-position: calc(50% + var(--rs-minimap-start-x) + 1687px) calc(50% + var(--rs-minimap-start-y) - 584px); }
+   60.031% { background-position: calc(50% + var(--rs-minimap-start-x) + 1697px) calc(50% + var(--rs-minimap-start-y) - 609px); }
+   60.305% { background-position: calc(50% + var(--rs-minimap-start-x) + 1726px) calc(50% + var(--rs-minimap-start-y) - 604px); }
+   60.467% { background-position: calc(50% + var(--rs-minimap-start-x) + 1741px) calc(50% + var(--rs-minimap-start-y) - 612px); }
+   60.492% { background-position: calc(50% + var(--rs-minimap-start-x) + 1743px) calc(50% + var(--rs-minimap-start-y) - 614px); }
+   60.717% { background-position: calc(50% + var(--rs-minimap-start-x) + 1742px) calc(50% + var(--rs-minimap-start-y) - 639px); }
+   60.777% { background-position: calc(50% + var(--rs-minimap-start-x) + 1736px) calc(50% + var(--rs-minimap-start-y) - 641px); }
+   61.252% { background-position: calc(50% + var(--rs-minimap-start-x) + 1684px) calc(50% + var(--rs-minimap-start-y) - 645px); }
+   61.429% { background-position: calc(50% + var(--rs-minimap-start-x) + 1664px) calc(50% + var(--rs-minimap-start-y) - 645px); }
+   61.781% { background-position: calc(50% + var(--rs-minimap-start-x) + 1627px) calc(50% + var(--rs-minimap-start-y) - 638px); }
+   62.266% { background-position: calc(50% + var(--rs-minimap-start-x) + 1573px) calc(50% + var(--rs-minimap-start-y) - 640px); }
+   62.606% { background-position: calc(50% + var(--rs-minimap-start-x) + 1572px) calc(50% + var(--rs-minimap-start-y) - 678px); }
+   62.778% { background-position: calc(50% + var(--rs-minimap-start-x) + 1557px) calc(50% + var(--rs-minimap-start-y) - 689px); }
+   63.118% { background-position: calc(50% + var(--rs-minimap-start-x) + 1556px) calc(50% + var(--rs-minimap-start-y) - 727px); }
+   63.311% { background-position: calc(50% + var(--rs-minimap-start-x) + 1535px) calc(50% + var(--rs-minimap-start-y) - 729px); }
+   63.505% { background-position: calc(50% + var(--rs-minimap-start-x) + 1518px) calc(50% + var(--rs-minimap-start-y) - 741px); }
+   63.723% { background-position: calc(50% + var(--rs-minimap-start-x) + 1514px) calc(50% + var(--rs-minimap-start-y) - 764px); }
+   63.921% { background-position: calc(50% + var(--rs-minimap-start-x) + 1492px) calc(50% + var(--rs-minimap-start-y) - 765px); }
+   64.008% { background-position: calc(50% + var(--rs-minimap-start-x) + 1483px) calc(50% + var(--rs-minimap-start-y) - 767px); }
+   64.273% { background-position: calc(50% + var(--rs-minimap-start-x) + 1483px) calc(50% + var(--rs-minimap-start-y) - 797px); }
+   64.494% { background-position: calc(50% + var(--rs-minimap-start-x) + 1476px) calc(50% + var(--rs-minimap-start-y) - 819px); }
+   64.725% { background-position: calc(50% + var(--rs-minimap-start-x) + 1496px) calc(50% + var(--rs-minimap-start-y) - 834px); }
+   65.043% { background-position: calc(50% + var(--rs-minimap-start-x) + 1489px) calc(50% + var(--rs-minimap-start-y) - 867px); }
+   65.069% { background-position: calc(50% + var(--rs-minimap-start-x) + 1489px) calc(50% + var(--rs-minimap-start-y) - 870px); }
+   65.153% { background-position: calc(50% + var(--rs-minimap-start-x) + 1495px) calc(50% + var(--rs-minimap-start-y) - 877px); }
+   65.201% { background-position: calc(50% + var(--rs-minimap-start-x) + 1496px) calc(50% + var(--rs-minimap-start-y) - 882px); }
+   65.380% { background-position: calc(50% + var(--rs-minimap-start-x) + 1488px) calc(50% + var(--rs-minimap-start-y) - 899px); }
+   65.458% { background-position: calc(50% + var(--rs-minimap-start-x) + 1486px) calc(50% + var(--rs-minimap-start-y) - 907px); }
+   65.745% { background-position: calc(50% + var(--rs-minimap-start-x) + 1513px) calc(50% + var(--rs-minimap-start-y) - 920px); }
+   65.807% { background-position: calc(50% + var(--rs-minimap-start-x) + 1513px) calc(50% + var(--rs-minimap-start-y) - 927px); }
+   65.989% { background-position: calc(50% + var(--rs-minimap-start-x) + 1509px) calc(50% + var(--rs-minimap-start-y) - 946px); }
+   66.324% { background-position: calc(50% + var(--rs-minimap-start-x) + 1539px) calc(50% + var(--rs-minimap-start-y) - 965px); }
+   66.381% { background-position: calc(50% + var(--rs-minimap-start-x) + 1538px) calc(50% + var(--rs-minimap-start-y) - 971px); }
+   66.797% { background-position: calc(50% + var(--rs-minimap-start-x) + 1521px) calc(50% + var(--rs-minimap-start-y) - 1011px); }
+   67.168% { background-position: calc(50% + var(--rs-minimap-start-x) + 1521px) calc(50% + var(--rs-minimap-start-y) - 1053px); }
+   67.497% { background-position: calc(50% + var(--rs-minimap-start-x) + 1518px) calc(50% + var(--rs-minimap-start-y) - 1089px); }
+   67.952% { background-position: calc(50% + var(--rs-minimap-start-x) + 1553px) calc(50% + var(--rs-minimap-start-y) - 1126px); }
+   68.643% { background-position: calc(50% + var(--rs-minimap-start-x) + 1622px) calc(50% + var(--rs-minimap-start-y) - 1148px); }
+   68.938% { background-position: calc(50% + var(--rs-minimap-start-x) + 1655px) calc(50% + var(--rs-minimap-start-y) - 1147px); }
+   69.248% { background-position: calc(50% + var(--rs-minimap-start-x) + 1688px) calc(50% + var(--rs-minimap-start-y) - 1142px); }
+   69.560% { background-position: calc(50% + var(--rs-minimap-start-x) + 1717px) calc(50% + var(--rs-minimap-start-y) - 1157px); }
+   69.825% { background-position: calc(50% + var(--rs-minimap-start-x) + 1745px) calc(50% + var(--rs-minimap-start-y) - 1152px); }
+   69.990% { background-position: calc(50% + var(--rs-minimap-start-x) + 1759px) calc(50% + var(--rs-minimap-start-y) - 1163px); }
+   70.037% { background-position: calc(50% + var(--rs-minimap-start-x) + 1764px) calc(50% + var(--rs-minimap-start-y) - 1164px); }
+   70.090% { background-position: calc(50% + var(--rs-minimap-start-x) + 1770px) calc(50% + var(--rs-minimap-start-y) - 1164px); }
+   70.304% { background-position: calc(50% + var(--rs-minimap-start-x) + 1790px) calc(50% + var(--rs-minimap-start-y) - 1154px); }
+   70.463% { background-position: calc(50% + var(--rs-minimap-start-x) + 1808px) calc(50% + var(--rs-minimap-start-y) - 1154px); }
+   70.740% { background-position: calc(50% + var(--rs-minimap-start-x) + 1828px) calc(50% + var(--rs-minimap-start-y) - 1177px); }
+   71.181% { background-position: calc(50% + var(--rs-minimap-start-x) + 1868px) calc(50% + var(--rs-minimap-start-y) - 1201px); }
+   71.236% { background-position: calc(50% + var(--rs-minimap-start-x) + 1871px) calc(50% + var(--rs-minimap-start-y) - 1206px); }
+   71.350% { background-position: calc(50% + var(--rs-minimap-start-x) + 1873px) calc(50% + var(--rs-minimap-start-y) - 1218px); }
+   71.598% { background-position: calc(50% + var(--rs-minimap-start-x) + 1863px) calc(50% + var(--rs-minimap-start-y) - 1242px); }
+   72.012% { background-position: calc(50% + var(--rs-minimap-start-x) + 1861px) calc(50% + var(--rs-minimap-start-y) - 1288px); }
+   72.298% { background-position: calc(50% + var(--rs-minimap-start-x) + 1841px) calc(50% + var(--rs-minimap-start-y) - 1312px); }
+   72.708% { background-position: calc(50% + var(--rs-minimap-start-x) + 1805px) calc(50% + var(--rs-minimap-start-y) - 1337px); }
+   72.888% { background-position: calc(50% + var(--rs-minimap-start-x) + 1806px) calc(50% + var(--rs-minimap-start-y) - 1357px); }
+   73.101% { background-position: calc(50% + var(--rs-minimap-start-x) + 1786px) calc(50% + var(--rs-minimap-start-y) - 1367px); }
+   73.139% { background-position: calc(50% + var(--rs-minimap-start-x) + 1783px) calc(50% + var(--rs-minimap-start-y) - 1370px); }
+   73.263% { background-position: calc(50% + var(--rs-minimap-start-x) + 1778px) calc(50% + var(--rs-minimap-start-y) - 1382px); }
+   73.477% { background-position: calc(50% + var(--rs-minimap-start-x) + 1758px) calc(50% + var(--rs-minimap-start-y) - 1392px); }
+   73.988% { background-position: calc(50% + var(--rs-minimap-start-x) + 1701px) calc(50% + var(--rs-minimap-start-y) - 1390px); }
+   74.200% { background-position: calc(50% + var(--rs-minimap-start-x) + 1677px) calc(50% + var(--rs-minimap-start-y) - 1390px); }
+   74.411% { background-position: calc(50% + var(--rs-minimap-start-x) + 1654px) calc(50% + var(--rs-minimap-start-y) - 1392px); }
+   74.645% { background-position: calc(50% + var(--rs-minimap-start-x) + 1630px) calc(50% + var(--rs-minimap-start-y) - 1398px); }
+   74.816% { background-position: calc(50% + var(--rs-minimap-start-x) + 1614px) calc(50% + var(--rs-minimap-start-y) - 1406px); }
+   74.853% { background-position: calc(50% + var(--rs-minimap-start-x) + 1611px) calc(50% + var(--rs-minimap-start-y) - 1409px); }
+   74.965% { background-position: calc(50% + var(--rs-minimap-start-x) + 1607px) calc(50% + var(--rs-minimap-start-y) - 1420px); }
+   75.172% { background-position: calc(50% + var(--rs-minimap-start-x) + 1606px) calc(50% + var(--rs-minimap-start-y) - 1443px); }
+   75.674% { background-position: calc(50% + var(--rs-minimap-start-x) + 1647px) calc(50% + var(--rs-minimap-start-y) - 1481px); }
+   75.902% { background-position: calc(50% + var(--rs-minimap-start-x) + 1645px) calc(50% + var(--rs-minimap-start-y) - 1506px); }
+   76.223% { background-position: calc(50% + var(--rs-minimap-start-x) + 1673px) calc(50% + var(--rs-minimap-start-y) - 1526px); }
+   76.240% { background-position: calc(50% + var(--rs-minimap-start-x) + 1673px) calc(50% + var(--rs-minimap-start-y) - 1528px); }
+   76.499% { background-position: calc(50% + var(--rs-minimap-start-x) + 1653px) calc(50% + var(--rs-minimap-start-y) - 1549px); }
+   76.898% { background-position: calc(50% + var(--rs-minimap-start-x) + 1663px) calc(50% + var(--rs-minimap-start-y) - 1590px); }
+   76.920% { background-position: calc(50% + var(--rs-minimap-start-x) + 1662px) calc(50% + var(--rs-minimap-start-y) - 1592px); }
+   77.123% { background-position: calc(50% + var(--rs-minimap-start-x) + 1644px) calc(50% + var(--rs-minimap-start-y) - 1604px); }
+   77.167% { background-position: calc(50% + var(--rs-minimap-start-x) + 1639px) calc(50% + var(--rs-minimap-start-y) - 1604px); }
+   77.854% { background-position: calc(50% + var(--rs-minimap-start-x) + 1575px) calc(50% + var(--rs-minimap-start-y) - 1571px); }
+   78.164% { background-position: calc(50% + var(--rs-minimap-start-x) + 1542px) calc(50% + var(--rs-minimap-start-y) - 1566px); }
+   78.480% { background-position: calc(50% + var(--rs-minimap-start-x) + 1507px) calc(50% + var(--rs-minimap-start-y) - 1564px); }
+   78.505% { background-position: calc(50% + var(--rs-minimap-start-x) + 1505px) calc(50% + var(--rs-minimap-start-y) - 1562px); }
+   78.571% { background-position: calc(50% + var(--rs-minimap-start-x) + 1504px) calc(50% + var(--rs-minimap-start-y) - 1555px); }
+   78.605% { background-position: calc(50% + var(--rs-minimap-start-x) + 1502px) calc(50% + var(--rs-minimap-start-y) - 1552px); }
+   78.748% { background-position: calc(50% + var(--rs-minimap-start-x) + 1487px) calc(50% + var(--rs-minimap-start-y) - 1555px); }
+   79.173% { background-position: calc(50% + var(--rs-minimap-start-x) + 1439px) calc(50% + var(--rs-minimap-start-y) - 1555px); }
+   79.335% { background-position: calc(50% + var(--rs-minimap-start-x) + 1424px) calc(50% + var(--rs-minimap-start-y) - 1547px); }
+   79.370% { background-position: calc(50% + var(--rs-minimap-start-x) + 1420px) calc(50% + var(--rs-minimap-start-y) - 1547px); }
+   79.596% { background-position: calc(50% + var(--rs-minimap-start-x) + 1399px) calc(50% + var(--rs-minimap-start-y) - 1558px); }
+   79.622% { background-position: calc(50% + var(--rs-minimap-start-x) + 1399px) calc(50% + var(--rs-minimap-start-y) - 1561px); }
+   79.710% { background-position: calc(50% + var(--rs-minimap-start-x) + 1406px) calc(50% + var(--rs-minimap-start-y) - 1568px); }
+   79.967% { background-position: calc(50% + var(--rs-minimap-start-x) + 1401px) calc(50% + var(--rs-minimap-start-y) - 1595px); }
+   80.060% { background-position: calc(50% + var(--rs-minimap-start-x) + 1407px) calc(50% + var(--rs-minimap-start-y) - 1603px); }
+   80.086% { background-position: calc(50% + var(--rs-minimap-start-x) + 1407px) calc(50% + var(--rs-minimap-start-y) - 1606px); }
+   80.538% { background-position: calc(50% + var(--rs-minimap-start-x) + 1385px) calc(50% + var(--rs-minimap-start-y) - 1648px); }
+   81.279% { background-position: calc(50% + var(--rs-minimap-start-x) + 1302px) calc(50% + var(--rs-minimap-start-y) - 1650px); }
+   81.401% { background-position: calc(50% + var(--rs-minimap-start-x) + 1300px) calc(50% + var(--rs-minimap-start-y) - 1663px); }
+   81.469% { background-position: calc(50% + var(--rs-minimap-start-x) + 1294px) calc(50% + var(--rs-minimap-start-y) - 1667px); }
+   81.618% { background-position: calc(50% + var(--rs-minimap-start-x) + 1292px) calc(50% + var(--rs-minimap-start-y) - 1683px); }
+   81.717% { background-position: calc(50% + var(--rs-minimap-start-x) + 1302px) calc(50% + var(--rs-minimap-start-y) - 1686px); }
+   81.931% { background-position: calc(50% + var(--rs-minimap-start-x) + 1317px) calc(50% + var(--rs-minimap-start-y) - 1704px); }
+   82.076% { background-position: calc(50% + var(--rs-minimap-start-x) + 1316px) calc(50% + var(--rs-minimap-start-y) - 1720px); }
+   82.142% { background-position: calc(50% + var(--rs-minimap-start-x) + 1315px) calc(50% + var(--rs-minimap-start-y) - 1727px); }
+   82.331% { background-position: calc(50% + var(--rs-minimap-start-x) + 1299px) calc(50% + var(--rs-minimap-start-y) - 1740px); }
+   82.553% { background-position: calc(50% + var(--rs-minimap-start-x) + 1294px) calc(50% + var(--rs-minimap-start-y) - 1763px); }
+   82.599% { background-position: calc(50% + var(--rs-minimap-start-x) + 1291px) calc(50% + var(--rs-minimap-start-y) - 1767px); }
+   83.171% { background-position: calc(50% + var(--rs-minimap-start-x) + 1235px) calc(50% + var(--rs-minimap-start-y) - 1788px); }
+   84.054% { background-position: calc(50% + var(--rs-minimap-start-x) + 1138px) calc(50% + var(--rs-minimap-start-y) - 1795px); }
+   84.502% { background-position: calc(50% + var(--rs-minimap-start-x) + 1101px) calc(50% + var(--rs-minimap-start-y) - 1828px); }
+   84.810% { background-position: calc(50% + var(--rs-minimap-start-x) + 1108px) calc(50% + var(--rs-minimap-start-y) - 1860px); }
+   84.858% { background-position: calc(50% + var(--rs-minimap-start-x) + 1107px) calc(50% + var(--rs-minimap-start-y) - 1865px); }
+   85.189% { background-position: calc(50% + var(--rs-minimap-start-x) + 1070px) calc(50% + var(--rs-minimap-start-y) - 1866px); }
+   85.464% { background-position: calc(50% + var(--rs-minimap-start-x) + 1043px) calc(50% + var(--rs-minimap-start-y) - 1876px); }
+   85.959% { background-position: calc(50% + var(--rs-minimap-start-x) + 987px) calc(50% + var(--rs-minimap-start-y) - 1876px); }
+   86.500% { background-position: calc(50% + var(--rs-minimap-start-x) + 930px) calc(50% + var(--rs-minimap-start-y) - 1886px); }
+   86.534% { background-position: calc(50% + var(--rs-minimap-start-x) + 927px) calc(50% + var(--rs-minimap-start-y) - 1888px); }
+   87.253% { background-position: calc(50% + var(--rs-minimap-start-x) + 928px) calc(50% + var(--rs-minimap-start-y) - 1969px); }
+   87.528% { background-position: calc(50% + var(--rs-minimap-start-x) + 945px) calc(50% + var(--rs-minimap-start-y) - 1993px); }
+   87.554% { background-position: calc(50% + var(--rs-minimap-start-x) + 945px) calc(50% + var(--rs-minimap-start-y) - 1996px); }
+   87.702% { background-position: calc(50% + var(--rs-minimap-start-x) + 936px) calc(50% + var(--rs-minimap-start-y) - 2009px); }
+   87.738% { background-position: calc(50% + var(--rs-minimap-start-x) + 936px) calc(50% + var(--rs-minimap-start-y) - 2013px); }
+   87.973% { background-position: calc(50% + var(--rs-minimap-start-x) + 952px) calc(50% + var(--rs-minimap-start-y) - 2033px); }
+   88.717% { background-position: calc(50% + var(--rs-minimap-start-x) + 889px) calc(50% + var(--rs-minimap-start-y) - 2084px); }
+   89.198% { background-position: calc(50% + var(--rs-minimap-start-x) + 883px) calc(50% + var(--rs-minimap-start-y) - 2136px); }
+   89.638% { background-position: calc(50% + var(--rs-minimap-start-x) + 857px) calc(50% + var(--rs-minimap-start-y) - 2175px); }
+   89.690% { background-position: calc(50% + var(--rs-minimap-start-x) + 859px) calc(50% + var(--rs-minimap-start-y) - 2180px); }
+   89.904% { background-position: calc(50% + var(--rs-minimap-start-x) + 874px) calc(50% + var(--rs-minimap-start-y) - 2198px); }
+   90.101% { background-position: calc(50% + var(--rs-minimap-start-x) + 893px) calc(50% + var(--rs-minimap-start-y) - 2206px); }
+   90.400% { background-position: calc(50% + var(--rs-minimap-start-x) + 891px) calc(50% + var(--rs-minimap-start-y) - 2239px); }
+   91.163% { background-position: calc(50% + var(--rs-minimap-start-x) + 806px) calc(50% + var(--rs-minimap-start-y) - 2242px); }
+   91.503% { background-position: calc(50% + var(--rs-minimap-start-x) + 775px) calc(50% + var(--rs-minimap-start-y) - 2260px); }
+   92.077% { background-position: calc(50% + var(--rs-minimap-start-x) + 715px) calc(50% + var(--rs-minimap-start-y) - 2248px); }
+   93.102% { background-position: calc(50% + var(--rs-minimap-start-x) + 602px) calc(50% + var(--rs-minimap-start-y) - 2255px); }
+   93.747% { background-position: calc(50% + var(--rs-minimap-start-x) + 529px) calc(50% + var(--rs-minimap-start-y) - 2255px); }
+   93.806% { background-position: calc(50% + var(--rs-minimap-start-x) + 525px) calc(50% + var(--rs-minimap-start-y) - 2260px); }
+   94.071% { background-position: calc(50% + var(--rs-minimap-start-x) + 495px) calc(50% + var(--rs-minimap-start-y) - 2260px); }
+   94.130% { background-position: calc(50% + var(--rs-minimap-start-x) + 491px) calc(50% + var(--rs-minimap-start-y) - 2255px); }
+   94.819% { background-position: calc(50% + var(--rs-minimap-start-x) + 413px) calc(50% + var(--rs-minimap-start-y) - 2255px); }
+   95.512% { background-position: calc(50% + var(--rs-minimap-start-x) + 412px) calc(50% + var(--rs-minimap-start-y) - 2177px); }
+   95.755% { background-position: calc(50% + var(--rs-minimap-start-x) + 392px) calc(50% + var(--rs-minimap-start-y) - 2159px); }
+   96.869% { background-position: calc(50% + var(--rs-minimap-start-x) + 266px) calc(50% + var(--rs-minimap-start-y) - 2159px); }
+   97.191% { background-position: calc(50% + var(--rs-minimap-start-x) + 265px) calc(50% + var(--rs-minimap-start-y) - 2195px); }
+   97.921% { background-position: calc(50% + var(--rs-minimap-start-x) + 208px) calc(50% + var(--rs-minimap-start-y) - 2254px); }
+   98.593% { background-position: calc(50% + var(--rs-minimap-start-x) + 132px) calc(50% + var(--rs-minimap-start-y) - 2254px); }
+   98.664% { background-position: calc(50% + var(--rs-minimap-start-x) + 127px) calc(50% + var(--rs-minimap-start-y) - 2248px); }
+   98.894% { background-position: calc(50% + var(--rs-minimap-start-x) + 101px) calc(50% + var(--rs-minimap-start-y) - 2248px); }
+   98.966% { background-position: calc(50% + var(--rs-minimap-start-x) + 96px) calc(50% + var(--rs-minimap-start-y) - 2254px); }
+  100.000% { background-position: calc(50% + var(--rs-minimap-start-x) - 21px) calc(50% + var(--rs-minimap-start-y) - 2254px); }
+}
+
+
+/* =====================================================================
+   3. USE THIS ROUTE ONLY ON THE MANGA LIST
+   ===================================================================== */
+
+@supports (animation-timeline: scroll()) {
+  html body.ownlist[data-work="manga"]::before,
+  html body.ownlist.manga::before {
+    animation-name: rs-minimap-route-manga !important;
+    animation-range-start: 0px !important;
+    animation-range-end: var(--rs-minimap-route-scroll-distance) !important;
+  }
+}
+
+
+/* Reduced-motion keeps the Manga minimap parked at Arceuus instead of
+   falling back to the Anime/Tree Gnome Village origin. */
+@media (prefers-reduced-motion: reduce) {
+  html body.ownlist[data-work="manga"]::before,
+  html body.ownlist.manga::before {
+    animation: none !important;
+    background-position:
+      calc(50% + var(--rs-minimap-start-x))
+      calc(50% + var(--rs-minimap-start-y)) !important;
+  }
+}
