@@ -1,0 +1,593 @@
+/* MODULE: 32-search-style-filter-v1.css
+   V23 header/dialog pass:
+   1. Repairs MAL's nav search box that our early CSS accidentally suppressed.
+   2. Gives the banner Style/Design Settings control RuneScape typography/panel styling.
+   3. Reworks the Filters dialog into an OSRS-settings-like interface.
+
+   Card layout, minimap, footer, status tabs and sidebar are untouched.
+*/
+
+
+/* =====================================================================
+   1. SEARCH BUTTON — FUNCTIONAL REPAIR + OSRS INPUT
+   ---------------------------------------------------------------------
+   MAL's own JS toggles class="open" on #search-box.
+   The old theme had:
+       #search-box { display:none !important; }
+   which meant the JS worked but could never make the box visible.
+   ===================================================================== */
+
+html body.ownlist .status-menu-container .search-container {
+  position: relative !important;
+  width: 46px !important;
+  height: 89px !important;
+  overflow: visible !important;
+  z-index: 90 !important;
+}
+
+html body.ownlist .status-menu-container .search-container #search-button {
+  position: absolute !important;
+  inset: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 46px !important;
+  height: 89px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #e4c36f !important;
+  font-size: 18px !important;
+
+  background: transparent !important;
+  border-left: 1px solid rgba(0,0,0,.30) !important;
+
+  z-index: 3 !important;
+}
+
+html body.ownlist .status-menu-container .search-container #search-button:hover {
+  color: #ffff00 !important;
+  background: rgba(0,0,0,.14) !important;
+}
+
+
+/* Closed state: it still EXISTS, because MAL's JS needs to toggle .open. */
+html body.ownlist .status-menu-container .search-container #search-box {
+  position: absolute !important;
+  top: 50% !important;
+  right: 46px !important;
+
+  display: inline-block !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+
+  box-sizing: border-box !important;
+
+  width: 0 !important;
+  height: 38px !important;
+
+  margin: 0 !important;
+  padding: 3px !important;
+
+  transform: translateY(-50%) !important;
+
+  overflow: hidden !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #726451 !important;
+  background: #2d2a22 !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.55),
+    0 3px 8px rgba(0,0,0,.45) !important;
+
+  transition:
+    width .22s ease,
+    opacity .14s ease,
+    visibility 0s linear .22s !important;
+
+  z-index: 2 !important;
+}
+
+
+/* MAL adds this class when the magnifying glass is clicked. */
+html body.ownlist .status-menu-container .search-container #search-box.open {
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  width: 250px !important;
+
+  transition:
+    width .22s ease,
+    opacity .14s ease !important;
+}
+
+html body.ownlist .status-menu-container .search-container #search-box input {
+  display: block !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 30px !important;
+
+  margin: 0 !important;
+  padding: 4px 8px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #554c41 !important;
+  border-radius: 0 !important;
+
+  background: #17130f !important;
+  color: #f0dfb4 !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 16px !important;
+  line-height: 20px !important;
+
+  text-shadow: 1px 1px 0 #000 !important;
+
+  box-shadow: inset 0 1px 4px rgba(0,0,0,.55) !important;
+}
+
+html body.ownlist .status-menu-container .search-container #search-box input:focus {
+  border-color: #726451 !important;
+  outline-color: #a08d6e !important;
+}
+
+
+/* =====================================================================
+   2. STYLE / DESIGN SETTINGS BUTTON
+   ===================================================================== */
+
+html body.ownlist .cover-block .btn-list-setting {
+  box-sizing: border-box !important;
+
+  padding: 7px 10px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #726451 !important;
+  border-radius: 0 !important;
+
+  background:
+    linear-gradient(rgba(255,255,255,.025), rgba(0,0,0,.04)),
+    #3e3529 !important;
+
+  color: #ff9933 !important;
+  opacity: .9 !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.28),
+    0 2px 5px rgba(0,0,0,.42) !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+
+  text-shadow: 1px 1px 0 #000 !important;
+}
+
+html body.ownlist .cover-block .btn-list-setting .text {
+  font: inherit !important;
+  color: inherit !important;
+}
+
+html body.ownlist .cover-block .btn-list-setting i {
+  color: #d8c06d !important;
+  font-size: 13px !important;
+  vertical-align: 1px !important;
+}
+
+html body.ownlist .cover-block .btn-list-setting:hover {
+  color: #ffff00 !important;
+  opacity: 1 !important;
+  background:
+    linear-gradient(rgba(255,255,255,.035), rgba(0,0,0,.02)),
+    #554c41 !important;
+}
+
+html body.ownlist .cover-block .btn-list-setting:hover i {
+  color: #ffff00 !important;
+}
+
+
+/* =====================================================================
+   3. ADVANCED FILTERS — OSRS SETTINGS WINDOW
+   ===================================================================== */
+
+html body.ownlist #advanced-options {
+  box-sizing: border-box !important;
+
+  width: min(900px, calc(100vw - 48px)) !important;
+  min-height: 0 !important;
+
+  margin: 0 auto !important;
+  padding: 22px 24px 24px !important;
+
+  border: 3px solid #17130f !important;
+  outline: 2px solid #726451 !important;
+  border-radius: 0 !important;
+
+  background:
+    linear-gradient(rgba(255,255,255,.018), rgba(0,0,0,.025)),
+    #3e3529 !important;
+
+  color: #e8d8b5 !important;
+
+  box-shadow:
+    inset 0 0 0 1px #2d2a22,
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 14px 40px rgba(0,0,0,.78) !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 16px !important;
+  line-height: 20px !important;
+
+  text-shadow: 1px 1px 0 rgba(0,0,0,.72) !important;
+
+  z-index: 1101 !important;
+}
+
+
+/* Close button: small stone square / OSRS-style X. */
+html body.ownlist #advanced-options #fancybox-close {
+  position: absolute !important;
+  top: -14px !important;
+  right: -14px !important;
+
+  display: block !important;
+
+  width: 28px !important;
+  height: 28px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 2px solid #17130f !important;
+  outline: 1px solid #8d7c61 !important;
+  border-radius: 2px !important;
+
+  background: #554c41 !important;
+
+  box-shadow: 0 2px 5px rgba(0,0,0,.65) !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+
+  z-index: 5 !important;
+}
+
+html body.ownlist #advanced-options #fancybox-close::before {
+  content: "×" !important;
+
+  position: absolute !important;
+  inset: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  color: #ff9933 !important;
+
+  font-family: "RS Chat 07", "RSChat07", sans-serif !important;
+  font-size: 25px !important;
+  font-weight: 700 !important;
+  line-height: 24px !important;
+
+  text-shadow: 1px 1px 0 #000 !important;
+}
+
+html body.ownlist #advanced-options #fancybox-close:hover {
+  background: #625848 !important;
+}
+
+html body.ownlist #advanced-options #fancybox-close:hover::before {
+  color: #ffff00 !important;
+}
+
+
+/* Filter / Sort section headings. */
+html body.ownlist #advanced-options .advanced-options-header {
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+
+  margin: 0 auto 12px !important;
+  padding: 2px 2px 8px !important;
+
+  border-bottom: 1px solid #726451 !important;
+
+  color: #ff9933 !important;
+
+  font-family: "RS Large", "RSLarge", Georgia, serif !important;
+  font-size: 22px !important;
+  font-weight: 400 !important;
+  line-height: 24px !important;
+
+  text-shadow: 1px 1px 0 #000 !important;
+}
+
+html body.ownlist #advanced-options .advanced-options-header .description {
+  margin-left: 10px !important;
+
+  color: #e0c879 !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+}
+
+
+/* Sections and rows. */
+html body.ownlist #advanced-options .filter,
+html body.ownlist #advanced-options .sort {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+html body.ownlist #advanced-options .sort {
+  margin-top: 22px !important;
+}
+
+html body.ownlist #advanced-options .filter-widget,
+html body.ownlist #advanced-options .sort-widget {
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+
+  margin: 0 auto !important;
+  padding: 5px 4px !important;
+
+  min-height: 40px !important;
+}
+
+html body.ownlist #advanced-options .filter-widget:last-of-type,
+html body.ownlist #advanced-options .sort-widget:last-of-type {
+  padding-bottom: 8px !important;
+}
+
+
+/* Left-hand labels. */
+html body.ownlist #advanced-options .filter-widget .widget-header,
+html body.ownlist #advanced-options .sort-widget .widget-header {
+  display: inline-block !important;
+
+  width: 126px !important;
+
+  margin: 0 8px 0 0 !important;
+
+  color: #f0dfb4 !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 30px !important;
+
+  vertical-align: middle !important;
+}
+
+html body.ownlist #advanced-options .filter-widget .text {
+  color: #e8d8b5 !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 30px !important;
+
+  vertical-align: middle !important;
+}
+
+
+/* Inputs / selects. */
+html body.ownlist #advanced-options select,
+html body.ownlist #advanced-options input[type="text"] {
+  box-sizing: border-box !important;
+
+  height: 32px !important;
+
+  margin: 0 5px 0 0 !important;
+  padding: 4px 28px 4px 8px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #554c41 !important;
+  border-radius: 0 !important;
+
+  background-color: #211c17 !important;
+  color: #f0dfb4 !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 16px !important;
+  line-height: 22px !important;
+
+  text-shadow: 1px 1px 0 #000 !important;
+
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.02) !important;
+}
+
+html body.ownlist #advanced-options input[type="text"] {
+  width: 390px !important;
+  padding-right: 8px !important;
+}
+
+html body.ownlist #advanced-options select:focus,
+html body.ownlist #advanced-options input[type="text"]:focus {
+  outline-color: #8d7c61 !important;
+}
+
+html body.ownlist #advanced-options select:disabled {
+  color: #766c5d !important;
+  opacity: .72 !important;
+}
+
+
+/* Preserve sensible widths for MAL's filter fields. */
+html body.ownlist #advanced-options .filter-widget.airing-status select {
+  width: 170px !important;
+}
+
+html body.ownlist #advanced-options .filter-widget.producer select {
+  width: 380px !important;
+}
+
+html body.ownlist #advanced-options .filter-widget.aired-date select.year {
+  width: 100px !important;
+}
+
+html body.ownlist #advanced-options .filter-widget.aired-date select.month,
+html body.ownlist #advanced-options .filter-widget.aired-date select.day {
+  width: 72px !important;
+}
+
+html body.ownlist #advanced-options .filter-widget.aired-season select.year {
+  width: 100px !important;
+}
+
+html body.ownlist #advanced-options .filter-widget.aired-season select.season {
+  width: 130px !important;
+}
+
+html body.ownlist #advanced-options .sort-widget select {
+  width: 200px !important;
+}
+
+
+/* Sort direction radio buttons become little stone controls. */
+html body.ownlist #advanced-options .sort-widget input[type="radio"] {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+html body.ownlist #advanced-options .sort-widget input[type="radio"] + label {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  box-sizing: border-box !important;
+
+  min-width: 62px !important;
+  height: 32px !important;
+
+  margin: 0 3px !important;
+  padding: 3px 8px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #726451 !important;
+  border-radius: 2px !important;
+
+  background: #554c41 !important;
+  color: #e8d8b5 !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+
+  text-shadow: 1px 1px 0 #000 !important;
+
+  vertical-align: middle !important;
+}
+
+html body.ownlist #advanced-options .sort-widget input[type="radio"] + label i {
+  margin-right: 3px !important;
+  color: #c4b48f !important;
+}
+
+html body.ownlist #advanced-options .sort-widget input[type="radio"]:checked + label {
+  background: #6a5e49 !important;
+  color: #ffff00 !important;
+  outline-color: #a88e55 !important;
+}
+
+html body.ownlist #advanced-options .sort-widget input[type="radio"]:checked + label i {
+  color: #ffff00 !important;
+}
+
+html body.ownlist #advanced-options .sort-widget input[type="radio"]:disabled + label {
+  color: #71685a !important;
+  outline-color: #463f35 !important;
+  opacity: .65 !important;
+}
+
+
+/* Apply / Clear footer area. */
+html body.ownlist #advanced-options .advanced-options-button {
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+
+  margin: 16px auto 0 !important;
+  padding: 14px 0 0 !important;
+
+  border-top: 1px solid #726451 !important;
+
+  text-align: center !important;
+}
+
+html body.ownlist #advanced-options .btn-apply,
+html body.ownlist #advanced-options .btn-clear {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  box-sizing: border-box !important;
+
+  width: 150px !important;
+  height: 36px !important;
+
+  margin: 0 5px !important;
+  padding: 0 !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #726451 !important;
+  border-radius: 2px !important;
+
+  background: #554c41 !important;
+  color: #e6c46c !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  line-height: 22px !important;
+
+  text-shadow: 1px 1px 0 #000 !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 2px 4px rgba(0,0,0,.34) !important;
+}
+
+html body.ownlist #advanced-options .btn-apply:hover,
+html body.ownlist #advanced-options .btn-clear:hover {
+  background: #665b49 !important;
+  color: #ffff00 !important;
+}
+
+
+/* Responsive fallback. */
+@media (max-width: 940px) {
+  html body.ownlist #advanced-options {
+    width: calc(100vw - 28px) !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  html body.ownlist #advanced-options .advanced-options-header .description {
+    display: block !important;
+    margin: 4px 0 0 !important;
+  }
+
+  html body.ownlist #advanced-options .filter-widget .widget-header,
+  html body.ownlist #advanced-options .sort-widget .widget-header {
+    width: 112px !important;
+  }
+
+  html body.ownlist #advanced-options input[type="text"],
+  html body.ownlist #advanced-options .filter-widget.producer select {
+    width: min(390px, calc(100vw - 190px)) !important;
+  }
+}

@@ -9,27 +9,18 @@
 html body.ownlist #footer-block {
   width: 470px !important;
   max-width: calc(100vw - 32px) !important;
-
-  /* Prompt + thumbs remain absolutely positioned in the first 130px.
-     Everything below them now flows naturally instead of being pinned
-     to the bottom of an artificially tall panel. */
   min-height: 0 !important;
   height: auto !important;
-
   padding: 130px 20px 18px !important;
 }
 
-
-/* MAL's own two legal lines: make them actually readable. */
 html body.ownlist #copyright,
 html body.ownlist #recaptcha-terms {
   color: #b8aa8f !important;
-
   font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
   font-size: 14px !important;
   font-weight: 400 !important;
   line-height: 18px !important;
-
   text-shadow: 1px 1px 0 rgba(0,0,0,.65) !important;
 }
 
@@ -42,10 +33,6 @@ html body.ownlist #recaptcha-terms a {
   font: inherit !important;
 }
 
-
-/* The attribution now participates in normal document flow, so it sits
-   immediately below the Terms line rather than being anchored far away
-   at the bottom of the panel. */
 html body.ownlist #footer-block::after {
   content:
     "Unofficial fan-made MyAnimeList theme by Tafixados.\A"
@@ -53,9 +40,7 @@ html body.ownlist #footer-block::after {
     "This theme is not affiliated with or endorsed by Jagex or MyAnimeList." !important;
 
   position: static !important;
-
   display: block !important;
-
   width: 100% !important;
   box-sizing: border-box !important;
 
@@ -73,15 +58,10 @@ html body.ownlist #footer-block::after {
 
   text-align: center !important;
   white-space: pre-line !important;
-
   text-shadow: 1px 1px 0 rgba(0,0,0,.72) !important;
-
   pointer-events: none !important;
 }
 
-
-/* On small windows keep the larger text, just let the panel use the
-   available width and wrap naturally. */
 @media (max-width: 520px) {
   html body.ownlist #footer-block {
     width: calc(100vw - 28px) !important;
