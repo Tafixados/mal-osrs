@@ -1,0 +1,7 @@
+/* Tafixados MAL-OSRS — development v2.2
+   Base: tested clean-v2.1 parity build
+   Feature: OSRS quest-completion confirmation dialog
+*/
+
+@import url("./theme-clean-v2-1-parity.css");
+@import url("./css/11-quest-completion-dialog-v1.css");
