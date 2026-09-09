@@ -1,5 +1,5 @@
-/* Tafixados MAL OSRS — modular master stylesheet v24
-   V24 repositions the search field into the banner and fixes full-cell search hover.
+/* Tafixados MAL OSRS — modular master stylesheet v25
+   V25 keeps V23's working search logic, fixes its placement/hover without changing nav geometry, and themes the Score editor.
 */
 
 @import url("./osrs-ui-font-layer-v4-clean.css");
@@ -29,4 +29,4 @@
 @import url("./css/30-footer-legal-cursor-v1.css");
 @import url("./css/31-footer-readable-legal-v1.css");
 @import url("./css/32-search-style-filter-v1.css");
-@import url("./css/33-search-position-polish-v1.css");
+@import url("./css/34-search-score-polish-v1.css");

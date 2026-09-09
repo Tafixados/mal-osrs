@@ -1,0 +1,293 @@
+/* MODULE: 34-search-score-polish-v1.css
+   V25:
+   - restores the WORKING V23 search mechanics
+   - positions the open field at the banner's lower-right corner
+   - keeps the search nav slot fixed at its original 46px grid track
+   - prevents click/open state from shifting the navigation row
+   - makes the whole search slot highlight consistently
+   - themes the inline Score editor and its native dropdown as far as CSS allows
+*/
+
+
+/* =====================================================================
+   1. SEARCH — REVERT V24 GEOMETRY, KEEP V23 FUNCTIONALITY
+   ===================================================================== */
+
+/* IMPORTANT:
+   02-tabs.css defines the final status-menu grid column as 46px.
+   Do NOT make this container wider than that track; doing so causes the
+   click-induced layout shift seen in V24. */
+html body.ownlist .status-menu-container .search-container {
+  position: relative !important;
+
+  width: 46px !important;
+  min-width: 46px !important;
+  max-width: 46px !important;
+
+  height: 89px !important;
+  min-height: 89px !important;
+  max-height: 89px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: visible !important;
+  z-index: 120 !important;
+}
+
+
+/* Highlight the CONTAINER, not a wider child, so the hover always matches
+   the actual 46px grid slot and never spills/shifts sideways. */
+html body.ownlist .status-menu-container .search-container:hover,
+html body.ownlist .status-menu-container .search-container:has(#search-box.open) {
+  background:
+    linear-gradient(rgba(255,255,255,.025), rgba(0,0,0,.08)),
+    rgba(23,19,15,.22) !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(114,100,81,.24) !important;
+}
+
+
+html body.ownlist .status-menu-container .search-container #search-button {
+  position: absolute !important;
+  inset: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  box-sizing: border-box !important;
+
+  width: 46px !important;
+  min-width: 46px !important;
+  max-width: 46px !important;
+
+  height: 89px !important;
+  min-height: 89px !important;
+  max-height: 89px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  border-left: 1px solid rgba(0,0,0,.30) !important;
+  border-right: 0 !important;
+
+  color: #e4c36f !important;
+
+  z-index: 3 !important;
+}
+
+html body.ownlist .status-menu-container .search-container #search-button:hover,
+html body.ownlist .status-menu-container:has(#search-box.open) #search-button {
+  color: #ffff00 !important;
+  background: transparent !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   SEARCH FIELD
+   MAL itself toggles #search-box.open.
+   Keep V23's working visibility mechanism, but relocate the box.
+
+   The parent search cell is already the far-right edge of the nav.
+   Therefore:
+      right: 0
+      bottom: calc(100% + 8px)
+   aligns the field's lower-right corner just ABOVE the search button,
+   inside the lower-right part of the banner.
+   --------------------------------------------------------------------- */
+
+html body.ownlist .status-menu-container .search-container #search-box {
+  position: absolute !important;
+
+  top: auto !important;
+  right: 0 !important;
+  bottom: calc(100% + 8px) !important;
+  left: auto !important;
+
+  display: block !important;
+
+  visibility: hidden !important;
+  opacity: 0 !important;
+
+  box-sizing: border-box !important;
+
+  width: 0 !important;
+  height: 42px !important;
+
+  margin: 0 !important;
+  padding: 3px !important;
+
+  transform: none !important;
+  transform-origin: right center !important;
+
+  overflow: hidden !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #726451 !important;
+
+  background: #2d2a22 !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.55),
+    0 3px 8px rgba(0,0,0,.55) !important;
+
+  transition:
+    width .20s ease,
+    opacity .12s ease,
+    visibility 0s linear .20s !important;
+
+  z-index: 160 !important;
+}
+
+
+html body.ownlist .status-menu-container .search-container #search-box.open {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  width: 300px !important;
+
+  transition:
+    width .20s ease,
+    opacity .12s ease !important;
+}
+
+
+html body.ownlist .status-menu-container .search-container #search-box input {
+  display: block !important;
+
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  height: 34px !important;
+
+  margin: 0 !important;
+  padding: 4px 9px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #554c41 !important;
+  border-radius: 0 !important;
+
+  background: #17130f !important;
+  color: #f0dfb4 !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 17px !important;
+  line-height: 24px !important;
+
+  text-shadow: 1px 1px 0 #000 !important;
+
+  box-shadow: inset 0 1px 4px rgba(0,0,0,.55) !important;
+}
+
+html body.ownlist .status-menu-container .search-container #search-box input:focus {
+  border-color: #726451 !important;
+  outline-color: #a08d6e !important;
+}
+
+
+@media (max-width: 1100px) {
+  html body.ownlist .status-menu-container .search-container #search-box.open {
+    width: 250px !important;
+  }
+}
+
+
+
+/* =====================================================================
+   2. INLINE SCORE EDITOR
+   ===================================================================== */
+
+/* MAL swaps the static score text for a native <select> while editing.
+   We can fully theme the CLOSED control. The operating system/browser still
+   owns some parts of the expanded popup, but color-scheme + option styling
+   gets Chromium/Firefox much closer to the rest of the theme. */
+
+html body.ownlist
+.list-table .list-table-data .data.score select {
+  box-sizing: border-box !important;
+
+  width: 58px !important;
+  min-width: 58px !important;
+  max-width: 58px !important;
+
+  height: 27px !important;
+  min-height: 27px !important;
+  max-height: 27px !important;
+
+  margin: 0 0 0 2px !important;
+  padding: 2px 5px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #726451 !important;
+  border-radius: 0 !important;
+
+  background-color: #2d2a22 !important;
+  color: #f3dfaa !important;
+
+  color-scheme: dark !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 21px !important;
+
+  text-align: center !important;
+  text-shadow: 1px 1px 0 #000 !important;
+
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,.55),
+    0 1px 2px rgba(0,0,0,.28) !important;
+
+  vertical-align: middle !important;
+
+  cursor: var(--cursor-sword) !important;
+}
+
+
+html body.ownlist
+.list-table .list-table-data .data.score select:hover {
+  background-color: #554c41 !important;
+  color: #ffff00 !important;
+}
+
+
+html body.ownlist
+.list-table .list-table-data .data.score select:focus {
+  background-color: #3e3529 !important;
+  color: #ffff00 !important;
+  outline-color: #a08d6e !important;
+}
+
+
+/* Expanded native menu where supported. */
+html body.ownlist
+.list-table .list-table-data .data.score select option {
+  background: #2d2a22 !important;
+  color: #f0dfb4 !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+
+
+html body.ownlist
+.list-table .list-table-data .data.score select option:checked {
+  background: #554c41 !important;
+  color: #ffff00 !important;
+}
+
+
+/* Keep the edit control above the tile's decorative notch overlays. */
+html body.ownlist
+.list-table .list-table-data .data.score select,
+html body.ownlist
+.list-table .list-table-data .data.score form {
+  position: relative !important;
+  z-index: 8 !important;
+}
