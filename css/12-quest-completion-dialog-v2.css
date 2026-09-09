@@ -1,0 +1,323 @@
+/* MAL-OSRS — Quest Completion dialog v2
+   Fixes the first-pass Fancybox geometry and scrollbars.
+
+   This module assumes MAL's old Fancybox-style completion popup:
+   #fancybox-wrap > #fancybox-outer > #fancybox-content
+*/
+
+:root {
+  --osrs-quest-complete-scroll:
+    url("https://i.imgur.com/ImbCBCz.png");
+  --osrs-quest-close:
+    url("https://i.imgur.com/B2GzCjT.png");
+}
+
+
+/* =====================================================================
+   1. FORCE THE FANCYBOX SHELL TO THE PARCHMENT SIZE
+   ===================================================================== */
+
+/* The original MAL popup is tiny. Fancybox was keeping those old dimensions
+   and adding scrollbars around our much larger parchment. Override the actual
+   Fancybox shell instead of only the child that contains the buttons. */
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+
+  width: 700px !important;
+  height: 489px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: translate(-50%, -50%) !important;
+
+  overflow: visible !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+
+  z-index: 11010 !important;
+}
+
+
+html body.ownlist #fancybox-outer:has(input[value="Set as Completed"]),
+html body.ownlist #fancybox-content:has(input[value="Set as Completed"]) {
+  position: relative !important;
+
+  box-sizing: border-box !important;
+
+  width: 700px !important;
+  min-width: 700px !important;
+  max-width: 700px !important;
+
+  height: 489px !important;
+  min-height: 489px !important;
+  max-height: 489px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: visible !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* Remove any inner element from v2.2 that was given its own fixed 560x355 box. */
+html body.ownlist #fancybox-content:has(input[value="Set as Completed"])
+div:has(> input[value="Set as Completed"]):has(> input[value="Do not set as Completed"]) {
+  position: static !important;
+
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: visible !important;
+
+  background: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+}
+
+
+/* =====================================================================
+   2. PARCHMENT
+   ===================================================================== */
+
+html body.ownlist #fancybox-content:has(input[value="Set as Completed"]) {
+  background:
+    var(--osrs-quest-complete-scroll)
+    center center / contain
+    no-repeat !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+
+  text-align: center !important;
+}
+
+
+/* Main quest-completion copy.
+   The updated image no longer has "Congratulations!" baked into it. */
+html body.ownlist #fancybox-content:has(input[value="Set as Completed"])::before {
+  content:
+    "Congratulations!\A"
+    "You have completed this quest!\A"
+    "\A"
+    "You are awarded:\A"
+    "1 Quest Point";
+
+  position: absolute !important;
+
+  top: 105px !important;
+  left: 145px !important;
+  right: 120px !important;
+
+  display: block !important;
+
+  color: #2b1a10 !important;
+
+  font-family: "RS NPC Chat", "RS Chat 07", serif !important;
+  font-size: 27px !important;
+  font-weight: 400 !important;
+  line-height: 29px !important;
+
+  text-align: center !important;
+  white-space: pre-line !important;
+
+  text-shadow: none !important;
+
+  pointer-events: none !important;
+  z-index: 4 !important;
+}
+
+
+/* Replacement for MAL's native:
+     "Do you want to set this entry as completed?"
+*/
+html body.ownlist #fancybox-content:has(input[value="Set as Completed"])::after {
+  content: "Set quest as 'Completed'?";
+
+  position: absolute !important;
+
+  top: 326px !important;
+  left: 150px !important;
+  right: 120px !important;
+
+  display: block !important;
+
+  color: #2b1a10 !important;
+
+  font-family: "RS NPC Chat", "RS Chat 07", serif !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  line-height: 27px !important;
+
+  text-align: center !important;
+
+  text-shadow: none !important;
+
+  pointer-events: none !important;
+  z-index: 4 !important;
+}
+
+
+/* =====================================================================
+   3. ACTION OPTIONS
+   ===================================================================== */
+
+/* Turn MAL's native controls into floating dialogue choices. */
+html body.ownlist #fancybox-content input[value="Set as Completed"],
+html body.ownlist #fancybox-content input[value="Do not set as Completed"] {
+  position: absolute !important;
+  left: 50% !important;
+
+  display: block !important;
+
+  box-sizing: border-box !important;
+
+  width: 330px !important;
+  min-width: 330px !important;
+  max-width: 330px !important;
+
+  height: 30px !important;
+  min-height: 30px !important;
+  max-height: 30px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: translateX(-50%) !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+
+  color: #31180c !important;
+
+  font-family: "RS NPC Chat", "RS Chat 07", serif !important;
+  font-size: 21px !important;
+  font-weight: 400 !important;
+  line-height: 28px !important;
+
+  text-align: center !important;
+  text-shadow: none !important;
+
+  cursor: var(--cursor-sword, pointer) !important;
+
+  z-index: 7 !important;
+}
+
+html body.ownlist #fancybox-content input[value="Set as Completed"] {
+  top: 367px !important;
+}
+
+html body.ownlist #fancybox-content input[value="Do not set as Completed"] {
+  top: 405px !important;
+}
+
+html body.ownlist #fancybox-content input[value="Set as Completed"]:hover,
+html body.ownlist #fancybox-content input[value="Do not set as Completed"]:hover,
+html body.ownlist #fancybox-content input[value="Set as Completed"]:focus,
+html body.ownlist #fancybox-content input[value="Do not set as Completed"]:focus {
+  color: #9b271d !important;
+  filter: brightness(1.20) !important;
+}
+
+
+/* =====================================================================
+   4. CLOSE BUTTON
+   ===================================================================== */
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) #fancybox-close {
+  position: absolute !important;
+
+  /* Deliberately moved inward onto the parchment. */
+  top: 64px !important;
+  right: 78px !important;
+
+  display: block !important;
+
+  width: 34px !important;
+  height: 34px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background:
+    var(--osrs-quest-close)
+    center / contain
+    no-repeat !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+
+  filter: brightness(.90) !important;
+
+  cursor: var(--cursor-sword, pointer) !important;
+
+  z-index: 20 !important;
+}
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) #fancybox-close:hover {
+  filter: brightness(1.40) saturate(1.08) !important;
+}
+
+
+/* =====================================================================
+   5. REMOVE FANCYBOX'S BLACK CHROME / SCROLLBARS
+   ===================================================================== */
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) *,
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) {
+  scrollbar-width: none !important;
+}
+
+html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) *::-webkit-scrollbar {
+  display: none !important;
+}
+
+
+/* =====================================================================
+   6. RESPONSIVE FALLBACK
+   ===================================================================== */
+
+@media (max-width: 760px), (max-height: 560px) {
+  html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) {
+    transform: translate(-50%, -50%) scale(.82) !important;
+  }
+}
+
+@media (max-width: 610px), (max-height: 470px) {
+  html body.ownlist #fancybox-wrap:has(input[value="Set as Completed"]) {
+    transform: translate(-50%, -50%) scale(.68) !important;
+  }
+}
