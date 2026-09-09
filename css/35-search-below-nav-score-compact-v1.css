@@ -1,0 +1,269 @@
+/* MODULE: 35-search-below-nav-score-compact-v1.css
+   V26:
+   - fixes the search geometry using the ACTUAL 54px final grid slot
+   - allows the search field to extend outside the nav's formerly clipped area
+   - opens search BELOW the navigation strip instead of over the banner/tabs
+   - makes hover fill the entire search navigation cell
+   - compacts the inline Score selector and native option list
+*/
+
+
+/* =====================================================================
+   1. SEARCH — ACTUAL NAV GEOMETRY + NO CLIPPING
+   ===================================================================== */
+
+/* 09-ui-polish-v44.css is later than 02-tabs.css and defines the final
+   seventh grid track as 54px. Keep container/button/grid in agreement. */
+html body.ownlist .status-menu-container .status-menu {
+  grid-template-columns: repeat(6, minmax(0, 1fr)) 54px !important;
+
+  /* REQUIRED: otherwise an absolutely-positioned search box that leaves
+     the 89px ribbon is clipped and looks like it never opened. */
+  overflow: visible !important;
+}
+
+html body.ownlist .status-menu-container,
+html body.ownlist .status-menu-container.fixed {
+  overflow: visible !important;
+}
+
+
+/* Full real seventh cell. */
+html body.ownlist .status-menu-container .search-container {
+  position: relative !important;
+
+  grid-column: 7 !important;
+  grid-row: 1 !important;
+
+  box-sizing: border-box !important;
+
+  width: 54px !important;
+  min-width: 54px !important;
+  max-width: 54px !important;
+
+  height: 89px !important;
+  min-height: 89px !important;
+  max-height: 89px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: visible !important;
+
+  border-left: 1px solid rgba(0,0,0,.42) !important;
+  background: rgba(0,0,0,.08) !important;
+
+  z-index: 300 !important;
+}
+
+
+/* Hover/open state fills the ENTIRE 54x89 cell. */
+html body.ownlist .status-menu-container .search-container:hover,
+html body.ownlist .status-menu-container .search-container:has(#search-box.open) {
+  background:
+    linear-gradient(rgba(255,255,255,.025), rgba(0,0,0,.08)),
+    rgba(23,19,15,.28) !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(114,100,81,.30) !important;
+}
+
+
+html body.ownlist .status-menu-container .search-container #search-button {
+  position: absolute !important;
+  inset: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  box-sizing: border-box !important;
+
+  width: 54px !important;
+  min-width: 54px !important;
+  max-width: 54px !important;
+
+  height: 89px !important;
+  min-height: 89px !important;
+  max-height: 89px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+
+  color: #e4c36f !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+
+  z-index: 3 !important;
+}
+
+html body.ownlist .status-menu-container .search-container #search-button:hover,
+html body.ownlist .status-menu-container .search-container:has(#search-box.open) #search-button {
+  color: #ffff00 !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   SEARCH FIELD — BELOW NAV
+
+   Parent top = navigation ribbon.
+   top: calc(100% + 8px) places the field immediately BELOW the ribbon.
+   right: 0 keeps its right edge aligned to the right edge of the search cell.
+   --------------------------------------------------------------------- */
+html body.ownlist .status-menu-container .search-container #search-box {
+  position: absolute !important;
+
+  top: calc(100% + 8px) !important;
+  right: 0 !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  display: block !important;
+
+  visibility: hidden !important;
+  opacity: 0 !important;
+
+  box-sizing: border-box !important;
+
+  width: 0 !important;
+  height: 40px !important;
+
+  margin: 0 !important;
+  padding: 3px !important;
+
+  transform: none !important;
+  transform-origin: right top !important;
+
+  overflow: hidden !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #726451 !important;
+
+  background: #2d2a22 !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.55),
+    0 4px 10px rgba(0,0,0,.62) !important;
+
+  transition:
+    width .20s ease,
+    opacity .12s ease,
+    visibility 0s linear .20s !important;
+
+  z-index: 500 !important;
+}
+
+
+html body.ownlist .status-menu-container .search-container #search-box.open {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  width: 280px !important;
+
+  transition:
+    width .20s ease,
+    opacity .12s ease !important;
+}
+
+
+html body.ownlist .status-menu-container .search-container #search-box input {
+  display: block !important;
+
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  height: 32px !important;
+
+  margin: 0 !important;
+  padding: 3px 8px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #554c41 !important;
+  border-radius: 0 !important;
+
+  background: #17130f !important;
+  color: #f0dfb4 !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 16px !important;
+  line-height: 22px !important;
+
+  text-shadow: 1px 1px 0 #000 !important;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,.55) !important;
+}
+
+html body.ownlist .status-menu-container .search-container #search-box input:focus {
+  border-color: #726451 !important;
+  outline-color: #a08d6e !important;
+}
+
+
+/* =====================================================================
+   2. SCORE SELECT — COMPACT OSRS VERSION
+   ===================================================================== */
+
+html body.ownlist
+.list-table .list-table-data .data.score select {
+  box-sizing: border-box !important;
+
+  width: 43px !important;
+  min-width: 43px !important;
+  max-width: 43px !important;
+
+  height: 22px !important;
+  min-height: 22px !important;
+  max-height: 22px !important;
+
+  margin: 0 0 0 2px !important;
+  padding: 0 2px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #726451 !important;
+  border-radius: 0 !important;
+
+  background-color: #2d2a22 !important;
+  color: #f3dfaa !important;
+
+  color-scheme: dark !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 16px !important;
+
+  text-align: center !important;
+  text-shadow: 1px 1px 0 #000 !important;
+
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,.55),
+    0 1px 2px rgba(0,0,0,.28) !important;
+
+  vertical-align: middle !important;
+  cursor: var(--cursor-sword) !important;
+}
+
+
+html body.ownlist
+.list-table .list-table-data .data.score select option {
+  margin: 0 !important;
+  padding: 0 3px !important;
+
+  background: #2d2a22 !important;
+  color: #f0dfb4 !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 14px !important;
+}
+
+
+html body.ownlist
+.list-table .list-table-data .data.score select option:checked {
+  background: #554c41 !important;
+  color: #ffff00 !important;
+}

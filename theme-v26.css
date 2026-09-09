@@ -1,5 +1,5 @@
-/* Tafixados MAL OSRS — modular master stylesheet v25
-   V25 keeps V23's working search logic, fixes its placement/hover without changing nav geometry, and themes the Score editor.
+/* Tafixados MAL OSRS — modular master stylesheet v26
+   V26 fixes search clipping using the actual 54px nav slot, opens it below the ribbon, and compacts the Score selector.
 */
 
 @import url("./osrs-ui-font-layer-v4-clean.css");
@@ -30,3 +30,4 @@
 @import url("./css/31-footer-readable-legal-v1.css");
 @import url("./css/32-search-style-filter-v1.css");
 @import url("./css/34-search-score-polish-v1.css");
+@import url("./css/35-search-below-nav-score-compact-v1.css");
