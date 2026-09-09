@@ -1,0 +1,825 @@
+/* MAL-OSRS SAFE REFACTOR v1.1
+   Module: 04-sidebar-tooltips-visitor.css
+   Cascade-preserving consolidation.
+*/
+
+/* =====================================================================
+   ORIGINAL SOURCE: 13-sidebar-final-v2.css
+   ===================================================================== */
+/* MODULE: 13-sidebar-final.css
+   Current OSRS stone sidebar stack, hover/selected stones, replacement icons, and Logout handling.
+   Extracted from source lines 2284-2558; import order matters. */
+
+/* =====================================================================
+   SIDEBAR — OUTER STACK
+   ===================================================================== */
+
+body.ownlist .list-menu-float {
+  position: fixed !important;
+  top: 88px !important;
+  left: 8px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+
+  width: 50px !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+
+  overflow: visible !important;
+  z-index: 150 !important;
+}
+
+/* Profile remains separate from the carved stone stack. */
+body.ownlist .list-menu-float > .icon-menu.profile {
+  position: relative !important;
+  box-sizing: border-box !important;
+
+  width: 42px !important;
+  height: 42px !important;
+
+  margin: 0 4px 3px 0 !important;
+
+  border: 2px solid #17130f !important;
+  outline: 1px solid #726451 !important;
+
+  background-position: center !important;
+  background-size: cover !important;
+
+  overflow: hidden !important;
+}
+
+
+/* =====================================================================
+   SIDEBAR — STONES
+   The clickable rows remain 50x48 for reliable MAL interaction, while
+   the stone image itself keeps its native aspect ratio and hugs the right.
+   ===================================================================== */
+
+body.ownlist .list-menu-float > .icon-menu:not(.profile),
+body.ownlist .list-menu-float > form {
+  position: relative !important;
+  box-sizing: border-box !important;
+
+  display: block !important;
+  flex: 0 0 48px !important;
+
+  width: 50px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background-color: transparent !important;
+  background-image: var(--rs-stone-mid) !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  background-size: auto 100% !important;
+
+  box-shadow: none !important;
+  overflow: visible !important;
+  transition: none !important;
+}
+
+/* Some MAL controls (notably Logout) are wrapped in a form.
+   The wrapper owns the stone. Its child must remain transparent or
+   Chrome paints two hover stones on top of each other. */
+body.ownlist .list-menu-float > form > .icon-menu,
+body.ownlist .list-menu-float > form > .icon-menu:hover,
+body.ownlist .list-menu-float > form:hover > .icon-menu {
+  position: relative !important;
+
+  width: 50px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Top cap = first real control after the profile. */
+body.ownlist .list-menu-float > .icon-menu.profile + .icon-menu:not(.profile),
+body.ownlist .list-menu-float > .icon-menu.profile + form {
+  background-image: var(--rs-stone-top) !important;
+}
+
+/* Bottom cap = final direct control, whatever MAL happens to show. */
+body.ownlist .list-menu-float > .icon-menu:not(.profile):last-child,
+body.ownlist .list-menu-float > form:last-child {
+  background-image: var(--rs-stone-bottom) !important;
+}
+
+
+/* =====================================================================
+   SIDEBAR — HIGHLIGHT / HOVER
+   ===================================================================== */
+
+body.ownlist .list-menu-float > .icon-menu:not(.profile):hover,
+body.ownlist .list-menu-float > form:hover {
+  width: 50px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+
+  background-color: transparent !important;
+  background-image: var(--rs-stone-mid-hot) !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  background-size: auto 100% !important;
+}
+
+body.ownlist .list-menu-float > .icon-menu.profile + .icon-menu:not(.profile):hover,
+body.ownlist .list-menu-float > .icon-menu.profile + form:hover {
+  background-image: var(--rs-stone-top-hot) !important;
+}
+
+body.ownlist .list-menu-float > .icon-menu:not(.profile):last-child:hover,
+body.ownlist .list-menu-float > form:last-child:hover {
+  background-image: var(--rs-stone-bottom-hot) !important;
+}
+
+/* Extra Logout protection against MAL's form/button hover cascade. */
+body.ownlist .list-menu-float > form:has(.icon-menu.logout) {
+  background-image: var(--rs-stone-mid) !important;
+}
+
+body.ownlist .list-menu-float > form:has(.icon-menu.logout):hover {
+  background-image: var(--rs-stone-mid-hot) !important;
+}
+
+body.ownlist .list-menu-float > form:has(.icon-menu.logout) > .icon-menu.logout,
+body.ownlist .list-menu-float > form:has(.icon-menu.logout):hover > .icon-menu.logout,
+body.ownlist .list-menu-float > form:has(.icon-menu.logout) > .icon-menu.logout:hover {
+  background: transparent !important;
+}
+
+/* Active Anime/Manga tab gets the red OSRS-selected treatment. */
+body.ownlist[data-work="anime"] .list-menu-float .icon-menu.anime-list {
+  background-image: var(--rs-stone-mid-hot) !important;
+}
+
+body.ownlist[data-work="manga"] .list-menu-float .icon-menu.manga-list {
+  background-image: var(--rs-stone-mid-hot) !important;
+}
+
+
+/* =====================================================================
+   SIDEBAR — ICONS
+   ===================================================================== */
+
+/* Middle stones are narrower than the 50px click row.
+   The ordinary icon is shifted 4px right compared with the old 8px rule,
+   so it visually centres over the right-aligned middle stone. */
+body.ownlist .list-menu-float .icon-menu:not(.profile)::before {
+  content: "" !important;
+
+  position: absolute !important;
+  left: auto !important;
+  right: 6px !important;
+  top: 7px !important;
+
+  display: block !important;
+
+  width: 32px !important;
+  height: 32px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+
+  pointer-events: none !important;
+  z-index: 3 !important;
+
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,.62));
+}
+
+/* The first/top and last/bottom stones are wider, so keep their icons
+   closer to the original 50px-row centre. */
+body.ownlist
+.list-menu-float > .icon-menu.profile + .icon-menu:not(.profile)::before,
+body.ownlist
+.list-menu-float > .icon-menu:not(.profile):last-child::before {
+  left: 8px !important;
+  right: auto !important;
+}
+
+/* Form-wrapped Logout is a middle stone: centre its child icon over the
+   narrower right-aligned stone too. */
+body.ownlist .list-menu-float > form .icon-menu.logout::before {
+  left: auto !important;
+  right: 6px !important;
+}
+
+/* Replace known MAL SVGs; unknown controls stay visible rather than blank. */
+body.ownlist .list-menu-float .icon-menu.quick-add > svg.icon,
+body.ownlist .list-menu-float .icon-menu.anime-list > svg.icon,
+body.ownlist .list-menu-float .icon-menu.manga-list > svg.icon,
+body.ownlist .list-menu-float .icon-menu.statistics > svg.icon,
+body.ownlist .list-menu-float .icon-menu.stats > svg.icon,
+body.ownlist .list-menu-float .icon-menu.history > svg.icon,
+body.ownlist .list-menu-float .icon-menu.export > svg.icon,
+body.ownlist .list-menu-float .icon-menu.logout > svg.icon,
+body.ownlist .list-menu-float .icon-menu.setting > svg.icon {
+  display: none !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.quick-add::before {
+  background-image: var(--rs-side-quick) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.anime-list::before {
+  background-image: var(--rs-side-anime) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.manga-list::before {
+  background-image: var(--rs-side-manga) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.statistics::before,
+body.ownlist .list-menu-float .icon-menu.stats::before {
+  background-image: var(--rs-side-statistics) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.history::before {
+  background-image: var(--rs-side-history) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.export::before {
+  background-image: var(--rs-side-export) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.logout::before {
+  background-image: var(--rs-side-logout) !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.setting::before {
+  background-image: var(--rs-side-settings) !important;
+}
+
+/* =====================================================================
+   DYNAMIC CAP RESOLUTION
+   MAL exposes different sidebar controls depending on owner/visitor state.
+   CSS cannot ask "which element is visually last after display:none?" in a
+   completely generic way, but it CAN react to DOM presence with :has(), and
+   MAL also exposes data-owner on <body>. These rules therefore resolve the
+   lower cap from the controls that actually exist, with an explicit visitor
+   fallback for Logout.
+   ===================================================================== */
+
+/* If Settings is absent from the DOM, Logout becomes the lower cap. */
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  > form:has(.icon-menu.logout),
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  > .icon-menu.logout {
+  background-image: var(--rs-stone-bottom) !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  background-size: auto 100% !important;
+}
+
+/* On another user's list, MAL can retain owner-only controls in odd/hidden
+   states. data-owner="" is therefore the reliable signal: Logout is the
+   actual bottom action in the visitor layout. */
+body.ownlist[data-owner=""] .list-menu-float
+  > form:has(.icon-menu.logout),
+body.ownlist[data-owner=""] .list-menu-float
+  > .icon-menu.logout {
+  background-image: var(--rs-stone-bottom) !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  background-size: auto 100% !important;
+}
+
+/* Correct highlighted lower-cap art. These come AFTER the generic Logout
+   middle-stone rules so they win the cascade. */
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  > form:has(.icon-menu.logout):hover,
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  > .icon-menu.logout:hover,
+body.ownlist[data-owner=""] .list-menu-float
+  > form:has(.icon-menu.logout):hover,
+body.ownlist[data-owner=""] .list-menu-float
+  > .icon-menu.logout:hover {
+  background-image: var(--rs-stone-bottom-hot) !important;
+}
+
+/* Centre Logout's icon over the wider bottom cap instead of over a narrow
+   middle stone. */
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting))
+  .icon-menu.logout::before,
+body.ownlist[data-owner=""] .list-menu-float
+  .icon-menu.logout::before {
+  left: 8px !important;
+  right: auto !important;
+}
+
+/* Presence-based fallback chain for unusual MAL states. If Logout itself
+   isn't present, promote the last known available control. */
+body.ownlist .list-menu-float
+  :is(.icon-menu.export, .icon-menu.history, .icon-menu.statistics, .icon-menu.stats)
+  {
+  /* default remains middle; specific promotions below */
+}
+
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting)):not(:has(.icon-menu.logout))
+  > .icon-menu.export {
+  background-image: var(--rs-stone-bottom) !important;
+}
+
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting)):not(:has(.icon-menu.logout)):not(:has(.icon-menu.export))
+  > .icon-menu.history {
+  background-image: var(--rs-stone-bottom) !important;
+}
+
+body.ownlist .list-menu-float:not(:has(.icon-menu.setting)):not(:has(.icon-menu.logout)):not(:has(.icon-menu.export)):not(:has(.icon-menu.history))
+  > :is(.icon-menu.statistics, .icon-menu.stats) {
+  background-image: var(--rs-stone-bottom) !important;
+}
+
+/* =====================================================================
+   ORIGINAL SOURCE: 14-tooltips-v2.css
+   ===================================================================== */
+/* MODULE: 14-tooltips.css
+   OSRS Choose Option hover tooltips, including the 103×84 Settings menu.
+   Extracted from source lines 2559-2713; import order matters. */
+
+/* =====================================================================
+   ORDINARY CONTEXT-MENU TOOLTIP — NATIVE 103x52
+   ===================================================================== */
+
+body.ownlist
+.list-menu-float
+.icon-menu:not(.profile):not(.setting) > .text {
+  position: absolute !important;
+  left: 47px !important;
+  top: 0 !important;
+
+  box-sizing: border-box !important;
+  display: block !important;
+
+  width: 103px !important;
+  min-width: 103px !important;
+  max-width: 103px !important;
+
+  height: 52px !important;
+  min-height: 52px !important;
+  max-height: 52px !important;
+
+  margin: 0 !important;
+  padding: 21px 4px 3px 5px !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background-color: transparent !important;
+  background-image: var(--rs-option-menu) !important;
+  background-position: left top !important;
+  background-repeat: no-repeat !important;
+  background-size: 103px 52px !important;
+
+  color: #ffffff !important;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.95) !important;
+  font-family: "RS UF", "RS Chat 07", monospace !important;
+  font-size: 19px !important;
+  font-weight: 400 !important;
+  line-height: 21px !important;
+  text-align: left !important;
+
+  white-space: nowrap !important;
+  overflow: hidden !important;
+
+  opacity: 0 !important;
+  visibility: hidden !important;
+
+  pointer-events: auto !important;
+  z-index: 500 !important;
+
+  transition: none !important;
+}
+
+body.ownlist
+.list-menu-float
+.icon-menu:not(.profile):not(.setting):hover > .text {
+  width: 103px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+body.ownlist
+.list-menu-float
+.icon-menu:not(.profile):not(.setting) > .text:hover {
+  color: #ffff00 !important;
+}
+
+
+/* =====================================================================
+   SETTINGS CONTEXT MENU — NATIVE 103x84
+   ===================================================================== */
+
+body.ownlist .list-menu-float .icon-menu.setting > .text {
+  position: absolute !important;
+  left: 47px !important;
+  top: 0 !important;
+
+  box-sizing: border-box !important;
+  display: block !important;
+
+  width: 103px !important;
+  min-width: 103px !important;
+  max-width: 103px !important;
+
+  height: 84px !important;
+  min-height: 84px !important;
+  max-height: 84px !important;
+
+  margin: 0 !important;
+  padding: 21px 4px 3px 5px !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background-color: transparent !important;
+  background-image: var(--rs-option-menu-settings) !important;
+  background-position: left top !important;
+  background-repeat: no-repeat !important;
+  background-size: 103px 84px !important;
+
+  opacity: 0 !important;
+  visibility: hidden !important;
+
+  overflow: hidden !important;
+  z-index: 500 !important;
+}
+
+body.ownlist .list-menu-float .icon-menu.setting:hover > .text {
+  width: 103px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Two real MAL actions occupy the two blank option rows. */
+body.ownlist .list-menu-float .icon-menu.setting > .text .link-list-setting,
+body.ownlist .list-menu-float .icon-menu.setting > .text .link-style-setting,
+body.ownlist .list-menu-float .icon-menu.setting:hover > .text .link-list-setting,
+body.ownlist .list-menu-float .icon-menu.setting:hover > .text .link-style-setting {
+  position: static !important;
+
+  display: block !important;
+
+  box-sizing: border-box !important;
+  width: 94px !important;
+  height: 27px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+
+  color: #ffffff !important;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.95) !important;
+  font-family: "RS UF", "RS Chat 07", monospace !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  line-height: 27px !important;
+  text-align: left !important;
+
+  white-space: nowrap !important;
+}
+
+body.ownlist
+.list-menu-float
+.icon-menu.setting > .text .link-list-setting:hover,
+body.ownlist
+.list-menu-float
+.icon-menu.setting > .text .link-style-setting:hover {
+  color: #ffff00 !important;
+}
+
+/* =====================================================================
+   ORIGINAL SOURCE: 15-visitor-strip-v5.css
+   ===================================================================== */
+/* MODULE: 15-visitor-strip-v5.css
+   Visitor-only utility strip above the banner.
+   Owner view is untouched.
+   IMPORTANT: obsolete visitor-header sizing was removed from the font layer,
+   so these dimensions are no longer overridden by a more-specific !important rule. */
+
+/* =====================================================================
+   VISITOR UTILITY STRIP
+   Left: switch to the other list (Anime/Manga)
+   Right row 1: "Viewing <user>'s Anime List"
+   Right row 2: Shared Anime / Affinity / Statistics / History
+   ===================================================================== */
+
+body.ownlist[data-owner=""] .header {
+  position: relative !important;
+  box-sizing: border-box !important;
+  display: block !important;
+
+  width: min(1320px, calc(100vw - 64px)) !important;
+  height: 68px !important;
+  min-height: 68px !important;
+
+  margin: 0 auto 12px !important;
+  padding: 5px 10px !important;
+
+  border: 2px solid #17130f !important;
+  outline: 1px solid #6d6250 !important;
+  background: linear-gradient(180deg, #4a4338 0%, #342e26 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 3px 8px rgba(0,0,0,.35) !important;
+
+  color: #d8c9aa !important;
+  overflow: visible !important;
+  z-index: 90 !important;
+}
+
+/* Hide MAL's logo/home title in this strip. */
+body.ownlist[data-owner=""] .header .header-title {
+  display: none !important;
+}
+
+/* MAL's visitor header is a mixture of independently-positioned elements.
+   Reset it into a two-column, two-row grid. */
+body.ownlist[data-owner=""] .header .header-menu,
+body.ownlist[data-owner=""] .header .header-menu.other {
+  position: relative !important;
+  inset: auto !important;
+  float: none !important;
+
+  display: grid !important;
+  grid-template-columns: minmax(150px, auto) 1fr !important;
+  grid-template-rows: 22px 20px !important;
+  column-gap: 14px !important;
+  row-gap: 2px !important;
+  align-items: center !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 56px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: visible !important;
+}
+
+/* ---------------------------------------------------------------------
+   LEFT: Anime/Manga switch
+   --------------------------------------------------------------------- */
+
+body.ownlist[data-owner=""] .header .header-menu .list-menu {
+  position: static !important;
+
+  grid-column: 1 !important;
+  grid-row: 1 / 3 !important;
+  align-self: center !important;
+  justify-self: start !important;
+
+  display: block !important;
+
+  width: auto !important;
+  height: 34px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+
+  overflow: visible !important;
+}
+
+/* There is normally only one item here: the link to the other list. */
+body.ownlist[data-owner=""] .header .header-menu .list-menu .icon-menu {
+  position: relative !important;
+  inset: auto !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  box-sizing: border-box !important;
+  width: auto !important;
+  min-width: 118px !important;
+  height: 32px !important;
+
+  margin: 0 !important;
+  padding: 0 10px 0 7px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #6d6250 !important;
+  background: linear-gradient(#4b4337, #302a22) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.05) !important;
+
+  color: #d8c9aa !important;
+  font-family: "RS Small", "RS Chat 07", sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 32px !important;
+
+  overflow: hidden !important;
+}
+
+body.ownlist[data-owner=""] .header .header-menu .list-menu .icon-menu:hover {
+  background: linear-gradient(#5a5041, #393126) !important;
+  color: #ffff00 !important;
+}
+
+body.ownlist[data-owner=""] .header .header-menu .list-menu .icon-menu svg.icon {
+  position: static !important;
+
+  width: 16px !important;
+  height: 16px !important;
+
+  margin: 0 7px 0 0 !important;
+  padding: 0 !important;
+
+  fill: #d8c9aa !important;
+  flex: 0 0 auto !important;
+}
+
+body.ownlist[data-owner=""] .header .header-menu .list-menu .icon-menu:hover svg.icon {
+  fill: #ffff00 !important;
+}
+
+body.ownlist[data-owner=""] .header .header-menu .list-menu .icon-menu .text {
+  position: static !important;
+  inset: auto !important;
+
+  display: inline !important;
+  width: auto !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: inherit !important;
+  font: inherit !important;
+  line-height: inherit !important;
+  white-space: nowrap !important;
+}
+
+/* ---------------------------------------------------------------------
+   RIGHT: visitor information
+   --------------------------------------------------------------------- */
+
+body.ownlist[data-owner=""] .header .header-menu .btn-menu {
+  position: static !important;
+
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  justify-self: end !important;
+  align-self: end !important;
+
+  display: block !important;
+
+  width: auto !important;
+  height: 19px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+
+  color: #d8c9aa !important;
+  font-family: "RS Small", "RS Chat 07", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 19px !important;
+  text-align: right !important;
+  white-space: nowrap !important;
+
+  overflow: visible !important;
+}
+
+body.ownlist[data-owner=""] .header .header-menu .header-info {
+  position: static !important;
+
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  justify-self: end !important;
+  align-self: start !important;
+
+  display: block !important;
+
+  width: auto !important;
+  height: 19px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #d8c9aa !important;
+  font-family: "RS Small", "RS Chat 07", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 19px !important;
+  text-align: right !important;
+  white-space: nowrap !important;
+
+  overflow: visible !important;
+}
+
+body.ownlist[data-owner=""] .header .header-menu .btn-menu a,
+body.ownlist[data-owner=""] .header .header-menu .header-info a {
+  color: #e2c278 !important;
+  font: inherit !important;
+}
+
+body.ownlist[data-owner=""] .header .header-menu .btn-menu a:hover,
+body.ownlist[data-owner=""] .header .header-menu .header-info a:hover {
+  color: #ffff00 !important;
+}
+
+/* ---------------------------------------------------------------------
+   MAL dropdown opened from "Viewing ... List"
+   Do NOT force display; only skin/position it when MAL itself opens it.
+   This prevents the native white rectangle from sitting on the strip.
+   --------------------------------------------------------------------- */
+
+body.ownlist[data-owner=""] #header-menu-dropdown {
+  top: 26px !important;
+  right: 0 !important;
+
+  min-width: 170px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #6d6250 !important;
+  background: #3e3529 !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,.5) !important;
+
+  color: #d8c9aa !important;
+  font-family: "RS Small", "RS Chat 07", sans-serif !important;
+
+  z-index: 200 !important;
+}
+
+body.ownlist[data-owner=""] #header-menu-dropdown a {
+  color: #d8c9aa !important;
+  background: transparent !important;
+}
+
+body.ownlist[data-owner=""] #header-menu-dropdown a:hover {
+  color: #ffff00 !important;
+  background: #554c41 !important;
+}
+
+/* The header is in normal document flow, so this strip genuinely occupies
+   space above the banner instead of overlapping it. */
+body.ownlist[data-owner=""] .list-container {
+  margin-top: 0 !important;
+}
+
+/* Keep the visitor strip usable on narrower windows before the rest of the
+   theme reaches its mobile breakpoint. */
+@media (max-width: 900px) {
+  body.ownlist[data-owner=""] .header .header-menu,
+  body.ownlist[data-owner=""] .header .header-menu.other {
+    grid-template-columns: 120px 1fr !important;
+  }
+
+  body.ownlist[data-owner=""] .header .header-menu .list-menu .icon-menu {
+    min-width: 108px !important;
+    font-size: 13px !important;
+  }
+
+  body.ownlist[data-owner=""] .header .header-menu .btn-menu,
+  body.ownlist[data-owner=""] .header .header-menu .header-info {
+    font-size: 12px !important;
+  }
+}

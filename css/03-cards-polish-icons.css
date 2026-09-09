@@ -1,0 +1,1299 @@
+/* MAL-OSRS SAFE REFACTOR v1.1
+   Module: 03-cards-polish-icons.css
+   Cascade-preserving consolidation.
+*/
+
+/* =====================================================================
+   ORIGINAL SOURCE: 07-cards-layout-v42.css
+   ===================================================================== */
+/* MODULE: 07-cards-layout-v42.css
+   v4.2 three-column fixed card layout, larger covers, and card responsiveness.
+   Extracted from source lines 1025-1293; import order matters. */
+
+/* =====================================================================
+   v4.2 FORMAT OVERRIDE
+   Clean 3-column layout with fixed-size cards and larger covers.
+   This block intentionally overrides the experimental absolute-position
+   rules above without changing the rest of the theme.
+   ===================================================================== */
+
+/* --- three entries per row --- */
+.list-table {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+/* --- every card uses the exact same internal grid --- */
+.list-table .list-table-data {
+  position: relative !important;
+  display: grid !important;
+
+  grid-template-columns: 132px minmax(0, 1fr) minmax(82px, .72fr) !important;
+  grid-template-rows: 58px 44px 44px 44px !important;
+  grid-template-areas:
+    "image title    title"
+    "image progress score"
+    "image type     rated"
+    "image season   season" !important;
+
+  column-gap: 12px !important;
+  row-gap: 6px !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 232px !important;
+  min-height: 232px !important;
+  max-height: 232px !important;
+  padding: 12px !important;
+  overflow: hidden !important;
+}
+
+/* --- common cell reset: NO absolute positioning --- */
+.list-table .list-table-data .data.image,
+.list-table .list-table-data .data.title,
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.rated {
+  position: static !important;
+  inset: auto !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+
+  box-sizing: border-box !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+}
+
+/* --- cover fills almost the whole card height --- */
+.list-table .list-table-data .data.image {
+  grid-area: image !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  padding: 4px 0 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+}
+
+.list-table .list-table-data .data.image a {
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 126px !important;
+  height: 190px !important;
+  margin: 0 !important;
+  padding: 4px !important;
+
+  border: 2px solid #15120e !important;
+  outline: 1px solid #796e59 !important;
+  background: linear-gradient(#41392f, #2c2720) !important;
+  box-shadow:
+    inset 0 0 12px rgba(0,0,0,.42),
+    0 2px 5px rgba(0,0,0,.46) !important;
+  overflow: hidden !important;
+}
+
+.list-table .list-table-data .data.image .image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* --- fixed-height title + quest status --- */
+.list-table .list-table-data .data.title {
+  grid-area: title !important;
+  display: block !important;
+  padding: 3px 2px 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  text-align: left !important;
+}
+
+.list-table .list-table-data .data.title > .link {
+  display: -webkit-box !important;
+  overflow: hidden !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+
+  height: 36px !important;
+  min-height: 36px !important;
+  max-height: 36px !important;
+
+  color: var(--rs-gold) !important;
+  font-size: 16px !important;
+  line-height: 18px !important;
+  text-align: left !important;
+}
+
+/* restore the quest-state line under the title */
+.list-table .list-table-data .data.title::after {
+  position: static !important;
+  display: block !important;
+  width: auto !important;
+  height: 14px !important;
+  margin: 4px 0 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+
+  font-family: Tahoma, Verdana, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: bold !important;
+  line-height: 14px !important;
+  text-align: left !important;
+  text-transform: none !important;
+}
+
+.list-table .list-table-data:has(.status.watching) .data.title::after {
+  content: "Quest Started" !important;
+  color: #f0ed49 !important;
+}
+
+.list-table .list-table-data:has(.status.completed) .data.title::after {
+  content: "Quest Complete" !important;
+  color: #68d66a !important;
+}
+
+.list-table .list-table-data:has(.status.onhold) .data.title::after {
+  content: "Quest Paused" !important;
+  color: #cf9a62 !important;
+}
+
+.list-table .list-table-data:has(.status.dropped) .data.title::after {
+  content: "Quest Abandoned" !important;
+  color: #ef756a !important;
+}
+
+.list-table .list-table-data:has(.status.plantowatch) .data.title::after {
+  content: "Quest Not Started" !important;
+  color: #c48be5 !important;
+}
+
+/* --- compact details: every box is the same height --- */
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.rated {
+  display: block !important;
+  padding: 6px 7px 5px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid rgba(111,100,82,.52) !important;
+  background: linear-gradient(rgba(74,65,53,.40), rgba(39,34,28,.40)) !important;
+
+  color: #e3d3af !important;
+  font-family: Tahoma, Verdana, sans-serif !important;
+  font-size: 10px !important;
+  line-height: 12px !important;
+  text-align: center !important;
+
+  overflow: hidden !important;
+}
+
+.list-table .list-table-data .data.progress { grid-area: progress !important; }
+.list-table .list-table-data .data.score    { grid-area: score !important; }
+.list-table .list-table-data .data.type     { grid-area: type !important; }
+.list-table .list-table-data .data.rated    { grid-area: rated !important; }
+.list-table .list-table-data .data.season   { grid-area: season !important; }
+
+/* labels */
+.list-table .list-table-data .data.score::before,
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.rated::before {
+  display: block !important;
+  margin: 0 0 3px !important;
+  color: #8f846e !important;
+  font-family: Tahoma, Verdana, sans-serif !important;
+  font-size: 8px !important;
+  font-weight: normal !important;
+  line-height: 9px !important;
+  text-transform: uppercase !important;
+}
+
+.list-table .list-table-data .data.score::before    { content: "Score" !important; }
+.list-table .list-table-data .data.progress::before { content: "Progress" !important; }
+.list-table .list-table-data .data.type::before     { content: "Type" !important; }
+.list-table .list-table-data .data.rated::before    { content: "Rated" !important; }
+.list-table .list-table-data .data.season::before   { content: "Released" !important; }
+
+/* undo the old score-as-status experiment */
+.list-table .list-table-data .data.score .link,
+.list-table .list-table-data .data.score .score-label {
+  display: inline !important;
+  color: #f0ce64 !important;
+  font-family: Georgia, serif !important;
+  font-size: 15px !important;
+  line-height: 12px !important;
+}
+
+/* restore real progress content */
+.list-table .list-table-data .data.progress .link,
+.list-table .list-table-data .data.progress > span {
+  display: inline !important;
+  color: #e8d8b5 !important;
+}
+
+.list-table .list-table-data .data.progress .icon-add-episode {
+  display: inline !important;
+  color: #64c769 !important;
+}
+
+/* tags stay hidden in compact 3-column mode */
+.list-table .list-table-data .data.tags {
+  display: none !important;
+}
+
+/* --- responsive fallbacks --- */
+@media (max-width: 1450px) {
+  .list-table {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 1050px) {
+  .list-table {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .list-table {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* =====================================================================
+   ORIGINAL SOURCE: 08-card-details-v43.css
+   ===================================================================== */
+/* MODULE: 08-card-details-v43.css
+   v4.3 six-box metadata layout including restored Tags.
+   Extracted from source lines 1294-1470; import order matters. */
+
+/* =====================================================================
+   v4.3 DETAIL PANEL CLEANUP
+   - 6 equal metadata boxes
+   - Score label/value share one box
+   - Progress label/value share one box
+   - Tags restored as sixth box
+   - Released and Tags split the final row evenly
+   ===================================================================== */
+
+/* Right-hand metadata columns are now exactly equal width. */
+.list-table .list-table-data {
+  grid-template-columns: 132px repeat(2, minmax(0, 1fr)) !important;
+  grid-template-rows: 58px 44px 44px 44px !important;
+  grid-template-areas:
+    "image title    title"
+    "image progress score"
+    "image type     rated"
+    "image season   tags" !important;
+}
+
+/* All six metadata fields use one identical box model. */
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.rated,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.tags {
+  position: static !important;
+  inset: auto !important;
+
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+
+  margin: 0 !important;
+  padding: 5px 7px 4px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid rgba(111,100,82,.52) !important;
+  background: linear-gradient(rgba(74,65,53,.40), rgba(39,34,28,.40)) !important;
+
+  color: #e3d3af !important;
+  font-family: Tahoma, Verdana, sans-serif !important;
+  font-size: 10px !important;
+  line-height: 12px !important;
+  text-align: center !important;
+
+  overflow: hidden !important;
+}
+
+/* Explicit grid placement. */
+.list-table .list-table-data .data.progress { grid-area: progress !important; }
+.list-table .list-table-data .data.score    { grid-area: score !important; }
+.list-table .list-table-data .data.type     { grid-area: type !important; }
+.list-table .list-table-data .data.rated    { grid-area: rated !important; }
+.list-table .list-table-data .data.season   { grid-area: season !important; }
+.list-table .list-table-data .data.tags     { grid-area: tags !important; }
+
+/* CRITICAL RESET:
+   Older experiments gave Score's ::before its own bordered mini-box.
+   Strip ALL that styling so every label sits inside its parent box,
+   just like Progress. */
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.score::before,
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.rated::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.tags::before {
+  position: static !important;
+  display: block !important;
+
+  width: auto !important;
+  height: 9px !important;
+
+  margin: 0 0 3px !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+
+  color: #8f846e !important;
+  font-family: Tahoma, Verdana, sans-serif !important;
+  font-size: 8px !important;
+  font-weight: normal !important;
+  line-height: 9px !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+}
+
+.list-table .list-table-data .data.progress::before { content: "Progress" !important; }
+.list-table .list-table-data .data.score::before    { content: "Score" !important; }
+.list-table .list-table-data .data.type::before     { content: "Type" !important; }
+.list-table .list-table-data .data.rated::before    { content: "Rated" !important; }
+.list-table .list-table-data .data.season::before   { content: "Released" !important; }
+.list-table .list-table-data .data.tags::before     { content: "Tags" !important; }
+
+/* Score value lives normally below the Score label. */
+.list-table .list-table-data .data.score .link,
+.list-table .list-table-data .data.score .score-label {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+
+  color: #f0ce64 !important;
+  font-family: Georgia, serif !important;
+  font-size: 15px !important;
+  font-weight: normal !important;
+  line-height: 12px !important;
+}
+
+/* Progress value likewise stays in the same box as its label. */
+.list-table .list-table-data .data.progress .link,
+.list-table .list-table-data .data.progress > span {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+
+  color: #e8d8b5 !important;
+}
+
+.list-table .list-table-data .data.progress .icon-add-episode {
+  display: inline !important;
+  color: #64c769 !important;
+}
+
+/* Season and tag links remain functional.
+   Tags are primarily being used as custom season filters. */
+.list-table .list-table-data .data.season a,
+.list-table .list-table-data .data.tags a {
+  display: inline !important;
+  color: #e8d8b5 !important;
+  font-size: 10px !important;
+  line-height: 12px !important;
+  white-space: nowrap !important;
+}
+
+.list-table .list-table-data .data.tags > div {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Don't waste the compact Tags box on MAL's "Edit" link. */
+.list-table .list-table-data .data.tags .edit {
+  display: none !important;
+}
+
+/* Kill leftover generated/pseudo content from earlier experiments. */
+.list-table .list-table-data .data.score::after,
+.list-table .list-table-data .data.progress::after,
+.list-table .list-table-data .data.type::after,
+.list-table .list-table-data .data.rated::after,
+.list-table .list-table-data .data.season::after,
+.list-table .list-table-data .data.tags::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* =====================================================================
+   ORIGINAL SOURCE: 09-ui-polish-v44.css
+   ===================================================================== */
+/* MODULE: 09-ui-polish-v44.css
+   v4.4 tab alignment/search refinements and first OSRS notched-panel treatment.
+   Extracted from source lines 1471-1660; import order matters. */
+
+/* =====================================================================
+   v4.4 OSRS UI POLISH
+   - Align status tabs with the content ribbon below
+   - Give Search its own non-overlapping slot
+   - Add OSRS-style "bitten" / notched corners to metadata boxes
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   STATUS BAR ALIGNMENT
+   The list content is inset 22px, so the tab ribbon now uses the same
+   inset instead of floating almost edge-to-edge.
+   --------------------------------------------------------------------- */
+.status-menu-container,
+.status-menu-container.fixed {
+  box-sizing: border-box !important;
+  height: 92px !important;
+  padding: 0 22px !important;
+  overflow: hidden !important;
+}
+
+.status-menu-container .status-menu {
+  box-sizing: border-box !important;
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) 54px !important;
+
+  width: 100% !important;
+  height: 89px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: hidden !important;
+  border-left: 1px solid rgba(0,0,0,.42) !important;
+  border-right: 1px solid rgba(255,255,255,.035) !important;
+}
+
+/* Keep every tab exactly inside its grid cell. */
+.status-menu-container .status-menu .status-button {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: 89px !important;
+
+  margin: 0 !important;
+  padding: 8px 4px 7px !important;
+
+  overflow: hidden !important;
+  transform: none !important;
+}
+
+/* Slightly lower icons so they sit visually centered in the OSRS ribbon. */
+.status-menu-container .status-menu .status-button::before {
+  width: 44px !important;
+  height: 44px !important;
+  margin: 2px auto 4px !important;
+}
+
+/* Search gets a real seventh grid slot instead of sitting over tab #6. */
+.status-menu-container .search-container {
+  position: relative !important;
+  grid-column: 7 !important;
+  grid-row: 1 !important;
+
+  box-sizing: border-box !important;
+  display: block !important;
+
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  width: 54px !important;
+  min-width: 54px !important;
+  max-width: 54px !important;
+  height: 89px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: hidden !important;
+
+  border-left: 1px solid rgba(0,0,0,.42) !important;
+  border-right: 0 !important;
+  background: rgba(0,0,0,.08) !important;
+}
+
+.status-menu-container .search-container #search-button {
+  position: absolute !important;
+  inset: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  box-sizing: border-box !important;
+  width: 54px !important;
+  height: 89px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #e4c36f !important;
+  font-size: 18px !important;
+}
+
+/* ---------------------------------------------------------------------
+   OSRS "BITTEN CORNER" DETAIL BOXES
+
+   This is a concave polygon, not ordinary rounded corners:
+   each 6px square corner is literally cut out of the panel.
+   --------------------------------------------------------------------- */
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.rated,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.tags {
+  border: 0 !important;
+  outline: 0 !important;
+
+  clip-path: polygon(
+    6px 0,
+    calc(100% - 6px) 0,
+
+    calc(100% - 6px) 6px,
+    100% 6px,
+
+    100% calc(100% - 6px),
+    calc(100% - 6px) calc(100% - 6px),
+
+    calc(100% - 6px) 100%,
+    6px 100%,
+
+    6px calc(100% - 6px),
+    0 calc(100% - 6px),
+
+    0 6px,
+    6px 6px
+  ) !important;
+
+  background:
+    linear-gradient(180deg, rgba(90,80,64,.34), rgba(38,33,27,.44)),
+    #302a22 !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(132,119,95,.62),
+    inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+
+/* OSRS UI tends to have tiny bright corner/edge accents.
+   A subtle inset line keeps the clipped boxes from looking flat. */
+.list-table .list-table-data .data.progress:hover,
+.list-table .list-table-data .data.score:hover,
+.list-table .list-table-data .data.type:hover,
+.list-table .list-table-data .data.rated:hover,
+.list-table .list-table-data .data.season:hover,
+.list-table .list-table-data .data.tags:hover {
+  background:
+    linear-gradient(180deg, rgba(103,91,72,.38), rgba(44,38,30,.46)),
+    #342d24 !important;
+}
+
+/* At narrower widths the old responsive status menu becomes multi-row.
+   Remove desktop insets there so it still fits cleanly. */
+@media (max-width: 860px) {
+  .status-menu-container,
+  .status-menu-container.fixed {
+    padding: 0 10px !important;
+  }
+
+  .status-menu-container .status-menu {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    overflow: visible !important;
+  }
+
+  .status-menu-container .search-container {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 40px !important;
+  }
+
+  .status-menu-container .search-container #search-button {
+    width: 100% !important;
+    height: 40px !important;
+  }
+}
+
+/* =====================================================================
+   ORIGINAL SOURCE: 10-card-polish-v45.css
+   ===================================================================== */
+/* MODULE: 10-card-polish-v45.css
+   v4.5 character-summary colors, panel refinement, and Progress/Score icon styling.
+   Extracted from source lines 1661-1835; import order matters. */
+
+/* =====================================================================
+   v4.5 OSRS PANEL REFINEMENT
+   - remove the harsh clipped "missing corner" look
+   - shift toward the real OSRS character-summary panels
+   - lighter inner boxes, double borders, softer corners
+   - small icons for Progress and Score labels
+   ===================================================================== */
+
+:root {
+  --osrs-card-bg: #3e3529;
+  --osrs-box-bg: #554c41;
+  --osrs-box-inner: #726451;
+  --osrs-box-outer: #2d2a22;
+  --osrs-orange: #ff9933;
+  --osrs-green: #0dc10d;
+  --osrs-cream: #ead9b5;
+
+  --osrs-xp-icon: url("https://oldschool.runescape.wiki/images/Character_Summary_-_Total_XP_icon.png");
+  --osrs-level-icon: url("https://oldschool.runescape.wiki/images/Character_Summary_-_Total_Level.png");
+}
+
+/* Main tile background closer to the OSRS wiki summary panel. */
+.list-table .list-table-data {
+  border: 1px solid var(--osrs-box-outer) !important;
+  outline: 1px solid #8b7c60 !important;
+  background:
+    linear-gradient(90deg, #342d24 0%, var(--osrs-card-bg) 10%, var(--osrs-card-bg) 90%, #342d24 100%) !important;
+  box-shadow:
+    inset 0 0 0 1px #5f5444,
+    0 4px 10px rgba(0,0,0,.28) !important;
+}
+
+/* Softer, intentional OSRS-style inner panels.
+   We are deliberately abandoning the fake "missing" clipped corners. */
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.rated,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.tags {
+  clip-path: none !important;
+  border: 1px solid var(--osrs-box-outer) !important;
+  outline: 0 !important;
+  border-radius: 3px !important;
+
+  background:
+    linear-gradient(180deg, #5a5146 0%, var(--osrs-box-bg) 16%, #4e453a 100%) !important;
+
+  box-shadow:
+    inset 0 0 0 1px var(--osrs-box-inner),
+    inset 0 1px 0 rgba(255,255,255,.05),
+    inset 0 -1px 0 rgba(0,0,0,.16) !important;
+
+  color: var(--osrs-cream) !important;
+}
+
+/* Subtle decorative corner nicks / bevel hints instead of hard clipping. */
+.list-table .list-table-data .data.progress::after,
+.list-table .list-table-data .data.score::after,
+.list-table .list-table-data .data.type::after,
+.list-table .list-table-data .data.rated::after,
+.list-table .list-table-data .data.season::after,
+.list-table .list-table-data .data.tags::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  border-radius: 3px !important;
+  background:
+    radial-gradient(circle at 0 0, transparent 0 5px, rgba(114,100,81,.85) 5.5px 6px, transparent 6.5px) top left / 12px 12px no-repeat,
+    radial-gradient(circle at 100% 0, transparent 0 5px, rgba(114,100,81,.85) 5.5px 6px, transparent 6.5px) top right / 12px 12px no-repeat,
+    radial-gradient(circle at 0 100%, transparent 0 5px, rgba(45,42,34,.85) 5.5px 6px, transparent 6.5px) bottom left / 12px 12px no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 0 5px, rgba(45,42,34,.85) 5.5px 6px, transparent 6.5px) bottom right / 12px 12px no-repeat !important;
+  opacity: .45 !important;
+}
+
+/* Ensure the panels are a positioning context for the decorative overlay. */
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.rated,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.tags {
+  position: relative !important;
+}
+
+/* Label color and typography closer to OSRS orange. */
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.score::before,
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.rated::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.tags::before {
+  color: var(--osrs-orange) !important;
+  font-size: 8px !important;
+  letter-spacing: .2px !important;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.45) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Tiny icons beside the two key labels. */
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.score::before {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  height: 10px !important;
+  margin-bottom: 4px !important;
+  padding: 0 !important;
+  background-position: left center !important;
+  background-repeat: no-repeat !important;
+  background-size: 11px 11px !important;
+}
+
+.list-table .list-table-data .data.progress::before {
+  content: "PROGRESS" !important;
+  background-image: var(--osrs-xp-icon) !important;
+  background-position: calc(50% - 28px) center !important;
+}
+
+.list-table .list-table-data .data.score::before {
+  content: "SCORE" !important;
+  background-image: var(--osrs-level-icon) !important;
+  background-position: calc(50% - 20px) center !important;
+}
+
+/* Non-icon labels keep the simpler centered style. */
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.rated::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.tags::before {
+  display: block !important;
+  text-align: center !important;
+}
+
+/* Warm up the values a bit. */
+.list-table .list-table-data .data.progress .link,
+.list-table .list-table-data .data.progress > span,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.rated,
+.list-table .list-table-data .data.season a,
+.list-table .list-table-data .data.tags a,
+.list-table .list-table-data .data.tags > div {
+  color: #f2e2bf !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.list-table .list-table-data .data.score .link,
+.list-table .list-table-data .data.score .score-label {
+  color: #ffd46b !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Make title color match the OSRS reference more closely. */
+.list-table .list-table-data .data.title > .link {
+  color: var(--osrs-orange) !important;
+  text-shadow: 2px 2px 0 rgba(0,0,0,.60) !important;
+}
+
+/* Optional soft hover just to keep them alive without departing from OSRS too much. */
+.list-table .list-table-data .data.progress:hover,
+.list-table .list-table-data .data.score:hover,
+.list-table .list-table-data .data.type:hover,
+.list-table .list-table-data .data.rated:hover,
+.list-table .list-table-data .data.season:hover,
+.list-table .list-table-data .data.tags:hover {
+  background:
+    linear-gradient(180deg, #61584d 0%, #5a5044 18%, #52493e 100%) !important;
+}
+
+/* =====================================================================
+   ORIGINAL SOURCE: 11-card-final-v46.css
+   ===================================================================== */
+/* MODULE: 11-card-final-v46.css
+   v4.6 current card geometry, centered titles, spacing, rounded OSRS notches, and status stripe.
+   Extracted from source lines 1836-2185; import order matters. */
+
+/* =====================================================================
+   v4.6 TILE GEOMETRY + ROUNDED OSRS NOTCHES
+   - title centered
+   - detail grid moved upward
+   - bottom detail row aligns with bottom of cover
+   - 5px vertical + horizontal gaps between the six detail boxes
+   - rounded inward corner "bites" drawn in CSS while preserving borders
+   - completed status stripe test changed to #00ff00
+   ===================================================================== */
+
+:root {
+  --osrs-card-bg: #3e3529;
+  --osrs-box-bg: #554c41;
+  --osrs-box-inner: #726451;
+  --osrs-box-outer: #2d2a22;
+  --osrs-orange: #ff9933;
+
+  /* Color behind the notches. Keep this matched to the card body. */
+  --osrs-notch-bg: #3e3529;
+}
+
+/* ---------------------------------------------------------------------
+   CARD GEOMETRY
+   Right side:
+     TITLE
+     PROGRESS | SCORE
+     TYPE     | RATED
+     RELEASED | TAGS
+
+   50 + 5 + 42 + 5 + 42 + 5 + 42 = 191px
+   The cover frame is also exactly 191px tall.
+   --------------------------------------------------------------------- */
+.list-table .list-table-data {
+  display: grid !important;
+
+  grid-template-columns:
+    132px
+    12px
+    minmax(0, 1fr)
+    5px
+    minmax(0, 1fr) !important;
+
+  grid-template-rows:
+    50px
+    42px
+    42px
+    42px !important;
+
+  grid-template-areas:
+    "image . title    title title"
+    "image . progress .    score"
+    "image . type     .    rated"
+    "image . season   .    tags" !important;
+
+  row-gap: 5px !important;
+  column-gap: 0 !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 215px !important;
+  min-height: 215px !important;
+  max-height: 215px !important;
+
+  padding: 12px !important;
+
+  border: 1px solid var(--osrs-box-outer) !important;
+  outline: 1px solid #8b7c60 !important;
+
+  background: var(--osrs-card-bg) !important;
+
+  box-shadow:
+    inset 0 0 0 1px #5f5444,
+    0 4px 10px rgba(0,0,0,.28) !important;
+}
+
+/* test the brighter OSRS-like completed green */
+.list-table .list-table-data:has(.status.completed)::before {
+  background: #00ff00 !important;
+}
+
+/* ---------------------------------------------------------------------
+   COVER — exactly same vertical extent as title + 3 detail rows
+   --------------------------------------------------------------------- */
+.list-table .list-table-data .data.image {
+  grid-area: image !important;
+
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+
+  width: 132px !important;
+  height: 191px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+}
+
+.list-table .list-table-data .data.image a {
+  display: block !important;
+
+  box-sizing: border-box !important;
+  width: 126px !important;
+  height: 191px !important;
+
+  margin: 0 auto !important;
+  padding: 5px !important;
+
+  border: 2px solid #17130f !important;
+  outline: 1px solid #796e59 !important;
+
+  background: #2b261f !important;
+
+  box-shadow:
+    inset 0 0 0 1px #4b4236,
+    inset 0 0 12px rgba(0,0,0,.42),
+    0 2px 5px rgba(0,0,0,.46) !important;
+
+  overflow: hidden !important;
+}
+
+.list-table .list-table-data .data.image .image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* ---------------------------------------------------------------------
+   CENTERED TITLE
+   --------------------------------------------------------------------- */
+.list-table .list-table-data .data.title {
+  grid-area: title !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 50px !important;
+
+  margin: 0 !important;
+  padding: 0 8px !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+
+  text-align: center !important;
+}
+
+.list-table .list-table-data .data.title > .link {
+  display: -webkit-box !important;
+
+  width: 100% !important;
+  height: auto !important;
+  max-height: 38px !important;
+
+  overflow: hidden !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+
+  color: var(--osrs-orange) !important;
+
+  font-size: 17px !important;
+  line-height: 19px !important;
+
+  text-align: center !important;
+  text-shadow: 2px 2px 0 rgba(0,0,0,.60) !important;
+}
+
+/* no extra quest-status line in the compact card header */
+.list-table .list-table-data .data.title::after {
+  display: none !important;
+}
+
+/* ---------------------------------------------------------------------
+   SIX DETAIL BOXES — EXACTLY 5px APART
+   --------------------------------------------------------------------- */
+.list-table .list-table-data .data.progress { grid-area: progress !important; }
+.list-table .list-table-data .data.score    { grid-area: score !important; }
+.list-table .list-table-data .data.type     { grid-area: type !important; }
+.list-table .list-table-data .data.rated    { grid-area: rated !important; }
+.list-table .list-table-data .data.season   { grid-area: season !important; }
+.list-table .list-table-data .data.tags     { grid-area: tags !important; }
+
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.score,
+.list-table .list-table-data .data.type,
+.list-table .list-table-data .data.rated,
+.list-table .list-table-data .data.season,
+.list-table .list-table-data .data.tags {
+  position: relative !important;
+  inset: auto !important;
+
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+
+  margin: 0 !important;
+  padding: 5px 7px 4px !important;
+
+  /* Real rectangular double border beneath the corner overlays. */
+  border: 1px solid var(--osrs-box-outer) !important;
+  outline: 0 !important;
+  border-radius: 2px !important;
+
+  background: var(--osrs-box-bg) !important;
+
+  box-shadow:
+    inset 0 0 0 1px var(--osrs-box-inner),
+    inset 0 1px 0 rgba(255,255,255,.035),
+    inset 0 -1px 0 rgba(0,0,0,.12) !important;
+
+  overflow: hidden !important;
+
+  color: #f2e2bf !important;
+  text-align: center !important;
+}
+
+/* ---------------------------------------------------------------------
+   ROUNDED INWARD CORNER BITES
+
+   Instead of clip-path, these paint four tiny quarter-circles in the
+   CARD color over the corners, then draw a crisp outer+inner border
+   ring around each bite. Visually this behaves like a concave rounded
+   notch, but it keeps the panel border intact and intentional.
+   --------------------------------------------------------------------- */
+.list-table .list-table-data .data.progress::after,
+.list-table .list-table-data .data.score::after,
+.list-table .list-table-data .data.type::after,
+.list-table .list-table-data .data.rated::after,
+.list-table .list-table-data .data.season::after,
+.list-table .list-table-data .data.tags::after {
+  content: "" !important;
+
+  position: absolute !important;
+  inset: 0 !important;
+
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  pointer-events: none !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  /*
+    0–4.5px  = card background (the actual "bite")
+    4.5–5.5  = dark outer border
+    5.5–6.5  = lighter inner border
+    >6.5px   = transparent, revealing panel fill
+  */
+  background:
+    radial-gradient(
+      circle at 0 0,
+      var(--osrs-notch-bg) 0 4.5px,
+      var(--osrs-box-outer) 4.7px 5.6px,
+      var(--osrs-box-inner) 5.8px 6.7px,
+      transparent 6.9px
+    ) top left / 14px 14px no-repeat,
+
+    radial-gradient(
+      circle at 100% 0,
+      var(--osrs-notch-bg) 0 4.5px,
+      var(--osrs-box-outer) 4.7px 5.6px,
+      var(--osrs-box-inner) 5.8px 6.7px,
+      transparent 6.9px
+    ) top right / 14px 14px no-repeat,
+
+    radial-gradient(
+      circle at 0 100%,
+      var(--osrs-notch-bg) 0 4.5px,
+      var(--osrs-box-outer) 4.7px 5.6px,
+      var(--osrs-box-inner) 5.8px 6.7px,
+      transparent 6.9px
+    ) bottom left / 14px 14px no-repeat,
+
+    radial-gradient(
+      circle at 100% 100%,
+      var(--osrs-notch-bg) 0 4.5px,
+      var(--osrs-box-outer) 4.7px 5.6px,
+      var(--osrs-box-inner) 5.8px 6.7px,
+      transparent 6.9px
+    ) bottom right / 14px 14px no-repeat !important;
+
+  opacity: 1 !important;
+  z-index: 2 !important;
+}
+
+/* labels and values must stay above the decorative corner overlay */
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.score::before,
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.rated::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.tags::before,
+.list-table .list-table-data .data.progress > *,
+.list-table .list-table-data .data.score > *,
+.list-table .list-table-data .data.type > *,
+.list-table .list-table-data .data.rated > *,
+.list-table .list-table-data .data.season > *,
+.list-table .list-table-data .data.tags > * {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+/* Keep the OSRS label treatment from v4.5. */
+.list-table .list-table-data .data.progress::before,
+.list-table .list-table-data .data.score::before,
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.rated::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.tags::before {
+  color: var(--osrs-orange) !important;
+}
+
+/* Hover should be subtle, not modern-button-like. */
+.list-table .list-table-data .data.progress:hover,
+.list-table .list-table-data .data.score:hover,
+.list-table .list-table-data .data.type:hover,
+.list-table .list-table-data .data.rated:hover,
+.list-table .list-table-data .data.season:hover,
+.list-table .list-table-data .data.tags:hover {
+  background: #5a5044 !important;
+}
+
+/* Responsive: at 2 columns give the info area slightly more breathing room. */
+@media (max-width: 1050px) {
+  .list-table .list-table-data {
+    grid-template-columns:
+      132px
+      12px
+      minmax(0, 1fr)
+      5px
+      minmax(0, 1fr) !important;
+  }
+}
+
+/* =====================================================================
+   ORIGINAL SOURCE: 12-infobox-icons.css
+   ===================================================================== */
+/* MODULE: 12-infobox-icons.css
+   Current additional Type/Rated/Released/Tags icon assets and label icon placement.
+   Extracted from source lines 2186-2283; import order matters. */
+
+/* =====================================================================
+   TAFIXADOS OSRS — CONSOLIDATED ADD-ON v1
+   Built directly on the last confirmed-good v4.6 + font-layer-v4 file.
+
+   This block appears ONCE and contains:
+     - Type / Rated / Released / Tags icons
+     - OSRS stone sidebar
+     - native-size 103x52 hover menus
+     - native-size 103x84 Settings menu
+     - middle-stone icon centering
+     - Logout hover fix
+     - visitor utility strip above the banner
+
+   It deliberately does NOT modify:
+     - the working card grid
+     - the rounded notch ::after geometry/colors
+     - the working font import
+     - the current infobox/font sizing
+   ===================================================================== */
+
+
+/* =====================================================================
+   INFOBOX ICONS
+   ===================================================================== */
+
+:root {
+  --rs-icon-type:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Character_Summary_-_Combat_Level_icon.png");
+  --rs-icon-rated:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Prayer_tab_icon.png");
+  --rs-icon-released:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Hourglass_(Recruitment_Drive).png");
+  --rs-icon-tags:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Character_Summary_-_Collections_Logged_icon.png");
+
+  --rs-stone-top: url("https://i.imgur.com/YuFM9y1.png");
+  --rs-stone-top-hot: url("https://i.imgur.com/fvrvt7D.png");
+  --rs-stone-mid: url("https://i.imgur.com/tuYzBdL.png");
+  --rs-stone-mid-hot: url("https://i.imgur.com/myeLaww.png");
+  --rs-stone-bottom: url("https://i.imgur.com/TjUwYKN.png");
+  --rs-stone-bottom-hot: url("https://i.imgur.com/289VuKk.png");
+
+  --rs-side-quick:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Inventory.png");
+  --rs-side-anime:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Music.png");
+  --rs-side-manga:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Spellbook.png");
+  --rs-side-statistics:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Stats_icon.png");
+  --rs-side-history:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Activity_Adviser_orb.png");
+  --rs-side-export:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Account_Management.png");
+  --rs-side-logout:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Logout.png");
+  --rs-side-settings:
+    url("https://oldschool.runescape.wiki/w/Special:Redirect/file/Settings.png");
+
+  --rs-option-menu: url("https://i.imgur.com/wcjZ7hd.png");
+  --rs-option-menu-settings: url("https://i.imgur.com/BYhIGPI.png");
+}
+
+
+/* Add only backgrounds to the EXISTING labels. Do not touch ::after:
+   ::after is where the working rounded corner notches live. */
+.list-table .list-table-data .data.type::before,
+.list-table .list-table-data .data.rated::before,
+.list-table .list-table-data .data.season::before,
+.list-table .list-table-data .data.tags::before {
+  background-repeat: no-repeat !important;
+}
+
+.list-table .list-table-data .data.type::before {
+  background-image: var(--rs-icon-type) !important;
+  background-size: 16px 16px !important;
+  background-position: calc(50% - 27px) center !important;
+}
+
+.list-table .list-table-data .data.rated::before {
+  background-image: var(--rs-icon-rated) !important;
+  background-size: 17px 17px !important;
+  background-position: calc(50% - 29px) center !important;
+}
+
+.list-table .list-table-data .data.season::before {
+  background-image: var(--rs-icon-released) !important;
+  background-size: 11px 17px !important;
+  background-position: calc(50% - 38px) center !important;
+}
+
+.list-table .list-table-data .data.tags::before {
+  background-image: var(--rs-icon-tags) !important;
+  background-size: 16px 16px !important;
+  background-position: calc(50% - 27px) center !important;
+}

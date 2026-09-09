@@ -1,0 +1,468 @@
+/* MAL-OSRS SAFE REFACTOR v1.1
+   Module: 07-minimap-footer.css
+   Cascade-preserving consolidation.
+*/
+
+/* =====================================================================
+   ORIGINAL SOURCE: 29-minimap-full-route-native-v1.css
+   ===================================================================== */
+/* MODULE: 29-minimap-full-route-native-v1.css
+   V20 correction for the full Tree Gnome Village maze -> Ectofuntus route.
+
+   IMPORTANT:
+   The image supplied through chat was automatically downscaled from the
+   original 3635x1284 to 2048x723 before V19 traced it.
+
+   V20 rescales every generated route offset back to the ORIGINAL coordinate
+   system using the uniform width ratio:
+
+       3635 / 2048 = 1.774902344
+
+   This restores the same native world-map scale used by the successful
+   maze -> Yanille V18 test.
+
+   V19 route scroll span: 66142px
+   V20 corrected span:    117396px
+*/
+
+:root {
+  --rs-minimap-route-scroll-distance: 117396px;
+}
+
+@keyframes rs-minimap-route {
+    0.000% { background-position: calc(50% + var(--rs-minimap-start-x) + 0px) calc(50% + var(--rs-minimap-start-y) + 0px); }
+    0.264% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 14px); }
+    0.325% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 21px); }
+    0.392% { background-position: calc(50% + var(--rs-minimap-start-x) - 16px) calc(50% + var(--rs-minimap-start-y) + 23px); }
+    0.465% { background-position: calc(50% + var(--rs-minimap-start-x) - 12px) calc(50% + var(--rs-minimap-start-y) + 30px); }
+    0.607% { background-position: calc(50% + var(--rs-minimap-start-x) + 4px) calc(50% + var(--rs-minimap-start-y) + 32px); }
+    0.652% { background-position: calc(50% + var(--rs-minimap-start-x) + 4px) calc(50% + var(--rs-minimap-start-y) + 37px); }
+    0.740% { background-position: calc(50% + var(--rs-minimap-start-x) - 5px) calc(50% + var(--rs-minimap-start-y) + 41px); }
+    1.179% { background-position: calc(50% + var(--rs-minimap-start-x) - 5px) calc(50% + var(--rs-minimap-start-y) + 92px); }
+    1.261% { background-position: calc(50% + var(--rs-minimap-start-x) - 14px) calc(50% + var(--rs-minimap-start-y) + 94px); }
+    1.364% { background-position: calc(50% + var(--rs-minimap-start-x) - 21px) calc(50% + var(--rs-minimap-start-y) + 101px); }
+    1.491% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 87px); }
+    1.579% { background-position: calc(50% + var(--rs-minimap-start-x) - 14px) calc(50% + var(--rs-minimap-start-y) + 83px); }
+    1.625% { background-position: calc(50% + var(--rs-minimap-start-x) - 14px) calc(50% + var(--rs-minimap-start-y) + 78px); }
+    1.713% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 75px); }
+    1.864% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 57px); }
+    1.937% { background-position: calc(50% + var(--rs-minimap-start-x) - 16px) calc(50% + var(--rs-minimap-start-y) + 53px); }
+    1.989% { background-position: calc(50% + var(--rs-minimap-start-x) - 18px) calc(50% + var(--rs-minimap-start-y) + 48px); }
+    2.170% { background-position: calc(50% + var(--rs-minimap-start-x) - 39px) calc(50% + var(--rs-minimap-start-y) + 48px); }
+    2.237% { background-position: calc(50% + var(--rs-minimap-start-x) - 41px) calc(50% + var(--rs-minimap-start-y) + 41px); }
+    2.319% { background-position: calc(50% + var(--rs-minimap-start-x) - 50px) calc(50% + var(--rs-minimap-start-y) + 39px); }
+    2.392% { background-position: calc(50% + var(--rs-minimap-start-x) - 53px) calc(50% + var(--rs-minimap-start-y) + 32px); }
+    2.739% { background-position: calc(50% + var(--rs-minimap-start-x) - 94px) calc(50% + var(--rs-minimap-start-y) + 32px); }
+    2.991% { background-position: calc(50% + var(--rs-minimap-start-x) - 94px) calc(50% + var(--rs-minimap-start-y) + 5px); }
+    3.632% { background-position: calc(50% + var(--rs-minimap-start-x) - 169px) calc(50% + var(--rs-minimap-start-y) + 4px); }
+    4.328% { background-position: calc(50% + var(--rs-minimap-start-x) - 169px) calc(50% + var(--rs-minimap-start-y) - 78px); }
+    4.697% { background-position: calc(50% + var(--rs-minimap-start-x) - 211px) calc(50% + var(--rs-minimap-start-y) - 80px); }
+    4.824% { background-position: calc(50% + var(--rs-minimap-start-x) - 213px) calc(50% + var(--rs-minimap-start-y) - 94px); }
+    4.949% { background-position: calc(50% + var(--rs-minimap-start-x) - 225px) calc(50% + var(--rs-minimap-start-y) - 99px); }
+    5.182% { background-position: calc(50% + var(--rs-minimap-start-x) - 227px) calc(50% + var(--rs-minimap-start-y) - 126px); }
+    5.802% { background-position: calc(50% + var(--rs-minimap-start-x) - 300px) calc(50% + var(--rs-minimap-start-y) - 126px); }
+    5.966% { background-position: calc(50% + var(--rs-minimap-start-x) - 304px) calc(50% + var(--rs-minimap-start-y) - 144px); }
+    6.183% { background-position: calc(50% + var(--rs-minimap-start-x) - 328px) calc(50% + var(--rs-minimap-start-y) - 142px); }
+    6.326% { background-position: calc(50% + var(--rs-minimap-start-x) - 312px) calc(50% + var(--rs-minimap-start-y) - 140px); }
+    6.408% { background-position: calc(50% + var(--rs-minimap-start-x) - 311px) calc(50% + var(--rs-minimap-start-y) - 131px); }
+    6.835% { background-position: calc(50% + var(--rs-minimap-start-x) - 346px) calc(50% + var(--rs-minimap-start-y) - 96px); }
+    6.971% { background-position: calc(50% + var(--rs-minimap-start-x) - 346px) calc(50% + var(--rs-minimap-start-y) - 80px); }
+    7.173% { background-position: calc(50% + var(--rs-minimap-start-x) - 360px) calc(50% + var(--rs-minimap-start-y) - 62px); }
+    9.531% { background-position: calc(50% + var(--rs-minimap-start-x) - 360px) calc(50% + var(--rs-minimap-start-y) + 215px); }
+   10.056% { background-position: calc(50% + var(--rs-minimap-start-x) - 314px) calc(50% + var(--rs-minimap-start-y) + 252px); }
+   10.168% { background-position: calc(50% + var(--rs-minimap-start-x) - 302px) calc(50% + var(--rs-minimap-start-y) + 254px); }
+   10.561% { background-position: calc(50% + var(--rs-minimap-start-x) - 302px) calc(50% + var(--rs-minimap-start-y) + 300px); }
+   10.998% { background-position: calc(50% + var(--rs-minimap-start-x) - 268px) calc(50% + var(--rs-minimap-start-y) + 337px); }
+   11.394% { background-position: calc(50% + var(--rs-minimap-start-x) - 296px) calc(50% + var(--rs-minimap-start-y) + 371px); }
+   11.552% { background-position: calc(50% + var(--rs-minimap-start-x) - 286px) calc(50% + var(--rs-minimap-start-y) + 385px); }
+   11.628% { background-position: calc(50% + var(--rs-minimap-start-x) - 286px) calc(50% + var(--rs-minimap-start-y) + 394px); }
+   11.786% { background-position: calc(50% + var(--rs-minimap-start-x) - 275px) calc(50% + var(--rs-minimap-start-y) + 408px); }
+   11.847% { background-position: calc(50% + var(--rs-minimap-start-x) - 275px) calc(50% + var(--rs-minimap-start-y) + 415px); }
+   12.055% { background-position: calc(50% + var(--rs-minimap-start-x) - 291px) calc(50% + var(--rs-minimap-start-y) + 433px); }
+   12.136% { background-position: calc(50% + var(--rs-minimap-start-x) - 300px) calc(50% + var(--rs-minimap-start-y) + 435px); }
+   12.257% { background-position: calc(50% + var(--rs-minimap-start-x) - 300px) calc(50% + var(--rs-minimap-start-y) + 449px); }
+   12.382% { background-position: calc(50% + var(--rs-minimap-start-x) - 312px) calc(50% + var(--rs-minimap-start-y) + 454px); }
+   12.539% { background-position: calc(50% + var(--rs-minimap-start-x) - 314px) calc(50% + var(--rs-minimap-start-y) + 472px); }
+   13.069% { background-position: calc(50% + var(--rs-minimap-start-x) - 376px) calc(50% + var(--rs-minimap-start-y) + 472px); }
+   13.510% { background-position: calc(50% + var(--rs-minimap-start-x) - 417px) calc(50% + var(--rs-minimap-start-y) + 499px); }
+   13.789% { background-position: calc(50% + var(--rs-minimap-start-x) - 449px) calc(50% + var(--rs-minimap-start-y) + 501px); }
+   14.031% { background-position: calc(50% + var(--rs-minimap-start-x) - 449px) calc(50% + var(--rs-minimap-start-y) + 529px); }
+   14.202% { background-position: calc(50% + var(--rs-minimap-start-x) - 435px) calc(50% + var(--rs-minimap-start-y) + 543px); }
+   14.383% { background-position: calc(50% + var(--rs-minimap-start-x) - 435px) calc(50% + var(--rs-minimap-start-y) + 564px); }
+   14.841% { background-position: calc(50% + var(--rs-minimap-start-x) - 396px) calc(50% + var(--rs-minimap-start-y) + 600px); }
+   15.688% { background-position: calc(50% + var(--rs-minimap-start-x) - 396px) calc(50% + var(--rs-minimap-start-y) + 699px); }
+   15.957% { background-position: calc(50% + var(--rs-minimap-start-x) - 426px) calc(50% + var(--rs-minimap-start-y) + 703px); }
+   17.409% { background-position: calc(50% + var(--rs-minimap-start-x) - 426px) calc(50% + var(--rs-minimap-start-y) + 873px); }
+   18.401% { background-position: calc(50% + var(--rs-minimap-start-x) - 506px) calc(50% + var(--rs-minimap-start-y) + 957px); }
+   18.582% { background-position: calc(50% + var(--rs-minimap-start-x) - 506px) calc(50% + var(--rs-minimap-start-y) + 978px); }
+   18.872% { background-position: calc(50% + var(--rs-minimap-start-x) - 532px) calc(50% + var(--rs-minimap-start-y) + 996px); }
+   18.932% { background-position: calc(50% + var(--rs-minimap-start-x) - 532px) calc(50% + var(--rs-minimap-start-y) + 1003px); }
+   19.033% { background-position: calc(50% + var(--rs-minimap-start-x) - 524px) calc(50% + var(--rs-minimap-start-y) + 1010px); }
+   19.109% { background-position: calc(50% + var(--rs-minimap-start-x) - 524px) calc(50% + var(--rs-minimap-start-y) + 1019px); }
+   19.331% { background-position: calc(50% + var(--rs-minimap-start-x) - 543px) calc(50% + var(--rs-minimap-start-y) + 1035px); }
+   20.556% { background-position: calc(50% + var(--rs-minimap-start-x) - 687px) calc(50% + var(--rs-minimap-start-y) + 1035px); }
+   20.875% { background-position: calc(50% + var(--rs-minimap-start-x) - 717px) calc(50% + var(--rs-minimap-start-y) + 1017px); }
+   21.238% { background-position: calc(50% + var(--rs-minimap-start-x) - 760px) calc(50% + var(--rs-minimap-start-y) + 1017px); }
+   21.792% { background-position: calc(50% + var(--rs-minimap-start-x) - 788px) calc(50% + var(--rs-minimap-start-y) + 964px); }
+   21.944% { background-position: calc(50% + var(--rs-minimap-start-x) - 802px) calc(50% + var(--rs-minimap-start-y) + 955px); }
+   22.371% { background-position: calc(50% + var(--rs-minimap-start-x) - 829px) calc(50% + var(--rs-minimap-start-y) + 916px); }
+   22.480% { background-position: calc(50% + var(--rs-minimap-start-x) - 840px) calc(50% + var(--rs-minimap-start-y) + 911px); }
+   22.838% { background-position: calc(50% + var(--rs-minimap-start-x) - 868px) calc(50% + var(--rs-minimap-start-y) + 880px); }
+   23.231% { background-position: calc(50% + var(--rs-minimap-start-x) - 914px) calc(50% + var(--rs-minimap-start-y) + 880px); }
+   23.426% { background-position: calc(50% + var(--rs-minimap-start-x) - 932px) calc(50% + var(--rs-minimap-start-y) + 893px); }
+   24.482% { background-position: calc(50% + var(--rs-minimap-start-x) - 1053px) calc(50% + var(--rs-minimap-start-y) + 887px); }
+   24.715% { background-position: calc(50% + var(--rs-minimap-start-x) - 1054px) calc(50% + var(--rs-minimap-start-y) + 914px); }
+   25.008% { background-position: calc(50% + var(--rs-minimap-start-x) - 1031px) calc(50% + var(--rs-minimap-start-y) + 939px); }
+   25.189% { background-position: calc(50% + var(--rs-minimap-start-x) - 1031px) calc(50% + var(--rs-minimap-start-y) + 960px); }
+   25.390% { background-position: calc(50% + var(--rs-minimap-start-x) - 1017px) calc(50% + var(--rs-minimap-start-y) + 978px); }
+   25.436% { background-position: calc(50% + var(--rs-minimap-start-x) - 1017px) calc(50% + var(--rs-minimap-start-y) + 983px); }
+   25.607% { background-position: calc(50% + var(--rs-minimap-start-x) - 1031px) calc(50% + var(--rs-minimap-start-y) + 997px); }
+   25.985% { background-position: calc(50% + var(--rs-minimap-start-x) - 1031px) calc(50% + var(--rs-minimap-start-y) + 1042px); }
+   26.186% { background-position: calc(50% + var(--rs-minimap-start-x) - 1045px) calc(50% + var(--rs-minimap-start-y) + 1060px); }
+   26.298% { background-position: calc(50% + var(--rs-minimap-start-x) - 1044px) calc(50% + var(--rs-minimap-start-y) + 1072px); }
+   26.592% { background-position: calc(50% + var(--rs-minimap-start-x) - 1010px) calc(50% + var(--rs-minimap-start-y) + 1074px); }
+   26.713% { background-position: calc(50% + var(--rs-minimap-start-x) - 1010px) calc(50% + var(--rs-minimap-start-y) + 1088px); }
+   26.920% { background-position: calc(50% + var(--rs-minimap-start-x) - 1026px) calc(50% + var(--rs-minimap-start-y) + 1106px); }
+   27.223% { background-position: calc(50% + var(--rs-minimap-start-x) - 1061px) calc(50% + var(--rs-minimap-start-y) + 1106px); }
+   27.536% { background-position: calc(50% + var(--rs-minimap-start-x) - 1077px) calc(50% + var(--rs-minimap-start-y) + 1076px); }
+   28.274% { background-position: calc(50% + var(--rs-minimap-start-x) - 1053px) calc(50% + var(--rs-minimap-start-y) + 999px); }
+   28.819% { background-position: calc(50% + var(--rs-minimap-start-x) - 1083px) calc(50% + var(--rs-minimap-start-y) + 948px); }
+   29.182% { background-position: calc(50% + var(--rs-minimap-start-x) - 1083px) calc(50% + var(--rs-minimap-start-y) + 905px); }
+   29.636% { background-position: calc(50% + var(--rs-minimap-start-x) - 1113px) calc(50% + var(--rs-minimap-start-y) + 864px); }
+   29.960% { background-position: calc(50% + var(--rs-minimap-start-x) - 1150px) calc(50% + var(--rs-minimap-start-y) + 866px); }
+   30.127% { background-position: calc(50% + var(--rs-minimap-start-x) - 1159px) calc(50% + var(--rs-minimap-start-y) + 882px); }
+   30.662% { background-position: calc(50% + var(--rs-minimap-start-x) - 1161px) calc(50% + var(--rs-minimap-start-y) + 944px); }
+   31.494% { background-position: calc(50% + var(--rs-minimap-start-x) - 1258px) calc(50% + var(--rs-minimap-start-y) + 944px); }
+   31.644% { background-position: calc(50% + var(--rs-minimap-start-x) - 1271px) calc(50% + var(--rs-minimap-start-y) + 932px); }
+   32.127% { background-position: calc(50% + var(--rs-minimap-start-x) - 1328px) calc(50% + var(--rs-minimap-start-y) + 932px); }
+   32.754% { background-position: calc(50% + var(--rs-minimap-start-x) - 1329px) calc(50% + var(--rs-minimap-start-y) + 859px); }
+   33.373% { background-position: calc(50% + var(--rs-minimap-start-x) - 1384px) calc(50% + var(--rs-minimap-start-y) + 816px); }
+   34.189% { background-position: calc(50% + var(--rs-minimap-start-x) - 1384px) calc(50% + var(--rs-minimap-start-y) + 721px); }
+   34.558% { background-position: calc(50% + var(--rs-minimap-start-x) - 1427px) calc(50% + var(--rs-minimap-start-y) + 719px); }
+   35.263% { background-position: calc(50% + var(--rs-minimap-start-x) - 1489px) calc(50% + var(--rs-minimap-start-y) + 669px); }
+   35.450% { background-position: calc(50% + var(--rs-minimap-start-x) - 1510px) calc(50% + var(--rs-minimap-start-y) + 667px); }
+   37.627% { background-position: calc(50% + var(--rs-minimap-start-x) - 1510px) calc(50% + var(--rs-minimap-start-y) + 412px); }
+   38.146% { background-position: calc(50% + var(--rs-minimap-start-x) - 1546px) calc(50% + var(--rs-minimap-start-y) + 366px); }
+   38.651% { background-position: calc(50% + var(--rs-minimap-start-x) - 1548px) calc(50% + var(--rs-minimap-start-y) + 307px); }
+   38.848% { background-position: calc(50% + var(--rs-minimap-start-x) - 1571px) calc(50% + var(--rs-minimap-start-y) + 307px); }
+   39.041% { background-position: calc(50% + var(--rs-minimap-start-x) - 1574px) calc(50% + var(--rs-minimap-start-y) + 286px); }
+   39.359% { background-position: calc(50% + var(--rs-minimap-start-x) - 1612px) calc(50% + var(--rs-minimap-start-y) + 286px); }
+   39.652% { background-position: calc(50% + var(--rs-minimap-start-x) - 1613px) calc(50% + var(--rs-minimap-start-y) + 319px); }
+   39.952% { background-position: calc(50% + var(--rs-minimap-start-x) - 1647px) calc(50% + var(--rs-minimap-start-y) + 323px); }
+   40.306% { background-position: calc(50% + var(--rs-minimap-start-x) - 1649px) calc(50% + var(--rs-minimap-start-y) + 364px); }
+   40.790% { background-position: calc(50% + var(--rs-minimap-start-x) - 1706px) calc(50% + var(--rs-minimap-start-y) + 364px); }
+   40.893% { background-position: calc(50% + var(--rs-minimap-start-x) - 1709px) calc(50% + var(--rs-minimap-start-y) + 353px); }
+   41.051% { background-position: calc(50% + var(--rs-minimap-start-x) - 1727px) calc(50% + var(--rs-minimap-start-y) + 351px); }
+   41.238% { background-position: calc(50% + var(--rs-minimap-start-x) - 1729px) calc(50% + var(--rs-minimap-start-y) + 330px); }
+   41.858% { background-position: calc(50% + var(--rs-minimap-start-x) - 1802px) calc(50% + var(--rs-minimap-start-y) + 330px); }
+   42.227% { background-position: calc(50% + var(--rs-minimap-start-x) - 1803px) calc(50% + var(--rs-minimap-start-y) + 288px); }
+   42.505% { background-position: calc(50% + var(--rs-minimap-start-x) - 1826px) calc(50% + var(--rs-minimap-start-y) + 264px); }
+   44.244% { background-position: calc(50% + var(--rs-minimap-start-x) - 2030px) calc(50% + var(--rs-minimap-start-y) + 264px); }
+   44.586% { background-position: calc(50% + var(--rs-minimap-start-x) - 2059px) calc(50% + var(--rs-minimap-start-y) + 236px); }
+   44.904% { background-position: calc(50% + var(--rs-minimap-start-x) - 2096px) calc(50% + var(--rs-minimap-start-y) + 236px); }
+   45.031% { background-position: calc(50% + var(--rs-minimap-start-x) - 2098px) calc(50% + var(--rs-minimap-start-y) + 222px); }
+   45.104% { background-position: calc(50% + var(--rs-minimap-start-x) - 2105px) calc(50% + var(--rs-minimap-start-y) + 218px); }
+   45.186% { background-position: calc(50% + var(--rs-minimap-start-x) - 2107px) calc(50% + var(--rs-minimap-start-y) + 209px); }
+   45.397% { background-position: calc(50% + var(--rs-minimap-start-x) - 2132px) calc(50% + var(--rs-minimap-start-y) + 209px); }
+   45.637% { background-position: calc(50% + var(--rs-minimap-start-x) - 2135px) calc(50% + var(--rs-minimap-start-y) + 236px); }
+   46.105% { background-position: calc(50% + var(--rs-minimap-start-x) - 2190px) calc(50% + var(--rs-minimap-start-y) + 236px); }
+   46.299% { background-position: calc(50% + var(--rs-minimap-start-x) - 2194px) calc(50% + var(--rs-minimap-start-y) + 257px); }
+   46.820% { background-position: calc(50% + var(--rs-minimap-start-x) - 2254px) calc(50% + var(--rs-minimap-start-y) + 259px); }
+   46.985% { background-position: calc(50% + var(--rs-minimap-start-x) - 2268px) calc(50% + var(--rs-minimap-start-y) + 272px); }
+   47.242% { background-position: calc(50% + var(--rs-minimap-start-x) - 2268px) calc(50% + var(--rs-minimap-start-y) + 302px); }
+   47.735% { background-position: calc(50% + var(--rs-minimap-start-x) - 2240px) calc(50% + var(--rs-minimap-start-y) + 348px); }
+   48.052% { background-position: calc(50% + var(--rs-minimap-start-x) - 2240px) calc(50% + var(--rs-minimap-start-y) + 385px); }
+   48.519% { background-position: calc(50% + var(--rs-minimap-start-x) - 2206px) calc(50% + var(--rs-minimap-start-y) + 426px); }
+   49.910% { background-position: calc(50% + var(--rs-minimap-start-x) - 2206px) calc(50% + var(--rs-minimap-start-y) + 589px); }
+   50.255% { background-position: calc(50% + var(--rs-minimap-start-x) - 2167px) calc(50% + var(--rs-minimap-start-y) + 593px); }
+   50.694% { background-position: calc(50% + var(--rs-minimap-start-x) - 2167px) calc(50% + var(--rs-minimap-start-y) + 644px); }
+   51.017% { background-position: calc(50% + var(--rs-minimap-start-x) - 2139px) calc(50% + var(--rs-minimap-start-y) + 667px); }
+   51.220% { background-position: calc(50% + var(--rs-minimap-start-x) - 2137px) calc(50% + var(--rs-minimap-start-y) + 690px); }
+   51.488% { background-position: calc(50% + var(--rs-minimap-start-x) - 2121px) calc(50% + var(--rs-minimap-start-y) + 715px); }
+   52.643% { background-position: calc(50% + var(--rs-minimap-start-x) - 2119px) calc(50% + var(--rs-minimap-start-y) + 850px); }
+   52.832% { background-position: calc(50% + var(--rs-minimap-start-x) - 2109px) calc(50% + var(--rs-minimap-start-y) + 868px); }
+   53.458% { background-position: calc(50% + var(--rs-minimap-start-x) - 2036px) calc(50% + var(--rs-minimap-start-y) + 870px); }
+   53.972% { background-position: calc(50% + var(--rs-minimap-start-x) - 2036px) calc(50% + var(--rs-minimap-start-y) + 930px); }
+   54.548% { background-position: calc(50% + var(--rs-minimap-start-x) - 1984px) calc(50% + var(--rs-minimap-start-y) + 969px); }
+   55.138% { background-position: calc(50% + var(--rs-minimap-start-x) - 1984px) calc(50% + var(--rs-minimap-start-y) + 1038px); }
+   55.265% { background-position: calc(50% + var(--rs-minimap-start-x) - 1999px) calc(50% + var(--rs-minimap-start-y) + 1040px); }
+   55.366% { background-position: calc(50% + var(--rs-minimap-start-x) - 2006px) calc(50% + var(--rs-minimap-start-y) + 1049px); }
+   55.971% { background-position: calc(50% + var(--rs-minimap-start-x) - 2077px) calc(50% + var(--rs-minimap-start-y) + 1049px); }
+   56.845% { background-position: calc(50% + var(--rs-minimap-start-x) - 2080px) calc(50% + var(--rs-minimap-start-y) + 948px); }
+   57.223% { background-position: calc(50% + var(--rs-minimap-start-x) - 2125px) calc(50% + var(--rs-minimap-start-y) + 948px); }
+   57.462% { background-position: calc(50% + var(--rs-minimap-start-x) - 2128px) calc(50% + var(--rs-minimap-start-y) + 974px); }
+   58.263% { background-position: calc(50% + var(--rs-minimap-start-x) - 2222px) calc(50% + var(--rs-minimap-start-y) + 974px); }
+   59.183% { background-position: calc(50% + var(--rs-minimap-start-x) - 2226px) calc(50% + var(--rs-minimap-start-y) + 868px); }
+   60.211% { background-position: calc(50% + var(--rs-minimap-start-x) - 2346px) calc(50% + var(--rs-minimap-start-y) + 868px); }
+   61.040% { background-position: calc(50% + var(--rs-minimap-start-x) - 2350px) calc(50% + var(--rs-minimap-start-y) + 964px); }
+   61.524% { background-position: calc(50% + var(--rs-minimap-start-x) - 2407px) calc(50% + var(--rs-minimap-start-y) + 964px); }
+   62.884% { background-position: calc(50% + var(--rs-minimap-start-x) - 2536px) calc(50% + var(--rs-minimap-start-y) + 1037px); }
+   64.215% { background-position: calc(50% + var(--rs-minimap-start-x) - 2693px) calc(50% + var(--rs-minimap-start-y) + 1037px); }
+   64.596% { background-position: calc(50% + var(--rs-minimap-start-x) - 2726px) calc(50% + var(--rs-minimap-start-y) + 1010px); }
+   64.883% { background-position: calc(50% + var(--rs-minimap-start-x) - 2760px) calc(50% + var(--rs-minimap-start-y) + 1010px); }
+   65.093% { background-position: calc(50% + var(--rs-minimap-start-x) - 2764px) calc(50% + var(--rs-minimap-start-y) + 1033px); }
+   65.985% { background-position: calc(50% + var(--rs-minimap-start-x) - 2868px) calc(50% + var(--rs-minimap-start-y) + 1033px); }
+   66.187% { background-position: calc(50% + var(--rs-minimap-start-x) - 2870px) calc(50% + var(--rs-minimap-start-y) + 1010px); }
+   66.840% { background-position: calc(50% + var(--rs-minimap-start-x) - 2820px) calc(50% + var(--rs-minimap-start-y) + 955px); }
+   66.901% { background-position: calc(50% + var(--rs-minimap-start-x) - 2820px) calc(50% + var(--rs-minimap-start-y) + 948px); }
+   67.164% { background-position: calc(50% + var(--rs-minimap-start-x) - 2790px) calc(50% + var(--rs-minimap-start-y) + 946px); }
+   67.352% { background-position: calc(50% + var(--rs-minimap-start-x) - 2788px) calc(50% + var(--rs-minimap-start-y) + 925px); }
+   68.020% { background-position: calc(50% + var(--rs-minimap-start-x) - 2735px) calc(50% + var(--rs-minimap-start-y) + 871px); }
+   68.450% { background-position: calc(50% + var(--rs-minimap-start-x) - 2769px) calc(50% + var(--rs-minimap-start-y) + 836px); }
+   68.873% { background-position: calc(50% + var(--rs-minimap-start-x) - 2748px) calc(50% + var(--rs-minimap-start-y) + 795px); }
+   69.554% { background-position: calc(50% + var(--rs-minimap-start-x) - 2778px) calc(50% + var(--rs-minimap-start-y) + 728px); }
+   70.218% { background-position: calc(50% + var(--rs-minimap-start-x) - 2735px) calc(50% + var(--rs-minimap-start-y) + 667px); }
+   70.685% { background-position: calc(50% + var(--rs-minimap-start-x) - 2769px) calc(50% + var(--rs-minimap-start-y) + 627px); }
+   71.002% { background-position: calc(50% + var(--rs-minimap-start-x) - 2746px) calc(50% + var(--rs-minimap-start-y) + 600px); }
+   71.368% { background-position: calc(50% + var(--rs-minimap-start-x) - 2772px) calc(50% + var(--rs-minimap-start-y) + 568px); }
+   71.523% { background-position: calc(50% + var(--rs-minimap-start-x) - 2778px) calc(50% + var(--rs-minimap-start-y) + 552px); }
+   71.583% { background-position: calc(50% + var(--rs-minimap-start-x) - 2778px) calc(50% + var(--rs-minimap-start-y) + 545px); }
+   71.882% { background-position: calc(50% + var(--rs-minimap-start-x) - 2762px) calc(50% + var(--rs-minimap-start-y) + 516px); }
+   72.569% { background-position: calc(50% + var(--rs-minimap-start-x) - 2751px) calc(50% + var(--rs-minimap-start-y) + 440px); }
+   73.078% { background-position: calc(50% + var(--rs-minimap-start-x) - 2779px) calc(50% + var(--rs-minimap-start-y) + 392px); }
+   73.389% { background-position: calc(50% + var(--rs-minimap-start-x) - 2799px) calc(50% + var(--rs-minimap-start-y) + 421px); }
+   73.818% { background-position: calc(50% + var(--rs-minimap-start-x) - 2776px) calc(50% + var(--rs-minimap-start-y) + 461px); }
+   74.314% { background-position: calc(50% + var(--rs-minimap-start-x) - 2779px) calc(50% + var(--rs-minimap-start-y) + 518px); }
+   74.396% { background-position: calc(50% + var(--rs-minimap-start-x) - 2781px) calc(50% + var(--rs-minimap-start-y) + 527px); }
+   74.603% { background-position: calc(50% + var(--rs-minimap-start-x) - 2799px) calc(50% + var(--rs-minimap-start-y) + 543px); }
+   74.918% { background-position: calc(50% + var(--rs-minimap-start-x) - 2835px) calc(50% + var(--rs-minimap-start-y) + 540px); }
+   75.022% { background-position: calc(50% + var(--rs-minimap-start-x) - 2831px) calc(50% + var(--rs-minimap-start-y) + 529px); }
+   75.363% { background-position: calc(50% + var(--rs-minimap-start-x) - 2799px) calc(50% + var(--rs-minimap-start-y) + 509px); }
+   75.919% { background-position: calc(50% + var(--rs-minimap-start-x) - 2803px) calc(50% + var(--rs-minimap-start-y) + 446px); }
+   76.123% { background-position: calc(50% + var(--rs-minimap-start-x) - 2822px) calc(50% + var(--rs-minimap-start-y) + 435px); }
+   76.196% { background-position: calc(50% + var(--rs-minimap-start-x) - 2829px) calc(50% + var(--rs-minimap-start-y) + 435px); }
+   76.473% { background-position: calc(50% + var(--rs-minimap-start-x) - 2843px) calc(50% + var(--rs-minimap-start-y) + 461px); }
+   76.519% { background-position: calc(50% + var(--rs-minimap-start-x) - 2843px) calc(50% + var(--rs-minimap-start-y) + 467px); }
+   76.872% { background-position: calc(50% + var(--rs-minimap-start-x) - 2820px) calc(50% + var(--rs-minimap-start-y) + 499px); }
+   77.003% { background-position: calc(50% + var(--rs-minimap-start-x) - 2827px) calc(50% + var(--rs-minimap-start-y) + 511px); }
+   77.149% { background-position: calc(50% + var(--rs-minimap-start-x) - 2842px) calc(50% + var(--rs-minimap-start-y) + 504px); }
+   77.754% { background-position: calc(50% + var(--rs-minimap-start-x) - 2913px) calc(50% + var(--rs-minimap-start-y) + 504px); }
+   78.412% { background-position: calc(50% + var(--rs-minimap-start-x) - 2953px) calc(50% + var(--rs-minimap-start-y) + 444px); }
+   79.289% { background-position: calc(50% + var(--rs-minimap-start-x) - 2953px) calc(50% + var(--rs-minimap-start-y) + 341px); }
+   79.732% { background-position: calc(50% + var(--rs-minimap-start-x) - 2939px) calc(50% + var(--rs-minimap-start-y) + 295px); }
+   79.860% { background-position: calc(50% + var(--rs-minimap-start-x) - 2950px) calc(50% + var(--rs-minimap-start-y) + 284px); }
+   80.713% { background-position: calc(50% + var(--rs-minimap-start-x) - 3049px) calc(50% + var(--rs-minimap-start-y) + 282px); }
+   81.968% { background-position: calc(50% + var(--rs-minimap-start-x) - 3049px) calc(50% + var(--rs-minimap-start-y) + 135px); }
+   82.207% { background-position: calc(50% + var(--rs-minimap-start-x) - 3076px) calc(50% + var(--rs-minimap-start-y) + 131px); }
+   82.555% { background-position: calc(50% + var(--rs-minimap-start-x) - 3076px) calc(50% + var(--rs-minimap-start-y) + 91px); }
+   82.628% { background-position: calc(50% + var(--rs-minimap-start-x) - 3069px) calc(50% + var(--rs-minimap-start-y) + 87px); }
+   82.779% { background-position: calc(50% + var(--rs-minimap-start-x) - 3069px) calc(50% + var(--rs-minimap-start-y) + 69px); }
+   84.434% { background-position: calc(50% + var(--rs-minimap-start-x) - 3262px) calc(50% + var(--rs-minimap-start-y) + 67px); }
+   84.697% { background-position: calc(50% + var(--rs-minimap-start-x) - 3264px) calc(50% + var(--rs-minimap-start-y) + 98px); }
+   84.770% { background-position: calc(50% + var(--rs-minimap-start-x) - 3257px) calc(50% + var(--rs-minimap-start-y) + 101px); }
+   84.936% { background-position: calc(50% + var(--rs-minimap-start-x) - 3257px) calc(50% + var(--rs-minimap-start-y) + 121px); }
+   85.055% { background-position: calc(50% + var(--rs-minimap-start-x) - 3269px) calc(50% + var(--rs-minimap-start-y) + 124px); }
+   85.543% { background-position: calc(50% + var(--rs-minimap-start-x) - 3312px) calc(50% + var(--rs-minimap-start-y) + 160px); }
+   85.866% { background-position: calc(50% + var(--rs-minimap-start-x) - 3314px) calc(50% + var(--rs-minimap-start-y) + 197px); }
+   86.169% { background-position: calc(50% + var(--rs-minimap-start-x) - 3349px) calc(50% + var(--rs-minimap-start-y) + 197px); }
+   86.257% { background-position: calc(50% + var(--rs-minimap-start-x) - 3353px) calc(50% + var(--rs-minimap-start-y) + 206px); }
+   86.332% { background-position: calc(50% + var(--rs-minimap-start-x) - 3362px) calc(50% + var(--rs-minimap-start-y) + 206px); }
+   86.455% { background-position: calc(50% + var(--rs-minimap-start-x) - 3372px) calc(50% + var(--rs-minimap-start-y) + 215px); }
+   86.642% { background-position: calc(50% + var(--rs-minimap-start-x) - 3374px) calc(50% + var(--rs-minimap-start-y) + 236px); }
+   87.292% { background-position: calc(50% + var(--rs-minimap-start-x) - 3450px) calc(50% + var(--rs-minimap-start-y) + 236px); }
+   87.631% { background-position: calc(50% + var(--rs-minimap-start-x) - 3452px) calc(50% + var(--rs-minimap-start-y) + 275px); }
+   87.840% { background-position: calc(50% + var(--rs-minimap-start-x) - 3475px) calc(50% + var(--rs-minimap-start-y) + 279px); }
+   88.052% { background-position: calc(50% + var(--rs-minimap-start-x) - 3475px) calc(50% + var(--rs-minimap-start-y) + 304px); }
+   88.110% { background-position: calc(50% + var(--rs-minimap-start-x) - 3470px) calc(50% + var(--rs-minimap-start-y) + 307px); }
+   88.609% { background-position: calc(50% + var(--rs-minimap-start-x) - 3470px) calc(50% + var(--rs-minimap-start-y) + 366px); }
+   89.090% { background-position: calc(50% + var(--rs-minimap-start-x) - 3445px) calc(50% + var(--rs-minimap-start-y) + 412px); }
+   89.664% { background-position: calc(50% + var(--rs-minimap-start-x) - 3445px) calc(50% + var(--rs-minimap-start-y) + 479px); }
+   90.683% { background-position: calc(50% + var(--rs-minimap-start-x) - 3564px) calc(50% + var(--rs-minimap-start-y) + 481px); }
+   91.393% { background-position: calc(50% + var(--rs-minimap-start-x) - 3630px) calc(50% + var(--rs-minimap-start-y) + 524px); }
+   91.968% { background-position: calc(50% + var(--rs-minimap-start-x) - 3630px) calc(50% + var(--rs-minimap-start-y) + 591px); }
+   92.303% { background-position: calc(50% + var(--rs-minimap-start-x) - 3603px) calc(50% + var(--rs-minimap-start-y) + 619px); }
+   93.005% { background-position: calc(50% + var(--rs-minimap-start-x) - 3521px) calc(50% + var(--rs-minimap-start-y) + 621px); }
+   94.063% { background-position: calc(50% + var(--rs-minimap-start-x) - 3521px) calc(50% + var(--rs-minimap-start-y) + 745px); }
+   94.106% { background-position: calc(50% + var(--rs-minimap-start-x) - 3518px) calc(50% + var(--rs-minimap-start-y) + 749px); }
+   94.584% { background-position: calc(50% + var(--rs-minimap-start-x) - 3473px) calc(50% + var(--rs-minimap-start-y) + 777px); }
+   95.053% { background-position: calc(50% + var(--rs-minimap-start-x) - 3418px) calc(50% + var(--rs-minimap-start-y) + 777px); }
+   95.187% { background-position: calc(50% + var(--rs-minimap-start-x) - 3415px) calc(50% + var(--rs-minimap-start-y) + 792px); }
+   95.888% { background-position: calc(50% + var(--rs-minimap-start-x) - 3333px) calc(50% + var(--rs-minimap-start-y) + 793px); }
+   96.493% { background-position: calc(50% + var(--rs-minimap-start-x) - 3333px) calc(50% + var(--rs-minimap-start-y) + 864px); }
+   96.536% { background-position: calc(50% + var(--rs-minimap-start-x) - 3337px) calc(50% + var(--rs-minimap-start-y) + 868px); }
+   97.164% { background-position: calc(50% + var(--rs-minimap-start-x) - 3394px) calc(50% + var(--rs-minimap-start-y) + 909px); }
+   97.330% { background-position: calc(50% + var(--rs-minimap-start-x) - 3413px) calc(50% + var(--rs-minimap-start-y) + 909px); }
+   97.768% { background-position: calc(50% + var(--rs-minimap-start-x) - 3456px) calc(50% + var(--rs-minimap-start-y) + 930px); }
+   98.137% { background-position: calc(50% + var(--rs-minimap-start-x) - 3498px) calc(50% + var(--rs-minimap-start-y) + 932px); }
+   98.319% { background-position: calc(50% + var(--rs-minimap-start-x) - 3498px) calc(50% + var(--rs-minimap-start-y) + 953px); }
+   98.462% { background-position: calc(50% + var(--rs-minimap-start-x) - 3486px) calc(50% + var(--rs-minimap-start-y) + 964px); }
+   99.430% { background-position: calc(50% + var(--rs-minimap-start-x) - 3486px) calc(50% + var(--rs-minimap-start-y) + 1077px); }
+   99.652% { background-position: calc(50% + var(--rs-minimap-start-x) - 3470px) calc(50% + var(--rs-minimap-start-y) + 1097px); }
+  100.000% { background-position: calc(50% + var(--rs-minimap-start-x) - 3470px) calc(50% + var(--rs-minimap-start-y) + 1138px); }
+}
+
+/* =====================================================================
+   ORIGINAL SOURCE: 30-footer-legal-cursor-v1.css
+   ===================================================================== */
+/* MODULE: 30-footer-legal-cursor-v1.css
+   V21 footer polish:
+   - preserves the Dragon Scimitar cursor over the thumbs buttons
+   - adds a compact fan-theme attribution / non-affiliation notice
+   - does not change the existing thumb artwork or hover behavior
+*/
+
+:root {
+  --rs-main-cursor: url("https://i.imgur.com/7ppAQ8f.png");
+}
+
+
+/* =====================================================================
+   1. KEEP THE CUSTOM CURSOR ON THE DECORATIVE THUMB BUTTONS
+   ---------------------------------------------------------------------
+   The old footer module explicitly used cursor: default on these two
+   pseudo-elements, which overrode the site's Dragon Scimitar cursor.
+   ===================================================================== */
+
+html body.ownlist #copyright::before,
+html body.ownlist #recaptcha-terms::before {
+  cursor: var(--rs-main-cursor), auto !important;
+}
+
+
+/* =====================================================================
+   2. FAN-THEME ATTRIBUTION / NON-AFFILIATION NOTICE
+   ===================================================================== */
+
+/* Make a little more vertical room below MAL's own legal text. */
+html body.ownlist #footer-block {
+  min-height: 254px !important;
+  padding: 130px 14px 72px !important;
+}
+
+
+/* #footer-block::before is already the "Did you enjoy..." prompt,
+   so ::after is available for our attribution. */
+html body.ownlist #footer-block::after {
+  content:
+    "Unofficial fan-made MyAnimeList theme by Tafixados.\A"
+    "Inspired by Old School RuneScape. RuneScape and associated game assets are the property of Jagex Ltd.; MyAnimeList and associated marks are the property of MyAnimeList Co., Ltd.\A"
+    "This theme is not affiliated with or endorsed by Jagex or MyAnimeList." !important;
+
+  position: absolute !important;
+  left: 14px !important;
+  right: 14px !important;
+  bottom: 12px !important;
+
+  display: block !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #887b65 !important;
+
+  font-family: "RS Small", "RSSmall", "RS Chat 07", Tahoma, Verdana, sans-serif !important;
+  font-size: 8px !important;
+  font-weight: 400 !important;
+  line-height: 10px !important;
+
+  text-align: center !important;
+  white-space: pre-line !important;
+
+  text-shadow: 1px 1px 0 rgba(0,0,0,.6) !important;
+
+  pointer-events: none !important;
+}
+
+
+/* Slightly more space on very narrow screens so the legal notice can wrap
+   without running into MAL's own copyright/reCAPTCHA text. */
+@media (max-width: 420px) {
+  html body.ownlist #footer-block {
+    min-height: 286px !important;
+    padding-bottom: 96px !important;
+  }
+
+  html body.ownlist #footer-block::after {
+    left: 10px !important;
+    right: 10px !important;
+    font-size: 7px !important;
+    line-height: 9px !important;
+  }
+}
+
+/* =====================================================================
+   ORIGINAL SOURCE: 31-footer-readable-legal-v1.css
+   ===================================================================== */
+/* MODULE: 31-footer-readable-legal-v1.css
+   V22 footer readability pass:
+   - removes the large dead gap before the fan-theme notice
+   - puts the notice directly after MAL's own legal text
+   - substantially increases footer legal-text size
+   - keeps the existing prompt, thumb buttons and Dragon Scimitar cursor
+*/
+
+html body.ownlist #footer-block {
+  width: 470px !important;
+  max-width: calc(100vw - 32px) !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 130px 20px 18px !important;
+}
+
+html body.ownlist #copyright,
+html body.ownlist #recaptcha-terms {
+  color: #b8aa8f !important;
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.65) !important;
+}
+
+html body.ownlist #recaptcha-terms {
+  margin-top: 3px !important;
+}
+
+html body.ownlist #recaptcha-terms a {
+  color: #d0bd82 !important;
+  font: inherit !important;
+}
+
+html body.ownlist #footer-block::after {
+  content:
+    "Unofficial fan-made MyAnimeList theme by Tafixados.\A"
+    "Inspired by Old School RuneScape. RuneScape and associated game assets are the property of Jagex Ltd.; MyAnimeList and associated marks are the property of MyAnimeList Co., Ltd.\A"
+    "This theme is not affiliated with or endorsed by Jagex or MyAnimeList." !important;
+
+  position: static !important;
+  display: block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+
+  margin: 10px 0 0 !important;
+  padding: 9px 4px 0 !important;
+
+  border-top: 1px solid rgba(114,100,81,.55) !important;
+
+  color: #c8b99a !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+
+  text-align: center !important;
+  white-space: pre-line !important;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.72) !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 520px) {
+  html body.ownlist #footer-block {
+    width: calc(100vw - 28px) !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    padding-bottom: 16px !important;
+  }
+
+  html body.ownlist #copyright,
+  html body.ownlist #recaptcha-terms {
+    font-size: 13px !important;
+    line-height: 17px !important;
+  }
+
+  html body.ownlist #footer-block::after {
+    font-size: 15px !important;
+    line-height: 19px !important;
+  }
+}

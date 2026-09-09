@@ -8,14 +8,14 @@
 */
 
 @import url("./osrs-ui-font-layer-v4-clean.css");
-@import url("./css/00-foundation.css");
-@import url("./css/01-shell-banner-nav.css");
-@import url("./css/02-cards-sidebar-dialogs-base.css");
-@import url("./css/03-cards-polish-icons.css");
-@import url("./css/04-sidebar-tooltips-visitor.css");
-@import url("./css/05-manga-optional-fields.css");
-@import url("./css/06-footer-stats-progress.css");
-@import url("./css/07-minimap-footer.css");
-@import url("./css/08-search-filter-score.css");
-@import url("./css/09-search-final.css");
-@import url("./css/10-manga-final-fixes.css");
+@import url("./css-legacy-refactor-v1/00-foundation.css");
+@import url("./css-legacy-refactor-v1/01-shell-banner-nav.css");
+@import url("./css-legacy-refactor-v1/02-cards-sidebar-dialogs-base.css");
+@import url("./css-legacy-refactor-v1/03-cards-polish-icons.css");
+@import url("./css-legacy-refactor-v1/04-sidebar-tooltips-visitor.css");
+@import url("./css-legacy-refactor-v1/05-manga-optional-fields.css");
+@import url("./css-legacy-refactor-v1/06-footer-stats-progress.css");
+@import url("./css-legacy-refactor-v1/07-minimap-footer.css");
+@import url("./css-legacy-refactor-v1/08-search-filter-score.css");
+@import url("./css-legacy-refactor-v1/09-search-final.css");
+@import url("./css-legacy-refactor-v1/10-manga-final-fixes.css");
