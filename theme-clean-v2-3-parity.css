@@ -1,7 +1,0 @@
-/* Tafixados MAL-OSRS — parity v2.3
-   Base: user's current stable theme-clean-v2-2-parity.css
-   Feature: independent Manga minimap route through Zeah / Varlamore
-*/
-
-@import url("./theme-clean-v2-2-parity.css");
-@import url("./css/12-manga-minimap-route.css");
