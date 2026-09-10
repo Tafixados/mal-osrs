@@ -1,11 +1,10 @@
 /* MAL-OSRS — Episode Rating / Discussion Dialog
-   Consolidated exact-DOM build v3.
+   Consolidated exact-DOM build v4.
 
-   This file replaces ALL earlier episode-rating dialog experiments.
-   It is designed to load directly on top of the last pre-rating baseline:
-   theme-clean-v2-3-parity.css
-
-   Final panel canvas: 223 x 401 px
+   Fix in this pass:
+   - the supplied 223x401 background is now rendered as its own absolute
+     ::before layer instead of relying on the modal's CSS background shorthand.
+   - all MAL/base-theme surfaces above it are forced transparent.
 */
 
 :root {
@@ -25,8 +24,6 @@
   --osrs-vote-orange: #ff981f;
   --osrs-vote-red: #ff6257;
   --osrs-vote-white: #f7f7f7;
-
-  --osrs-vote-panel: url("https://i.imgur.com/1VqYHYo.png");
 
   --osrs-vote-1: url("https://i.imgur.com/yD3aNV3.png");
   --osrs-vote-1-hover: url("https://i.imgur.com/fTsbK4A.png");
@@ -48,13 +45,16 @@
 
 
 /* =====================================================================
-   0. HARD RESET / SINGLE BACKGROUND
+   0. SHELL + REAL BACKGROUND LAYER
    ===================================================================== */
 
 html body.ownlist .mal-modal-dialog:has(.modal-vote-score) {
+  position: relative !important;
+
   width: var(--osrs-vote-w) !important;
   min-width: var(--osrs-vote-w) !important;
   max-width: var(--osrs-vote-w) !important;
+
   height: var(--osrs-vote-h) !important;
   min-height: var(--osrs-vote-h) !important;
   max-height: var(--osrs-vote-h) !important;
@@ -63,7 +63,9 @@ html body.ownlist .mal-modal-dialog:has(.modal-vote-score) {
   margin-right: auto !important;
   padding: 0 !important;
 
-  background: transparent !important;
+  background: none !important;
+  background-color: transparent !important;
+
   border: 0 !important;
   outline: 0 !important;
   border-radius: 0 !important;
@@ -75,12 +77,14 @@ html body.ownlist .mal-modal-dialog:has(.modal-vote-score) {
 html body.ownlist .mal-modal-content:has(.modal-vote-score) {
   position: relative !important;
   display: block !important;
+  isolation: isolate !important;
 
   box-sizing: border-box !important;
 
   width: var(--osrs-vote-w) !important;
   min-width: var(--osrs-vote-w) !important;
   max-width: var(--osrs-vote-w) !important;
+
   height: var(--osrs-vote-h) !important;
   min-height: var(--osrs-vote-h) !important;
   max-height: var(--osrs-vote-h) !important;
@@ -88,11 +92,8 @@ html body.ownlist .mal-modal-content:has(.modal-vote-score) {
   margin: 0 !important;
   padding: 0 !important;
 
-  background:
-    transparent
-    var(--osrs-vote-panel)
-    center / 223px 401px
-    no-repeat !important;
+  background: none !important;
+  background-color: transparent !important;
 
   border: 0 !important;
   outline: 0 !important;
@@ -100,21 +101,56 @@ html body.ownlist .mal-modal-content:has(.modal-vote-score) {
   box-shadow: none !important;
 
   overflow: hidden !important;
+}
+
+/* The supplied image is the actual complete panel. */
+html body.ownlist .mal-modal-content:has(.modal-vote-score)::before {
+  content: "" !important;
+
+  position: absolute !important;
+  inset: 0 !important;
+
+  display: block !important;
+
+  width: 223px !important;
+  height: 401px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background-color: transparent !important;
+  background-image: url("https://i.imgur.com/1VqYHYo.png") !important;
+  background-position: 0 0 !important;
+  background-repeat: no-repeat !important;
+  background-size: 223px 401px !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+
+  pointer-events: none !important;
+  z-index: 0 !important;
 
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
 
+/* Everything interactive sits above the background image. */
+html body.ownlist .mal-modal-content:has(.modal-vote-score) > * {
+  position: relative;
+  z-index: 1;
+}
 
-/* Remove every previous visible section/background treatment. */
+/* Remove any competing MAL/base-theme paint. */
 html body.ownlist .mal-modal-content:has(.modal-vote-score) > .mal-modal-header,
 html body.ownlist .mal-modal-content:has(.modal-vote-score) > .mal-modal-body,
 html body.ownlist .mal-modal-content:has(.modal-vote-score) .modal-vote-score,
-html body.ownlist .mal-modal-content:has(.modal-vote-score) .modal-vote-score-footer {
-  box-sizing: border-box !important;
-
-  background: transparent !important;
+html body.ownlist .mal-modal-content:has(.modal-vote-score) .modal-vote-score-footer,
+html body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header .row,
+html body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header .row1 {
+  background: none !important;
   background-color: transparent !important;
+  background-image: none !important;
 
   border: 0 !important;
   outline: 0 !important;
@@ -124,7 +160,7 @@ html body.ownlist .mal-modal-content:has(.modal-vote-score) .modal-vote-score-fo
 
 
 /* =====================================================================
-   1. HEADER — EXACT LIVE MAL MARKUP
+   1. HEADER
    ===================================================================== */
 
 html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
@@ -158,10 +194,6 @@ html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
   overflow: hidden !important;
 }
 
-
-/* Anime title:
-   exactly one line; long titles truncate with "...".
-*/
 html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
 .mal-modal-content > .mal-modal-header > .row.row1 > .title {
   display: block !important;
@@ -190,8 +222,6 @@ html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
   text-shadow: 1px 1px 0 #000 !important;
 }
 
-
-/* Episode subtitle */
 html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
 .mal-modal-content > .mal-modal-header > .row.row1 > .subtitle {
   display: block !important;
@@ -222,7 +252,7 @@ html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
 
 
 /* =====================================================================
-   2. BODY — POSITIONED OVER THE 223 x 401 PANEL
+   2. BODY
    ===================================================================== */
 
 html body.ownlist .mal-modal-content:has(.modal-vote-score) > .mal-modal-body {
@@ -246,8 +276,6 @@ html body.ownlist .mal-modal-content:has(.modal-vote-score) > .mal-modal-body {
   font-family: "RS Chat 07", "RS Small", sans-serif !important;
 }
 
-
-/* Question / disclaimer */
 html body.ownlist .mal-modal-content:has(.modal-vote-score)
 .modal-vote-score-label {
   position: absolute !important;
@@ -291,7 +319,7 @@ html body.ownlist .mal-modal-content:has(.modal-vote-score)
 
 
 /* =====================================================================
-   3. STARS — 32x36, 5px GAPS
+   3. STARS
    ===================================================================== */
 
 html body.ownlist .mal-modal-content:has(.modal-vote-score)
@@ -301,11 +329,11 @@ ul.modal-vote-score {
   left: 50% !important;
 
   display: flex !important;
-  flex-direction: row-reverse !important; /* MAL source 5..1 -> visual 1..5 */
+  flex-direction: row-reverse !important;
   align-items: center !important;
   justify-content: center !important;
 
-  width: 180px !important; /* 5*32 + 4*5 */
+  width: 180px !important;
   height: var(--osrs-vote-star-h) !important;
 
   margin: 0 !important;
@@ -334,7 +362,7 @@ ul.modal-vote-score > li {
   padding: 0 !important;
 
   list-style: none !important;
-  background: transparent !important;
+  background: none !important;
   border: 0 !important;
   outline: 0 !important;
   box-shadow: none !important;
@@ -515,16 +543,14 @@ html body.ownlist .mal-modal-content:has(.modal-vote-score)
 html body.ownlist .mal-modal-content:has(.modal-vote-score)
 .modal-vote-score-footer a:focus {
   background-image: var(--osrs-vote-footer-hover) !important;
-
   color: var(--osrs-vote-white) !important;
   -webkit-text-fill-color: var(--osrs-vote-white) !important;
-
   text-decoration: none !important;
 }
 
 
 /* =====================================================================
-   5. CLOSE BUTTON — EXACT LIVE MAL MARKUP
+   5. CLOSE BUTTON
    ===================================================================== */
 
 html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
@@ -585,7 +611,7 @@ html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
 
 
 /* =====================================================================
-   6. RESPONSIVE FALLBACK
+   6. SMALL VIEWPORT FALLBACK
    ===================================================================== */
 
 @media (max-width: 245px), (max-height: 430px) {
