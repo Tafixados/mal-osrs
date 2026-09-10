@@ -81,7 +81,8 @@ body.ownlist .mal-modal-content:has(.modal-vote-score) {
   padding: 0 !important;
   overflow: hidden !important;
 
-  background: transparent url("https://i.imgur.com/1VqYHYo.png") center / 100% 100% no-repeat !important;
+  /* Temporary shell until the user supplies the final interface artwork. */
+  background: #22201d !important;
   border: 1px solid #6f6756 !important;
   outline: 1px solid #1b1813 !important;
   border-radius: 7px !important;
@@ -107,7 +108,7 @@ html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
   width: 100% !important;
   margin: 0 !important;
   padding: 12px 40px 10px var(--osrs-vote-side) !important;
-  background: transparent !important;
+  background: #393227 !important;
   color: var(--osrs-vote-orange) !important;
   text-align: left !important;
 }
@@ -140,9 +141,9 @@ html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
   font-style: normal !important;
   line-height: 18px !important;
 
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
 
   text-align: left !important;
   text-shadow: 1px 1px 0 #000 !important;
@@ -190,7 +191,7 @@ body.ownlist .mal-modal-body:has(.modal-vote-score) {
   margin: 0 !important;
   padding: 22px var(--osrs-vote-side) 22px !important;
   overflow: visible !important;
-  background: transparent !important;
+  background: #202124 !important;
   border: 0 !important;
   color: var(--osrs-vote-orange) !important;
   font-family: "RS Chat 07", "RS Small", sans-serif !important;
