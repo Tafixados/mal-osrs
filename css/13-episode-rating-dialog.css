@@ -75,7 +75,6 @@ html body.ownlist .mal-modal-dialog:has(.modal-vote-score) {
 html body.ownlist .mal-modal-content:has(.modal-vote-score) {
   position: relative !important;
   display: block !important;
-  isolation: isolate !important;
 
   box-sizing: border-box !important;
 
@@ -89,8 +88,11 @@ html body.ownlist .mal-modal-content:has(.modal-vote-score) {
   margin: 0 !important;
   padding: 0 !important;
 
-  background: none !important;
-  background-color: transparent !important;
+  background:
+    transparent
+    var(--osrs-vote-panel)
+    center / 223px 401px
+    no-repeat !important;
 
   border: 0 !important;
   outline: 0 !important;
@@ -103,30 +105,6 @@ html body.ownlist .mal-modal-content:has(.modal-vote-score) {
   image-rendering: crisp-edges;
 }
 
-html body.ownlist .mal-modal-content:has(.modal-vote-score)::before {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  width: 223px !important;
-  height: 401px !important;
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent var(--osrs-vote-panel) 0 0 / 223px 401px no-repeat !important;
-  border: 0 !important;
-  outline: 0 !important;
-  box-shadow: none !important;
-  pointer-events: none !important;
-  z-index: 0 !important;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-}
-
-
-html body.ownlist .mal-modal-content:has(.modal-vote-score) > * {
-  position: relative !important;
-  z-index: 1 !important;
-}
 
 /* Remove every previous visible section/background treatment. */
 html body.ownlist .mal-modal-content:has(.modal-vote-score) > .mal-modal-header,
