@@ -1,0 +1,9 @@
+/* MAL-OSRS — Manga-only banner override v1
+   Keeps the anime banner unchanged.
+   The shared banner module already uses var(--hero-banner), so this only
+   swaps that variable when MAL reports data-work="manga".
+*/
+
+body.ownlist[data-work="manga"] {
+  --hero-banner: url("https://i.imgur.com/w2gocnM.png");
+}

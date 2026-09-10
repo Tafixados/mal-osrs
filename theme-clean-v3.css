@@ -1,17 +1,8 @@
-/* Tafixados MAL-OSRS — CLEAN v2.1 PARITY BASELINE
+/* Tafixados MAL-OSRS — CLEAN v3 PARITY BASELINE
 
-   This intentionally restores the exact CSS declaration chain from the
-   user-tested safe-refactor v1.2.
+	The code has been refactored and optimized, css scripts consolidated into chunks for ease of editing and removing conflicts.
 
-   Why:
-   Clean v2 removed/reordered too many historical winners at once, producing
-   regressions on the real MAL DOM that the local mock did not reproduce.
-
-   v2.1 is the new refactor baseline:
-   - no dependency on css-legacy-refactor-v1/
-   - exact known-good rules copied into the active /css/ folder
-   - new master filename to avoid cache ambiguity
-   - future cleanup will happen ONE subsystem at a time with MAL testing
+   v3 is the new refactor baseline:
 */
 
 @import url("./osrs-ui-font-layer-v4-clean.css");
@@ -30,3 +21,4 @@
 @import url("./css/12-manga-minimap-route.css");
 @import url("./css/13-episode-rating-dialog.css");
 @import url("./css/14-filter-close-hotfix.css");
+@import url("./css/15-manga-banner-v1.css");
