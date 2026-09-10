@@ -1,9 +1,0 @@
-/* Tafixados MAL-OSRS — parity v2.10
-   Base: theme-clean-v2-3-parity.css (last pre-rating baseline)
-   Episode rating: exact live-DOM stylesheet v2
-
-   This deliberately bypasses every earlier rating-dialog experiment.
-*/
-
-@import url("./theme-clean-v2-3-parity.css");
-@import url("./css/13-episode-rating-dialog-exact-v2.css");

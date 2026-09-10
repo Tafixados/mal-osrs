@@ -1,30 +1,32 @@
 /* MAL-OSRS — Episode Rating / Discussion Dialog
-   CONSOLIDATED build.
+   Consolidated exact-DOM build v3.
 
-   IMPORTANT:
-   This file replaces ALL earlier episode-rating modules (v1-v4).
-   Load it directly on top of theme-clean-v2-3-parity.css so none of the
-   earlier experimental rating rules can fight with these selectors.
+   This file replaces ALL earlier episode-rating dialog experiments.
+   It is designed to load directly on top of the last pre-rating baseline:
+   theme-clean-v2-3-parity.css
+
+   Final panel canvas: 223 x 401 px
 */
 
 :root {
-  /* Exact compact layout: 5*32px stars + 4*12px internal gaps + 2*12px sides. */
-  --osrs-vote-w: 232px;
-  --osrs-vote-side: 12px;
-  --osrs-vote-gap: 12px;
-  --osrs-vote-body-h: 338px;
+  --osrs-vote-w: 223px;
+  --osrs-vote-h: 401px;
+
+  --osrs-vote-side: 11px;
+  --osrs-vote-gap: 5px;
 
   --osrs-vote-star-w: 32px;
   --osrs-vote-star-h: 36px;
   --osrs-vote-close: 28px;
 
-  /* Footer plate is kept at the image's intended 100% display size. */
   --osrs-vote-footer-w: 154px;
   --osrs-vote-footer-h: 34px;
 
   --osrs-vote-orange: #ff981f;
   --osrs-vote-red: #ff6257;
   --osrs-vote-white: #f7f7f7;
+
+  --osrs-vote-panel: url("https://i.imgur.com/1VqYHYo.png");
 
   --osrs-vote-1: url("https://i.imgur.com/yD3aNV3.png");
   --osrs-vote-1-hover: url("https://i.imgur.com/fTsbK4A.png");
@@ -44,200 +46,293 @@
   --osrs-vote-footer-hover: url("https://i.imgur.com/QbrIj5e.png");
 }
 
+
 /* =====================================================================
-   0. HARD RESET — rating modal only
+   0. HARD RESET / SINGLE BACKGROUND
    ===================================================================== */
 
-body.ownlist .mal-modal-dialog:has(.modal-vote-score),
-body.ownlist .mal-modal-content:has(.modal-vote-score),
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-body,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .modal-vote-score,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .modal-vote-score-footer {
-  box-sizing: border-box !important;
-}
-
-body.ownlist .mal-modal-dialog:has(.modal-vote-score) {
+html body.ownlist .mal-modal-dialog:has(.modal-vote-score) {
   width: var(--osrs-vote-w) !important;
   min-width: var(--osrs-vote-w) !important;
   max-width: var(--osrs-vote-w) !important;
+  height: var(--osrs-vote-h) !important;
+  min-height: var(--osrs-vote-h) !important;
+  max-height: var(--osrs-vote-h) !important;
+
   margin-left: auto !important;
   margin-right: auto !important;
   padding: 0 !important;
-  border: 0 !important;
+
   background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
   box-shadow: none !important;
+
+  overflow: visible !important;
 }
 
-body.ownlist .mal-modal-content:has(.modal-vote-score) {
+html body.ownlist .mal-modal-content:has(.modal-vote-score) {
   position: relative !important;
-  display: flex !important;
-  flex-direction: column !important;
+  display: block !important;
+
+  box-sizing: border-box !important;
+
   width: var(--osrs-vote-w) !important;
   min-width: var(--osrs-vote-w) !important;
   max-width: var(--osrs-vote-w) !important;
-  height: auto !important;
-  min-height: 0 !important;
+  height: var(--osrs-vote-h) !important;
+  min-height: var(--osrs-vote-h) !important;
+  max-height: var(--osrs-vote-h) !important;
+
   margin: 0 !important;
   padding: 0 !important;
+
+  background:
+    transparent
+    var(--osrs-vote-panel)
+    center / 223px 401px
+    no-repeat !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
   overflow: hidden !important;
 
-  /* Temporary shell until the user supplies the final interface artwork. */
-  background: #22201d !important;
-  border: 1px solid #6f6756 !important;
-  outline: 1px solid #1b1813 !important;
-  border-radius: 7px !important;
-  box-shadow: inset 0 0 0 1px #302a21, 0 4px 12px rgba(0,0,0,.38) !important;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
+
+
+/* Remove every previous visible section/background treatment. */
+html body.ownlist .mal-modal-content:has(.modal-vote-score) > .mal-modal-header,
+html body.ownlist .mal-modal-content:has(.modal-vote-score) > .mal-modal-body,
+html body.ownlist .mal-modal-content:has(.modal-vote-score) .modal-vote-score,
+html body.ownlist .mal-modal-content:has(.modal-vote-score) .modal-vote-score-footer {
+  box-sizing: border-box !important;
+
+  background: transparent !important;
+  background-color: transparent !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
 
 /* =====================================================================
-   1. HEADER — TITLE AND SUBTITLE ARE INTENTIONALLY SEPARATE
+   1. HEADER — EXACT LIVE MAL MARKUP
    ===================================================================== */
 
-/* Header wrapper. MAL nests the actual title/subtitle inside this sibling of
-   .mal-modal-body, so style the wrapper first, then force its descendants. */
-body.ownlist .mal-modal-content:has(.modal-vote-score)
-> :not(.mal-modal-body):not([class*="close"]):not([aria-label="Close"]) {
-  box-sizing: border-box !important;
+html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
+.mal-modal-content > .mal-modal-header {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+
   width: 100% !important;
+  height: 68px !important;
+
   margin: 0 !important;
-  padding: 14px 42px 13px var(--osrs-vote-side) !important;
-  background: #393227 !important;
+  padding: 13px 41px 0 var(--osrs-vote-side) !important;
+
   color: var(--osrs-vote-orange) !important;
-  font-family: "RS Chat 07", "RS Small", sans-serif !important;
-  font-size: 14px !important;
-  line-height: 16px !important;
   text-align: left !important;
+
+  overflow: hidden !important;
 }
 
-/* Reset descendants so old MAL/theme font declarations cannot win. */
-body.ownlist .mal-modal-content:has(.modal-vote-score)
-> :not(.mal-modal-body):not([class*="close"]):not([aria-label="Close"]) * {
+html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
+.mal-modal-content > .mal-modal-header > .row.row1 {
+  display: block !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: hidden !important;
+}
+
+
+/* Anime title:
+   exactly one line; long titles truncate with "...".
+*/
+html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
+.mal-modal-content > .mal-modal-header > .row.row1 > .title {
+  display: block !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 0 3px !important;
+  padding: 0 !important;
+
   color: var(--osrs-vote-orange) !important;
-  font-family: "RS Chat 07", "RS Small", sans-serif !important;
+  -webkit-text-fill-color: var(--osrs-vote-orange) !important;
+
+  font-family: "RS UF", sans-serif !important;
+  font-size: 15px !important;
   font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 17px !important;
+
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+
+  text-align: left !important;
   text-shadow: 1px 1px 0 #000 !important;
 }
 
-/* Anime title — every known/likely MAL title shape plus title-like links.
-   This is deliberately more specific than the reset above. */
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-title,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .modal-title,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header .title,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header .title a,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header > a:not([class*="close"]),
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header > strong,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header > b,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header > h1,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header > h2,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header > h3,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header > h4,
-body.ownlist .mal-modal-content:has(.modal-vote-score)
-> :not(.mal-modal-body):not([class*="close"]):not([aria-label="Close"]) > :first-child:not([class*="close"]) {
-  font-family: "RS UF", sans-serif !important;
-  font-size: 24px !important;
-  line-height: 25px !important;
-  font-weight: 400 !important;
-  color: var(--osrs-vote-orange) !important;
-}
 
-/* Episode X Discussion — force the subtitle back to the chat font and make it
-   visibly smaller than the anime title. */
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-subtitle,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .modal-subtitle,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header .subtitle,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header small,
-body.ownlist .mal-modal-content:has(.modal-vote-score) .mal-modal-header p,
-body.ownlist .mal-modal-content:has(.modal-vote-score)
-> :not(.mal-modal-body):not([class*="close"]):not([aria-label="Close"]) > :nth-child(2):not([class*="close"]) {
-  font-family: "RS Chat 07", "RS Small", sans-serif !important;
-  font-size: 14px !important;
-  line-height: 16px !important;
-  font-weight: 400 !important;
-  color: var(--osrs-vote-orange) !important;
-}
+/* Episode subtitle */
+html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
+.mal-modal-content > .mal-modal-header > .row.row1 > .subtitle {
+  display: block !important;
 
-/* =====================================================================
-   2. BODY — FIXED TALL AREA, THREE SECTIONS DISTRIBUTED EVENLY
-   ===================================================================== */
-
-body.ownlist .mal-modal-body:has(.modal-vote-score) {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  flex: 0 0 var(--osrs-vote-body-h) !important;
   width: 100% !important;
-  height: var(--osrs-vote-body-h) !important;
-  min-height: var(--osrs-vote-body-h) !important;
-  max-height: var(--osrs-vote-body-h) !important;
-  margin: 0 !important;
-  padding: 22px var(--osrs-vote-side) 22px !important;
-  overflow: visible !important;
-  background: #202124 !important;
-  border: 0 !important;
-  color: var(--osrs-vote-orange) !important;
-  font-family: "RS Chat 07", "RS Small", sans-serif !important;
-}
+  min-width: 0 !important;
+  max-width: 100% !important;
 
-body.ownlist .modal-vote-score-label {
-  flex: 0 0 auto !important;
-  width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
+
+  color: var(--osrs-vote-orange) !important;
+  -webkit-text-fill-color: var(--osrs-vote-orange) !important;
+
+  font-family: "RS Chat 07", "RS Small", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 13px !important;
+
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+
+  text-align: left !important;
+  text-shadow: 1px 1px 0 #000 !important;
+}
+
+
+/* =====================================================================
+   2. BODY — POSITIONED OVER THE 223 x 401 PANEL
+   ===================================================================== */
+
+html body.ownlist .mal-modal-content:has(.modal-vote-score) > .mal-modal-body {
+  position: absolute !important;
+  top: 68px !important;
+  left: 0 !important;
+
+  display: block !important;
+
+  width: 100% !important;
+  height: 333px !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 0 var(--osrs-vote-side) !important;
+
+  overflow: visible !important;
+
   color: var(--osrs-vote-orange) !important;
   font-family: "RS Chat 07", "RS Small", sans-serif !important;
-  font-size: 19px !important;
-  line-height: 22px !important;
+}
+
+
+/* Question / disclaimer */
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+.modal-vote-score-label {
+  position: absolute !important;
+  top: 23px !important;
+  left: var(--osrs-vote-side) !important;
+  right: var(--osrs-vote-side) !important;
+
+  width: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: var(--osrs-vote-orange) !important;
+
+  font-family: "RS Chat 07", "RS Small", sans-serif !important;
+  font-size: 16px !important;
   font-weight: 400 !important;
+  line-height: 19px !important;
+
   text-align: center !important;
   text-shadow: 1px 1px 0 #000 !important;
 }
 
-body.ownlist .modal-vote-score-label .caution {
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+.modal-vote-score-label .caution {
   display: block !important;
-  margin: 8px 0 0 !important;
+
+  margin: 7px 0 0 !important;
   padding: 0 !important;
+
   color: var(--osrs-vote-red) !important;
+
   font-family: "RS Small", "RS Chat 07", sans-serif !important;
-  font-size: 11px !important;
-  line-height: 13px !important;
+  font-size: 9px !important;
   font-weight: 400 !important;
+  line-height: 11px !important;
+
   text-align: center !important;
   text-shadow: none !important;
 }
 
+
 /* =====================================================================
-   3. STARS — 32x36, EXACT 12px GAPS, 12px EDGE PADDING
+   3. STARS — 32x36, 5px GAPS
    ===================================================================== */
 
-body.ownlist ul.modal-vote-score {
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+ul.modal-vote-score {
+  position: absolute !important;
+  top: 117px !important;
+  left: 50% !important;
+
   display: flex !important;
-  flex-direction: row-reverse !important; /* MAL source is 5..1; show 1..5 */
+  flex-direction: row-reverse !important; /* MAL source 5..1 -> visual 1..5 */
   align-items: center !important;
   justify-content: center !important;
-  flex: 0 0 auto !important;
-  width: 208px !important; /* 5*32 + 4*12 */
+
+  width: 180px !important; /* 5*32 + 4*5 */
   height: var(--osrs-vote-star-h) !important;
+
   margin: 0 !important;
   padding: 0 !important;
   gap: var(--osrs-vote-gap) !important;
+
+  transform: translateX(-50%) !important;
+
   list-style: none !important;
-  background: transparent !important;
-  border: 0 !important;
-  outline: 0 !important;
 }
 
-body.ownlist ul.modal-vote-score > li {
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+ul.modal-vote-score > li {
   display: block !important;
   flex: 0 0 var(--osrs-vote-star-w) !important;
+
   width: var(--osrs-vote-star-w) !important;
   min-width: var(--osrs-vote-star-w) !important;
   max-width: var(--osrs-vote-star-w) !important;
+
   height: var(--osrs-vote-star-h) !important;
   min-height: var(--osrs-vote-star-h) !important;
   max-height: var(--osrs-vote-star-h) !important;
+
   margin: 0 !important;
   padding: 0 !important;
+
   list-style: none !important;
   background: transparent !important;
   border: 0 !important;
@@ -245,177 +340,257 @@ body.ownlist ul.modal-vote-score > li {
   box-shadow: none !important;
 }
 
-body.ownlist a.modal-vote-score-link {
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+a.modal-vote-score-link {
   display: block !important;
-  width: 32px !important;
-  min-width: 32px !important;
-  max-width: 32px !important;
-  height: 36px !important;
-  min-height: 36px !important;
-  max-height: 36px !important;
+
+  width: var(--osrs-vote-star-w) !important;
+  min-width: var(--osrs-vote-star-w) !important;
+  max-width: var(--osrs-vote-star-w) !important;
+
+  height: var(--osrs-vote-star-h) !important;
+  min-height: var(--osrs-vote-star-h) !important;
+  max-height: var(--osrs-vote-star-h) !important;
+
   margin: 0 !important;
   padding: 0 !important;
+
   border: 0 !important;
   border-radius: 0 !important;
   outline: 0 !important;
+
   background-color: transparent !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
   background-size: 32px 36px !important;
+
   box-shadow: none !important;
+
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
+
   font-size: 0 !important;
   line-height: 0 !important;
   text-indent: -9999px !important;
+
   overflow: hidden !important;
+
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+
   cursor: var(--cursor-sword, pointer) !important;
 }
 
-body.ownlist .modal-vote-score-link > i,
-body.ownlist .modal-vote-score-link > span { display: none !important; }
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+.modal-vote-score-link > i,
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+.modal-vote-score-link > span {
+  display: none !important;
+}
 
-body.ownlist .modal-vote-score-link[rel="1"] { background-image: var(--osrs-vote-1) !important; }
-body.ownlist .modal-vote-score-link[rel="1"]:hover,
-body.ownlist .modal-vote-score-link[rel="1"]:focus { background-image: var(--osrs-vote-1-hover) !important; }
-body.ownlist .modal-vote-score-link[rel="2"] { background-image: var(--osrs-vote-2) !important; }
-body.ownlist .modal-vote-score-link[rel="2"]:hover,
-body.ownlist .modal-vote-score-link[rel="2"]:focus { background-image: var(--osrs-vote-2-hover) !important; }
-body.ownlist .modal-vote-score-link[rel="3"] { background-image: var(--osrs-vote-3) !important; }
-body.ownlist .modal-vote-score-link[rel="3"]:hover,
-body.ownlist .modal-vote-score-link[rel="3"]:focus { background-image: var(--osrs-vote-3-hover) !important; }
-body.ownlist .modal-vote-score-link[rel="4"] { background-image: var(--osrs-vote-4) !important; }
-body.ownlist .modal-vote-score-link[rel="4"]:hover,
-body.ownlist .modal-vote-score-link[rel="4"]:focus { background-image: var(--osrs-vote-4-hover) !important; }
-body.ownlist .modal-vote-score-link[rel="5"] { background-image: var(--osrs-vote-5) !important; }
-body.ownlist .modal-vote-score-link[rel="5"]:hover,
-body.ownlist .modal-vote-score-link[rel="5"]:focus { background-image: var(--osrs-vote-5-hover) !important; }
+html body.ownlist .modal-vote-score-link[rel="1"] {
+  background-image: var(--osrs-vote-1) !important;
+}
+html body.ownlist .modal-vote-score-link[rel="1"]:hover,
+html body.ownlist .modal-vote-score-link[rel="1"]:focus {
+  background-image: var(--osrs-vote-1-hover) !important;
+}
+
+html body.ownlist .modal-vote-score-link[rel="2"] {
+  background-image: var(--osrs-vote-2) !important;
+}
+html body.ownlist .modal-vote-score-link[rel="2"]:hover,
+html body.ownlist .modal-vote-score-link[rel="2"]:focus {
+  background-image: var(--osrs-vote-2-hover) !important;
+}
+
+html body.ownlist .modal-vote-score-link[rel="3"] {
+  background-image: var(--osrs-vote-3) !important;
+}
+html body.ownlist .modal-vote-score-link[rel="3"]:hover,
+html body.ownlist .modal-vote-score-link[rel="3"]:focus {
+  background-image: var(--osrs-vote-3-hover) !important;
+}
+
+html body.ownlist .modal-vote-score-link[rel="4"] {
+  background-image: var(--osrs-vote-4) !important;
+}
+html body.ownlist .modal-vote-score-link[rel="4"]:hover,
+html body.ownlist .modal-vote-score-link[rel="4"]:focus {
+  background-image: var(--osrs-vote-4-hover) !important;
+}
+
+html body.ownlist .modal-vote-score-link[rel="5"] {
+  background-image: var(--osrs-vote-5) !important;
+}
+html body.ownlist .modal-vote-score-link[rel="5"]:hover,
+html body.ownlist .modal-vote-score-link[rel="5"]:focus {
+  background-image: var(--osrs-vote-5-hover) !important;
+}
+
 
 /* =====================================================================
-   4. FOOTER — SAME BUTTON PLATE FOR BOTH ACTIONS
+   4. FOOTER BUTTONS
    ===================================================================== */
 
-body.ownlist .modal-vote-score-footer {
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+.modal-vote-score-footer {
+  position: absolute !important;
+  top: 194px !important;
+  left: 0 !important;
+
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  justify-content: center !important;
-  flex: 0 0 auto !important;
+  justify-content: flex-start !important;
+
   width: 100% !important;
-  margin: 12px 0 0 !important;
+
+  margin: 0 !important;
   padding: 0 !important;
-  gap: var(--osrs-vote-gap) !important;
-  background: transparent !important;
-  border: 0 !important;
+  gap: 12px !important;
 }
 
-body.ownlist .modal-vote-score-footer .left,
-body.ownlist .modal-vote-score-footer .right {
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+.modal-vote-score-footer .left,
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+.modal-vote-score-footer .right {
   float: none !important;
+
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+
   width: 100% !important;
+
   margin: 0 !important;
   padding: 0 !important;
 }
 
-body.ownlist .modal-vote-score-footer a {
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+.modal-vote-score-footer a {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+
   width: var(--osrs-vote-footer-w) !important;
   min-width: var(--osrs-vote-footer-w) !important;
   max-width: var(--osrs-vote-footer-w) !important;
+
   height: var(--osrs-vote-footer-h) !important;
   min-height: var(--osrs-vote-footer-h) !important;
   max-height: var(--osrs-vote-footer-h) !important;
+
   margin: 0 !important;
   padding: 0 7px !important;
-  background: transparent var(--osrs-vote-footer) center / 100% 100% no-repeat !important;
+
+  background:
+    transparent
+    var(--osrs-vote-footer)
+    center / 100% 100%
+    no-repeat !important;
+
   border: 0 !important;
   outline: 0 !important;
+
   color: var(--osrs-vote-white) !important;
   -webkit-text-fill-color: var(--osrs-vote-white) !important;
+
   font-family: "RS UF", sans-serif !important;
-  font-size: 14px !important;
-  line-height: 15px !important;
+  font-size: 13px !important;
   font-weight: 400 !important;
+  line-height: 14px !important;
+
   text-align: center !important;
   text-decoration: none !important;
   text-shadow: 1px 1px 1px #000, 1px 1px 0 #000 !important;
+
   white-space: nowrap !important;
+
   cursor: var(--cursor-sword, pointer) !important;
 }
 
-body.ownlist .modal-vote-score-footer a:hover,
-body.ownlist .modal-vote-score-footer a:focus {
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+.modal-vote-score-footer a:hover,
+html body.ownlist .mal-modal-content:has(.modal-vote-score)
+.modal-vote-score-footer a:focus {
   background-image: var(--osrs-vote-footer-hover) !important;
+
   color: var(--osrs-vote-white) !important;
   -webkit-text-fill-color: var(--osrs-vote-white) !important;
+
   text-decoration: none !important;
 }
 
+
 /* =====================================================================
-   5. CLOSE BUTTON
+   5. CLOSE BUTTON — EXACT LIVE MAL MARKUP
    ===================================================================== */
 
-body.ownlist .mal-modal-content:has(.modal-vote-score)
-:is(.mal-modal-close, .mal-modal-close-button, .modal-close, .close,
-    button[aria-label="Close"], a[aria-label="Close"], [class*="close"]) {
+html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
+.mal-modal-content > button.btn-close[aria-label="Close"] {
   position: absolute !important;
-  top: 11px !important;
-  right: 10px !important;
+  top: 10px !important;
+  right: 9px !important;
+
   display: block !important;
+
   width: var(--osrs-vote-close) !important;
   min-width: var(--osrs-vote-close) !important;
   max-width: var(--osrs-vote-close) !important;
+
   height: var(--osrs-vote-close) !important;
   min-height: var(--osrs-vote-close) !important;
   max-height: var(--osrs-vote-close) !important;
+
   margin: 0 !important;
   padding: 0 !important;
+
   border: 0 !important;
   outline: 0 !important;
-  background: transparent var(--osrs-vote-x) center / contain no-repeat !important;
+
+  background:
+    transparent
+    var(--osrs-vote-x)
+    center / contain
+    no-repeat !important;
+
   box-shadow: none !important;
+
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
   font-size: 0 !important;
   line-height: 0 !important;
+
   overflow: hidden !important;
+
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+
   cursor: var(--cursor-sword, pointer) !important;
   z-index: 20 !important;
 }
 
-body.ownlist .mal-modal-content:has(.modal-vote-score)
-:is(.mal-modal-close, .mal-modal-close-button, .modal-close, .close,
-    button[aria-label="Close"], a[aria-label="Close"], [class*="close"]):hover,
-body.ownlist .mal-modal-content:has(.modal-vote-score)
-:is(.mal-modal-close, .mal-modal-close-button, .modal-close, .close,
-    button[aria-label="Close"], a[aria-label="Close"], [class*="close"]):focus {
+html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
+.mal-modal-content > button.btn-close[aria-label="Close"]:hover,
+html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
+.mal-modal-content > button.btn-close[aria-label="Close"]:focus {
   background-image: var(--osrs-vote-x-hover) !important;
 }
 
-body.ownlist .mal-modal-content:has(.modal-vote-score)
-:is(.mal-modal-close, .mal-modal-close-button, .modal-close, .close,
-    button[aria-label="Close"], a[aria-label="Close"], [class*="close"]) > * {
+html body.ownlist .mal-modal-dialog:has(.modal-vote-score)
+.mal-modal-content > button.btn-close[aria-label="Close"] > i {
   visibility: hidden !important;
 }
+
 
 /* =====================================================================
    6. RESPONSIVE FALLBACK
    ===================================================================== */
 
-@media (max-width: 270px) {
-  body.ownlist .mal-modal-dialog:has(.modal-vote-score),
-  body.ownlist .mal-modal-content:has(.modal-vote-score) {
-    width: calc(100vw - 12px) !important;
-    min-width: 0 !important;
-    max-width: calc(100vw - 12px) !important;
+@media (max-width: 245px), (max-height: 430px) {
+  html body.ownlist .mal-modal-dialog:has(.modal-vote-score) {
+    transform: scale(.88) !important;
+    transform-origin: top center !important;
   }
 }

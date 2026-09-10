@@ -1,0 +1,9 @@
+/* Tafixados MAL-OSRS — parity v2.11
+   Base: theme-clean-v2-3-parity.css (last pre-rating baseline)
+   Episode rating: final single-background consolidated build
+
+   All earlier episode-rating CSS files are intentionally bypassed.
+*/
+
+@import url("./theme-clean-v2-3-parity.css");
+@import url("./css/13-episode-rating-dialog.css");
