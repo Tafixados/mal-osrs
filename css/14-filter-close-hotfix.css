@@ -1,0 +1,69 @@
+/* MAL-OSRS — Filters close button hotfix v2
+   Load AFTER the existing filter stylesheet.
+   Replaces the previous Quick Add + Filters patch; Quick Add lives in its
+   own iframe and the parent list stylesheet cannot style its contents.
+*/
+
+html body.ownlist #advanced-options #fancybox-close {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 28px !important;
+  height: 28px !important;
+
+  min-width: 28px !important;
+  min-height: 28px !important;
+  max-width: 28px !important;
+  max-height: 28px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+
+  /* Use the shorthand so older hover rules cannot re-enable tiling or
+     change background-size/background-position independently. */
+  background: transparent url("https://i.imgur.com/dGqgzAo.png")
+              center center / 28px 28px no-repeat !important;
+
+  box-shadow: none !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: -9999px !important;
+
+  overflow: hidden !important;
+  z-index: 20 !important;
+
+  transform: none !important;
+
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+html body.ownlist #advanced-options #fancybox-close::before,
+html body.ownlist #advanced-options #fancybox-close::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+html body.ownlist #advanced-options #fancybox-close:hover,
+html body.ownlist #advanced-options #fancybox-close:focus,
+html body.ownlist #advanced-options #fancybox-close:active {
+  width: 28px !important;
+  height: 28px !important;
+
+  background: transparent url("https://i.imgur.com/G6aPiF3.png")
+              center center / 28px 28px no-repeat !important;
+
+  transform: none !important;
+  box-shadow: none !important;
+}
