@@ -1,1 +1,1 @@
-@\import "https://cdn.jsdelivr.net/gh/Tafixados/mal-osrs@main/theme-clean-v3-2-1.css";
+@\import "https://cdn.jsdelivr.net/gh/Tafixados/mal-osrs@main/theme-clean-v3-2-2.css";
