@@ -244,7 +244,7 @@ html body.ownlist .list-table > tbody.list-item:nth-child(18n + 18 of .list-item
    ================================================================ */
 
 html body.ownlist .list-table .list-table-data::after {
-  content: "1,200" !important;
+  content: var(--xp-drop-text, "1,200") !important;
 
   position: fixed !important;
   top: var(--xp-drop-end-top) !important;
