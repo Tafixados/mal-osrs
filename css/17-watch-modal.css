@@ -1,0 +1,484 @@
+/* MAL-OSRS — Watch modal test v2
+   Paste this INSTEAD OF the previous Watch-modal block while testing.
+   It intentionally leaves MAL's normal modal positioning mechanism alone
+   except for the dialog width, so the popup stays centered as MAL intended.
+*/
+
+:root {
+  --watch-bg: #3e3529;
+  --watch-row-bg: #554c41;
+  --watch-row-hover: #5d5346;
+  --watch-border-dark: #17130f;
+  --watch-border-light: #726451;
+  --watch-text: #e8d8b5;
+  --watch-link: #e8c46b;
+  --watch-orange: #ff9933;
+  --watch-yellow: #ffff00;
+
+  --watch-close: url("https://i.imgur.com/dGqgzAo.png");
+  --watch-close-hover: url("https://i.imgur.com/G6aPiF3.png");
+
+  --watch-check-empty: url("https://i.imgur.com/P5MEZ3f.png");
+  --watch-check-ticked: url("https://i.imgur.com/jkuDEY8.png");
+}
+
+
+/* ================================================================
+   DIALOG
+   ================================================================ */
+
+/* Do NOT force top/left/position here.
+   MAL's own modal wrapper handles centering. */
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable) {
+  box-sizing: border-box !important;
+
+  width: min(560px, calc(100vw - 40px)) !important;
+  max-width: 560px !important;
+
+  /* Keep MAL's vertical placement, but explicitly preserve horizontal
+     auto margins in case another list rule has touched them. */
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  padding: 0 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+
+  color: var(--watch-text) !important;
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.7) !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+> .mal-modal-content {
+  position: relative !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 2px solid var(--watch-border-dark) !important;
+  outline: 1px solid var(--watch-border-light) !important;
+  border-radius: 0 !important;
+
+  background:
+    linear-gradient(rgba(255,255,255,.014), rgba(0,0,0,.018)),
+    var(--watch-bg) !important;
+
+  box-shadow:
+    inset 0 0 0 1px #2d2a22,
+    0 8px 24px rgba(0,0,0,.65) !important;
+
+  overflow: visible !important;
+}
+
+
+/* ================================================================
+   HEADER
+   ================================================================ */
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.mal-modal-header {
+  position: relative !important;
+
+  box-sizing: border-box !important;
+  min-height: 64px !important;
+
+  margin: 0 !important;
+  padding: 10px 46px 9px 14px !important;
+
+  border: 0 !important;
+  border-bottom: 1px solid var(--watch-border-light) !important;
+
+  background: transparent !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.mal-modal-header .row {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  background: transparent !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.mal-modal-header .row1 > .caption {
+  margin: 0 0 3px !important;
+  padding: 0 !important;
+
+  color: var(--watch-orange) !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 19px !important;
+  font-weight: 400 !important;
+  line-height: 22px !important;
+
+  text-shadow: 1px 1px 0 #000 !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.mal-modal-header .row1 > .title {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: var(--watch-text) !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  line-height: 21px !important;
+
+  text-shadow: 1px 1px 0 #000 !important;
+}
+
+
+/* Hide unavailable — compact and aligned along the lower-right of header. */
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.mal-modal-header .row2 {
+  position: absolute !important;
+  right: 13px !important;
+  bottom: 9px !important;
+
+  display: block !important;
+
+  width: auto !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.mal-modal-header .row2 label {
+  display: inline-grid !important;
+  grid-template-columns: 18px auto !important;
+  align-items: center !important;
+  column-gap: 6px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: var(--watch-text) !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 19px !important;
+
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+
+/* ================================================================
+   CHECKBOX
+   ================================================================ */
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+input.js-broadcast-hide-unavailable {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  flex: 0 0 auto !important;
+
+  position: static !important;
+  inset: auto !important;
+
+  align-self: center !important;
+  justify-self: center !important;
+
+  width: 18px !important;
+  height: 18px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+
+  vertical-align: middle !important;
+  transform: none !important;
+
+  background:
+    transparent
+    var(--watch-check-empty)
+    center / 18px 18px
+    no-repeat !important;
+
+  box-shadow: none !important;
+
+  cursor: pointer !important;
+
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+input.js-broadcast-hide-unavailable:checked {
+  background-image: var(--watch-check-ticked) !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+input.js-broadcast-hide-unavailable:focus-visible {
+  outline: 1px solid #a88e55 !important;
+  outline-offset: 1px !important;
+}
+
+
+/* ================================================================
+   PROVIDERS
+   ================================================================ */
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.mal-modal-body {
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+
+  margin: 0 !important;
+  padding: 10px 12px 12px !important;
+
+  border: 0 !important;
+  background: transparent !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.broadcasts {
+  width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  list-style: none !important;
+}
+
+
+/* Preserve MAL's own hide/show state. */
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.broadcasts[style*="display: none"] {
+  display: none !important;
+}
+
+
+/* When unavailable services are revealed, give the second list a clear
+   gap from the available services above it. */
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.broadcasts.typicals + .broadcasts.others:not([style*="display: none"]) {
+  margin-top: 8px !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.broadcast {
+  display: block !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+
+  margin: 0 0 5px !important;
+  padding: 0 !important;
+
+  border: 1px solid var(--watch-border-dark) !important;
+  outline: 1px solid #675b49 !important;
+  border-radius: 0 !important;
+
+  background: var(--watch-row-bg) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    inset 0 -1px 0 rgba(0,0,0,.12) !important;
+
+  overflow: hidden !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.broadcast:last-child {
+  margin-bottom: 0 !important;
+}
+
+
+/* Preserve MAL's JS-driven unavailable-provider hiding. */
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.broadcast[style*="display: none"] {
+  display: none !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.broadcast > a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 38px !important;
+
+  margin: 0 !important;
+  padding: 6px 9px !important;
+
+  border: 0 !important;
+  background: transparent !important;
+
+  color: var(--watch-link) !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  line-height: 21px !important;
+
+  text-decoration: none !important;
+  text-shadow: 1px 1px 0 #000 !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.broadcast:hover {
+  background: var(--watch-row-hover) !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.broadcast > a:hover {
+  color: var(--watch-yellow) !important;
+  text-decoration: none !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.broadcast > a .spicon {
+  flex: 0 0 auto !important;
+
+  margin: 0 !important;
+
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,.4)) !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+.broadcast > a > .caption {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: inherit !important;
+  font: inherit !important;
+  line-height: inherit !important;
+}
+
+
+/* ================================================================
+   CLOSE BUTTON
+   Exact same 28×28 artwork scale as the current Filters X.
+   ================================================================ */
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+> .mal-modal-content > .btn-close {
+  position: absolute !important;
+  top: 7px !important;
+  right: 7px !important;
+
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 28px !important;
+  height: 28px !important;
+
+  min-width: 28px !important;
+  min-height: 28px !important;
+  max-width: 28px !important;
+  max-height: 28px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+
+  background:
+    transparent
+    var(--watch-close)
+    center center / 28px 28px
+    no-repeat !important;
+
+  box-shadow: none !important;
+
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+
+  overflow: hidden !important;
+  cursor: pointer !important;
+
+  z-index: 20 !important;
+
+  transform: none !important;
+
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+> .mal-modal-content > .btn-close:hover,
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+> .mal-modal-content > .btn-close:focus,
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+> .mal-modal-content > .btn-close:active {
+  width: 28px !important;
+  height: 28px !important;
+
+  background:
+    transparent
+    var(--watch-close-hover)
+    center center / 28px 28px
+    no-repeat !important;
+
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+
+html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+> .mal-modal-content > .btn-close > i {
+  display: none !important;
+}
+
+
+/* ================================================================
+   SMALL SCREENS
+   ================================================================ */
+
+@media (max-width: 620px) {
+  html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable) {
+    width: calc(100vw - 24px) !important;
+    max-width: none !important;
+  }
+
+  html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+  .mal-modal-header {
+    min-height: 82px !important;
+    padding-right: 44px !important;
+  }
+
+  html body.ownlist .mal-modal-dialog:has(.js-broadcast-hide-unavailable)
+  .mal-modal-header .row2 {
+    position: static !important;
+    margin-top: 8px !important;
+  }
+}
