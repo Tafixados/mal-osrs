@@ -604,66 +604,7 @@ html body.ownlist::after {
    58 generated control points, simplified to <1px error.
    --------------------------------------------------------------------- */
 
-@keyframes rs-minimap-route {
-    0.00% { background-position: calc(50% + var(--rs-minimap-start-x) + 0px) calc(50% + var(--rs-minimap-start-y) + 0px); }
-    1.76% { background-position: calc(50% + var(--rs-minimap-start-x) - 12px) calc(50% + var(--rs-minimap-start-y) + 3px); }
-    1.97% { background-position: calc(50% + var(--rs-minimap-start-x) - 13px) calc(50% + var(--rs-minimap-start-y) + 4px); }
-    2.96% { background-position: calc(50% + var(--rs-minimap-start-x) - 13px) calc(50% + var(--rs-minimap-start-y) + 11px); }
-    3.17% { background-position: calc(50% + var(--rs-minimap-start-x) - 14px) calc(50% + var(--rs-minimap-start-y) + 12px); }
-    4.31% { background-position: calc(50% + var(--rs-minimap-start-x) - 22px) calc(50% + var(--rs-minimap-start-y) + 12px); }
-    4.51% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 13px); }
-    5.65% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 21px); }
-    5.85% { background-position: calc(50% + var(--rs-minimap-start-x) - 22px) calc(50% + var(--rs-minimap-start-y) + 22px); }
-    6.85% { background-position: calc(50% + var(--rs-minimap-start-x) - 15px) calc(50% + var(--rs-minimap-start-y) + 22px); }
-    8.02% { background-position: calc(50% + var(--rs-minimap-start-x) - 13px) calc(50% + var(--rs-minimap-start-y) + 30px); }
-   10.31% { background-position: calc(50% + var(--rs-minimap-start-x) + 3px) calc(50% + var(--rs-minimap-start-y) + 30px); }
-   10.51% { background-position: calc(50% + var(--rs-minimap-start-x) + 4px) calc(50% + var(--rs-minimap-start-y) + 31px); }
-   11.51% { background-position: calc(50% + var(--rs-minimap-start-x) + 4px) calc(50% + var(--rs-minimap-start-y) + 38px); }
-   12.68% { background-position: calc(50% + var(--rs-minimap-start-x) - 4px) calc(50% + var(--rs-minimap-start-y) + 40px); }
-   20.10% { background-position: calc(50% + var(--rs-minimap-start-x) - 4px) calc(50% + var(--rs-minimap-start-y) + 92px); }
-   20.30% { background-position: calc(50% + var(--rs-minimap-start-x) - 5px) calc(50% + var(--rs-minimap-start-y) + 93px); }
-   21.58% { background-position: calc(50% + var(--rs-minimap-start-x) - 14px) calc(50% + var(--rs-minimap-start-y) + 93px); }
-   22.62% { background-position: calc(50% + var(--rs-minimap-start-x) - 16px) calc(50% + var(--rs-minimap-start-y) + 100px); }
-   23.47% { background-position: calc(50% + var(--rs-minimap-start-x) - 22px) calc(50% + var(--rs-minimap-start-y) + 100px); }
-   23.68% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 99px); }
-   25.53% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 86px); }
-   25.73% { background-position: calc(50% + var(--rs-minimap-start-x) - 22px) calc(50% + var(--rs-minimap-start-y) + 85px); }
-   26.87% { background-position: calc(50% + var(--rs-minimap-start-x) - 14px) calc(50% + var(--rs-minimap-start-y) + 85px); }
-   27.07% { background-position: calc(50% + var(--rs-minimap-start-x) - 13px) calc(50% + var(--rs-minimap-start-y) + 84px); }
-   28.07% { background-position: calc(50% + var(--rs-minimap-start-x) - 13px) calc(50% + var(--rs-minimap-start-y) + 77px); }
-   28.27% { background-position: calc(50% + var(--rs-minimap-start-x) - 14px) calc(50% + var(--rs-minimap-start-y) + 76px); }
-   29.41% { background-position: calc(50% + var(--rs-minimap-start-x) - 22px) calc(50% + var(--rs-minimap-start-y) + 76px); }
-   29.62% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 75px); }
-   32.33% { background-position: calc(50% + var(--rs-minimap-start-x) - 23px) calc(50% + var(--rs-minimap-start-y) + 56px); }
-   33.50% { background-position: calc(50% + var(--rs-minimap-start-x) - 15px) calc(50% + var(--rs-minimap-start-y) + 54px); }
-   34.36% { background-position: calc(50% + var(--rs-minimap-start-x) - 15px) calc(50% + var(--rs-minimap-start-y) + 48px); }
-   34.56% { background-position: calc(50% + var(--rs-minimap-start-x) - 16px) calc(50% + var(--rs-minimap-start-y) + 47px); }
-   37.84% { background-position: calc(50% + var(--rs-minimap-start-x) - 39px) calc(50% + var(--rs-minimap-start-y) + 47px); }
-   38.04% { background-position: calc(50% + var(--rs-minimap-start-x) - 40px) calc(50% + var(--rs-minimap-start-y) + 46px); }
-   39.04% { background-position: calc(50% + var(--rs-minimap-start-x) - 40px) calc(50% + var(--rs-minimap-start-y) + 39px); }
-   39.24% { background-position: calc(50% + var(--rs-minimap-start-x) - 41px) calc(50% + var(--rs-minimap-start-y) + 38px); }
-   40.52% { background-position: calc(50% + var(--rs-minimap-start-x) - 50px) calc(50% + var(--rs-minimap-start-y) + 38px); }
-   41.42% { background-position: calc(50% + var(--rs-minimap-start-x) - 52px) calc(50% + var(--rs-minimap-start-y) + 32px); }
-   47.56% { background-position: calc(50% + var(--rs-minimap-start-x) - 95px) calc(50% + var(--rs-minimap-start-y) + 32px); }
-   47.76% { background-position: calc(50% + var(--rs-minimap-start-x) - 96px) calc(50% + var(--rs-minimap-start-y) + 31px); }
-   48.47% { background-position: calc(50% + var(--rs-minimap-start-x) - 96px) calc(50% + var(--rs-minimap-start-y) + 26px); }
-   49.11% { background-position: calc(50% + var(--rs-minimap-start-x) - 92px) calc(50% + var(--rs-minimap-start-y) + 24px); }
-   51.82% { background-position: calc(50% + var(--rs-minimap-start-x) - 92px) calc(50% + var(--rs-minimap-start-y) + 5px); }
-   52.02% { background-position: calc(50% + var(--rs-minimap-start-x) - 93px) calc(50% + var(--rs-minimap-start-y) + 4px); }
-   62.57% { background-position: calc(50% + var(--rs-minimap-start-x) - 167px) calc(50% + var(--rs-minimap-start-y) + 4px); }
-   62.77% { background-position: calc(50% + var(--rs-minimap-start-x) - 168px) calc(50% + var(--rs-minimap-start-y) + 3px); }
-   74.61% { background-position: calc(50% + var(--rs-minimap-start-x) - 168px) calc(50% + var(--rs-minimap-start-y) - 80px); }
-   74.81% { background-position: calc(50% + var(--rs-minimap-start-x) - 169px) calc(50% + var(--rs-minimap-start-y) - 81px); }
-   80.80% { background-position: calc(50% + var(--rs-minimap-start-x) - 211px) calc(50% + var(--rs-minimap-start-y) - 81px); }
-   81.00% { background-position: calc(50% + var(--rs-minimap-start-x) - 212px) calc(50% + var(--rs-minimap-start-y) - 82px); }
-   83.00% { background-position: calc(50% + var(--rs-minimap-start-x) - 212px) calc(50% + var(--rs-minimap-start-y) - 96px); }
-   83.20% { background-position: calc(50% + var(--rs-minimap-start-x) - 213px) calc(50% + var(--rs-minimap-start-y) - 97px); }
-   84.62% { background-position: calc(50% + var(--rs-minimap-start-x) - 223px) calc(50% + var(--rs-minimap-start-y) - 97px); }
-   84.83% { background-position: calc(50% + var(--rs-minimap-start-x) - 224px) calc(50% + var(--rs-minimap-start-y) - 98px); }
-   88.82% { background-position: calc(50% + var(--rs-minimap-start-x) - 224px) calc(50% + var(--rs-minimap-start-y) - 126px); }
-   89.02% { background-position: calc(50% + var(--rs-minimap-start-x) - 225px) calc(50% + var(--rs-minimap-start-y) - 127px); }
-  100.00% { background-position: calc(50% + var(--rs-minimap-start-x) - 302px) calc(50% + var(--rs-minimap-start-y) - 127px); }
-}
+/* Earlier @rs-minimap-route route removed in performance pass: module 07 supplies the final authoritative keyframes. */
 
 
 /* ---------------------------------------------------------------------

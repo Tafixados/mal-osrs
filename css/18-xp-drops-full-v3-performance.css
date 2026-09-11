@@ -1,0 +1,458 @@
+/* MAL-OSRS — XP drops full rotation v1
+   Pure CSS, 18-drop loop covering all OSRS skills.
+
+   Trigger:
+     Anime episode +
+     Manga chapter +
+     Manga volume +
+
+   The same row pseudo-element is reset on mouse-down (:active), then
+   transitions upward/fades when the mouse button is released.
+*/
+
+
+:root {
+  --xp-drop-end-top: 38px;
+  --xp-drop-start-offset: 255px;
+
+  /* Minimap is right:18px and 211px wide in the current theme.
+     12px more puts the drop immediately to its left. */
+  --xp-drop-right: calc(18px + 211px + 12px);
+
+  --xp-drop-duration: 1850ms;
+}
+
+
+/* ================================================================
+   1. FULL 18-DROP ROTATION
+
+   The cycle covers all 24 OSRS skills while combining a few activities
+   that naturally award multiple skills at once.
+
+    1  Controlled melee        Attack + Strength + Defence + Hitpoints
+    2  Ship combat             Ranged + Sailing
+    3  Gilded altar            Prayer
+    4  Superglass Make         Magic + Crafting
+    5  Blood runecrafting      Runecraft
+    6  Amethyst                Mining
+    7  Rune platebody          Smithing
+    8  Leaping sturgeon        Fishing + Strength + Agility
+    9  Shark                   Cooking
+   10  Redwood log             Firemaking
+   11  Redwood tree            Woodcutting
+   12  Prayer potion           Herblore
+   13  Ardougne knight         Thieving
+   14  Magic longbow           Fletching
+   15  Abyssal demon           Slayer
+   16  Magic tree check        Farming
+   17  Mahogany table          Construction
+   18  Redwood birdhouse       Hunter
+
+   Then the sequence loops back to 1.
+
+   Multi-skill drops use several skill icons followed by one combined XP
+   number, matching the compact XP-drop style requested for the theme.
+   ================================================================ */
+
+
+/* 1 — Controlled melee, modelled as a 30-damage hit:
+   40 Attack + 40 Strength + 40 Defence + 40 Hitpoints = 160 total.
+   Cyan imitates RuneLite/OSRS shared-XP colouring. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 1 of .list-item) {
+  --xp-drop-icons:
+    url("https://oldschool.runescape.wiki/images/Attack_icon.png"),
+    url("https://oldschool.runescape.wiki/images/Strength_icon.png"),
+    url("https://oldschool.runescape.wiki/images/Defence_icon.png"),
+    url("https://oldschool.runescape.wiki/images/Hitpoints_icon.png");
+  --xp-drop-positions:
+    0 center,
+    21px center,
+    42px center,
+    63px center;
+  --xp-drop-sizes:
+    19px 19px,
+    19px 19px,
+    19px 19px,
+    19px 19px;
+  --xp-drop-pad: 86px;
+  --xp-drop-min-width: 132px;
+  --xp-drop-color: #5ffcff;
+  --xp-drop-text: "160";
+}
+
+
+/* 2 — Ship combat, modelled as a 25-damage cannon hit:
+   100 Ranged + 25 Sailing = 125 total. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 2 of .list-item) {
+  --xp-drop-icons:
+    url("https://oldschool.runescape.wiki/images/Ranged_icon.png"),
+    url("https://oldschool.runescape.wiki/images/Sailing_icon.png");
+  --xp-drop-positions:
+    0 center,
+    23px center;
+  --xp-drop-sizes:
+    21px 21px,
+    21px 21px;
+  --xp-drop-pad: 50px;
+  --xp-drop-min-width: 92px;
+  --xp-drop-text: "125";
+}
+
+
+/* 3 — Dragon bones at a gilded altar with both burners lit. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 3 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Prayer_icon.png");
+  --xp-drop-text: "252";
+}
+
+
+/* 4 — Superglass Make using the common 18 sand + 3 giant seaweed setup:
+   78 Magic + 180 Crafting = 258 total. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 4 of .list-item) {
+  --xp-drop-icons:
+    url("https://oldschool.runescape.wiki/images/Magic_icon.png"),
+    url("https://oldschool.runescape.wiki/images/Crafting_icon.png");
+  --xp-drop-positions:
+    0 center,
+    23px center;
+  --xp-drop-sizes:
+    21px 21px,
+    21px 21px;
+  --xp-drop-pad: 50px;
+  --xp-drop-min-width: 92px;
+  --xp-drop-text: "258";
+}
+
+
+/* 5 — True Blood Altar, one pure essence. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 5 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Runecraft_icon.png");
+  --xp-drop-text: "10.5";
+}
+
+
+/* 6 — Mining one amethyst. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 6 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Mining_icon.png");
+  --xp-drop-text: "240";
+}
+
+
+/* 7 — Smithing a rune platebody. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 7 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Smithing_icon.png");
+  --xp-drop-text: "375";
+}
+
+
+/* 8 — Catching a leaping sturgeon:
+   80 Fishing + 7 Strength + 7 Agility = 94 total. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 8 of .list-item) {
+  --xp-drop-icons:
+    url("https://oldschool.runescape.wiki/images/Fishing_icon.png"),
+    url("https://oldschool.runescape.wiki/images/Strength_icon.png"),
+    url("https://oldschool.runescape.wiki/images/Agility_icon.png");
+  --xp-drop-positions:
+    0 center,
+    22px center,
+    44px center;
+  --xp-drop-sizes:
+    20px 20px,
+    20px 20px,
+    20px 20px;
+  --xp-drop-pad: 68px;
+  --xp-drop-min-width: 106px;
+  --xp-drop-text: "94";
+}
+
+
+/* 9 — Cooking a shark. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 9 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Cooking_icon.png");
+  --xp-drop-text: "210";
+}
+
+
+/* 10 — Burning a redwood log. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 10 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Firemaking_icon.png");
+  --xp-drop-text: "350";
+}
+
+
+/* 11 — Cutting one redwood log from a redwood tree. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 11 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Woodcutting_icon.png");
+  --xp-drop-text: "380";
+}
+
+
+/* 12 — Making a prayer potion. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 12 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Herblore_icon.png");
+  --xp-drop-text: "87.5";
+}
+
+
+/* 13 — Pickpocketing a Knight of Ardougne. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 13 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Thieving_icon.png");
+  --xp-drop-text: "84.3";
+}
+
+
+/* 14 — Stringing a magic longbow. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 14 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Fletching_icon.png");
+  --xp-drop-text: "91.5";
+}
+
+
+/* 15 — Abyssal demon Slayer XP. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 15 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Slayer_icon.png");
+  --xp-drop-text: "150";
+}
+
+
+/* 16 — Checking the health of a fully-grown magic tree. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 16 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Farming_icon.png");
+  --xp-drop-text: "13,768.3";
+  --xp-drop-min-width: 102px;
+}
+
+
+/* 17 — Building a mahogany table. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 17 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Construction_icon.png");
+  --xp-drop-text: "840";
+}
+
+
+/* 18 — Emptying a redwood birdhouse. */
+html body.ownlist .list-table > tbody.list-item:nth-child(18n + 18 of .list-item) {
+  --xp-drop-icons: url("https://oldschool.runescape.wiki/images/Hunter_icon.png");
+  --xp-drop-text: "1,200";
+}
+
+
+/* ================================================================
+   2. XP DROP — PERFORMANCE VERSION
+
+   .list-table-data::before is already the status stripe, so ::after
+   is used for the XP drop.
+
+   The pseudo-element is generated only for the row whose + control owns
+   focus, instead of creating one hidden fixed/animated pseudo-element on
+   every card in a long list.
+   ================================================================ */
+
+html body.ownlist .list-table .list-table-data:has(
+  .icon-add-episode:focus,
+  .icon-add-chapter:focus,
+  .icon-add-volume:focus
+)::after {
+  content: var(--xp-drop-text, "1,200") !important;
+
+  position: fixed !important;
+  top: var(--xp-drop-end-top) !important;
+  right: var(--xp-drop-right) !important;
+  z-index: 300 !important;
+
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: auto !important;
+  min-width: var(--xp-drop-min-width, 72px) !important;
+  height: 24px !important;
+
+  margin: 0 !important;
+  padding: 1px 0 0 var(--xp-drop-pad, 26px) !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background-color: transparent !important;
+  background-image: var(--xp-drop-icons) !important;
+  background-repeat: no-repeat !important;
+  background-position: var(--xp-drop-positions, left center) !important;
+  background-size: var(--xp-drop-sizes, 21px 21px) !important;
+
+  color: var(--xp-drop-color, #ffffff) !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 22px !important;
+
+  text-align: left !important;
+  white-space: nowrap !important;
+  text-shadow:
+    1px 1px 0 #000,
+    0 0 2px rgba(0,0,0,.55) !important;
+
+  pointer-events: none !important;
+
+  opacity: 0 !important;
+  transform: translateY(0) !important;
+
+  /* Move upward at one constant speed. Keep the drop fully opaque
+     for the entire journey, then hide it instantly at the end. */
+  transition:
+    transform var(--xp-drop-duration) linear,
+    opacity 0s linear var(--xp-drop-duration) !important;
+
+}
+
+
+/* Mouse DOWN:
+   Instantly reset/show the drop at the lower starting point. */
+
+html body.ownlist .list-table .list-table-data:has(
+  .icon-add-episode:active,
+  .icon-add-chapter:active,
+  .icon-add-volume:active
+)::after {
+  opacity: 1 !important;
+  transform: translateY(var(--xp-drop-start-offset)) !important;
+
+  transition: none !important;
+}
+
+
+/* Mouse UP:
+   :active disappears, so the base state above transitions from
+   +255px -> 0px at a constant linear speed. Opacity stays at 1
+   until the movement finishes, then snaps to 0.
+
+   This gives us a closer OSRS-like upward XP drop without JavaScript.
+*/
+
+
+/* ================================================================
+   3. KEEP IT OUT OF SMALL LAYOUTS
+   The XP drop is designed specifically for the desktop minimap gutter.
+   ================================================================ */
+
+@media (max-width: 1200px) {
+  html body.ownlist .list-table .list-table-data:has(
+    .icon-add-episode:focus,
+    .icon-add-chapter:focus,
+    .icon-add-volume:focus
+  )::after {
+    display: none !important;
+  }
+}
+
+/* ================================================================
+   4. INLINE PROGRESS EDITOR
+   MAL swaps the clicked episode/chapter/volume value for a native
+   text input. Match the existing OSRS inline Score editor instead
+   of allowing the browser's white input box to appear.
+   ================================================================ */
+
+html body.ownlist
+.list-table .list-table-data :is(.data.progress, .data.chapter, .data.volume)
+input:not([type="hidden"]) {
+  position: relative !important;
+  z-index: 8 !important;
+
+  box-sizing: border-box !important;
+
+  width: 34px !important;
+  min-width: 34px !important;
+  max-width: 34px !important;
+
+  height: 22px !important;
+  min-height: 22px !important;
+  max-height: 22px !important;
+
+  margin: 0 1px 0 0 !important;
+  padding: 0 3px !important;
+
+  border: 1px solid #17130f !important;
+  outline: 1px solid #726451 !important;
+  border-radius: 0 !important;
+
+  background: #2d2a22 !important;
+  color: #f3dfaa !important;
+
+  font-family: "RS Chat 07", "RSChat07", Tahoma, Verdana, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+
+  text-align: center !important;
+  text-shadow: 1px 1px 0 #000 !important;
+
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,.55),
+    0 1px 2px rgba(0,0,0,.28) !important;
+
+  vertical-align: middle !important;
+
+  appearance: textfield !important;
+  -moz-appearance: textfield !important;
+
+  cursor: text !important;
+}
+
+
+/* Remove Chromium's number-field spinner if MAL ever emits type=number. */
+html body.ownlist
+.list-table .list-table-data :is(.data.progress, .data.chapter, .data.volume)
+input::-webkit-outer-spin-button,
+html body.ownlist
+.list-table .list-table-data :is(.data.progress, .data.chapter, .data.volume)
+input::-webkit-inner-spin-button {
+  margin: 0 !important;
+  -webkit-appearance: none !important;
+}
+
+
+html body.ownlist
+.list-table .list-table-data :is(.data.progress, .data.chapter, .data.volume)
+input:not([type="hidden"]):hover {
+  background: #554c41 !important;
+  color: #ffff00 !important;
+}
+
+
+html body.ownlist
+.list-table .list-table-data :is(.data.progress, .data.chapter, .data.volume)
+input:not([type="hidden"]):focus {
+  background: #3e3529 !important;
+  color: #ffff00 !important;
+
+  border-color: #17130f !important;
+  outline: 1px solid #a08d6e !important;
+
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,.6),
+    0 0 0 1px rgba(160,141,110,.18) !important;
+}
+
+/* ================================================================
+   5. KEEP THE XP DROP VIEWPORT-ANCHORED AFTER THE CLICK
+
+   The XP drop is position:fixed, but it lives on the card's ::after.
+   A transformed ancestor changes the containing block for fixed-position
+   descendants. The card's normal hover effect uses translateY(-2px), so
+   after clicking +, moving the pointer onto the cover caused the still-
+   animating XP drop to jump back into the card.
+
+   The + link remains focused after a normal mouse click, so while that
+   specific progress control owns focus, suppress only the card's tiny
+   hover translation. Outline/shadow hover feedback remains intact.
+   ================================================================ */
+
+html body.ownlist .list-table .list-table-data:has(
+  .icon-add-episode:focus,
+  .icon-add-chapter:focus,
+  .icon-add-volume:focus
+):hover {
+  transform: none !important;
+  overflow: visible !important;
+}
+

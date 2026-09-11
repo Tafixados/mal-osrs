@@ -1,0 +1,9 @@
+/* TEMPORARY PERFORMANCE DIAGNOSTIC — DO NOT KEEP PERMANENTLY
+   Paste after the theme. If scrolling becomes dramatically smoother,
+   the animated full-resolution world-map minimap is the main bottleneck.
+*/
+html body.ownlist::before,
+html body.ownlist::after {
+  display: none !important;
+  animation: none !important;
+}

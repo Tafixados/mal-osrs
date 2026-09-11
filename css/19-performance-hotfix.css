@@ -1,0 +1,39 @@
+/* MAL-OSRS — Performance hotfix pass 1
+   Conservative runtime optimizations that should not change desktop layout.
+*/
+
+/* Fixed page backgrounds are expensive on mobile/touch browsers because the
+   browser may need to repaint the viewport while scrolling. The visual
+   difference is minor on narrow screens. */
+@media (max-width: 1200px) {
+  html,
+  html body.ownlist {
+    background-attachment: scroll !important;
+  }
+}
+
+/* Touch browsers often synthesize/stick :hover. Avoid unnecessary transforms,
+   image filters and transition work where there is no real hover pointer. */
+@media (hover: none), (pointer: coarse) {
+  html body.ownlist .list-table .list-table-data {
+    transition: none !important;
+  }
+
+  html body.ownlist .list-table .list-table-data:hover {
+    transform: none !important;
+  }
+
+  html body.ownlist .list-table .list-table-data .data.image .image,
+  html body.ownlist .list-table .list-table-data:hover .data.image .image {
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
+/* Mobile sidebar stacking fix supplied/tested separately in MAL custom CSS. */
+@media (max-width: 900px) {
+  html body.ownlist .list-menu-float {
+    z-index: 260 !important;
+  }
+}

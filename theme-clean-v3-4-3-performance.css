@@ -1,0 +1,26 @@
+/* Tafixados MAL-OSRS — v3.4.3 PERFORMANCE TEST BUILD
+   Based on v3.4.2 with conservative runtime/load optimizations.
+*/
+
+@import url("./osrs-ui-font-layer-v4-clean.css");
+@import url("./css/00-foundation.css");
+@import url("./css/01-shell-banner-nav.css");
+@import url("./css/02-cards-sidebar-dialogs-base.css");
+@import url("./css/03-cards-polish-icons.css");
+@import url("./css/04-sidebar-tooltips-visitor.css");
+@import url("./css/05-manga-optional-fields.css");
+@import url("./css/06-footer-stats-progress.css");
+@import url("./css/07-minimap-footer.css");
+@import url("./css/08-search-filter-score.css");
+@import url("./css/09-search-final.css");
+@import url("./css/10-manga-final-fixes.css");
+@import url("./css/11-quest-completion-dialog.css");
+@import url("./css/12-manga-minimap-route.css");
+@import url("./css/13-episode-rating-dialog.css");
+@import url("./css/14-filter-close-hotfix.css");
+@import url("./css/15-manga-banner-v1.css");
+@import url("./css/15-contest-polish.css");
+@import url("./css/16-entry-context-menu-v5.css");
+@import url("./css/17-watch-modal.css");
+@import url("./css/18-xp-drops-full-v3-performance.css");
+@import url("./css/19-performance-hotfix.css");
