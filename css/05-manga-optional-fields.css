@@ -1516,3 +1516,462 @@ body.ownlist[data-work="manga"] .list-table:has(
   grid-column: span 9 !important;
   grid-row: auto !important;
 }
+
+/* =====================================================================
+   ANIME EXAMINE-ONLY OPTIONAL FIELDS
+   =====================================================================
+
+   The original optional-fields module switches Anime into a permanent
+   two-column / 36-track "advanced" layout as soon as optional MAL columns
+   are enabled. The OSRS context-menu Examine feature now uses those fields
+   differently:
+
+   - normal Anime cards always keep the compact three-column list layout;
+   - poster/title + the six core info boxes keep their original geometry;
+   - optional MAL columns remain hidden while the entry is collapsed;
+   - opening MAL's native More/Examine row reveals those optional fields
+     beneath the unchanged compact card.
+
+   Manga keeps the existing advanced optional-field behavior above.
+   ===================================================================== */
+
+
+/* Keep Anime at the normal list density even when advanced columns exist. */
+body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,
+        .data.storage,
+        .data.priority,
+        .data.genre,
+        .data.demographic,
+        .data.airing-started,
+        .data.airing-finished,
+        .data.studio,
+        .data.licensor,
+        .data.mal_score,
+        .data.score_diff,
+        .data.popularity
+    )
+) {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+}
+
+@media (max-width: 1050px) {
+    body.ownlist[data-work="anime"] .list-table:has(
+        .list-table-data > :is(
+            .data.days,
+            .data.storage,
+            .data.priority,
+            .data.genre,
+            .data.demographic,
+            .data.airing-started,
+            .data.airing-finished,
+            .data.studio,
+            .data.licensor,
+            .data.mal_score,
+            .data.score_diff,
+            .data.popularity
+        )
+    ) {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 720px) {
+    body.ownlist[data-work="anime"] .list-table:has(
+        .list-table-data > :is(
+            .data.days,
+            .data.storage,
+            .data.priority,
+            .data.genre,
+            .data.demographic,
+            .data.airing-started,
+            .data.airing-finished,
+            .data.studio,
+            .data.licensor,
+            .data.mal_score,
+            .data.score_diff,
+            .data.popularity
+        )
+    ) {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+
+/* Cancel the older 36-track Anime remap and restore the compact six-box card. */
+body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,
+        .data.storage,
+        .data.priority,
+        .data.genre,
+        .data.demographic,
+        .data.airing-started,
+        .data.airing-finished,
+        .data.studio,
+        .data.licensor,
+        .data.mal_score,
+        .data.score_diff,
+        .data.popularity
+    )
+) .list-table-data {
+    grid-template-columns:
+        132px
+        12px
+        minmax(0, 1fr)
+        5px
+        minmax(0, 1fr) !important;
+
+    grid-template-rows:
+        50px
+        42px
+        42px
+        42px !important;
+
+    grid-template-areas:
+        "image . title    title title"
+        "image . progress .    score"
+        "image . type     .    rated"
+        "image . season   .    tags" !important;
+
+    grid-auto-flow: row !important;
+    grid-auto-rows: auto !important;
+
+    row-gap: 5px !important;
+    column-gap: 0 !important;
+
+    height: 215px !important;
+    min-height: 215px !important;
+    max-height: 215px !important;
+
+    overflow: hidden !important;
+}
+
+body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,
+        .data.storage,
+        .data.priority,
+        .data.genre,
+        .data.demographic,
+        .data.airing-started,
+        .data.airing-finished,
+        .data.studio,
+        .data.licensor,
+        .data.mal_score,
+        .data.score_diff,
+        .data.popularity
+    )
+) .list-table-data > :is(
+    .data.image,
+    .data.title,
+    .data.progress,
+    .data.score,
+    .data.type,
+    .data.rated,
+    .data.season,
+    .data.tags
+) {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    order: 0 !important;
+}
+
+body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,.data.storage,.data.priority,.data.genre,.data.demographic,
+        .data.airing-started,.data.airing-finished,.data.studio,.data.licensor,
+        .data.mal_score,.data.score_diff,.data.popularity
+    )
+) .list-table-data > .data.image    { grid-area: image !important; }
+
+body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,.data.storage,.data.priority,.data.genre,.data.demographic,
+        .data.airing-started,.data.airing-finished,.data.studio,.data.licensor,
+        .data.mal_score,.data.score_diff,.data.popularity
+    )
+) .list-table-data > .data.title    { grid-area: title !important; }
+
+body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,.data.storage,.data.priority,.data.genre,.data.demographic,
+        .data.airing-started,.data.airing-finished,.data.studio,.data.licensor,
+        .data.mal_score,.data.score_diff,.data.popularity
+    )
+) .list-table-data > .data.progress { grid-area: progress !important; }
+
+body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,.data.storage,.data.priority,.data.genre,.data.demographic,
+        .data.airing-started,.data.airing-finished,.data.studio,.data.licensor,
+        .data.mal_score,.data.score_diff,.data.popularity
+    )
+) .list-table-data > .data.score    { grid-area: score !important; }
+
+body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,.data.storage,.data.priority,.data.genre,.data.demographic,
+        .data.airing-started,.data.airing-finished,.data.studio,.data.licensor,
+        .data.mal_score,.data.score_diff,.data.popularity
+    )
+) .list-table-data > .data.type     { grid-area: type !important; }
+
+body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,.data.storage,.data.priority,.data.genre,.data.demographic,
+        .data.airing-started,.data.airing-finished,.data.studio,.data.licensor,
+        .data.mal_score,.data.score_diff,.data.popularity
+    )
+) .list-table-data > .data.rated    { grid-area: rated !important; }
+
+body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,.data.storage,.data.priority,.data.genre,.data.demographic,
+        .data.airing-started,.data.airing-finished,.data.studio,.data.licensor,
+        .data.mal_score,.data.score_diff,.data.popularity
+    )
+) .list-table-data > .data.season   { grid-area: season !important; }
+
+body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,.data.storage,.data.priority,.data.genre,.data.demographic,
+        .data.airing-started,.data.airing-finished,.data.studio,.data.licensor,
+        .data.mal_score,.data.score_diff,.data.popularity
+    )
+) .list-table-data > .data.tags     { grid-area: tags !important; }
+
+
+/* Optional Anime columns are hidden until this entry is Examined. */
+body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,
+        .data.storage,
+        .data.priority,
+        .data.genre,
+        .data.demographic,
+        .data.airing-started,
+        .data.airing-finished,
+        .data.studio,
+        .data.licensor,
+        .data.mal_score,
+        .data.score_diff,
+        .data.popularity
+    )
+) .list-table-data > :is(
+    .data.started,
+    .data.finished,
+    .data.days,
+    .data.storage,
+    .data.priority,
+    .data.genre,
+    .data.demographic,
+    .data.airing-started,
+    .data.airing-finished,
+    .data.studio,
+    .data.licensor,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+) {
+    display: none !important;
+}
+
+
+/* Opening Examine expands the card downward without changing the core grid. */
+body.ownlist[data-work="anime"] .list-table-data:has(
+    + .more-info[style*="table-row"]
+) {
+    height: 405px !important;
+    min-height: 405px !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+/* Priority / Score Diff / Popularity need one additional short row. */
+body.ownlist[data-work="anime"] .list-table-data:has(
+    + .more-info[style*="table-row"]
+):has(> :is(.data.priority, .data.score_diff, .data.popularity)) {
+    height: 452px !important;
+    min-height: 452px !important;
+}
+
+
+/* Restore optional fields only for the Examined entry. */
+body.ownlist[data-work="anime"] .list-table-data:has(
+    + .more-info[style*="table-row"]
+) > :is(
+    .data.started,
+    .data.finished,
+    .data.days,
+    .data.storage,
+    .data.priority,
+    .data.genre,
+    .data.demographic,
+    .data.airing-started,
+    .data.airing-finished,
+    .data.studio,
+    .data.licensor,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+) {
+    position: absolute !important;
+    z-index: 2 !important;
+
+    display: flex !important;
+    box-sizing: border-box !important;
+
+    margin: 0 !important;
+
+    grid-column: auto !important;
+    grid-row: auto !important;
+    order: 0 !important;
+
+    min-width: 0 !important;
+    max-width: none !important;
+
+    height: 42px !important;
+    min-height: 42px !important;
+    max-height: 42px !important;
+}
+
+
+/* Quarter-width metadata rows. */
+body.ownlist[data-work="anime"] .list-table-data:has(
+    + .more-info[style*="table-row"]
+) > :is(
+    .data.started,
+    .data.finished,
+    .data.days,
+    .data.storage,
+    .data.priority,
+    .data.demographic,
+    .data.airing-started,
+    .data.airing-finished,
+    .data.mal_score,
+    .data.score_diff,
+    .data.popularity
+) {
+    width: calc(25% - 10px) !important;
+}
+
+
+/* Row 1 */
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.started {
+    top: 208px !important;
+    left: 12px !important;
+}
+
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.finished {
+    top: 208px !important;
+    left: calc(25% + 7px) !important;
+}
+
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.days {
+    top: 208px !important;
+    left: calc(50% + 2px) !important;
+}
+
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.airing-started {
+    top: 208px !important;
+    left: calc(75% - 3px) !important;
+}
+
+
+/* Row 2 */
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.airing-finished {
+    top: 255px !important;
+    left: 12px !important;
+}
+
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.storage {
+    top: 255px !important;
+    left: calc(25% + 7px) !important;
+}
+
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.demographic {
+    top: 255px !important;
+    left: calc(50% + 2px) !important;
+}
+
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.mal_score {
+    top: 255px !important;
+    left: calc(75% - 3px) !important;
+}
+
+
+/* Optional extra row */
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.priority {
+    top: 302px !important;
+    left: 12px !important;
+}
+
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.score_diff {
+    top: 302px !important;
+    left: calc(25% + 7px) !important;
+}
+
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.popularity {
+    top: 302px !important;
+    left: calc(50% + 2px) !important;
+}
+
+
+/* Studios / Licensors use two halves. */
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > :is(
+    .data.studio,
+    .data.licensor
+) {
+    top: 302px !important;
+    width: calc(50% - 14.5px) !important;
+}
+
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.studio {
+    left: 12px !important;
+}
+
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.licensor {
+    left: calc(50% + 2.5px) !important;
+}
+
+body.ownlist[data-work="anime"] .list-table-data:has(
+    + .more-info[style*="table-row"]
+):has(> :is(.data.priority, .data.score_diff, .data.popularity)) > :is(
+    .data.studio,
+    .data.licensor
+) {
+    top: 349px !important;
+}
+
+
+/* Genres fill the final row. */
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > .data.genre {
+    top: 349px !important;
+    left: 12px !important;
+    width: calc(100% - 24px) !important;
+
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+}
+
+body.ownlist[data-work="anime"] .list-table-data:has(
+    + .more-info[style*="table-row"]
+):has(> :is(.data.priority, .data.score_diff, .data.popularity)) > .data.genre {
+    top: 396px !important;
+}
+
+
+/* Structured optional fields can be hidden reliably when absent. */
+body.ownlist[data-work="anime"] .list-table-data:has(+ .more-info[style*="table-row"]) > :is(
+    .data.genre,
+    .data.demographic,
+    .data.studio,
+    .data.licensor
+):not(:has(span, a)) {
+    display: none !important;
+}
+

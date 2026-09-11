@@ -1,0 +1,459 @@
+/* MAL-OSRS
+   Module: 16-entry-context-menu.css
+
+   Anime-only OSRS "Choose Option" menu.
+   Consolidated from the tested v10 working file.
+
+   - Reuses MAL's real Watch / Edit / More actions.
+   - "Walk here" and "Cancel" are cosmetic hover rows.
+   - Entries without a Watch action use the shorter 180x114 popup.
+   - Examine opens MAL's native More panel.
+   - The native Discuss Anime link is styled as a clear action.
+*/
+
+
+/* =====================================================================
+   1. TITLE / TRIGGER
+   ===================================================================== */
+
+body.ownlist[data-work="anime"] .data.title {
+    overflow: visible !important;
+}
+
+body.ownlist[data-work="anime"] .data.title .icon-watch2 {
+    position: absolute !important;
+    top: 22px !important;
+    right: 4px !important;
+    z-index: 80 !important;
+
+    display: block !important;
+
+    width: 14px !important;
+    height: 14px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    background:
+        transparent
+        url("https://i.imgur.com/Bkrsh3j.png")
+        center / contain
+        no-repeat !important;
+
+    overflow: visible !important;
+    cursor: pointer !important;
+}
+
+body.ownlist[data-work="anime"] .data.title .icon-watch2 i {
+    display: none !important;
+}
+
+
+/* =====================================================================
+   2. OPEN PANEL — COMMON POSITIONING
+   ===================================================================== */
+
+body.ownlist[data-work="anime"] .data.title:has(
+    .icon-watch2:hover,
+    .add-edit-more .edit:hover,
+    .add-edit-more .add:hover,
+    .add-edit-more .more:hover
+) .icon-watch2 {
+    top: 15px !important;
+    right: -1px !important;
+
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+
+    cursor: default !important;
+}
+
+/* Heading is already baked into both background images. */
+body.ownlist[data-work="anime"] .data.title .icon-watch2::before {
+    content: none !important;
+}
+
+
+/* Full menu: Watch + Edit + Walk + Examine + Cancel. */
+body.ownlist[data-work="anime"] .data.title:has(.icon-watch2 > a):has(
+    .icon-watch2:hover,
+    .add-edit-more .edit:hover,
+    .add-edit-more .add:hover,
+    .add-edit-more .more:hover
+) .icon-watch2 {
+    width: 180px !important;
+    height: 140px !important;
+
+    background:
+        transparent
+        url("https://i.imgur.com/al9sDmP.png")
+        top left / 180px 140px
+        no-repeat !important;
+}
+
+
+/* Short menu: no Watch action, so use the four-row background. */
+body.ownlist[data-work="anime"] .data.title:has(.icon-watch2):not(:has(.icon-watch2 > a)):has(
+    .icon-watch2:hover,
+    .add-edit-more .edit:hover,
+    .add-edit-more .add:hover,
+    .add-edit-more .more:hover
+) .icon-watch2 {
+    width: 180px !important;
+    height: 114px !important;
+
+    background:
+        transparent
+        url("https://i.imgur.com/5aiCoph.png")
+        top left / 180px 114px
+        no-repeat !important;
+}
+
+
+/* =====================================================================
+   3. WATCH — MAL'S REAL STREAMING ACTION
+   ===================================================================== */
+
+body.ownlist[data-work="anime"] .data.title .icon-watch2 > a {
+    display: none !important;
+}
+
+body.ownlist[data-work="anime"] .data.title:has(.icon-watch2 > a):has(
+    .icon-watch2:hover,
+    .add-edit-more .edit:hover,
+    .add-edit-more .add:hover,
+    .add-edit-more .more:hover
+) .icon-watch2 > a {
+    position: absolute !important;
+    top: 26px !important;
+    left: 16px !important;
+    z-index: 2 !important;
+
+    display: block !important;
+
+    box-sizing: border-box !important;
+    width: 148px !important;
+    height: 21px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 0 !important;
+    line-height: 0 !important;
+
+    color: #fff !important;
+    text-align: left !important;
+    text-decoration: none !important;
+
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+body.ownlist[data-work="anime"] .data.title .icon-watch2 > a::before {
+    content: "Watch";
+
+    display: block;
+
+    font-family: "RS UF", "RuneScape UF", "RS Chat 07", monospace;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 21px;
+
+    color: #fff;
+    text-align: left;
+    text-shadow: 1px 1px 0 #000;
+
+    white-space: nowrap;
+}
+
+body.ownlist[data-work="anime"] .data.title .icon-watch2 > a,
+body.ownlist[data-work="anime"] .data.title .icon-watch2 > a:hover,
+body.ownlist[data-work="anime"] .data.title .icon-watch2 > a:focus,
+body.ownlist[data-work="anime"] .data.title .icon-watch2 > a:focus-visible,
+body.ownlist[data-work="anime"] .data.title .icon-watch2 > a:active {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    mix-blend-mode: normal !important;
+
+    text-decoration: none !important;
+}
+
+body.ownlist[data-work="anime"] .data.title .icon-watch2 > a:is(
+    :hover,
+    :focus,
+    :focus-visible,
+    :active
+)::before {
+    color: #ffff00 !important;
+}
+
+
+/* =====================================================================
+   4. EDIT / WALK HERE / EXAMINE / CANCEL
+   ===================================================================== */
+
+body.ownlist[data-work="anime"] .data.title .add-edit-more {
+    display: none !important;
+}
+
+body.ownlist[data-work="anime"] .data.title:has(
+    .icon-watch2:hover,
+    .add-edit-more .edit:hover,
+    .add-edit-more .add:hover,
+    .add-edit-more .more:hover
+) .add-edit-more {
+    position: absolute !important;
+    top: 15px !important;
+    right: -1px !important;
+    z-index: 90 !important;
+
+    display: block !important;
+
+    width: 180px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 0 !important;
+    line-height: 0 !important;
+
+    background: transparent !important;
+
+    /* The overlay itself must not cover Watch. */
+    pointer-events: none !important;
+}
+
+body.ownlist[data-work="anime"] .data.title:has(.icon-watch2 > a):has(
+    .icon-watch2:hover,
+    .add-edit-more .edit:hover,
+    .add-edit-more .add:hover,
+    .add-edit-more .more:hover
+) .add-edit-more {
+    height: 140px !important;
+}
+
+body.ownlist[data-work="anime"] .data.title:has(.icon-watch2):not(:has(.icon-watch2 > a)):has(
+    .icon-watch2:hover,
+    .add-edit-more .edit:hover,
+    .add-edit-more .add:hover,
+    .add-edit-more .more:hover
+) .add-edit-more {
+    height: 114px !important;
+}
+
+
+/* The wrapper spans provide real hover zones for cosmetic Walk / Cancel. */
+body.ownlist[data-work="anime"] .data.title
+    .add-edit-more :is(.edit, .add, .more) {
+    position: absolute !important;
+    left: 16px !important;
+
+    display: block !important;
+
+    box-sizing: border-box !important;
+    width: 148px !important;
+    height: 21px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 0 !important;
+    line-height: 0 !important;
+
+    color: #fff !important;
+    text-align: left !important;
+
+    pointer-events: auto !important;
+}
+
+
+/* Five-row menu:
+   Watch 26 / Edit 47 / Walk 68 / Examine 89 / Cancel 110. */
+body.ownlist[data-work="anime"] .data.title:has(.icon-watch2 > a)
+    .add-edit-more :is(.edit, .add) {
+    top: 68px !important;
+}
+
+body.ownlist[data-work="anime"] .data.title:has(.icon-watch2 > a)
+    .add-edit-more .more {
+    top: 110px !important;
+}
+
+
+/* Four-row menu:
+   Edit 24 / Walk 45 / Examine 66 / Cancel 87. */
+body.ownlist[data-work="anime"] .data.title:has(.icon-watch2):not(:has(.icon-watch2 > a))
+    .add-edit-more :is(.edit, .add) {
+    top: 45px !important;
+}
+
+body.ownlist[data-work="anime"] .data.title:has(.icon-watch2):not(:has(.icon-watch2 > a))
+    .add-edit-more .more {
+    top: 87px !important;
+}
+
+
+/* Real MAL links are rendered one row above their wrapper span. */
+body.ownlist[data-work="anime"] .data.title
+    .add-edit-more :is(.edit, .add, .more) > a {
+    position: absolute !important;
+    top: -21px !important;
+    left: 0 !important;
+
+    display: block !important;
+
+    box-sizing: border-box !important;
+    width: 148px !important;
+    height: 21px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 0 !important;
+    line-height: 0 !important;
+
+    color: #fff !important;
+    text-align: left !important;
+    text-decoration: none !important;
+
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+body.ownlist[data-work="anime"] .data.title
+    .add-edit-more .edit > a::before {
+    content: "Edit entry";
+}
+
+body.ownlist[data-work="anime"] .data.title
+    .add-edit-more .add > a::before {
+    content: "Add entry";
+}
+
+body.ownlist[data-work="anime"] .data.title
+    .add-edit-more .more > a::before {
+    content: "Examine";
+}
+
+body.ownlist[data-work="anime"] .data.title
+    .add-edit-more :is(.edit, .add, .more) > a::before {
+    display: block;
+
+    font-family: "RS UF", "RuneScape UF", "RS Chat 07", monospace;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 21px;
+
+    color: #fff;
+    text-align: left;
+    text-shadow: 1px 1px 0 #000;
+
+    white-space: nowrap;
+}
+
+body.ownlist[data-work="anime"] .data.title
+    .add-edit-more :is(.edit, .add, .more) > a:hover::before {
+    color: #ffff00;
+}
+
+
+/* Cosmetic Walk here row. */
+body.ownlist[data-work="anime"] .data.title
+    .add-edit-more :is(.edit, .add)::after {
+    content: "Walk here";
+
+    display: block;
+
+    font-family: "RS UF", "RuneScape UF", "RS Chat 07", monospace;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 21px;
+
+    color: #fff;
+    text-align: left;
+    text-shadow: 1px 1px 0 #000;
+
+    white-space: nowrap;
+    cursor: default;
+}
+
+body.ownlist[data-work="anime"] .data.title
+    .add-edit-more :is(.edit, .add):hover:not(:has(> a:hover))::after {
+    color: #ffff00;
+}
+
+
+/* Cosmetic Cancel row. */
+body.ownlist[data-work="anime"] .data.title
+    .add-edit-more .more::after {
+    content: "Cancel";
+
+    display: block;
+
+    font-family: "RS UF", "RuneScape UF", "RS Chat 07", monospace;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 21px;
+
+    color: #fff;
+    text-align: left;
+    text-shadow: 1px 1px 0 #000;
+
+    white-space: nowrap;
+    cursor: default;
+}
+
+body.ownlist[data-work="anime"] .data.title
+    .add-edit-more .more:hover:not(:has(> a:hover))::after {
+    color: #ffff00;
+}
+
+
+/* =====================================================================
+   5. EXAMINE / NATIVE MORE PANEL
+   ===================================================================== */
+
+/* The base card module hides MAL's More row with !important.
+   Reveal it only when MAL itself toggles the inline state to table-row. */
+body.ownlist[data-work="anime"] .list-table .more-info[style*="table-row"] {
+    display: block !important;
+    width: 100% !important;
+}
+
+body.ownlist[data-work="anime"] .list-table .more-info[style*="table-row"] .more-content {
+    display: block !important;
+}
+
+
+/* Make the real Discuss Anime link read clearly as an action. */
+body.ownlist[data-work="anime"] .list-table .more-info
+    a[href^="/forum/?animeid="] {
+    display: inline-block !important;
+
+    font-family: "RS UF", "RuneScape UF", "RS Chat 07", monospace !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    line-height: 22px !important;
+
+    color: #ff981f !important;
+    text-decoration: none !important;
+    text-shadow: 1px 1px 0 #000 !important;
+
+    cursor: pointer !important;
+}
+
+body.ownlist[data-work="anime"] .list-table .more-info
+    a[href^="/forum/?animeid="]:hover {
+    color: #ffff00 !important;
+    text-decoration: none !important;
+}
