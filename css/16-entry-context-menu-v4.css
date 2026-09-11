@@ -1133,3 +1133,58 @@ html body.ownlist[data-work="anime"] .list-table .list-table-data:has(+ .more-in
     display: none !important;
 }
 
+/* =====================================================================
+   9. FINAL OPEN-CARD GEOMETRY FORCE — v4
+   =====================================================================
+
+   The compact advanced-card override has higher specificity than the
+   earlier open-card height rule. Force the actual open card to release
+   its 215px max-height / hidden overflow as well.
+   ===================================================================== */
+
+html body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,
+        .data.storage,
+        .data.priority,
+        .data.genre,
+        .data.demographic,
+        .data.airing-started,
+        .data.airing-finished,
+        .data.studio,
+        .data.licensor,
+        .data.mal_score,
+        .data.score_diff,
+        .data.popularity
+    )
+) .list-table-data:has(+ .more-info[style*="table-row"]) {
+    height: 405px !important;
+    min-height: 405px !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+html body.ownlist[data-work="anime"] .list-table:has(
+    .list-table-data > :is(
+        .data.days,
+        .data.storage,
+        .data.priority,
+        .data.genre,
+        .data.demographic,
+        .data.airing-started,
+        .data.airing-finished,
+        .data.studio,
+        .data.licensor,
+        .data.mal_score,
+        .data.score_diff,
+        .data.popularity
+    )
+) .list-table-data:has(
+    + .more-info[style*="table-row"]
+):has(> :is(.data.priority, .data.score_diff, .data.popularity)) {
+    height: 452px !important;
+    min-height: 452px !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
